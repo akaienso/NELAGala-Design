@@ -1,0 +1,370 @@
+/* nelagala/css/styles.css */
+@font-face {
+    font-family: 'Barlow';
+    src: url('/typography/Barlow-SemiBold.otf') format('otf');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.nelagala-event {
+    font-family: 'Barlow', sans-serif;
+    color: #333;
+    background: #fff;
+    padding: 15px;
+    display: flex;
+  justify-content: space-between;
+    min-height: 100vh; /* Viewport height */
+    width: 100%; /* For full width */
+    flex-wrap: wrap;
+    max-width: 1200px;
+    margin: auto;
+}
+
+.nelagala-event header  {
+    width: 100%;
+    padding: 0px;
+    margin-top: 0;
+    background: #f0bd33;
+    /* Slightly off-white to distinguish sections */
+    text-align: center;
+    margin-bottom: 20px;
+    color: #ffffff;
+}
+
+.nelagala-event header h2 {
+    font-family: 'kepler-std-condensed-display', serif;
+    text-transform: uppercase;
+    font-style: italic;
+    font-size: 4em;
+    text-align: center; letter-spacing: 3px;
+    margin: 0;
+}
+.nelagala-event header h3 {}
+.nelagala-event header h1 {
+    font-family: 'nautica', sans-serif;
+    text-align: center;
+    font-size: 1.4em;
+    position: relative; /* Establishes a positioning context for children */
+    margin: 20px auto; /* Gives enough space for overlap */
+    color: #D1232E;
+    width: 70%
+}
+
+.nelagala-event header h1 .yr {
+    font-size: 1.75em; /* Third largest size */
+}
+
+.nelagala-event header h1 .yr sup {
+    font-size: .7em; /* Adjust the size of the superscript */
+    margin-left: .3em; /* Adjust the size of the superscript */
+}
+
+.nelagala-event header h1 .title {
+    display: block; /* Makes it a block to occupy its own line */
+    font-family: "kepler-std-condensed-display", serif;
+    font-size:1.8em; /* Second largest size */
+    color: #ffffff;
+    line-height: .9em; /* Reduces the space between this line and the next */
+    margin: -10px 0; /* Adjust top and bottom margin to manage overlap */
+    text-transform: uppercase;
+    position: relative; /* Allows adjustment of position */
+    top: -.4em; /* Pulls Gala up to overlap the title */
+}
+
+.nelagala-event header h1 .gala {
+    font-size: 3em; /* Largest size */
+    position: relative; /* Allows adjustment of position */
+    top: -.7em; /* Pulls Gala up to overlap the title */
+    display: block; /* Ensure Gala is on its own line */
+}
+
+/* Adjusting the default text size within h1, excluding styled spans */
+.nelagala-event header h1:not(:has(span)) {
+    font-size: 0.8em; /* Smallest text size */
+}
+  
+.nelagala-event header .row {
+    display: flex; /* This enables flexbox layout */
+    justify-content: space-between; /* This spaces out the child divs */
+    width: 100%; /* Ensures the row takes up full width of its parent */
+}
+
+.nelagala-event header .column {
+    flex: 1; /* This allows each column to take up equal space */
+    /* Optional padding for spacing, adjust as needed */
+    padding: 10px;
+}
+
+/* If you need the columns to have a bit of space between them */
+.nelagala-event header .column.left {
+    margin-right: 5px; /* Adjust the space between the columns */
+}
+
+.nelagala-event header .column.right {
+    margin-left: 5px; /* Adjust the space between the columns */
+}
+    
+/* General Styling for the Navigation */
+.nelagala-event .event-navigation ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    /* horizontal layout for larger screens */
+}
+
+.nelagala-event .event-navigation li {
+    padding: 0.5em 1em;
+    /* Spacing between items */
+}
+
+.nelagala-event .hamburger {
+    display: none;
+    /* Will be visible on mobile only due to media query */
+    cursor: pointer;
+    width: 30px;
+    /* Width of the hamburger menu */
+    height: 25px;
+    /* Total height of the hamburger menu */
+    position: absolute;
+    top: 1em;
+    right: 1em;
+    background: transparent;
+    border: none;
+}
+
+.nelagala-event .hamburger span {
+    display: block;
+    height: 3px;
+    /* Height of one bar */
+    margin-bottom: 5px;
+    /* Space between the bars */
+    background: #333;
+    /* Color of the bars */
+    border-radius: 3px;
+    transition: all 0.3s ease-in-out;
+}
+
+.nelagala-event .hamburger span:last-child {
+    margin-bottom: 0;
+    /* No margin for the last bar */
+}
+
+/* Styling for when the hamburger menu is transformed into a 'close' icon */
+.nelagala-event .hamburger.open span:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+}
+
+.nelagala-event .hamburger.open span:nth-child(2) {
+    opacity: 0;
+}
+
+.nelagala-event .hamburger.open span:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+}
+
+.nelagala-event main section {
+    margin-bottom: 2em;
+    padding: 2em;
+    background: #f9f9f9;
+    /* Slightly off-white to distinguish sections */
+}
+
+/* You can add specific styles for each section using the added class names */
+.nelagala-event main #save-the-date {
+    /* Specific styles for Save the Date section */
+}
+
+.nelagala-event main #about-the-event {
+    /* Specific styles for About the Event section */
+}
+
+.nelagala-event main #event-roles {
+    /* Specific styles for Event Roles section */
+}
+
+.nelagala-event main #honorees {
+    /* Specific styles for honorees section */
+}
+
+.nelagala-event main #tickets {
+    /* Specific styles for Tickets section */
+}
+
+.nelagala-event main #lodging {
+    /* Specific styles for lodging section */
+}
+
+.nelagala-event main #sponsorships {
+    /* Specific styles for sponsorship packages section */
+}
+
+.nelagala-event main #advertising {
+    /* Specific styles for advertising section */
+}
+
+.nelagala-event a {
+    text-decoration: none;
+    color: #333;
+    font-weight: 800;
+    font-size: 1em;
+    padding: 3px;
+    border-bottom: 4px solid #f9f9f9;
+}
+
+.nelagala-event a:hover {
+    text-decoration: none;
+    color: #D1232E;
+    border-bottom: 2px solid black;
+}
+
+.nelagala-event .event-navigation {
+    flex: 0 0 250px; /* Adjust width of the sidebar as needed */
+    position: -webkit-sticky;
+    /* For Safari */
+    position: sticky;
+    background-color: #f0f0f0; /* Temporarily set a background color */
+    width: 25%;
+    height: 110vh; // experiment with this value, try changing to 110vh
+    overflow: none;
+    background-color: #f0f0f0;
+    /* Temporarily set a background color */
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+}
+
+.nelagala-event .event-navigation ul {
+    display: flex;
+    flex-direction: column;
+    /* Stack the links vertically */
+    height: 100%;
+}
+
+.nelagala-event  .event-navigation a {
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+    font-size: 1.4em;
+    padding: 6px;
+    border-bottom: 4px solid #f0f0f0;
+}
+
+.nelagala-event .event-navigation a:hover {
+    text-decoration: none;
+    color: #D1232E;
+    border-bottom: 4px solid black;
+}
+
+/* SECTION: Media Queries */
+
+/* ANCHOR: For screens larger than 992px */
+@media (min-width: 992px) {
+
+    .nelagala-event main {
+        flex-grow: 1;
+        /* Allow the main content to grow */
+        width: calc(100% - 250px);
+        /* Subtract the sidebar width */
+        overflow-y: auto;
+        /* In case of long content */
+    }
+}
+
+/* ANCHOR: For screens smaller than 992px */
+@media (max-width: 991px) {
+    .nelagala-event header h1 {
+        width: 90%;
+        font-size: 2em;
+        padding: 0;
+    }
+    
+    .nelagala-event header h1 .yr {
+        font-size: 1.4em; /* Third largest size */
+    }
+    
+    .nelagala-event header h1 .yr sup {
+        font-size: 0.8em; /* Adjust the size of the superscript */
+    }
+    
+    .nelagala-event header h1 .title {
+        display: block; /* Makes it a block to occupy its own line */
+        font-family: "kepler-std-condensed-display", serif;
+        font-size: 1.3em; /* Second largest size */
+        color: #ABABAB;
+        line-height: .9em; /* Reduces the space between this line and the next */
+        margin: 0px 0; /* Adjust top and bottom margin to manage overlap */
+        text-transform: uppercase;
+    }
+    
+    .nelagala-event header h1 .gala {
+        font-size: 2.5em; /* Largest size */
+        position: relative; /* Allows adjustment of position */
+        top: -.8em; /* Pulls Gala up to overlap the title */
+        display: block; /* Ensure Gala is on its own line */
+    }
+    
+    /* Adjusting the default text size within h1, excluding styled spans */
+    .nelagala-event header h1:not(:has(span)) {
+        font-size: 0.8em; /* Smallest text size */
+    }
+
+    .nelagala-event .event-navigation {
+        position: fixed;
+        width: 100%;
+        top: 0;
+        background-color: #fff;
+        /* or any color that suits your design */
+    }
+
+    .nelagala-event .event-navigation ul {
+        flex-direction: column;
+        /* Stack items vertically */
+        display: none;
+        /* Hide by default */
+    }
+
+    .nelagala-event .event-navigation ul.open {
+        display: flex;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        /* This ensures it covers the full height */
+        flex-direction: column;
+        justify-content: center;
+        /* This will center the menu items vertically */
+        align-items: center;
+        /* This will center the menu items horizontally */
+        background-color: rgba(255, 255, 255, 0.9);
+        /* Slight transparency */
+        z-index: 1000;
+        /* Ensures the navigation is above other content */
+    }
+
+    .nelagala-event .hamburger {
+        display: block;
+        /* Show the hamburger icon */
+        position: absolute;
+        top: 10px;
+        /* Adjust as needed */
+        right: 10px;
+        /* Adjust as needed */
+        z-index: 2;
+        /* Ensure it's above other content */
+    }
+
+    .nelagala-event .event-navigation ul {
+        display: none;
+        /* Initially hidden on smaller screens */
+    }
+
+    /* Adjust the sections to be more mobile-friendly */
+    .nelagala-event section {
+        margin-bottom: 1em;
+        padding: 1em;
+    }
+}
+
+/* !SECTION: Media Queries */
