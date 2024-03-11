@@ -1,4 +1,17 @@
 /* nelagala/css/styles.css */
+:root {
+    --ng-txt: rgb(51, 51, 51);
+    --ng-bg: rgb(255, 255, 255);
+    --ng-main-bg: #497094; 
+    --ng-main-txt: #005427; 
+
+    --ng-header-bg: #f0bd33; 
+    --ng-header-txt: rgb(255, 255, 255);
+    --ng-header-txt-a: rgb(249, 249, 249);
+
+    --ng-red: rgb(209, 35, 46);
+  }
+
 @font-face {
     font-family: 'Barlow';
     src: url('/typography/Barlow-SemiBold.otf') format('otf');
@@ -8,11 +21,11 @@
 
 .nelagala-event {
     font-family: 'Barlow', sans-serif;
-    color: #333;
-    background: #fff;
+    color: var(--ng-txt);
+    background: var(--ng-bg);
     padding: 15px;
     display: flex;
-  justify-content: space-between;
+    justify-content: space-between;
     min-height: 100vh; /* Viewport height */
     width: 100%; /* For full width */
     flex-wrap: wrap;
@@ -24,11 +37,10 @@
     width: 100%;
     padding: 0px;
     margin-top: 0;
-    background: #f0bd33;
-    /* Slightly off-white to distinguish sections */
+    background: var(--ng-header-bg);
     text-align: center;
     margin-bottom: 20px;
-    color: #ffffff;
+    color: var(--ng-header-txt);
 }
 
 .nelagala-event header h2 {
@@ -46,7 +58,7 @@
     font-size: 1.4em;
     position: relative; /* Establishes a positioning context for children */
     margin: 20px auto; /* Gives enough space for overlap */
-    color: #D1232E;
+    color: var(--ng-red);
     width: 70%
 }
 
@@ -63,7 +75,7 @@
     display: block; /* Makes it a block to occupy its own line */
     font-family: "kepler-std-condensed-display", serif;
     font-size:1.8em; /* Second largest size */
-    color: #ffffff;
+    color: var(--ng-header-txt);
     line-height: .9em; /* Reduces the space between this line and the next */
     margin: -10px 0; /* Adjust top and bottom margin to manage overlap */
     text-transform: uppercase;
@@ -95,15 +107,52 @@
     padding: 10px;
 }
 
+.nelagala-event header a {
+    text-decoration: none;
+    color: var(--ng-header-txt);
+    font-weight: 500;
+    font-size: 1em;
+    padding: 3px;
+    border-bottom: 1 px solid var(--ng-header-bg);
+}
+
+.nelagala-event header a:hover {
+    text-decoration: none;
+    color: var(--ng-red);
+    font-weight: 500;
+    font-size: 1em;
+    padding: 3px;
+    border-bottom: 1px solid var(--ng-header-txt);
+}
+
 /* If you need the columns to have a bit of space between them */
 .nelagala-event header .column.left {
     margin-right: 5px; /* Adjust the space between the columns */
+    border-right: 4px solid var(--ng-red);
 }
 
 .nelagala-event header .column.right {
-    margin-left: 5px; /* Adjust the space between the columns */
+    margin-left: 5px; 
+    text-align: left;
 }
     
+.nelagala-event header .column.right p {
+    font-size: 2.7em;
+}
+    
+.nelagala-event header .column h3 {
+    font-family: "kepler-std-condensed-display", serif;
+    font-size: 2em;
+    font-style: italic;
+}
+
+.nelagala-event header .column h3 a {
+    font-weight: 800;
+    padding-right: 20px;
+    border-right: 1px solid var(--ng-header-txt);
+    margin-right: 20px;
+}
+ 
 /* General Styling for the Navigation */
 .nelagala-event .event-navigation ul {
     list-style-type: none;
@@ -214,7 +263,7 @@
 
 .nelagala-event a:hover {
     text-decoration: none;
-    color: #D1232E;
+    color: var(--ng-red);
     border-bottom: 2px solid black;
 }
 
@@ -252,7 +301,7 @@
 
 .nelagala-event .event-navigation a:hover {
     text-decoration: none;
-    color: #D1232E;
+    color: var(--ng-red);
     border-bottom: 4px solid black;
 }
 
