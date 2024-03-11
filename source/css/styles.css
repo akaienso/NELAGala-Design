@@ -33,14 +33,34 @@
     margin: auto;
 }
 
-.nelagala-event header  {
+.nelagala-event header {
     width: 100%;
     padding: 0px;
     margin-top: 0;
     background: var(--ng-header-bg);
     text-align: center;
     margin-bottom: 20px;
-    color: var(--ng-header-txt);
+    color: #ffffff;
+    position: relative;
+    overflow: hidden;
+}
+
+.nelagala-event .header-img {
+    position: absolute;
+    top: -142px;
+    right: -236px;
+    width: 765px;
+    transform: rotate(-13deg);
+    opacity: 0.6;
+}
+
+.nelagala-event header .col {
+    width: 50%;
+    padding: 20px 10px 30px;
+}
+
+.nelagala-event header .divider {
+    border-right: 6px solid #d1222e;
 }
 
 .nelagala-event header h2 {
@@ -49,21 +69,20 @@
     font-style: italic;
     font-size: 4em;
     text-align: center; letter-spacing: 3px;
-    margin: 0;
+    margin: 0 0 20px 0;
+    padding-top: 50px;
+    position: relative;
 }
-.nelagala-event header h3 {}
-.nelagala-event header h1 {
-    font-family: 'nautica', sans-serif;
-    text-align: center;
-    font-size: 1.4em;
-    position: relative; /* Establishes a positioning context for children */
-    margin: 20px auto; /* Gives enough space for overlap */
-    color: var(--ng-red);
-    width: 70%
+.nelagala-event header h3 {
+    font-size: 21px;
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-family: "Playfair Display", serif;
+    font-weight: 400;
 }
 
-.nelagala-event header h1 .yr {
-    font-size: 1.75em; /* Third largest size */
+.nelagala-event header .yr {
+    font-size: 2em; /* Third largest size */
 }
 
 .nelagala-event header h1 .yr sup {
@@ -71,16 +90,66 @@
     margin-left: .3em; /* Adjust the size of the superscript */
 }
 
-.nelagala-event header h1 .title {
-    display: block; /* Makes it a block to occupy its own line */
+.pre-title {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #D1232E;
+    font-family: 'nautica', sans-serif;
+    text-align: center;
+    font-size: 2.9em;
+    font-weight: 800;
+    margin: 0;
+    line-height: 58px;
+}
+
+.col-2 {
+    text-align: start;
+    padding-left: 20px;
+}
+
+
+.col-2 .col-2-title {
+    text-transform: uppercase;
+    font-size: 25px;
+    margin: 10px 0;
+}
+
+.col-2 .text {
+    font-family: "Playfair Display", serif;
+    font-weight: 400;
+    font-size: 21px;
+    margin: 0;
+}
+
+.header-img-main {
+    height: 300px;
+}
+
+.header-img-main img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    object-position: center 83%;
+}
+
+.header-footer-text {
+    font-size: 24px;
+    margin: 10px 0;
+    font-family: "Playfair Display", serif;
+    font-weight: 500;
+}
+
+.nelagala-event header h1.title {
+    display: inline;
+    text-align: center;
     font-family: "kepler-std-condensed-display", serif;
-    font-size:1.8em; /* Second largest size */
-    color: var(--ng-header-txt);
+    font-size: 3em;    /* Second largest size */
+    color: #ffffff;
     line-height: .9em; /* Reduces the space between this line and the next */
     margin: -10px 0; /* Adjust top and bottom margin to manage overlap */
     text-transform: uppercase;
-    position: relative; /* Allows adjustment of position */
-    top: -.4em; /* Pulls Gala up to overlap the title */
 }
 
 .nelagala-event header h1 .gala {
@@ -98,7 +167,10 @@
 .nelagala-event header .row {
     display: flex; /* This enables flexbox layout */
     justify-content: space-between; /* This spaces out the child divs */
+    align-items: center;
     width: 100%; /* Ensures the row takes up full width of its parent */
+    margin-bottom: 20px;
+    position: relative;
 }
 
 .nelagala-event header .column {
@@ -175,11 +247,12 @@
     /* Width of the hamburger menu */
     height: 25px;
     /* Total height of the hamburger menu */
-    position: absolute;
+    /* position: absolute;
     top: 1em;
-    right: 1em;
+    right: 1em; */
     background: transparent;
     border: none;
+    margin-right: 20px;
 }
 
 .nelagala-event .hamburger span {
@@ -274,7 +347,7 @@
     position: sticky;
     background-color: #f0f0f0; /* Temporarily set a background color */
     width: 25%;
-    height: 110vh; // experiment with this value, try changing to 110vh
+    height: 110vh; /* experiment with this value, try changing to 110vh */
     overflow: none;
     background-color: #f0f0f0;
     /* Temporarily set a background color */
@@ -327,6 +400,23 @@
         font-size: 2em;
         padding: 0;
     }
+
+    .nelagala-event header .row {
+        flex-wrap: wrap;
+    }
+
+    .nelagala-event header .col {
+        width: 100%;
+    }
+
+    .nelagala-event header .col-2 {
+        text-align: center;
+    }
+
+    .nelagala-event header .divider {
+        border-right: none;
+        border-bottom: 6px solid #d1222e;
+    }
     
     .nelagala-event header h1 .yr {
         font-size: 1.4em; /* Third largest size */
@@ -362,7 +452,10 @@
         position: fixed;
         width: 100%;
         top: 0;
+        left: 0;
         background-color: #fff;
+        max-height: 42px;
+        z-index: 9999;
         /* or any color that suits your design */
     }
 
@@ -388,7 +481,7 @@
         /* This will center the menu items horizontally */
         background-color: rgba(255, 255, 255, 0.9);
         /* Slight transparency */
-        z-index: 1000;
+        z-index: 9999;
         /* Ensures the navigation is above other content */
     }
 
@@ -400,7 +493,7 @@
         /* Adjust as needed */
         right: 10px;
         /* Adjust as needed */
-        z-index: 2;
+        z-index: 9999;
         /* Ensure it's above other content */
     }
 
