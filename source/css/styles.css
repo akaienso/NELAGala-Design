@@ -621,3 +621,33 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* !SECTION: Media Queries */
+
+/* Ticket Prices and Sponsorship Blocks */
+.packages {
+    display: flex;
+    flex-wrap: wrap; /* Allows items to wrap */
+    gap: 2%; /* Sets a gap of 2% between items */
+    align-items: flex-start;
+}
+
+.package {
+    flex: 0 0 31.333%; /* Sets the basis to slightly less than one-third, accounting for the gap */
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+
+.map-container {
+    position: relative;
+    width: 100%;
+    padding-bottom: 56.25%; /* Aspect ratio of 16:9 */
+    height: 0;
+  }
+  .map-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+  

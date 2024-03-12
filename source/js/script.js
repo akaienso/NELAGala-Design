@@ -7,3 +7,5 @@ document.addEventListener('DOMContentLoaded', function() {
         navList.classList.toggle('open');
     });
 });
+
+//  Google Maps API Key: AIzaSyBGZLfom_9gzVfPI39FCQ1MHWGxNjxUqDg
