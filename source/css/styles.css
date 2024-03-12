@@ -65,13 +65,12 @@ h1, h2, h3, h4, h5, h6 {
     font-weight: 800;
     font-size: 1em;
     padding: 3px;
-    transition: 0.15s ease-in;
+    transition: 0.2s ease-in;
 }
 
 .nelagala-event a:hover {
     text-decoration: none;
-    color: var(--ng-red);
-    border-bottom: 3px solid var(--ng-red);
+    color: rgb(213 78 86);
 }
 
 .nelagala-event main > section > h2 {
@@ -173,14 +172,14 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .header-img-main {
-    height: 300px;
+    height: 189px;
 }
 
 .header-img-main img {
     height: 100%;
     width: 100%;
     object-fit: cover;
-    object-position: center 83%;
+    object-position: center 75%;
 }
 
 .header-footer-text {
@@ -278,7 +277,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .nelagala-event main section {
     margin-bottom: 0 ;
-    padding: 50px;
+    padding: 20px;
     background: var(--ng-section-bg);
     /* Slightly off-white to distinguish sections */
 }
@@ -304,11 +303,9 @@ h1, h2, h3, h4, h5, h6 {
 
 .nelagala-event main #event-roles h3, .nelagala-event main #honorees h3 {
     font-family: var(--font-primary);
-    font-size: 1.7em;
+    font-size: 3em;
     margin-bottom: 10px;
 }
-
-
 
 /* ANCHOR: Roles and Honorees */    
 .nelagala-event .row-container {
@@ -415,23 +412,6 @@ h1, h2, h3, h4, h5, h6 {
 
 /* SECTION: Media Queries */
 
-/* ANCHOR: For screens smaller than 768px */
-@media screen and (max-width: 768px) {
-    .nelagala-event main > section.participants  > div {
-        flex-direction: column; 
-        align-items: flex-start; 
-    }
-
-    .nelagala-event main > section.participants  > div img {
-        width: 100%; 
-        margin: 0; /* Resets margin for both scenarios */
-    }
-
-    .nelagala-event main > section.participants  > div > div {
-        width: 100%; 
-    }
-}
-
 /* ANCHOR: For screens larger than 992px */
 @media (min-width: 992px) {
 
@@ -504,6 +484,49 @@ h1, h2, h3, h4, h5, h6 {
     .nelagala-event section {
         margin-bottom: 1em;
         padding: 1em;
+    }
+
+    .header-img-main {
+        height: 179px;
+    }
+
+    .nelagala-event header .divider {
+        border: none;
+    }
+
+    .col-2 {
+        display: none;
+    }
+
+    .nelagala-event .row-container, .nelagala-event .packages {
+        justify-content: center;
+        flex-wrap: wrap;
+        flex: 0 0 48%;
+    }
+
+    .nelagala-event .package {
+        flex: 0 0 48%;
+    }
+}
+
+/* ANCHOR: For screens smaller than 768px */
+@media screen and (max-width: 768px) {
+    .nelagala-event main > section.participants  > div {
+        flex-direction: column; 
+        align-items: flex-start; 
+    }
+
+    .nelagala-event main > section.participants  > div img {
+        width: 100%; 
+        margin: 0; /* Resets margin for both scenarios */
+    }
+
+    .nelagala-event main > section.participants  > div > div {
+        width: 100%; 
+    }
+
+    .nelagala-event .package {
+        flex: 0 0 100%;
     }
 }
 

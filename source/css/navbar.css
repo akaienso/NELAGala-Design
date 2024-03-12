@@ -30,18 +30,17 @@
 }
 
 .nav .menu-item a {
+  display: block;
   text-decoration: none;
   color: var(--ng-txt);
   font-weight: 500;
   font-size: 1.4em;
-  padding: 6px;
-  border-bottom: 1px solid #ddd;
 }
 
 .nav .menu-item a:hover {
   text-decoration: none;
   color: var(--ng-red);
-  border-bottom: 4px solid var(--ng-red);
+  border: none;
 }
 
 @media (max-width: 991px) {
