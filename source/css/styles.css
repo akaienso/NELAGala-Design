@@ -18,7 +18,6 @@
     --font-tertierary: 'Playfair Display', serif;
 
     --font-gala: 'nautica', sans-serif;
-
   }
 
 @font-face {
@@ -62,17 +61,17 @@ h1, h2, h3, h4, h5, h6 {
 
 .nelagala-event a {
     text-decoration: none;
-    color: var(--ng-txt);
+    color: var(--ng-red);
     font-weight: 800;
     font-size: 1em;
     padding: 3px;
-    border-bottom: 4px solid var(--ng-section-bg);
+    transition: 0.15s ease-in;
 }
 
 .nelagala-event a:hover {
     text-decoration: none;
     color: var(--ng-red);
-    border-bottom: 2px solid var(--ng-txt);
+    border-bottom: 3px solid var(--ng-red);
 }
 
 .nelagala-event main > section > h2 {
@@ -90,7 +89,6 @@ h1, h2, h3, h4, h5, h6 {
     margin-top: 0;
     background: var(--ng-header-bg);
     text-align: center;
-    margin-bottom: 20px;
     color: var(--ng-header-txt);
     position: relative;
     overflow: hidden;
@@ -280,7 +278,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .nelagala-event main section {
     margin-bottom: 0 ;
-    padding: 1em;
+    padding: 50px;
     background: var(--ng-section-bg);
     /* Slightly off-white to distinguish sections */
 }
@@ -295,17 +293,33 @@ h1, h2, h3, h4, h5, h6 {
     width: 100%;
   }
 
+.nelagala-event main #about-the-event .last {
+    margin-bottom: 50px;
+}
+
 .nelagala-event main #event-roles {
     /* Specific styles for Event Roles section */
 
 }
 
-.nelagala-event main #event-roles  h3 {
+.nelagala-event main #event-roles h3, .nelagala-event main #honorees h3 {
     font-family: var(--font-primary);
-    font-size: 2em;
+    font-size: 1.7em;
+    margin-bottom: 10px;
 }
 
+
+
 /* ANCHOR: Roles and Honorees */    
+.nelagala-event .row-container {
+    gap: 50px;
+    margin-bottom: 50px;
+}
+
+.nelagala-event .row-container.reverse {
+    flex-direction: row-reverse;
+}
+
 .nelagala-event .nelagala-event main > section.participants  {
     width: 100%;
 }
@@ -313,23 +327,30 @@ h1, h2, h3, h4, h5, h6 {
 .nelagala-event main > section > div {
     display: flex; 
     align-items: center; 
-    justify-content: space-between; 
-    margin-bottom: 0px; 
+    justify-content: start; 
+    margin-bottom: 0px;
+}
+
+.nelagala-event main > section > .packages {
+    align-items: inherit; 
 }
 
 .nelagala-event main > section.participants  > div img {
-    width: 40%; 
+    width: 50%;
     aspect-ratio: 3 / 4; 
-    object-fit: cover; 
+    object-fit: cover;
+    max-height: 400px;
+    mix-blend-mode: luminosity;
+    object-position: center 1%;
 }
 
 /* Targets every other .role starting from the second instance */
-.nelagala-event main > section.participants  > div:nth-child(even) {
-    flex-direction: row-reverse; /* Reverses the order, putting the image on the left */
-}
+/* .nelagala-event main > section.participants  > div:nth-child(even) {
+    flex-direction: row-reverse;
+} */
 
 .nelagala-event main > section.participants  > div > div {
-    width: 58%; 
+    width: 50%; 
     text-align: left; 
 }
 
@@ -341,6 +362,7 @@ h1, h2, h3, h4, h5, h6 {
     font-size: 16px;
     margin: 0; padding: 0;
 }
+
 .nelagala-event main > section.participants > div > div > .full-name {
        font-family: var(--font-tertiary);
         font-size: 2.4em; /* Second largest size */
@@ -349,8 +371,14 @@ h1, h2, h3, h4, h5, h6 {
         margin: 0;
 }
 
+.nelagala-event main > section.participants > div > div > .bio-summary {
+    font-size: 18px;
+    color: #707070;
+}
+
 .nelagala-event main > section.participants > div > div > .personal-title {
-    font-weight: bold;
+    font-weight: 500;
+    font-size: 18px;
 }
 
 .nelagala-event main > #Biography > div > div {
@@ -485,16 +513,36 @@ h1, h2, h3, h4, h5, h6 {
 .packages {
     display: flex;
     flex-wrap: wrap; /* Allows items to wrap */
-    gap: 2%; /* Sets a gap of 2% between items */
+    gap: 20px; /* Sets a gap of 2% between items */
     align-items: flex-start;
 }
 
 .package {
     flex: 0 0 31.333%; /* Sets the basis to slightly less than one-third, accounting for the gap */
-    padding: 20px;
     box-sizing: border-box;
+    position: relative;
+    background-color: white;
+    padding: 20px 20px 70px;
 }
 
+.package button {
+    padding: 10px;
+    border: 0.5px solid var(--ng-red);
+    border-radius: 5px;
+    color: var(--ng-red);
+    font-weight: 500;
+    text-transform: uppercase;
+    position: absolute;
+    bottom: 20px;
+    width: calc(100% - 40px);
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.package button:hover {
+    background-color: var(--ng-red);
+    color: #fff;
+}
 
 .map-container {
     position: relative;
@@ -509,4 +557,10 @@ h1, h2, h3, h4, h5, h6 {
     width: 100%;
     height: 100%;
   }
-  
+
+.sub-text {
+    margin-bottom: 50px;
+    font-size: 19px;
+    color: #707070;
+}
+

@@ -26,6 +26,7 @@
 
 .nav .menu-item {
   padding: 0.5em 1em;
+  margin-bottom: 10px;
 }
 
 .nav .menu-item a {
@@ -34,13 +35,13 @@
   font-weight: 500;
   font-size: 1.4em;
   padding: 6px;
-  border-bottom: 4px solid var(--ng-nav-bg);
+  border-bottom: 1px solid #ddd;
 }
 
 .nav .menu-item a:hover {
   text-decoration: none;
   color: var(--ng-red);
-  border-bottom: 4px solid var(--ng-txt);
+  border-bottom: 4px solid var(--ng-red);
 }
 
 @media (max-width: 991px) {
