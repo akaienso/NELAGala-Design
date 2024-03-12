@@ -92,7 +92,12 @@ h1, h2, h3, h4, h5, h6 {
     position: relative;
     overflow: hidden;
 }
-
+.nelagala-event.save-the-date, .nelagala-event.save-the-date main, .nelagala-event.save-the-date main header {
+    margin: 0;
+    width: 100%;
+    padding: 0;
+    max-width: none;
+}
 .nelagala-event .header-img {
     position: absolute;
     top: -142px;
