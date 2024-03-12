@@ -388,7 +388,8 @@ h1, h2, h3, h4, h5, h6 {
 
 .nelagala-event main > section.participants > div > div > h3 {
  
-    text-transform: none;font-family: "Barlow", serif;
+    text-transform: none;
+    font-family: var(--font-secondary)
     font-weight: 400;
     font-size: 16px;
     margin: 0; padding: 0;
@@ -402,7 +403,23 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .nelagala-event main > section.participants > div > div > .personal-title {
-     font-weight: bold;
+    font-weight: bold;
+}
+
+.nelagala-event main > #Biography > div > div {
+    width: 58%; 
+    text-align: right; 
+}
+
+.nelagala-event main > #Biography > article {
+    font-size: 1.2em;
+    margin: 2em auto;
+    width: 74%;
+    font-weight: normal;
+}
+
+.nelagala-event main > #Biography > article  p:first-child {
+    font-size: 1.6em;
 }
 
 .nelagala-event main #tickets {
