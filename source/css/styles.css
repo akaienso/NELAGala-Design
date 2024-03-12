@@ -28,13 +28,21 @@
     font-style: normal;
 }
 
+body {
+    margin: 0;
+}
+
+button {
+    border: none;
+    background: inherit;
+}
+
 /* SECTION: Base Typography */
 
 .nelagala-event {
     font-family: var(--font-secondary);
     color: var(--ng-txt);
     background: var(--ng-bg);
-    padding: 15px;
     display: flex;
     justify-content: space-between;
     min-height: 100vh; /* Viewport height */
@@ -270,67 +278,6 @@ h1, h2, h3, h4, h5, h6 {
 
 /* !SECTION: Header and Save the Date */
 
-/* SECTION: Navigation */
-.nelagala-event .event-navigation ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    /* horizontal layout for larger screens */
-}
-
-.nelagala-event .event-navigation li {
-    padding: 0.5em 1em;
-    /* Spacing between items */
-}
-
-.nelagala-event .hamburger {
-    display: none;
-    /* Will be visible on mobile only due to media query */
-    cursor: pointer;
-    width: 30px;
-    /* Width of the hamburger menu */
-    height: 25px;
-    /* Total height of the hamburger menu */
-    /* position: absolute;
-    top: 1em;
-    right: 1em; */
-    background: transparent;
-    border: none;
-    margin-right: 20px;
-}
-
-.nelagala-event .hamburger span {
-    display: block;
-    height: 3px;
-    /* Height of one bar */
-    margin-bottom: 5px;
-    /* Space between the bars */
-    background: #333;
-    /* Color of the bars */
-    border-radius: 3px;
-    transition: all 0.3s ease-in-out;
-}
-
-.nelagala-event .hamburger span:last-child {
-    margin-bottom: 0;
-    /* No margin for the last bar */
-}
-
-/* Styling for when the hamburger menu is transformed into a 'close' icon */
-.nelagala-event .hamburger.open span:nth-child(1) {
-    transform: translateY(8px) rotate(45deg);
-}
-
-.nelagala-event .hamburger.open span:nth-child(2) {
-    opacity: 0;
-}
-
-.nelagala-event .hamburger.open span:nth-child(3) {
-    transform: translateY(-8px) rotate(-45deg);
-}
-/* !SECTION: Navigation */
-
 .nelagala-event main section {
     margin-bottom: 0 ;
     padding: 1em;
@@ -389,7 +336,7 @@ h1, h2, h3, h4, h5, h6 {
 .nelagala-event main > section.participants > div > div > h3 {
  
     text-transform: none;
-    font-family: var(--font-secondary)
+    font-family: var(--font-secondary);
     font-weight: 400;
     font-size: 16px;
     margin: 0; padding: 0;
@@ -436,40 +383,6 @@ h1, h2, h3, h4, h5, h6 {
 
 .nelagala-event main #advertising {
     /* Specific styles for advertising section */
-}
-
-.nelagala-event .event-navigation {
-    flex: 0 0 250px; /* Adjust width of the sidebar as needed */
-    width: 25%;
-    height: 110vh; /* experiment with this value, try changing to 110vh */
-    overflow: none;
-    background-color: var(--ng-nav-bg);
-    /* Temporarily set a background color */
-    position: -webkit-sticky;
-    position: sticky;
-    top: 0;
-}
-
-.nelagala-event .event-navigation ul {
-    display: flex;
-    flex-direction: column;
-    /* Stack the links vertically */
-    height: 100%;
-}
-
-.nelagala-event  .event-navigation a {
-    text-decoration: none;
-    color: var(--ng-txt);
-    font-weight: 500;
-    font-size: 1.4em;
-    padding: 6px;
-    border-bottom: 4px solid var(--ng-nav-bg);
-}
-
-.nelagala-event .event-navigation a:hover {
-    text-decoration: none;
-    color: var(--ng-red);
-    border-bottom: 4px solid var(--ng-txt);
 }
 
 /* SECTION: Media Queries */
@@ -539,7 +452,7 @@ h1, h2, h3, h4, h5, h6 {
     
     .nelagala-event header h1 .title {
         display: block; /* Makes it a block to occupy its own line */
-        font-family: var(--font-primary)
+        font-family: var(--font-primary);
         font-size: 1.3em; /* Second largest size */
         color: var(--ng-header-title-txt);
         line-height: .9em; /* Reduces the space between this line and the next */
@@ -557,60 +470,6 @@ h1, h2, h3, h4, h5, h6 {
     /* Adjusting the default text size within h1, excluding styled spans */
     .nelagala-event header h1:not(:has(span)) {
         font-size: 0.8em; /* Smallest text size */
-    }
-
-    .nelagala-event .event-navigation {
-        position: fixed;
-        width: 100%;
-        top: 0;
-        left: 0;
-        background-color: #fff;
-        max-height: 42px;
-        z-index: 9999;
-        /* or any color that suits your design */
-    }
-
-    .nelagala-event .event-navigation ul {
-        flex-direction: column;
-        /* Stack items vertically */
-        display: none;
-        /* Hide by default */
-    }
-
-    .nelagala-event .event-navigation ul.open {
-        display: flex;
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100vh;
-        /* This ensures it covers the full height */
-        flex-direction: column;
-        justify-content: center;
-        /* This will center the menu items vertically */
-        align-items: center;
-        /* This will center the menu items horizontally */
-        background-color: var(--ng-nav-ul-open);
-        /* Slight transparency */
-        z-index: 9999;
-        /* Ensures the navigation is above other content */
-    }
-
-    .nelagala-event .hamburger {
-        display: block;
-        /* Show the hamburger icon */
-        position: absolute;
-        top: 10px;
-        /* Adjust as needed */
-        right: 10px;
-        /* Adjust as needed */
-        z-index: 9999;
-        /* Ensure it's above other content */
-    }
-
-    .nelagala-event .event-navigation ul {
-        display: none;
-        /* Initially hidden on smaller screens */
     }
 
     /* Adjust the sections to be more mobile-friendly */

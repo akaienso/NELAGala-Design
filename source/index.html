@@ -11,27 +11,31 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital@1&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/navbar.css">
 </head>
 
 <body>
 
     <div class="nelagala-event">
-        <nav class="event-navigation">
-            <ul>
-                <li><a href="#about-the-event">About the Event</a></li>
-                <li><a href="#event-roles">Who's Who</a></li>
-                <li><a href="#honorees">Honorees</a></li>
-                <li><a href="#tickets">Tickets</a></li>
-                <li><a href="#lodging">Lodging</a></li>
-                <li><a href="#sponsorhips">Sponsorship Packages</a></li>
-                <li><a href="#advertising">Advertising Rates</a></li>
+        <nav class="event-navigation nav">
+
+            <div class="burger-container">
+                <button id="burger" aria-label="Open navigation menu">
+                    <span class="bar topBar"></span>
+                    <span class="bar btmBar"></span>
+                </button>
+            </div>
+
+            <ul class="menu">
+                <li class="menu-item"><a href="#about-the-event">About the Event</a></li>
+                <li class="menu-item"><a href="#event-roles">Who's Who</a></li>
+                <li class="menu-item"><a href="#honorees">Honorees</a></li>
+                <li class="menu-item"><a href="#tickets">Tickets</a></li>
+                <li class="menu-item"><a href="#lodging">Lodging</a></li>
+                <li class="menu-item"><a href="#sponsorhips">Sponsorship Packages</a></li>
+                <li class="menu-item"><a href="#advertising">Advertising Rates</a></li>
             </ul>
 
-            <button class="hamburger" aria-label="Open navigation menu">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
         </nav>
 
         <main>
