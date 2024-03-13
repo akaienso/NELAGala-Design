@@ -6,12 +6,12 @@ function custom_theme_styles()
 {
     wp_enqueue_style('typekit-fonts', 'https://use.typekit.net/zcb5mzu.css');
     wp_enqueue_style('google-fonts', 'https://fonts.googleapis.com/css2?family=Playfair+Display:ital@1&display=swap', false);
-    wp_enqueue_style('nelagala-reset', 'https://cdn.jsdelivr.net/gh/akaienso/NELAGala-Design@migration/css/reset.css?' . time());
-    wp_enqueue_style('nelagala-style', 'https://cdn.jsdelivr.net/gh/akaienso/NELAGala-Design@migration/css/styles.css?' . time());
-    wp_enqueue_style('nelagala-navbar-style', 'https://cdn.jsdelivr.net/gh/akaienso/NELAGala-Design@migration/css/navbar.css?' . time());
-    // wp_enqueue_style('nelagala-reset', get_template_directory_uri() . '/inc/nelagala/css/reset.css');
-    // wp_enqueue_style('nelagala-style', get_template_directory_uri() . '/inc/nelagala/css/styles.css');
-    // wp_enqueue_style('nelagala-navbar-style', get_template_directory_uri() . '/inc/nelagala/css/navbar.css');
+    // wp_enqueue_style('nelagala-reset', 'https://cdn.jsdelivr.net/gh/akaienso/NELAGala-Design@migration/css/reset.css?' . time());
+    // wp_enqueue_style('nelagala-style', 'https://cdn.jsdelivr.net/gh/akaienso/NELAGala-Design@migration/css/styles.css?' . time());
+    // wp_enqueue_style('nelagala-navbar-style', 'https://cdn.jsdelivr.net/gh/akaienso/NELAGala-Design@migration/css/navbar.css?' . time());
+    wp_enqueue_style('nelagala-reset', get_template_directory_uri() . '/inc/nelagala/css/reset.css?' . time());
+    wp_enqueue_style('nelagala-style', get_template_directory_uri() . '/inc/nelagala/css/styles.css?' . time());
+    wp_enqueue_style('nelagala-navbar-style', get_template_directory_uri() . '/inc/nelagala/css/navbar.css?' . time());
 }
 add_action('wp_enqueue_scripts', 'custom_theme_styles');
 function custom_theme_scripts()
@@ -98,7 +98,7 @@ if ($events->have_posts()) : while ($events->have_posts()) : $events->the_post()
 
                                         <div class="title-wrap">
                                             <p class="pre-title">The <span class="yr">35</span> th Annual </p>
-                                            <h1 class="title">National Academic & Leadership Awards</h1>
+                                            <h1 class="title">"<?php echo  $event_title; ?></h1>
                                             <p class="pre-title"><span class="yr">Gala</span></p>
                                         </div>
                                     </div>
@@ -149,7 +149,7 @@ if ($events->have_posts()) : while ($events->have_posts()) : $events->the_post()
                                         $participant_slug = get_post_field('post_name', $participant_id);
                                         $biography_link = home_url("/nelagala/" . $participant_slug);
                                     ?>
-                                        <div>
+                                        <div class="row-container">
                                             <?php
 
                                             if (!empty($participant_photo)) {
@@ -160,10 +160,12 @@ if ($events->have_posts()) : while ($events->have_posts()) : $events->the_post()
                                             ?>
                                                 <img src="<?php echo esc_url($url); ?>" alt="Photograph of <?php echo esc_attr($alt); ?>"><?php
                                                                                                                                         } ?>
-                                            <h3><?php echo esc_html($role_description); ?></h3>
-                                            <p class="full-name"><?php echo esc_html($participant_name); ?></p>
-                                            <p class="bio-summary"><?php echo esc_html($participant_summary); ?></p>
-                                            <p><a href="<?php echo esc_url($biography_link); ?>">Read more</a></p>
+                                            <div>
+                                                <h3><?php echo esc_html($role_description); ?></h3>
+                                                <p class="full-name"><?php echo esc_html($participant_name); ?></p>
+                                                <p class="bio-summary"><?php echo esc_html($participant_summary); ?></p>
+                                                <p><a href="<?php echo esc_url($biography_link); ?>">Read more</a></p>
+                                            </div>
                                         </div>
                                     <?php endwhile; ?>
                                 </section>
@@ -197,7 +199,7 @@ if ($events->have_posts()) : while ($events->have_posts()) : $events->the_post()
                                         $recipient_slug = get_post_field('post_name', $recipient_id);
                                         $biography_link = home_url("/nelagala/" . $recipient_slug);
                                     ?>
-                                        <div>
+                                        <div class="row-container reverse">
                                             <?php
 
                                             if (!empty($recipient_photo)) {
@@ -208,10 +210,12 @@ if ($events->have_posts()) : while ($events->have_posts()) : $events->the_post()
                                             ?>
                                                 <img src="<?php echo esc_url($url); ?>" alt="Photograph of <?php echo esc_attr($alt); ?>"><?php
                                                                                                                                         } ?>
-                                            <h3><?php echo esc_html($honor_description); ?></h3>
-                                            <p class="full-name"><?php echo esc_html($recipient_name); ?></p>
-                                            <p class="bio-summary"><?php echo esc_html($recipient_summary); ?></p>
-                                            <p><a href="<?php echo esc_url($biography_link); ?>">Read more</a></p>
+                                            <div>
+                                                <h3><?php echo esc_html($honor_description); ?></h3>
+                                                <p class="full-name"><?php echo esc_html($recipient_name); ?></p>
+                                                <p class="bio-summary"><?php echo esc_html($recipient_summary); ?></p>
+                                                <p><a href="<?php echo esc_url($biography_link); ?>">Read more</a></p>
+                                            </div>
                                         </div>
                                     <?php endwhile; ?>
                                 </section>
