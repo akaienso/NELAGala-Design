@@ -98,7 +98,7 @@ body {
   opacity: 0.6;
 }
 .nelagala-event header .col {
-  width: 50%;
+  min-width: 50%;
   padding: 20px 10px 30px;
 }
 .nelagala-event header .divider {
@@ -345,7 +345,7 @@ body {
     flex-wrap: wrap;
   }
   .nelagala-event header .col {
-    width: 100%;
+    min-width: 100%;
   }
   .nelagala-event header .col-2 {
     text-align: center;
