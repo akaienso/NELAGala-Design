@@ -37,5 +37,8 @@
   font-size: 100%;
   /* Resets font size to a known state, you can adjust as needed */
 }
+.nelagala-event .grid_1200 {
+  overflow: default;
+}
 
 /*# sourceMappingURL=reset.css.map */

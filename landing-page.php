@@ -259,7 +259,7 @@ if ($events->have_posts()) : while ($events->have_posts()) : $events->the_post()
                                     <div class="packages">
                                         <?php
                                         while (have_rows('sponsorship_packages')) : the_row();
-                                            $type = get_sub_field('package');
+                                            $package = get_sub_field('package');
                                             $price = get_sub_field('price');
                                             $tax_deduction = get_sub_field('tax_deduction');
                                             $description = get_sub_field('description');

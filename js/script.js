@@ -27,6 +27,3 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         });
     });
 });
-
-
-//  Google Maps API Key: AIzaSyBGZLfom_9gzVfPI39FCQ1MHWGxNjxUqDg
