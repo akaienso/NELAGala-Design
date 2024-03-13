@@ -272,7 +272,7 @@ if ($events->have_posts()) : while ($events->have_posts()) : $events->the_post()
                                                 <?php if (have_rows('amenities')) : ?>
                                                     <ul>
                                                         <?php while (have_rows('amenities')) : the_row(); ?>
-                                                            <li><?php the_sub_field('amenity'); ?></li>
+                                                            <li class="list-item"><?php the_sub_field('amenity'); ?></li>
                                                         <?php endwhile; ?>
                                                     </ul>
                                                 <?php endif; ?>
