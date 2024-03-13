@@ -272,8 +272,7 @@ body {
 }
 .nelagala-event main > section > div {
   display: flex;
-  align-items: center;
-  justify-content: start;
+  align-items: flex-start;
   margin-bottom: 0px;
 }
 .nelagala-event main > section > .packages {
