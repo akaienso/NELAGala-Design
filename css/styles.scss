@@ -115,7 +115,7 @@ body {
     }
 
     header .col {
-        width: 50%;
+        min-width: 50%;
         padding: 20px 10px 30px;
     }
 
@@ -413,7 +413,7 @@ body {
         }
 
         header .col {
-            width: 100%;
+            min-width: 100%;
         }
 
         header .col-2 {
@@ -508,6 +508,7 @@ body {
         flex-wrap: wrap;
         gap: 20px;
         align-items: flex-start;
+        flex-direction: row;
     }
 
     .package {
@@ -515,7 +516,7 @@ body {
         box-sizing: border-box;
         position: relative;
         background-color: white;
-        padding: 20px 20px 70px;
+        padding: 20px 20px 120px;
     }
 
     .package button {
