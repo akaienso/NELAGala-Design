@@ -256,6 +256,10 @@ body {
 .nelagala-event main #about-the-event .last {
   margin-bottom: 50px;
 }
+.nelagala-event main #about-the-event p {
+  font-size: 18px;
+  margin-bottom: 20px;
+}
 .nelagala-event main #event-roles h3,
 .nelagala-event main #honorees h3 {
   font-family: var(--font-primary);
@@ -427,7 +431,7 @@ body {
     flex-wrap: wrap;
     flex: 0 0 48%;
   }
-  .nelagala-event .package {
+  .nelagala-event .packages .package {
     flex: 0 0 48%;
   }
 }
@@ -443,8 +447,8 @@ body {
   .nelagala-event main > section.participants > div > div {
     width: 100%;
   }
-  .nelagala-event .package,
-  .nelagala-event #sponsorshipss .package {
+  .nelagala-event .packages .package,
+  .nelagala-event #sponsorships .packages .package {
     flex: 0 0 100%;
   }
 }

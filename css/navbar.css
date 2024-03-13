@@ -11,7 +11,7 @@
   background-color: var(--ng-nav-bg);
   position: -webkit-sticky;
   position: sticky;
-  top: 0;
+  top: 120px;
 }
 .nelagala-event .nav .menu {
   display: flex;
