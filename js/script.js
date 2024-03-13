@@ -1,11 +1,32 @@
-document.addEventListener('DOMContentLoaded', function() {
-    var hamburger = document.querySelector('.hamburger');
-    var navList = document.querySelector('.event-navigation ul');
 
-    hamburger.addEventListener('click', function() {
-        hamburger.classList.toggle('open');
-        navList.classList.toggle('open');
+(function(){
+    var burger = document.querySelector('.burger-container'),
+        nav = document.querySelector('.nav'),
+        menuItem = document.querySelectorAll('.menu-item');
+    
+    burger.onclick = function() {
+        nav.classList.toggle('menu-opened');
+    }
+
+    menuItem.forEach(item => {
+       item.onclick = function() {
+        nav.classList.toggle('menu-opened');
+    }
+    })
+}());
+
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+
+        const target = document.querySelector(this.getAttribute('href'));
+
+        window.scrollTo({
+            top: target.offsetTop,
+            behavior: 'smooth'
+        });
     });
 });
+
 
 //  Google Maps API Key: AIzaSyBGZLfom_9gzVfPI39FCQ1MHWGxNjxUqDg

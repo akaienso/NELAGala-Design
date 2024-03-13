@@ -11,7 +11,8 @@ function custom_theme_scripts() {
 }
 add_action('wp_enqueue_scripts', 'custom_theme_scripts');
 
-get_header();?>
+// get_header();
+?>
 
 <section  class="sections default_page">
 	<div class="container">
@@ -226,4 +227,6 @@ ksort($matched_events); // Sort the matched events by year
             </div>
         </div>
     </section>
-<?php get_footer(); ?>
+<?php 
+//get_footer();
+ ?>

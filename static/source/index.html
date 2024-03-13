@@ -10,28 +10,36 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital@1&display=swap" rel="stylesheet">
+<<<<<<< HEAD:static/source/index.html
     <link rel="stylesheet" href="../../css/styles.css">
+=======
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/navbar.css">
+>>>>>>> main:source/index.html
 </head>
 
 <body>
 
     <div class="nelagala-event">
-        <nav class="event-navigation">
-            <ul>
-                <li><a href="#about-the-event">About the Event</a></li>
-                <li><a href="#event-roles">Who's Who</a></li>
-                <li><a href="#honorees">Honorees</a></li>
-                <li><a href="#tickets">Tickets</a></li>
-                <li><a href="#lodging">Lodging</a></li>
-                <li><a href="#sponsorhips">Sponsorship Packages</a></li>
-                <li><a href="#advertising">Advertising Rates</a></li>
+        <nav class="event-navigation nav">
+
+            <div class="burger-container">
+                <button id="burger" aria-label="Open navigation menu">
+                    <span class="bar topBar"></span>
+                    <span class="bar btmBar"></span>
+                </button>
+            </div>
+
+            <ul class="menu">
+                <li class="menu-item"><a href="#about-the-event">About the Event</a></li>
+                <li class="menu-item"><a href="#event-roles">Who's Who</a></li>
+                <li class="menu-item"><a href="#honorees">Honorees</a></li>
+                <li class="menu-item"><a href="#tickets">Tickets</a></li>
+                <li class="menu-item"><a href="#lodging">Lodging</a></li>
+                <li class="menu-item"><a href="#sponsorships">Sponsorship Packages</a></li>
+                <li class="menu-item"><a href="#advertising">Advertising Rates</a></li>
             </ul>
 
-            <button class="hamburger" aria-label="Open navigation menu">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
         </nav>
 
         <main>
@@ -64,13 +72,13 @@
                 <h2>About the Event</h2>
                 <p>Since 1989, the <a href="/sons-of-italy-foundation/" target="_blank">Sons of Italy Foundation’s (SIF)</a> Annual National Education & Leadership Awards (NELA) Gala has raised millions of dollars and has hosted many distinguished individuals. </p>
                 <p>Past attendees have included U.S. presidents, members of Congress and the Cabinet, and foreign diplomats. Previous SIF honorees include President Bill Clinton; President George W. Bush; Italy’s President Giorgio Napolitano; U.S. Supreme Court Justices Antonin Scalia and Samuel Alito; former Secretary of Defense Leon Panetta; former Fiat CEO Sergio Marchionne; science & medicine luminaries Dr. Anthony Fauci, Dr. Robert Gallo, and Dr. Michael Sofia; entertainers Frank Sinatra, Tony Bennett, Annette Funicello, and Gary Sinise; and sports legends Mario Andretti, Geno Auriemma, and Tommy Lasorda.</p>
-                <p>Founded in 1959, the SIF has contributed millions of dollars to scholarships, medical research, disaster relief efforts, cultural projects, veterans’ causes, and other special projects. The proceeds from the NELA Gala help fund its philanthropy.</p>
+                <p class="last">Founded in 1959, the SIF has contributed millions of dollars to scholarships, medical research, disaster relief efforts, cultural projects, veterans’ causes, and other special projects. The proceeds from the NELA Gala help fund its philanthropy.</p>
                 
                 <iframe class="video" src="https://www.youtube.com/embed/TqxoBDaSsCE?si=zPVg1wtV9D3Zf_bE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
             </section>
             <section id="event-roles" class="participants">
                 <h2>Who's who...</h2>
-                <div>
+                <div class="row-container">
                     <img src="img\faces\zappia.jpg">
                     <div>
                         <h3>Honorary Event Chair</h3>
@@ -79,7 +87,7 @@
                         <p><a href="biography.html#Biography">Read More</a></p>
                     </div>
                 </div>
-                <div>
+                <div class="row-container">
                     <img src="img\faces\JMantegna.jpg">
                     <div>
                         <h3>Master of Ceremonies</h3>
@@ -88,7 +96,7 @@
                         <p><a href="biography.html#Biography">Read More</a></p>
                     </div>
                 </div>
-                <div class="role right">
+                <div class="role right row-container">
                     <img src="img\faces\sicilian-tenors.webp">
                     <div>
                         <h3>Featured Entertainment</h3>
@@ -98,10 +106,10 @@
                     </div>
                 </div>
             </section>
-            <section id="honorees"  class="participants">
+            <section id="honorees" class="participants">
                 <!-- Content for honorees -->
                 <h2>Honorees</h2>
-                <div>
+                <div class="row-container reverse">
                     <img src="img\faces\Naccarato.png">
                     <div>
                         <h3>SIF National Education and Leadership Award</h3>
@@ -114,7 +122,7 @@
                         <p><a href="biography.html#Biography">Read More</a></p>
                     </div>
                 </div>
-                <div>
+                <div class="row-container reverse">
                     <img src="img\faces\JAlbertelli.png">
                     <div>
                         <h3>SIF Excellence in Business Award</h3>
@@ -127,7 +135,7 @@
                         <p><a href="biography.html#Biography">Read More</a></p>
                     </div>
                 </div>
-                <div class="role right">
+                <div class="role right row-container reverse">
                     <img src="img\faces\ATellez.jpg">
                     <div>
                         <h3>SIF Humanitarian Award</h3>
@@ -139,7 +147,7 @@
                         <p><a href="biography.html#Biography">Read More</a></p>
                     </div>
                 </div>
-                <div>
+                <div class="row-container reverse">
                     <img src="img\faces\BPascrell.jpg">
                     <div>
                         <h3>SIF Lifetime Achievement Award for Public Service</h3>
@@ -151,7 +159,7 @@
                         <p><a href="biography.html#Biography">Read More</a></p>
                     </div>
                 </div>
-                <div>
+                <div class="row-container reverse">
                     <img src="img\faces\TBianco.png">
                     <div>
                         <h3>SIF Lifetime Achievement Award in the Arts</h3>
@@ -166,10 +174,10 @@
                 </div>
                 
             </section>
-            <section id="tickets">
+            <section class="tickets" id="tickets">
                 <!-- Content for Tickets -->
                 <h2>Ticket Prices</h2>
-                <p>Tickets available on sale now Saepe eaque nisi fuga cumque amet. Et dolores iusto quibusdam molestiae laudantium facere vel sequi tenetur. Dignissimos adipisci consequuntur officiis commodi repellat omnis. </p>
+                <p class="sub-text">Tickets available on sale now Saepe eaque nisi fuga cumque amet. Et dolores iusto quibusdam molestiae laudantium facere vel sequi tenetur. Dignissimos adipisci consequuntur officiis commodi repellat omnis. </p>
                 <div class="packages">
                     <div class="package">
                         <h2>Tickets Only</h2>
@@ -188,13 +196,13 @@
                     </div>
                 </div>
             </section>
-            <section id="lodging">
+            <!-- <section id="lodging"> -->
                 <!-- Content for lodging -->
-            </section>
+            <!-- </section> -->
             <section id="sponsorships">
                 <!-- Content for sponsorship packages -->
                 <h2>Sponsorship Packages</h2>
-                <p>Tickets available on sale now Saepe eaque nisi fuga cumque amet. Et dolores iusto quibusdam molestiae laudantium facere vel sequi tenetur. Dignissimos adipisci consequuntur officiis commodi repellat omnis. </p>
+                <p class="sub-text">Tickets available on sale now Saepe eaque nisi fuga cumque amet. Et dolores iusto quibusdam molestiae laudantium facere vel sequi tenetur. Dignissimos adipisci consequuntur officiis commodi repellat omnis. </p>
                 <div class="packages">
                     <div class="package">
                         <h2>Tickets Only</h2>
@@ -247,7 +255,7 @@
             <section id="advertising">
                 <!-- Content for advertising rates -->
                 <h2>Advertising Rates</h2>
-                <p>Tickets available on sale now Saepe eaque nisi fuga cumque amet. Et dolores iusto quibusdam molestiae laudantium facere vel sequi tenetur. Dignissimos adipisci consequuntur officiis commodi repellat omnis. </p>
+                <p class="sub-text">Tickets available on sale now Saepe eaque nisi fuga cumque amet. Et dolores iusto quibusdam molestiae laudantium facere vel sequi tenetur. Dignissimos adipisci consequuntur officiis commodi repellat omnis. </p>
                 <div class="packages">
                     <div class="package">
                         <h2>Tickets Only</h2>
