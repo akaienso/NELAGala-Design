@@ -337,6 +337,16 @@ body {
   align-items: center;
   gap: 5px;
   margin: 16px 0;
+  font-size: 16px;
+}
+
+.nelagala-event .list-item::before {
+  content: url(/static/source/img/checkmark.svg);
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 20px;
+  height: 20px;
 }
 
 .nelagala-event .list-item img {
@@ -455,6 +465,11 @@ body {
   text-transform: inherit;
   font-family: var(--font-secondary);
 }
+
+.nelagala-event .package p {
+  font-size: 16px;
+}
+
 .nelagala-event .package button {
   padding: 10px;
   border: 0.5px solid var(--ng-red);
