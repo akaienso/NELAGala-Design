@@ -6,9 +6,12 @@ function custom_theme_styles()
 {
     wp_enqueue_style('typekit-fonts', 'https://use.typekit.net/zcb5mzu.css');
     wp_enqueue_style('google-fonts', 'https://fonts.googleapis.com/css2?family=Playfair+Display:ital@1&display=swap', false);
-    wp_enqueue_style('nelagala-reset', get_template_directory_uri() . '/inc/nelagala/css/reset.css');
-    wp_enqueue_style('nelagala-style', get_template_directory_uri() . '/inc/nelagala/css/styles.css');
-    wp_enqueue_style('nelagala-navbar-style', get_template_directory_uri() . '/inc/nelagala/css/navbar.css');
+    wp_enqueue_style('nelagala-reset', 'https://cdn.jsdelivr.net/gh/akaienso/NELAGala-Design@migration/css/reset.css?' . time());
+    wp_enqueue_style('nelagala-style', 'https://cdn.jsdelivr.net/gh/akaienso/NELAGala-Design@migration/css/styles.css?' . time());
+    wp_enqueue_style('nelagala-navbar-style', 'https://cdn.jsdelivr.net/gh/akaienso/NELAGala-Design@migration/css/navbar.css?' . time());
+    // wp_enqueue_style('nelagala-reset', get_template_directory_uri() . '/inc/nelagala/css/reset.css');
+    // wp_enqueue_style('nelagala-style', get_template_directory_uri() . '/inc/nelagala/css/styles.css');
+    // wp_enqueue_style('nelagala-navbar-style', get_template_directory_uri() . '/inc/nelagala/css/navbar.css');
 }
 add_action('wp_enqueue_scripts', 'custom_theme_styles');
 function custom_theme_scripts()
@@ -220,93 +223,87 @@ if ($events->have_posts()) : while ($events->have_posts()) : $events->the_post()
                             ?>
                                 <section id="tickets" class="tickets">
                                     <h2>Ticket Prices</h2>
+                                    <p class="sub-text">Tickets available on sale now Saepe eaque nisi fuga cumque amet. Et dolores iusto quibusdam molestiae laudantium facere vel sequi tenetur. Dignissimos adipisci consequuntur officiis commodi repellat omnis. </p>
                                     <div class="packages">
-                                    <?php
-                                    while (have_rows('ticket_prices')) : the_row();
-                                    $type = get_sub_field('type');
-                                    $price = get_sub_field('price');
-                                    $tax_deduction = get_sub_field('tax_deduction');
-                                    $description = get_sub_field('description');
-                                    ?>
-                                        <div>
-                                            <h2><?php echo esc_html($type); ?></h2>
-                                            <p>Price each: $<?php echo esc_html($price); ?></p>
-                                            <p>Allowable tax deduction: $<?php echo esc_html($tax_deduction); ?></p>
-                                            <p><?php echo ($description); ?></p>
-                                            <button>Buy Now</button>
-                                        </div>
-                                    <?php endwhile; ?>
+                                        <?php
+                                        while (have_rows('ticket_prices')) : the_row();
+                                            $type = get_sub_field('type');
+                                            $price = get_sub_field('price');
+                                            $tax_deduction = get_sub_field('tax_deduction');
+                                            $description = get_sub_field('description');
+                                        ?>
+                                            <div class="package">
+                                                <h2><?php echo esc_html($type); ?></h2>
+                                                <p>Price each: $<?php echo esc_html($price); ?></p>
+                                                <p>Allowable tax deduction: $<?php echo esc_html($tax_deduction); ?></p>
+                                                <p><?php echo ($description); ?></p>
+                                                <button>Buy Now</button>
+                                            </div>
+                                        <?php endwhile; ?>
                                     </div>
                                 </section>
                             <?php endif; ?>
                             <!--  !SECTION: Tickets -->
-                            
+
                             <!--  SECTION: sponsorship packagess -->
                             <?php
                             if (have_rows('sponsorship_packages')) :
                             ?>
                                 <section id="sponsorships" class="sponsorships">
                                     <h2>Sponsorship Packages</h2>
+                                    <p class="sub-text">Tickets available on sale now Saepe eaque nisi fuga cumque amet. Et dolores iusto quibusdam molestiae laudantium facere vel sequi tenetur. Dignissimos adipisci consequuntur officiis commodi repellat omnis. </p>
                                     <div class="packages">
-                                    <?php
-                                    while (have_rows('sponsorship_packages')) : the_row();
-                                    $type = get_sub_field('package');
-                                    $price = get_sub_field('price');
-                                    $tax_deduction = get_sub_field('tax_deduction');
-                                    $description = get_sub_field('description');
-                                    ?>
-                                        <div>
-                                            <h2><?php echo esc_html($package); ?></h2>
-                                            <p>Price each: $<?php echo esc_html($price); ?></p>
-                                            <p>Allowable tax deduction: $<?php echo esc_html($tax_deduction); ?></p>
-                                            <p><?php echo ($amenities); ?></p>
-                                            <?php if( have_rows('amenities') ): ?>
-                                                <ul>
-                                                    <?php while ( have_rows('amenities') ) : the_row(); ?>
-                                                        <li><?php the_sub_field('amenity'); ?></li>
-                                                    <?php endwhile; ?>
-                                                </ul>
-                                            <?php endif; ?>
-                                            <button>Buy Now</button>
-                                        </div>
-                                    <?php endwhile; ?>
+                                        <?php
+                                        while (have_rows('sponsorship_packages')) : the_row();
+                                            $type = get_sub_field('package');
+                                            $price = get_sub_field('price');
+                                            $tax_deduction = get_sub_field('tax_deduction');
+                                            $description = get_sub_field('description');
+                                        ?>
+                                            <div class="package">
+                                                <h2><?php echo esc_html($package); ?></h2>
+                                                <p>Price each: $<?php echo esc_html($price); ?></p>
+                                                <p>Allowable tax deduction: $<?php echo esc_html($tax_deduction); ?></p>
+                                                <p><?php echo ($amenities); ?></p>
+                                                <?php if (have_rows('amenities')) : ?>
+                                                    <ul>
+                                                        <?php while (have_rows('amenities')) : the_row(); ?>
+                                                            <li><?php the_sub_field('amenity'); ?></li>
+                                                        <?php endwhile; ?>
+                                                    </ul>
+                                                <?php endif; ?>
+                                                <button>Buy Now</button>
+                                            </div>
+                                        <?php endwhile; ?>
                                     </div>
                                 </section>
                             <?php endif; ?>
                             <!--  !SECTION: Sponsorship Packages. -->
-                            <!--  SECTION: sponsorship packagess -->
+                            <!--  SECTION: Advertising Rates -->
                             <?php
-                            if (have_rows('sponsorship_packages')) :
+                            if (have_rows('advertising_rates')) :
                             ?>
-                                <section id="sponsorships" class="sponsorships">
-                                    <h2>Sponsorship Packages</h2>
+                                <section id="advertising" class="advertising">
+                                    <h2>Advertising Rates</h2>
+                                    <p class="sub-text">Tickets available on sale now Saepe eaque nisi fuga cumque amet. Et dolores iusto quibusdam molestiae laudantium facere vel sequi tenetur. Dignissimos adipisci consequuntur officiis commodi repellat omnis. </p>
                                     <div class="packages">
-                                    <?php
-                                    while (have_rows('sponsorship_packages')) : the_row();
-                                    $type = get_sub_field('package');
-                                    $price = get_sub_field('price');
-                                    $tax_deduction = get_sub_field('tax_deduction');
-                                    $description = get_sub_field('description');
-                                    ?>
-                                        <div>
-                                            <h2><?php echo esc_html($package); ?></h2>
-                                            <p>Price each: $<?php echo esc_html($price); ?></p>
-                                            <p>Allowable tax deduction: $<?php echo esc_html($tax_deduction); ?></p>
-                                            <p><?php echo ($amenities); ?></p>
-                                            <?php if( have_rows('amenities') ): ?>
-                                                <ul>
-                                                    <?php while ( have_rows('amenities') ) : the_row(); ?>
-                                                        <li><?php the_sub_field('amenity'); ?></li>
-                                                    <?php endwhile; ?>
-                                                </ul>
-                                            <?php endif; ?>
-                                            <button>Buy Now</button>
-                                        </div>
-                                    <?php endwhile; ?>
+                                        <?php
+                                        while (have_rows('advertising_rates')) : the_row();
+                                            $ad = get_sub_field('ad');
+                                            $price = get_sub_field('price');
+                                            $description = get_sub_field('description');
+                                        ?>
+                                            <div class="package">
+                                                <h2><?php echo esc_html($ad); ?></h2>
+                                                <p>Price each: $<?php echo esc_html($price); ?></p>
+                                                <p><?php echo ($description); ?></p>
+                                                <button>Buy Now</button>
+                                            </div>
+                                        <?php endwhile; ?>
                                     </div>
                                 </section>
                             <?php endif; ?>
-                            <!--  !SECTION: Sponsorship Packages. -->
+                            <!--  !SECTION: Advertising Rates . -->
                         </main>
             <?php } else {
                         echo '<p>The event year does not match the date specified in the event details.</p>';
