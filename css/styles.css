@@ -256,9 +256,9 @@ body {
 .nelagala-event main #event-roles h3,
 .nelagala-event main #honorees h3 {
   font-family: var(--font-primary);
-  font-size: 3em;
+  font-size: 2em;
   margin-bottom: 10px;
-  text-align: center;
+  text-align: start;
 }
 .nelagala-event .row-container {
   gap: 50px;
@@ -279,6 +279,11 @@ body {
 .nelagala-event main > section > .packages {
   align-items: inherit;
 }
+
+.nelagala-event #sponsorships .package {
+  flex: 0 0 47%;
+}
+
 .nelagala-event main > section.participants > div img {
   width: 50%;
   aspect-ratio: 3/4;
@@ -301,7 +306,7 @@ body {
 }
 .nelagala-event main > section.participants > div > div > .full-name {
   font-family: var(--font-tertiary);
-  font-size: 2.4em;
+  font-size: 2em;
   font-weight: normal;
   text-transform: none;
   margin: 0;
@@ -327,6 +332,19 @@ body {
 .nelagala-event main > #Biography > article p:first-child {
   font-size: 1.6em;
 }
+
+.nelagala-event .list-item {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin: 16px 0;
+}
+
+.nelagala-event .list-item img {
+  width: 20px;
+  height: 20px;
+}
+
 @media (min-width: 992px) {
   .nelagala-event main {
     flex-grow: 1;
@@ -412,7 +430,7 @@ body {
   .nelagala-event main > section.participants > div > div {
     width: 100%;
   }
-  .nelagala-event .package {
+  .nelagala-event .package, .nelagala-event #sponsorshipss .package {
     flex: 0 0 100%;
   }
 }
@@ -429,6 +447,14 @@ body {
   position: relative;
   background-color: white;
   padding: 20px 20px 120px;
+}
+
+.nelagala-event .package h2 {
+  margin: 20px 0;
+  font-weight: 200;
+  font-size: 22px;
+  text-transform: inherit;
+  font-family: var(--font-secondary);
 }
 .nelagala-event .package button {
   padding: 10px;
@@ -465,5 +491,7 @@ body {
   font-size: 19px;
   color: #707070;
 }
+
+
 
 /*# sourceMappingURL=styles.css.map */
