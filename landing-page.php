@@ -266,13 +266,13 @@ if ($events->have_posts()) : while ($events->have_posts()) : $events->the_post()
                                         ?>
                                             <div class="package">
                                                 <h2><?php echo esc_html($package); ?></h2>
-                                                <p>Price each: $<?php echo esc_html($price); ?></p>
+                                                <p><em></em>Price each: $<?php echo esc_html($price); ?></p>
                                                 <p>Allowable tax deduction: $<?php echo esc_html($tax_deduction); ?></p>
                                                 <p><?php echo ($amenities); ?></p>
                                                 <?php if (have_rows('amenities')) : ?>
-                                                    <ul>
+                                                    <ul >
                                                         <?php while (have_rows('amenities')) : the_row(); ?>
-                                                            <li class="list-item"><?php the_sub_field('amenity'); ?></li>
+                                                            <li><?php the_sub_field('amenity'); ?></li>
                                                         <?php endwhile; ?>
                                                     </ul>
                                                 <?php endif; ?>

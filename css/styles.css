@@ -27,6 +27,9 @@ body {
   margin: 0;
 }
 
+.nelagala-event {
+
+}
 .nelagala-event button {
   border: none;
   background: inherit;
@@ -278,11 +281,9 @@ body {
 .nelagala-event main > section > .packages {
   align-items: inherit;
 }
-
 .nelagala-event #sponsorships .package {
   flex: 0 0 47%;
 }
-
 .nelagala-event main > section.participants > div img {
   width: 50%;
   aspect-ratio: 3/4;
@@ -331,29 +332,32 @@ body {
 .nelagala-event main > #Biography > article p:first-child {
   font-size: 1.6em;
 }
-
-.nelagala-event .list-item {
+.nelagala-event .package ul {
+  list-style-type: none;
+  /* Remove default list bullets */
+  margin-left: 0;
+  padding-left: 0;
+}
+.nelagala-event .package li {
   display: flex;
-  align-items: center;
-  gap: 5px;
+  align-items: flex-start; /* Align items to the start of the flex container */
+  gap: 8px; /* Adjust gap as needed */
   margin: 16px 0;
   font-size: 16px;
 }
-
-.nelagala-event .list-item::before {
-  content: url(/static/source/img/checkmark.svg);
-  position: relative;
-  top: 0;
-  left: 0;
-  width: 20px;
-  height: 20px;
+.nelagala-event .package li::before {
+  content: "\f00c";
+  /* FontAwesome checkmark unicode */
+  font-family: "FontAwesome";
+  /* FontAwesome 4.7 font-family */
+  color: var(--ng-red);
+  /* Additional styles for positioning and size */
+  font-size: 16px;
+  /* Adjust as needed */
+  line-height: 1;
+  /* Helps with aligning the icon with the top line of text */
+  padding-top: 6px;
 }
-
-.nelagala-event .list-item img {
-  width: 20px;
-  height: 20px;
-}
-
 @media (min-width: 992px) {
   .nelagala-event main {
     flex-grow: 1;
@@ -439,7 +443,8 @@ body {
   .nelagala-event main > section.participants > div > div {
     width: 100%;
   }
-  .nelagala-event .package, .nelagala-event #sponsorshipss .package {
+  .nelagala-event .package,
+  .nelagala-event #sponsorshipss .package {
     flex: 0 0 100%;
   }
 }
@@ -457,7 +462,6 @@ body {
   background-color: white;
   padding: 20px 20px 120px;
 }
-
 .nelagala-event .package h2 {
   margin: 20px 0;
   font-weight: 200;
@@ -465,11 +469,9 @@ body {
   text-transform: inherit;
   font-family: var(--font-secondary);
 }
-
 .nelagala-event .package p {
   font-size: 16px;
 }
-
 .nelagala-event .package button {
   padding: 10px;
   border: 0.5px solid var(--ng-red);
@@ -505,7 +507,5 @@ body {
   font-size: 19px;
   color: #707070;
 }
-
-
 
 /*# sourceMappingURL=styles.css.map */
