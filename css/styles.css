@@ -270,9 +270,24 @@ body {
 .nelagala-event .row-container {
   gap: 50px;
   margin-bottom: 50px;
+  cursor: pointer;
+}
+
+.nelagala-event .row-container:hover img {
+  mix-blend-mode: inherit;
+  transition: all 0.3s ease-in;
 }
 .nelagala-event .row-container.reverse {
   flex-direction: row-reverse;
+}
+.nelagala-event .row-container img {
+  width: 50%;
+  aspect-ratio: 3/4;
+  object-fit: cover;
+  max-height: 400px;
+  mix-blend-mode: luminosity;
+  object-position: center 1%;
+  transition: all 0.3s ease-in;
 }
 .nelagala-event main > section.participants {
   width: 100%;
@@ -287,14 +302,6 @@ body {
 }
 .nelagala-event #sponsorships .package {
   flex: 0 0 47%;
-}
-.nelagala-event main > section.participants > div img {
-  width: 50%;
-  aspect-ratio: 3/4;
-  object-fit: cover;
-  max-height: 400px;
-  mix-blend-mode: luminosity;
-  object-position: center 1%;
 }
 .nelagala-event main > section.participants > div > div {
   width: 50%;
