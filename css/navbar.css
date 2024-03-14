@@ -9,7 +9,6 @@
   height: 100svh;
   overflow: none;
   background-color: var(--ng-nav-bg);
-  position: -webkit-sticky;
   position: sticky;
   top: 120px;
 }
@@ -23,14 +22,14 @@
   display: flex;
 }
 .nelagala-event .nav .menu-item {
-  padding: 0.2em 0.5em;
+  padding: 0.1em 0.5em;
 }
 .nelagala-event .nav .menu-item a {
   display: block;
   text-decoration: none;
   color: var(--ng-txt);
   font-weight: 500;
-  font-size: 1em;
+  font-size: 1.4em;
 }
 .nelagala-event .nav .menu-item a:hover {
   text-decoration: none;
@@ -58,7 +57,9 @@
     cursor: pointer;
     transform: rotate(0deg);
     transition: all 0.3s var(--cubic);
-    user-select: none;
+    -webkit-user-select: none;
+       -moz-user-select: none;
+            user-select: none;
     -webkit-tap-highlight-color: transparent;
   }
   .nelagala-event .burger-container #burger .bar {
@@ -147,6 +148,4 @@
   .nelagala-event .nav.menu-opened ul.menu li.menu-item:nth-child(7) {
     transition-delay: 0.35s;
   }
-}
-
-/*# sourceMappingURL=navbar.css.map */
+}/*# sourceMappingURL=navbar.css.map */

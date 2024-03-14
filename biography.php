@@ -1,4 +1,4 @@
-<?php 
+<?php
 function custom_theme_styles()
 {
     wp_enqueue_style('typekit-fonts', 'https://use.typekit.net/zcb5mzu.css');
@@ -18,12 +18,35 @@ function custom_theme_scripts()
 add_action('wp_enqueue_scripts', 'custom_theme_scripts');
 get_header();
 
+$event_year = get_query_var('nelagala_year');
 
+if (empty($event_year)) {
+    $event_year = date('Y'); // Default to current year if not specified
+}
 
+// Query to fetch the event post by title, which is the year
+$events = new WP_Query(array(
+    'post_type' => 'nelagala_event',
+    'title' => $event_year,
+    'posts_per_page' => 1,
+));
 
+// Define sections and their corresponding ACF field keys
+$sections = [
+    '#about-the-event' => 'nelagala_event_title',
+    '#event-roles' => 'roles',
+    '#honorees' => 'honorees',
+    '#tickets' => 'ticket_prices',
+    '#lodging' => 'lodging',
+    '#sponsorships' => 'sponsorship_packages',
+    '#advertising' => 'advertising_rates',
+];
+
+if ($events->have_posts()) : while ($events->have_posts()) : $events->the_post();
+        $datetime = get_field('nelagala_event_datetime');
 ?>
 
-<section class="sections">
+        <section class="sections">
             <div class="container">
                 <div class="nelagala-event">
                     <!-- SECTION: Navigation Sidebar -->
@@ -35,13 +58,14 @@ get_header();
                             </button>
                         </div>
                         <ul class="menu">
-                            <li class="menu-item"><a href="#about-the-event">About the Event</a></li>
-                            <li class="menu-item"><a href="#event-roles">Who's Who</a></li>
-                            <li class="menu-item"><a href="#honorees">Honorees</a></li>
-                            <li class="menu-item"><a href="#tickets">Tickets</a></li>
-                            <li class="menu-item"><a href="#lodging">Lodging</a></li>
-                            <li class="menu-item"><a href="#sponsorships">Sponsorship Packages</a></li>
-                            <li class="menu-item"><a href="#advertising">Advertising Rates</a></li>
+                            <?php foreach ($sections as $anchor => $field_key) : ?>
+                                <?php
+                                // Check if the field has content or rows (for repeaters)
+                                $value = get_field($field_key);
+                                if ((is_array($value) && !empty($value)) || (!is_array($value) && !empty($value))) : ?>
+                                    <li class="menu-item"><a href="<?= $anchor ?>"><?= ucfirst(str_replace('-', ' ', substr($anchor, 1))) ?></a></li>
+                                <?php endif; ?>
+                            <?php endforeach; ?>
                         </ul>
                     </nav>
                     <!-- !SECTION: Navigation Sidebar -->

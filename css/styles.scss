@@ -14,9 +14,9 @@
 
     --font-primary: 'kepler-std-condensed-display', serif;
     --font-secondary: 'Barlow', sans-serif;
-    --font-tertierary: 'Playfair Display', serif;
-
-    --font-gala: 'nautica', sans-serif;
+    --font-tertiary: 'Playfair Display', serif;
+    --font-quaternary: "Georgia", serif;
+    --font-gala: "nautica", sans-serif;
 
     --cubic: cubic-bezier(0.4, 0.01, 0.165, 0.99);
     --menuItems: 7;
@@ -59,7 +59,7 @@ body {
    h5,
    h6 {
     font-family: var(--font-primary);
-    text-transform: uppercase;
+    text-transform: capitalize;
     color: var(--ng-txt);
   }
   
@@ -70,12 +70,14 @@ body {
     font-size: 1em;
     padding: 3px;
     transition: 0.2s ease-in;
+
+    &:hover {
+      text-decoration: none;
+      color: rgb(213, 78, 86);
+    }
   }
   
-   a:hover {
-    text-decoration: none;
-    color: rgb(213, 78, 86);
-  }
+  
   
    main>section>h2 {
     font-family: var(--font-primary);
@@ -116,6 +118,7 @@ body {
    header .col {
     min-width: 50%;
     padding: 20px 10px 30px;
+    font-family: var(--font-quaternary);
   }
   
    header .divider {
@@ -124,22 +127,28 @@ body {
   
    header h2 {
     font-family: var(--font-primary);
+    color: var(--ng-header-txt);
     text-transform: uppercase;
     font-style: italic;
-    font-size: 4em;
+    font-size: 3em;
     text-align: center;
     letter-spacing: 3px;
-    margin: 0 0 20px 0;
-    padding-top: 50px;
+    margin: 0 0 0px 0;
     position: relative;
   }
   
    header h3 {
-    font-size: 21px;
+    font-size: .8em;
     margin-top: 0;
-    margin-bottom: 15px;
+    margin-bottom: 20px;
     font-family: var(--font-tertiary);
+    color: var(--ng-header-txt);
     font-weight: 400;
+    text-transform: unset;
+    & sup {
+      font-size: .9em;
+      top: -.2em;
+    }
   }
   
    header .yr {
@@ -171,13 +180,18 @@ body {
   }
   
    .col-2 .col-2-title {
+    font-family: var(--font-secondary);
+    color: var(--ng-header-txt);
     text-transform: uppercase;
-    font-size: 25px;
-    margin: 10px 0;
+    font-size: 1.6em;
+    font-weight: 500;
+    margin: 0;
+    line-height: 1.2em;;
   }
   
    .col-2 .text {
     font-family: var(--font-tertiary);
+    color: var(--ng-header-txt);
     font-weight: 400;
     font-size: 21px;
     margin: 0;
