@@ -18,11 +18,35 @@ function custom_theme_scripts()
 add_action('wp_enqueue_scripts', 'custom_theme_scripts');
 get_header();
 
+
+
+
 ?>
 
-<section  class="sections">
-	<div class="container">
-    <div class="nelagala-event">
+<section class="sections">
+            <div class="container">
+                <div class="nelagala-event">
+                    <!-- SECTION: Navigation Sidebar -->
+                    <nav class="event-navigation nav">
+                        <div class="burger-container">
+                            <button id="burger" aria-label="Open navigation menu">
+                                <span class="bar topBar"></span>
+                                <span class="bar btmBar"></span>
+                            </button>
+                        </div>
+                        <ul class="menu">
+                            <li class="menu-item"><a href="#about-the-event">About the Event</a></li>
+                            <li class="menu-item"><a href="#event-roles">Who's Who</a></li>
+                            <li class="menu-item"><a href="#honorees">Honorees</a></li>
+                            <li class="menu-item"><a href="#tickets">Tickets</a></li>
+                            <li class="menu-item"><a href="#lodging">Lodging</a></li>
+                            <li class="menu-item"><a href="#sponsorships">Sponsorship Packages</a></li>
+                            <li class="menu-item"><a href="#advertising">Advertising Rates</a></li>
+                        </ul>
+                    </nav>
+                    <!-- !SECTION: Navigation Sidebar -->
+
+                    <!-- SECTION: Display Event Data  -->
 <?php
 
 $participant_name_url = get_query_var('nelagala_participant_name'); // Get the participant name from the URL
@@ -92,48 +116,6 @@ wp_reset_postdata();
 ksort($matched_events); // Sort the matched events by year
 ?>
 
-<h1>Biography for <?php echo esc_html($participant_name); ?></h1>
-
-<?php if (!empty($matched_events)) : ?>
-    <?php foreach ($matched_events as $year => $events) : ?>
-        <?php if ($year == $upcomingEventYear) : ?>
-            <h2>Upcoming Event (<?php echo esc_html($year); ?>)</h2>
-        <?php else : ?>
-            <h2>Past Events (<?php echo esc_html($year); ?>)</h2>
-        <?php endif; ?>
-
-        <ul>
-            <?php foreach ($events as $event) : ?>
-                <li>
-                    <a href="<?php echo esc_url($event['event_link']); ?>"><?php echo esc_html($event['event_title']); ?></a> - Role: <?php echo esc_html($event['role']); ?>
-                </li>
-            <?php endforeach; ?>
-        </ul>
-    <?php endforeach; ?>
-<?php else : ?>
-    <p>No event participation information found for this participant.</p>
-<?php endif;
-
-
-?> 
-
-<nav class="event-navigation">
-    <ul>
-        <li><a href="index.html#about-the-event">About the Event</a></li>
-        <li><a href="index.html#event-roles">Who's Who</a></li>
-        <li><a href="index.html#honorees">Honorees</a></li>
-        <li><a href="index.html#tickets">Tickets</a></li>
-        <li><a href="index.html#lodging">Lodging</a></li>
-        <li><a href="index.html#sponsorhips">Sponsorship Packages</a></li>
-        <li><a href="index.html#advertising">Advertising Rates</a></li>
-    </ul>
-
-    <button class="hamburger" aria-label="Open navigation menu">
-        <span></span>
-        <span></span>
-        <span></span>
-    </button>
-</nav>
 
 <main>
     <header>
@@ -162,63 +144,17 @@ ksort($matched_events); // Sort the matched events by year
         <div class="header-footer-text">Thursday, May 23 2024 | More details coming soon!</div>
     </header>
     <section id="Biography" class="participants">
-        <h2>Honorary Event Chair</h2>
+        <h2><?php echo $honor_title;?></h2>
         <div>
             <img src="img\faces\zappia.jpg">
             <div>
-                <p class="full-name">Ambassador Mariangela Zappia</p>
-                <p class="personal-title"> Italian Ambassador to the United States of America</p>
+                <p class="full-name"><?php echo $participant_name;?></p>
+                <p class="personal-title"> <?php $participant_name_url;?></p>
 
             </div>
         </div>
         <article>
-            <p>Mariangela Zappia is the Italian Ambassador to the United States of America. A career diplomat
-                with
-                over thirty-five years of experience, she is the first woman in her country to hold this
-                position,
-                as she was the first woman Permanent Representative of Italy to the United Nations in New York
-                and
-                to the North Atlantic Treaty Organization (NATO). She was also the first woman Diplomatic
-                Advisor to
-                the Italian Prime Minister and G7/G20 Sherpa.
-            </p>
-            <p>
-                Additionally, Ambassador Zappia has served as Head of the European Union Delegation to the UN
-                and
-                other International Organizations, and Ministry Plenipotentiary at the Permanent Mission of
-                Italy to
-                the UN and other International Organizations, both in Geneva, Switzerland. She has also served
-                as
-                First Counsellor at the Permanent Mission of Italy to the UN in New York in the early 2000s and
-                First Counsellor at the Italian Embassy in Brussels throughout the late 1990s.
-            </p>
-            <p>
-                She holds a Master’s degree in Political Science and International Relations from the University
-                of
-                Florence, as well as a post-graduate degree in Diplomatic and International Relations from the
-                same.
-                She has followed periodic high-level training courses on diplomatic practice and management at
-                the
-                Diplomatic Academy of the Italian Ministry of Foreign Affairs in Rome.
-            </p>
-            <p>
-                She has published works on reforming the UN Security Council and on Italy’s contributions to UN
-                peacekeeping operations, and is a regular speaker at international conferences regarding Italian
-                foreign policy, multilateral and global issues.
-            </p>
-            <p>
-                She is an active member of the International Gender Champions Network aimed at promoting gender
-                parity and women’s participation in decision-making. In 2019, she was awarded with the “Mela
-                d’Oro”
-                (Golden Apple) by the “Fondazione Marisa Bellisario” in recognition of her contribution to the
-                advancement of women in public institutions.
-            </p>
-            <p>
-                She has been awarded the decoration of “Commendatore” (Commander) of the Order of Merit of the
-                Italian Republic. She speaks fluent English and French, and has a good knowledge of Spanish.
-                She’s
-                the mother of Claire, 28, and Christian, 24.
-            </p>
+           <?php the_content();?>
         </article>
         <section class="past-honors">
             <ul>

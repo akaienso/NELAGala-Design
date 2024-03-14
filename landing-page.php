@@ -34,9 +34,18 @@ $events = new WP_Query(array(
     'posts_per_page' => 1,
 ));
 
-// Loop through the event(s)
+// Define sections and their corresponding ACF field keys
+$sections = [
+    '#about-the-event' => 'nelagala_event_title',
+    '#event-roles' => 'roles',
+    '#honorees' => 'honorees',
+    '#tickets' => 'ticket_prices',
+    '#lodging' => 'lodging',
+    '#sponsorships' => 'sponsorship_packages',
+    '#advertising' => 'advertising_rates',
+];
+
 if ($events->have_posts()) : while ($events->have_posts()) : $events->the_post();
-        // Validate year from post title against 'nelagala_event_datetime'
         $datetime = get_field('nelagala_event_datetime');
 ?>
 
@@ -52,13 +61,14 @@ if ($events->have_posts()) : while ($events->have_posts()) : $events->the_post()
                             </button>
                         </div>
                         <ul class="menu">
-                            <li class="menu-item"><a href="#about-the-event">About the Event</a></li>
-                            <li class="menu-item"><a href="#event-roles">Who's Who</a></li>
-                            <li class="menu-item"><a href="#honorees">Honorees</a></li>
-                            <li class="menu-item"><a href="#tickets">Tickets</a></li>
-                            <li class="menu-item"><a href="#lodging">Lodging</a></li>
-                            <li class="menu-item"><a href="#sponsorships">Sponsorship Packages</a></li>
-                            <li class="menu-item"><a href="#advertising">Advertising Rates</a></li>
+                            <?php foreach ($sections as $anchor => $field_key) : ?>
+                                <?php
+                                // Check if the field has content or rows (for repeaters)
+                                $value = get_field($field_key);
+                                if ((is_array($value) && !empty($value)) || (!is_array($value) && !empty($value))) : ?>
+                                    <li class="menu-item"><a href="<?= $anchor ?>"><?= ucfirst(str_replace('-', ' ', substr($anchor, 1))) ?></a></li>
+                                <?php endif; ?>
+                            <?php endforeach; ?>
                         </ul>
                     </nav>
                     <!-- !SECTION: Navigation Sidebar -->
@@ -78,7 +88,7 @@ if ($events->have_posts()) : while ($events->have_posts()) : $events->the_post()
                         $google_api_key = get_field('google_api_key');
                         $google_geocoding_api_key = get_field('google_geocoding_api_key');
                         $response = file_get_contents("https://maps.googleapis.com/maps/api/geocode/json?latlng=$lat,$lng&key=$google_geocoding_api_key");
-                        
+
                         // echo "<pre>" . $google_api_key . "</pre>";
                         // echo "<pre>" . $google_geocoding_api_key . "</pre>";
                         // echo "<pre>" . $response . "</pre>";
@@ -131,7 +141,7 @@ if ($events->have_posts()) : while ($events->have_posts()) : $events->the_post()
                                         <h3>Sons of Italy Foundation presents</h3>
                                         <div class="title-wrap">
                                             <p class="pre-title"><?php echo get_current_event_year_with_ordinal(); ?>
-</p>
+                                            </p>
                                             <h1 class="title">"<?php echo  $event_title; ?></h1>
                                             <p class="pre-title"><span class="yr">Gala</span></p>
                                         </div>
@@ -145,7 +155,7 @@ if ($events->have_posts()) : while ($events->have_posts()) : $events->the_post()
                                 <div class="header-img-main">
                                     <img src="<?php echo get_template_directory_uri() . '/inc/nelagala/img/header-main-img.jpg'; ?>" alt="Teatro Antico di Taormina">
                                 </div>
-                                <div class="header-footer-text"><?echo $display_date; ?> | More details coming soon!</div>
+                                <div class="header-footer-text"><? echo $display_date; ?> | More details coming soon!</div>
                             </header>
                             <!--  !SECTION: Event Header -->
                             <!--  SECTION: About the Event -->
@@ -287,7 +297,7 @@ if ($events->have_posts()) : while ($events->have_posts()) : $events->the_post()
                             if (have_rows('sponsorship_packages')) :
                             ?>
                                 <section id="sponsorships" class="sponsorships">
-                                <h2><?php echo $sponsorship_section_headline ?></h2>
+                                    <h2><?php echo $sponsorship_section_headline ?></h2>
                                     <span class="sub-text"><?php echo $sponsorship_section_top_content; ?></span>
                                     <div class="packages">
                                         <?php
@@ -303,7 +313,7 @@ if ($events->have_posts()) : while ($events->have_posts()) : $events->the_post()
                                                 <p>Allowable tax deduction: $<?php echo esc_html($tax_deduction); ?></p>
                                                 <p><?php echo ($amenities); ?></p>
                                                 <?php if (have_rows('amenities')) : ?>
-                                                    <ul >
+                                                    <ul>
                                                         <?php while (have_rows('amenities')) : the_row(); ?>
                                                             <li><?php the_sub_field('amenity'); ?></li>
                                                         <?php endwhile; ?>
@@ -321,7 +331,7 @@ if ($events->have_posts()) : while ($events->have_posts()) : $events->the_post()
                             if (have_rows('advertising_rates')) :
                             ?>
                                 <section id="advertising" class="advertising">
-                                <h2><?php echo $advertising_section_headline ?></h2>
+                                    <h2><?php echo $advertising_section_headline ?></h2>
                                     <span class="sub-text"><?php echo $advertising_section_top_content; ?></span>
                                     <div class="packages">
                                         <?php

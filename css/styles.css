@@ -43,7 +43,6 @@ body {
   min-height: 100vh;
   width: 100%;
   flex-wrap: wrap;
-  max-width: 1200px;
   margin: 116px auto 0 auto;
 }
 .nelagala-event h1,
@@ -270,24 +269,9 @@ body {
 .nelagala-event .row-container {
   gap: 50px;
   margin-bottom: 50px;
-  cursor: pointer;
-}
-
-.nelagala-event .row-container:hover img {
-  mix-blend-mode: inherit;
-  transition: all 0.3s ease-in;
 }
 .nelagala-event .row-container.reverse {
   flex-direction: row-reverse;
-}
-.nelagala-event .row-container img {
-  width: 50%;
-  aspect-ratio: 3/4;
-  object-fit: cover;
-  max-height: 400px;
-  mix-blend-mode: luminosity;
-  object-position: center 1%;
-  transition: all 0.3s ease-in;
 }
 .nelagala-event main > section.participants {
   width: 100%;
@@ -302,6 +286,14 @@ body {
 }
 .nelagala-event #sponsorships .package {
   flex: 0 0 47%;
+}
+.nelagala-event main > section.participants > div img {
+  width: 50%;
+  aspect-ratio: 3/4;
+  object-fit: cover;
+  max-height: 400px;
+  mix-blend-mode: luminosity;
+  object-position: center 1%;
 }
 .nelagala-event main > section.participants > div > div {
   width: 50%;
@@ -438,7 +430,7 @@ body {
     flex-wrap: wrap;
     flex: 0 0 48%;
   }
-  .nelagala-event .packages .package {
+  .nelagala-event .package {
     flex: 0 0 48%;
   }
 }
@@ -455,7 +447,7 @@ body {
     width: 100%;
   }
   .nelagala-event .packages .package,
-  .nelagala-event #sponsorships .packages .package {
+  .nelagala-event #sponsorshipss .packages .package {
     flex: 0 0 100%;
   }
 }
