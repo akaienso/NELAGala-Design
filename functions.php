@@ -93,7 +93,6 @@ function nelagala_template_include($template) {
 }
 add_filter('template_include', 'nelagala_template_include');
 
-
 function find_upcoming_event_year() {
     // Set up a query for nelagala_event posts ordered by date, ascending
     $args = array(
@@ -126,4 +125,21 @@ function find_upcoming_event_year() {
 
     // Return current year as fallback
     return date('Y');
+}
+
+function get_current_event_year_with_ordinal() {
+    $start_year = 1990; // The year the first event took place
+    $current_year = date('Y'); // Get the current year
+
+    // Calculate the event number
+    $event_number = $current_year - $start_year + 1;
+
+    // Append ordinal suffix
+    $ends = array('th','st','nd','rd','th','th','th','th','th','th');
+    if (($event_number % 100) >= 11 && ($event_number % 100) <= 13)
+       $ordinal_suffix = 'th';
+    else
+       $ordinal_suffix = $ends[$event_number % 10];
+
+    return "The <span class='yr'>{$event_number}</span>{$ordinal_suffix} annual";
 }

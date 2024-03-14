@@ -97,24 +97,32 @@ if ($events->have_posts()) : while ($events->have_posts()) : $events->the_post()
                                 $venue_state = $component->short_name;
                             }
                         }
-
-// Now $city and $state contain the city and state of the event location
+                        $header_venue_message = get_field('header_venue_message');
                         $venue_name = get_field('nelagala_venue_name');
                         // URL from oEmbed field
                         $promotional_video = get_field('promotional_video');
                         // Repeater fields
                         $roles = get_field('roles');
                         $honorees = get_field('honorees');
+                        $ticket_section_headline = get_field('ticket_section_headline');
+                        $ticket_section_top_content = get_field('ticket_section_top_content');
                         $ticket_prices = get_field('ticket_prices');
-                        $sponsorship_packages = get_field('sponsorship_packages');
-                        $advertising_rates = get_field('advertising_rates');
+                        $lodging_section_headline = get_field('lodging_section_headline');
+                        $lodging_section_top_content = get_field('lodging_section_top_content');
                         $lodging = get_field('lodging');
+                        $sponsorship_section_headline = get_field('sponsorship_section_headline');
+                        $sponsorship_section_top_content = get_field('sponsorship_section_top_content');
+                        $sponsorship_packages = get_field('sponsorship_packages');
+                        $advertising_section_headline = get_field('advertising_section_headline');
+                        $advertising_section_top_content = get_field('advertising_section_top_content');
+                        $advertising_rates = get_field('advertising_rates');
 
                         // Initialize the array to track missing sections
                         $missing_sections = [];
                     ?>
                         <main>
                             <!--  SECTION: Event Header -->
+
                             <header>
                                 <img class="header-img" src="<?php echo get_template_directory_uri() . '/inc/nelagala/img/sicilia.png'; ?>" alt="the Trinacria">
                                 <h2>Save the Date</h2>
@@ -122,21 +130,22 @@ if ($events->have_posts()) : while ($events->have_posts()) : $events->the_post()
                                     <div class="col divider">
                                         <h3>Sons of Italy Foundation presents</h3>
                                         <div class="title-wrap">
-                                            <p class="pre-title">The <span class="yr">35</span> th Annual </p>
+                                            <p class="pre-title"><?php echo get_current_event_year_with_ordinal(); ?>
+</p>
                                             <h1 class="title">"<?php echo  $event_title; ?></h1>
                                             <p class="pre-title"><span class="yr">Gala</span></p>
                                         </div>
                                     </div>
                                     <div class="col col-2">
-                                        <p class="text">Celebrate the Region of Sicily with us</p>
-                                        <p class="col-2-title">Ronald Reagan Building & International Trade Center</p>
+                                        <p class="text"><?php echo  $header_venue_message; ?></p>
+                                        <p class="col-2-title"><?php echo $venue_name; ?></p>
                                         <p class="text"><?php echo  $venue_city; ?>, <?php echo  $venue_state; ?></p>
                                     </div>
                                 </div>
                                 <div class="header-img-main">
                                     <img src="<?php echo get_template_directory_uri() . '/inc/nelagala/img/header-main-img.jpg'; ?>" alt="Teatro Antico di Taormina">
                                 </div>
-                                <div class="header-footer-text">Thursday, May 23 2024 | More details coming soon!</div>
+                                <div class="header-footer-text"><?echo $display_date; ?> | More details coming soon!</div>
                             </header>
                             <!--  !SECTION: Event Header -->
                             <!--  SECTION: About the Event -->
@@ -250,8 +259,8 @@ if ($events->have_posts()) : while ($events->have_posts()) : $events->the_post()
                             if (have_rows('ticket_prices')) :
                             ?>
                                 <section id="tickets" class="tickets">
-                                    <h2>Ticket Prices</h2>
-                                    <p class="sub-text">Tickets available on sale now Saepe eaque nisi fuga cumque amet. Et dolores iusto quibusdam molestiae laudantium facere vel sequi tenetur. Dignissimos adipisci consequuntur officiis commodi repellat omnis. </p>
+                                    <h2><?php echo $ticket_section_headline ?></h2>
+                                    <span class="sub-text"><?php echo $ticket_section_top_content; ?></span>
                                     <div class="packages">
                                         <?php
                                         while (have_rows('ticket_prices')) : the_row();
@@ -278,8 +287,8 @@ if ($events->have_posts()) : while ($events->have_posts()) : $events->the_post()
                             if (have_rows('sponsorship_packages')) :
                             ?>
                                 <section id="sponsorships" class="sponsorships">
-                                    <h2>Sponsorship Packages</h2>
-                                    <p class="sub-text">Tickets available on sale now Saepe eaque nisi fuga cumque amet. Et dolores iusto quibusdam molestiae laudantium facere vel sequi tenetur. Dignissimos adipisci consequuntur officiis commodi repellat omnis. </p>
+                                <h2><?php echo $sponsorship_section_headline ?></h2>
+                                    <span class="sub-text"><?php echo $sponsorship_section_top_content; ?></span>
                                     <div class="packages">
                                         <?php
                                         while (have_rows('sponsorship_packages')) : the_row();
@@ -312,8 +321,8 @@ if ($events->have_posts()) : while ($events->have_posts()) : $events->the_post()
                             if (have_rows('advertising_rates')) :
                             ?>
                                 <section id="advertising" class="advertising">
-                                    <h2>Advertising Rates</h2>
-                                    <p class="sub-text">Tickets available on sale now Saepe eaque nisi fuga cumque amet. Et dolores iusto quibusdam molestiae laudantium facere vel sequi tenetur. Dignissimos adipisci consequuntur officiis commodi repellat omnis. </p>
+                                <h2><?php echo $advertising_section_headline ?></h2>
+                                    <span class="sub-text"><?php echo $advertising_section_top_content; ?></span>
                                     <div class="packages">
                                         <?php
                                         while (have_rows('advertising_rates')) : the_row();
