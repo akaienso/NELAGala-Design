@@ -73,6 +73,32 @@ if ($events->have_posts()) : while ($events->have_posts()) : $events->the_post()
                         $display_date = $event_date->format('l, F j, Y'); // Use $event_date, not $datetime
                         // This returns an array for Google Map field
                         $event_location = get_field('nelagala_event_location');
+                        $lat = $event_location['lat'];
+                        $lng = $event_location['lng'];
+                        $google_api_key = get_field('google_api_key');
+                        $google_geocoding_api_key = get_field('google_geocoding_api_key');
+                        $response = file_get_contents("https://maps.googleapis.com/maps/api/geocode/json?latlng=$lat,$lng&key=$google_geocoding_api_key");
+                        
+                        // echo "<pre>" . $google_api_key . "</pre>";
+                        // echo "<pre>" . $google_geocoding_api_key . "</pre>";
+                        // echo "<pre>" . $response . "</pre>";
+
+                        // Decode the JSON response
+                        $data = json_decode($response);
+
+                        // Iterate over the address components to find the city and state
+                        $venue_city = "";
+                        $venue_state = "";
+                        foreach ($data->results[0]->address_components as $component) {
+                            if (in_array("locality", $component->types)) {
+                                $venue_city = $component->long_name;
+                            }
+                            if (in_array("administrative_area_level_1", $component->types)) {
+                                $venue_state = $component->short_name;
+                            }
+                        }
+
+// Now $city and $state contain the city and state of the event location
                         $venue_name = get_field('nelagala_venue_name');
                         // URL from oEmbed field
                         $promotional_video = get_field('promotional_video');
@@ -95,7 +121,6 @@ if ($events->have_posts()) : while ($events->have_posts()) : $events->the_post()
                                 <div class="row">
                                     <div class="col divider">
                                         <h3>Sons of Italy Foundation presents</h3>
-
                                         <div class="title-wrap">
                                             <p class="pre-title">The <span class="yr">35</span> th Annual </p>
                                             <h1 class="title">"<?php echo  $event_title; ?></h1>
@@ -105,10 +130,9 @@ if ($events->have_posts()) : while ($events->have_posts()) : $events->the_post()
                                     <div class="col col-2">
                                         <p class="text">Celebrate the Region of Sicily with us</p>
                                         <p class="col-2-title">Ronald Reagan Building & International Trade Center</p>
-                                        <p class="text">Washington, D.C.</p>
+                                        <p class="text"><?php echo  $venue_city; ?>, <?php echo  $venue_state; ?></p>
                                     </div>
                                 </div>
-
                                 <div class="header-img-main">
                                     <img src="<?php echo get_template_directory_uri() . '/inc/nelagala/img/header-main-img.jpg'; ?>" alt="Teatro Antico di Taormina">
                                 </div>
