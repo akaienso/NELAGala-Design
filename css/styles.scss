@@ -1,46 +1,76 @@
 :root {
-    --ng-txt: rgb(51, 51, 51);
-    --ng-bg: rgb(255, 255, 255);
-    --ng-nav-bg: #f0f0f0;
-    --ng-section-bg: #f9f9f9;
-    --ng-nav-ul-open: rgba(240, 240, 240, 0.9);
+  --ng-txt: rgb(51, 51, 51);
+  --ng-bg: rgb(255, 255, 255);
+  --ng-red: rgb(209, 35, 46);
 
-    --ng-header-bg: #f0bd33;
-    --ng-header-txt: rgb(255, 255, 255);
-    --ng-header-txt-a: rgb(249, 249, 249);
-    --ng-header-title-txt: rgb(171, 171, 171);
 
-    --ng-red: rgb(209, 35, 46);
+  --font-primary: 'kepler-std-condensed-display', serif;
+  --font-secondary: 'Barlow', sans-serif;
+  --font-tertiary: 'Playfair Display', serif;
+  --font-quaternary: "Georgia", serif;
+  --font-gala: "nautica", sans-serif;
 
-    --font-primary: 'kepler-std-condensed-display', serif;
-    --font-secondary: 'Barlow', sans-serif;
-    --font-tertiary: 'Playfair Display', serif;
-    --font-quaternary: "Georgia", serif;
-    --font-gala: "nautica", sans-serif;
+  // Navigation Sidebar Colors
+  $nav-bg: hsl(207, 44%, 28%);
+  $nav-item-txt: adjust-hue($nav-bg, 180deg);
 
-    --cubic: cubic-bezier(0.4, 0.01, 0.165, 0.99);
-    --menuItems: 7;
+  --ng-nav-bg: #{$nav-bg}];
+  --ng-nav-item-bg: #{hsla(0, 0%, lighten(hue(var(--ng-nav-bg)), 12%), 0.5)};
+  --ng-nav-item-txt: #{$nav-item-txt];
+  --ng-nav-item-hover-bg: #{hsl(0, 0%, darken(hue(var(--ng-nav-bg)), 16%))};
+  --ng-nav-item-hover-txt: hsl(0, 0%, 95%);
+
+  --ng-header-bg: #f0bd33;
+  --ng-header-txt: rgb(255, 255, 255);
+  --ng-header-txt-a: rgb(249, 249, 249);
+  --ng-header-title-txt: rgb(171, 171, 171);
+
+  --ng-section-bg: #f9f9f9;
+  --ng-package-border: rgb(236, 233, 233); // Slightly darker than --ng-section-bg
+
+  --cubic: cubic-bezier(0.4, 0.01, 0.165, 0.99);
+  --menuItems: 7;
 }
 
 @font-face {
-    font-family: 'Barlow';
-    src: url('../typography/Barlow-SemiBold.otf') format('otf');
-    font-weight: normal;
-    font-style: normal;
+  font-family: 'Barlow';
+  src: url('../typography/Barlow-SemiBold.otf') format('otf');
+  font-weight: normal;
+  font-style: normal;
 }
 
 body {
-    margin: 0;
+  margin: 0;
+
+  .business_directory {
+      .container {
+            display: none;
+      }
+  }
+
+  #top {
+    .grid_1200 {
+      overflow: default;
+    }
+
+    &>section:nth-child(4) {
+      // NOTE: Theme content .sections
+
+
+
+      &>div {
+        // NOTE: Theme content .container
+
+      }
+
+    }
+
+  }
 }
 
 .nelagala-event {
-  
-   button {
-    border: none;
-    background: inherit;
-  }
-  
-   & {
+
+  & {
     font-family: var(--font-secondary);
     color: var(--ng-txt);
     background: var(--ng-bg);
@@ -49,21 +79,31 @@ body {
     min-height: 100vh;
     width: 100%;
     flex-wrap: wrap;
-    margin: 116px auto 0 auto;
+    position: relative;
+    top: 116px;
+    margin: 0 auto -202px auto;
   }
-  
-   h1,
-   h2,
-   h3,
-   h4,
-   h5,
-   h6 {
-    font-family: var(--font-primary);
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-secondary);
     text-transform: capitalize;
-    color: var(--ng-txt);
+    color: var(--ng-red);
   }
-  
-   a {
+
+  $size: 3rem;
+
+  @for $i from 1 through 6 {
+    h#{$i} {
+      font-size: $size - 0.5rem * ($i - 1);
+    }
+  }
+
+  a {
     text-decoration: none;
     color: var(--ng-red);
     font-weight: 800;
@@ -76,17 +116,14 @@ body {
       color: rgb(213, 78, 86);
     }
   }
-  
-  
-  
-   main>section>h2 {
-    font-family: var(--font-primary);
-    text-transform: uppercase;
-    font-size: 3em;
-    color: var(--ng-red);
+
+  button {
+    border: none;
+    background: inherit;
   }
-  
-   header {
+
+
+  header {
     width: 100%;
     padding: 0px;
     margin-top: 0;
@@ -94,336 +131,375 @@ body {
     text-align: center;
     color: var(--ng-header-txt);
     position: relative;
+    top: 0;
     overflow: hidden;
-  }
-  
-   .save-the-date,
-   .save-the-date main,
-   .save-the-date main header {
-    margin: 0;
-    width: 100%;
-    padding: 0;
-    max-width: none;
-  }
-  
-   .header-img {
-    position: absolute;
-    top: -142px;
-    right: -236px;
-    width: 765px;
-    transform: rotate(-13deg);
-    opacity: 0.6;
-  }
-  
-   header .col {
-    min-width: 50%;
-    padding: 20px 10px 30px;
-    font-family: var(--font-quaternary);
-  }
-  
-   header .divider {
-    border-right: 6px solid var(--ng-red);
-  }
-  
-   header h2 {
-    font-family: var(--font-primary);
-    color: var(--ng-header-txt);
-    text-transform: uppercase;
-    font-style: italic;
-    font-size: 3em;
-    text-align: center;
-    letter-spacing: 3px;
-    margin: 0 0 0px 0;
-    position: relative;
-  }
-  
-   header h3 {
-    font-size: .8em;
-    margin-top: 0;
-    margin-bottom: 20px;
-    font-family: var(--font-tertiary);
-    color: var(--ng-header-txt);
-    font-weight: 400;
-    text-transform: unset;
-    & sup {
-      font-size: .9em;
-      top: -.2em;
+
+    .header-img {
+      position: absolute;
+      top: -252px;
+      right: -236px;
+      width: 765px;
+      transform: rotate(-13deg);
+      opacity: 0.4;
+    }
+
+    .header-img-main {
+      height: 189px;
+    }
+
+    .header-img-main img {
+      height: 100%;
+      width: 100%;
+      object-fit: cover;
+      object-position: center 75%;
+    }
+
+    .col {
+      min-width: 50%;
+      padding: 20px 10px 30px;
+      font-family: var(--font-quaternary);
+    }
+
+    .divider {
+      &::before {
+        content: "";
+        position: absolute;
+        right: 0;
+        /* For a left border; use 'right: 0' for a right border */
+        top: 20%;
+        /* Adjusts the gap at the top */
+        bottom: 15%;
+        /* Adjusts the gap at the bottom */
+        width: 4px;
+        /* Border width */
+        background-color: var(--ng-red);
+        /* Border color */
+      }
+    }
+
+    h1 {
+
+      &.title {
+        display: inline;
+        text-align: center;
+        font-family: var(--font-primary);
+        font-size: 2em;
+        color: var(--ng-header-txt);
+        line-height: 0.9em;
+        margin: -10px 0;
+        text-transform: uppercase;
+      }
+
+      &:not(:has(span)) {
+        font-size: 0.8em;
+      }
+
+    }
+
+    h2 {
+      font-family: var(--font-primary);
+      color: var(--ng-header-txt);
+      text-transform: uppercase;
+      font-style: italic;
+      font-size: 2.6em;
+      letter-spacing: 3px;
+      margin: 66px auto 0 auto;
+      padding: 0;
+      position: relative;
+    }
+
+    h3 {
+      font-size: .8em;
+      margin-top: 0;
+      margin-bottom: 20px;
+      font-family: var(--font-tertiary);
+      color: var(--ng-header-txt);
+      font-weight: 400;
+      text-transform: unset;
+
+      & sup {
+        font-size: .9em;
+        top: -.2em;
+      }
+    }
+
+    .pre-title,
+    .post-title {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--ng-red);
+      font-family: var(--font-gala);
+      text-align: center;
+      font-size: 2.2em;
+      font-weight: 800;
+      margin: 0;
+      line-height: 58px;
+
+      .yr {
+        font-size: 1.7em;
+
+        sup {
+          font-size: 0.7em;
+          margin-left: 0.3em;
+        }
+
+      }
+    }
+
+    .post-title {
+      font-size: 5em;
+      position: relative;
+      top: 0em;
+      display: block;
+    }
+
+    .col-2 {
+      text-align: start;
+      padding-left: 20px;
+
+      .col-2-title {
+        font-family: var(--font-secondary);
+        color: var(--ng-header-txt);
+        text-transform: uppercase;
+        font-size: 1.6em;
+        font-weight: 500;
+        margin: 0;
+        line-height: 1.2em;
+
+      }
+
+      .text {
+        font-family: var(--font-tertiary);
+        color: var(--ng-header-txt);
+        font-weight: 400;
+        font-size: 21px;
+        margin: 0;
+      }
+    }
+
+    .header-footer-text {
+      font-size: 24px;
+      margin: 10px 0;
+      font-family: var(--font-tertiary);
+      font-weight: 500;
+    }
+
+    .row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 90%;
+      max-width: 960px;
+      margin: 0 auto -15px auto;
+      position: relative;
+    }
+
+    .column {
+      flex: 1;
+      padding: 10px;
+
+      h3 {
+        font-family: var(--font-primary);
+        font-size: 2em;
+        font-style: italic;
+
+        a {
+          font-weight: 800;
+          padding-right: 20px;
+          border-right: 1px solid var(--ng-header-txt);
+          margin-right: 20px;
+        }
+      }
+    }
+
+    a {
+      text-decoration: none;
+      color: var(--ng-header-txt);
+      font-weight: 500;
+      font-size: 1em;
+      padding: 3px;
+      border-bottom: 1 px solid var(--ng-header-bg);
+
+      &:hover {
+        text-decoration: none;
+        color: var(--ng-red);
+        font-weight: 500;
+        font-size: 1em;
+        padding: 3px;
+        border-bottom: 1px solid var(--ng-header-txt);
+      }
+    }
+
+
+    p {
+      font-size: 2.7em;
     }
   }
-  
-   header .yr {
-    font-size: 2em;
-  }
-  
-   header h1 .yr sup {
-    font-size: 0.7em;
-    margin-left: 0.3em;
-  }
-  
-   .pre-title {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--ng-red);
-    font-family: var(--font-gala);
-    text-align: center;
-    font-size: 2.2em;
-    font-weight: 800;
-    margin: 0;
-    line-height: 58px;
-  }
-  
-   .col-2 {
-    text-align: start;
-    padding-left: 20px;
-  }
-  
-   .col-2 .col-2-title {
-    font-family: var(--font-secondary);
-    color: var(--ng-header-txt);
-    text-transform: uppercase;
-    font-size: 1.6em;
-    font-weight: 500;
-    margin: 0;
-    line-height: 1.2em;;
-  }
-  
-   .col-2 .text {
-    font-family: var(--font-tertiary);
-    color: var(--ng-header-txt);
-    font-weight: 400;
-    font-size: 21px;
-    margin: 0;
-  }
-  
-   .header-img-main {
-    height: 189px;
-  }
-  
-   .header-img-main img {
-    height: 100%;
-    width: 100%;
-    object-fit: cover;
-    object-position: center 75%;
-  }
-  
-   .header-footer-text {
-    font-size: 24px;
-    margin: 10px 0;
-    font-family: var(--font-tertiary);
-    font-weight: 500;
-  }
-  
-   header h1.title {
-    display: inline;
-    text-align: center;
-    font-family: var(--font-primary);
-    font-size: 2em;
-    color: var(--ng-header-txt);
-    line-height: 0.9em;
-    margin: -10px 0;
-    text-transform: uppercase;
-  }
-  
-   header h1 .gala {
-    font-size: 3em;
-    position: relative;
-    top: -0.7em;
-    display: block;
-  }
-  
-   header h1:not(:has(span)) {
-    font-size: 0.8em;
-  }
-  
-   header .row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    margin-bottom: 20px;
-    position: relative;
-  }
-  
-   header .column {
-    flex: 1;
-    padding: 10px;
-  }
-  
-   header a {
-    text-decoration: none;
-    color: var(--ng-header-txt);
-    font-weight: 500;
-    font-size: 1em;
-    padding: 3px;
-    border-bottom: 1 px solid var(--ng-header-bg);
-  }
-  
-   header a:hover {
-    text-decoration: none;
-    color: var(--ng-red);
-    font-weight: 500;
-    font-size: 1em;
-    padding: 3px;
-    border-bottom: 1px solid var(--ng-header-txt);
-  }
-  
-   header .column.left {
-    margin-right: 5px;
-    border-right: 4px solid var(--ng-red);
-  }
-  
-   header .column.right {
-    margin-left: 5px;
-    text-align: left;
-  }
-  
-   header .column.right p {
-    font-size: 2.7em;
-  }
-  
-   header .column h3 {
-    font-family: var(--font-primary);
-    font-size: 2em;
-    font-style: italic;
-  }
-  
-   header .column h3 a {
-    font-weight: 800;
-    padding-right: 20px;
-    border-right: 1px solid var(--ng-header-txt);
-    margin-right: 20px;
-  }
-  
-   main section {
-    margin-bottom: 0;
-    padding: 20px;
+
+
+  main {
     background: var(--ng-section-bg);
-  }
-  
-   main #about-the-event .video {
-    aspect-ratio: 16/9;
-    width: 100%;
-  }
-  
-   main #about-the-event .last {
-    margin-bottom: 50px;
+    padding-bottom: 54px;
+
+    section {
+      margin-bottom: 0;
+      width: 80%;
+      padding: 20px;
+      margin: 0 auto;
+    }
+
+    #about-the-event {
+      .last {
+        margin-bottom: 50px;
+      }
+
+      p {
+        font-size: 18px;
+        margin-bottom: 20px;
+      }
+    }
+
+    #event-roles h3,
+    #honorees h3 {
+      font-family: var(--font-tertiary);
+      color: var(--ng-txt);
+      font-size: 1em;
+      margin-bottom: 0px;
+      text-align: start;
+    }
+
   }
 
-  main #about-the-event p {
-    font-size: 18px;
-    margin-bottom: 20px;
-  }
-  
-   main #event-roles h3,
-   main #honorees h3 {
-    font-family: var(--font-primary);
-    font-size: 2em;
-    margin-bottom: 10px;
-    text-align: start;
-  }
-  
-   .row-container {
+
+
+  .row-container {
     gap: 50px;
     margin-bottom: 50px;
   }
-  
-   .row-container.reverse {
-    flex-direction: row-reverse;
-  }
-  
-   main>section.participants {
-    width: 100%;
+
+  .row-container:hover img {
+    mix-blend-mode: inherit;
+    transition: all 0.3s ease-in;
   }
 
-   main>section>div {
-    display: flex;
-    align-items: flex-start;
-    margin-bottom: 0px;
+  .row-container.reverse {
+    flex-direction: row-reverse;
   }
-  
-   main>section>.packages {
-    align-items: inherit;
+
+  main {
+
+    &>section {
+      margin-bottom: 1em;
+      padding: 1em;
+
+      &.participants {
+        width: 80%;
+        max-width: 1100px;
+        margin: 0 auto;
+      }
+
+      &>div {
+        display: flex;
+        align-items: flex-start;
+        margin-bottom: 0px;
+
+        img {
+          width: 50%;
+          aspect-ratio: 3/4;
+          object-fit: cover;
+          max-height: 400px;
+          mix-blend-mode: luminosity;
+          object-position: center 1%;
+        }
+      }
+
+      &>.packages {
+        align-items: inherit;
+      }
+    }
+
+    &>.video {
+      aspect-ratio: 16/9;
+      width: 100%;
+    }
   }
-  
-   #sponsorships .package {
+
+  #sponsorships .package {
     flex: 0 0 47%;
   }
-  
-   main>section.participants>div img {
-    width: 50%;
-    aspect-ratio: 3/4;
-    object-fit: cover;
-    max-height: 400px;
-    mix-blend-mode: luminosity;
-    object-position: center 1%;
-  }
-  
-   main>section.participants>div>div {
+
+
+  main>section.participants>div>div {
     width: 50%;
     text-align: left;
+
+    &>h3 {
+      text-transform: none;
+      font-family: var(--font-secondary);
+      font-weight: 400;
+      font-size: 16px;
+      margin: 0;
+      padding: 0;
+    }
   }
-  
-   main>section.participants>div>div>h3 {
-    text-transform: none;
+
+
+  main>section.participants>div>div>.full-name {
     font-family: var(--font-secondary);
-    font-weight: 400;
-    font-size: 16px;
-    margin: 0;
-    padding: 0;
-  }
-  
-   main>section.participants>div>div>.full-name {
-    font-family: var(--font-tertiary);
     font-size: 2em;
     font-weight: normal;
+    font-style: normal;
     text-transform: none;
-    margin: 0;
+    line-height: 1.3cap;
+    margin: .1em 0 .8em 0;
   }
-  
-   main>section.participants>div>div>.bio-summary {
+
+  main>section.participants>div>div>.bio-summary {
     font-size: 18px;
     color: #707070;
   }
-  
-   main>section.participants>div>div>.personal-title {
+
+  main>section.participants>div>div>.personal-title {
     font-weight: 500;
     font-size: 18px;
   }
-  
-   main>#Biography>div>div {
+
+  main>#Biography>div>div {
     width: 58%;
     text-align: right;
   }
-  
-   main>#Biography>article {
+
+  main>#Biography>article {
     font-size: 1.2em;
     margin: 2em auto;
     width: 74%;
     font-weight: normal;
   }
-  
-   main>#Biography>article p:first-child {
+
+  main>#Biography>article p:first-child {
     font-size: 1.6em;
   }
-  
-   .package ul {
+
+  .package ul {
     list-style-type: none;
     /* Remove default list bullets */
     margin-left: 0;
     padding-left: 0;
   }
-  
-   .package li {
+
+  .package li {
     display: flex;
-    align-items: flex-start;  /* Align items to the start of the flex container */
-    gap: 8px;  /* Adjust gap as needed */
+    align-items: flex-start;
+    /* Align items to the start of the flex container */
+    gap: 8px;
+    /* Adjust gap as needed */
     margin: 16px 0;
     font-size: 16px;
   }
-  
-   .package li::before {
+
+  .package li::before {
     content: "\f00c";
     /* FontAwesome checkmark unicode */
     font-family: 'FontAwesome';
@@ -436,48 +512,88 @@ body {
     /* Helps with aligning the icon with the top line of text */
     padding-top: 6px;
   }
-  
+
+  @media (min-width: 576px) {
+
+    .container,
+    .container-md,
+    .container-sm {
+      max-width: 100% !important;
+    }
+  }
+
+  @media (min-width: 768px) {
+
+    .container,
+    .container-md,
+    .container-sm {
+      max-width: 100% !important;
+    }
+  }
+
+
   @media (min-width: 992px) {
-     main {
+    main {
       flex-grow: 1;
       width: calc(100% - 250px);
       overflow-y: auto;
     }
   }
-  
+
   @media (max-width: 991px) {
-     header h1 {
+    .container {
+      max-width: fit-content;
+    }
+
+    & {
+      font-family: var(--font-secondary);
+      color: var(--ng-txt);
+      background: var(--ng-bg);
+      display: flex;
+      justify-content: space-between;
+      min-height: 100vh;
+      width: 100%;
+      flex-wrap: wrap;
+      margin: 0px auto 0 auto;
+    }
+
+    header {
+      border-bottom: .25em solid var(--ng-red);
+    }
+
+    header h1 {
       width: 90%;
       font-size: 2em;
       padding: 0;
     }
-  
-     header .row {
+
+    header .row {
       flex-wrap: wrap;
     }
-  
-     header .col {
+
+    header .col {
       min-width: 100%;
     }
-  
-     header .col-2 {
+
+    header .col-2 {
       text-align: center;
     }
-  
-     header .divider {
-      border-right: none;
-      border-bottom: 6px solid var(--ng-red);
+
+    header .divider {
+      &::before {
+        display: none;
+      }
     }
-  
-     header h1 .yr {
+
+    header h1 .yr {
       font-size: 1.4em;
     }
-  
-     header h1 .yr sup {
+
+    header h1 .yr sup {
       font-size: 0.8em;
     }
-  
-     header h1 .title {
+
+    header h1 .title {
       display: block;
       font-family: var(--font-primary);
       font-size: 1.3em;
@@ -486,97 +602,94 @@ body {
       margin: 0px 0;
       text-transform: uppercase;
     }
-  
-     header h1 .gala {
+
+    header h1 .gala {
       font-size: 2.5em;
       position: relative;
       top: -0.8em;
       display: block;
     }
-  
-     header h1:not(:has(span)) {
+
+    header h1:not(:has(span)) {
       font-size: 0.8em;
     }
-  
-     section {
-      margin-bottom: 1em;
-      padding: 1em;
-    }
-  
-     .header-img-main {
+
+
+    .header-img-main {
       height: 179px;
     }
-  
-     header .divider {
-      border: none;
-    }
-  
-     .col-2 {
+
+    .col-2 {
       display: none;
     }
-  
-     .row-container,
-     .packages {
+
+    .row-container,
+    .packages {
       justify-content: center;
       flex-wrap: wrap;
       flex: 0 0 48%;
     }
-  
-     .package {
+
+    .package {
       flex: 0 0 48%;
     }
+
   }
-  
+
   @media screen and (max-width: 768px) {
-     main>section.participants>div {
+    main>section.participants>div {
       flex-direction: column;
       align-items: flex-start;
     }
-  
-     main>section.participants>div img {
+
+    main>section.participants>div img {
       width: 100%;
       margin: 0;
     }
-  
-     main>section.participants>div>div {
+
+    main>section.participants>div>div {
       width: 100%;
     }
-  
+
     .packages .package,
-     #sponsorshipss .packages .package {
+    #sponsorshipss .packages .package {
       flex: 0 0 100%;
     }
   }
-  
-   .packages {
+
+  .packages {
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
     gap: 20px;
     align-items: flex-start;
   }
-  
-   .package {
+
+  .package {
     flex: 0 0 31.333%;
     box-sizing: border-box;
     position: relative;
     background-color: white;
     padding: 20px 20px 120px;
+    border: 1px solid var(--ng-package-border);
+    border-radius: 10px;
+    margin-top: 10px;
   }
-  
-   .package h2 {
-    margin: 20px 0;
-    font-weight: 200;
+
+  .package h2 {
+    margin: 10px 0;
+    font-weight: bold;
     font-size: 22px;
     text-transform: inherit;
     font-family: var(--font-secondary);
+    color: var(--ng-txt);
   }
-  
-   .package p {
+
+  .package p {
     font-size: 16px;
   }
-  
-   .package button {
+
+  .package button {
     padding: 10px;
     border: 0.5px solid var(--ng-red);
     border-radius: 5px;
@@ -589,35 +702,35 @@ body {
     cursor: pointer;
     transition: 0.3s;
   }
-  
-   .package button:hover {
+
+  .package button:hover {
     background-color: var(--ng-red);
     color: #fff;
   }
-  
-   .map-container {
+
+  .map-container {
     position: relative;
     width: 100%;
     padding-bottom: 56.25%;
     height: 0;
   }
-  
-   .map-container iframe {
+
+  .map-container iframe {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
   }
-  
-   .sub-text {
+
+  .sub-text {
     margin-bottom: 50px;
     font-size: 19px;
     color: #707070;
   }
-  
-  
-  
+
+
+
   /*# sourceMappingURL=styles.css.map */
 
 }

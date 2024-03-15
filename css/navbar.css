@@ -6,35 +6,43 @@
 .nelagala-event .nav {
   flex: 0 0 250px;
   width: 25%;
-  height: 100svh;
+  height: auto;
   overflow: none;
   background-color: var(--ng-nav-bg);
   position: sticky;
-  top: 120px;
+  top: 4em;
+  padding-top: 2em;
 }
 .nelagala-event .nav .menu {
   display: flex;
   flex-direction: column;
   height: 100%;
   list-style-type: none;
-  margin: 0;
-  padding: 0;
   display: flex;
+  padding: 0;
+  margin: 0;
+  width: 100%;
 }
-.nelagala-event .nav .menu-item {
+.nelagala-event .nav .menu .menu-item {
+  padding: 0;
+  margin: 0;
+  width: 100%;
+}
+.nelagala-event .nav .menu .menu-item a {
   padding: 0.1em 0.5em;
-}
-.nelagala-event .nav .menu-item a {
   display: block;
   text-decoration: none;
-  color: var(--ng-txt);
+  color: var(--ng-nav-item-txt);
   font-weight: 500;
-  font-size: 1.4em;
+  font-size: 1.125em;
+  border-bottom: 0.1em solid var(--ng-nav-item-bg);
+  width: 100%;
+  background-color: var(--ng-nav-item-bg);
 }
-.nelagala-event .nav .menu-item a:hover {
+.nelagala-event .nav .menu .menu-item a:hover {
   text-decoration: none;
-  color: var(--ng-red);
-  border: none;
+  color: var(--ng-nav-item-hover-txt);
+  border-bottom: 0.1em solid var(--ng-nav-item-hover-txt);
 }
 @media (max-width: 991px) {
   .nelagala-event .nav {
@@ -53,6 +61,7 @@
     align-items: center;
     position: relative;
     height: 50px;
+    top: -45px;
     width: 50px;
     cursor: pointer;
     transform: rotate(0deg);

@@ -37,39 +37,42 @@ $sections = [
     '#event-roles' => 'roles',
     '#honorees' => 'honorees',
     '#tickets' => 'ticket_prices',
-    '#lodging' => 'lodging',
+    //'#lodging' => 'lodging',
     '#sponsorships' => 'sponsorship_packages',
     '#advertising' => 'advertising_rates',
 ];
 
 if ($events->have_posts()) : while ($events->have_posts()) : $events->the_post();
-        $datetime = get_field('nelagala_event_datetime');
+    $datetime = get_field('nelagala_event_datetime');
+    $show_full_event_data = get_field('full_event_switch');
 ?>
+<section class="sections">
+    <div class="container">
 
-        <section class="sections">
-            <div class="container">
                 <div class="nelagala-event">
-                    <!-- SECTION: Navigation Sidebar -->
-                    <nav class="event-navigation nav">
-                        <div class="burger-container">
-                            <button id="burger" aria-label="Open navigation menu">
-                                <span class="bar topBar"></span>
-                                <span class="bar btmBar"></span>
-                            </button>
-                        </div>
-                        <ul class="menu">
-                            <?php foreach ($sections as $anchor => $field_key) : ?>
-                                <?php
-                                // Check if the field has content or rows (for repeaters)
-                                $value = get_field($field_key);
-                                if ((is_array($value) && !empty($value)) || (!is_array($value) && !empty($value))) : ?>
-                                    <li class="menu-item"><a href="<?= $anchor ?>"><?= ucfirst(str_replace('-', ' ', substr($anchor, 1))) ?></a></li>
-                                <?php endif; ?>
-                            <?php endforeach; ?>
-                        </ul>
-                    </nav>
-                    <!-- !SECTION: Navigation Sidebar -->
 
+                    <?php if ($show_full_event_data) : ?>
+                        <!-- SECTION: Navigation Sidebar -->
+                        <nav class="event-navigation nav bg_shape">
+                            <div class="burger-container">
+                                <button id="burger" aria-label="Open navigation menu">
+                                    <span class="bar topBar"></span>
+                                    <span class="bar btmBar"></span>
+                                </button>
+                            </div>
+                            <ul class="menu">
+                                <?php foreach ($sections as $anchor => $field_key) : ?>
+                                    <?php
+                                    // Check if the field has content or rows (for repeaters)
+                                    $value = get_field($field_key);
+                                    if ((is_array($value) && !empty($value)) || (!is_array($value) && !empty($value))) : ?>
+                                        <li class="menu-item"><a href="<?= $anchor ?>"><?= ucfirst(str_replace('-', ' ', substr($anchor, 1))) ?></a></li>
+                                    <?php endif; ?>
+                                <?php endforeach; ?>
+                            </ul>
+                        </nav>
+                    <!-- !SECTION: Navigation Sidebar -->
+                    <?php endif; ?>
             <!-- SECTION: Display Event Data  -->
             <?php
             if ($datetime && date('Y', strtotime($datetime)) == $event_year) {
@@ -106,10 +109,12 @@ if ($events->have_posts()) : while ($events->have_posts()) : $events->the_post()
                 }
                 $header_venue_message = get_field('header_venue_message');
                 $venue_name = get_field('nelagala_venue_name');
-                // URL from oEmbed field
                 $promotional_video = get_field('promotional_video');
-                // Repeater fields
+                $roles_section_headline = get_field('roles_section_headline');
+                $roles_section_content = get_field('roles_section_content');
                 $roles = get_field('roles');
+                $honorees_section_headline = get_field('honorees_section_headline');
+                $honorees_section_content = get_field('honorees_section_content');
                 $honorees = get_field('honorees');
                 $ticket_section_headline = get_field('ticket_section_headline');
                 $ticket_section_top_content = get_field('ticket_section_top_content');
@@ -131,16 +136,17 @@ if ($events->have_posts()) : while ($events->have_posts()) : $events->the_post()
                     <!--  SECTION: Event Header -->
 
                     <header>
-                        <img class="header-img" src="<?php echo get_template_directory_uri() . '/inc/nelagala/img/sicilia.png'; ?>" alt="the Trinacria">
+                        
                         <h2>Save the Date</h2>
                         <div class="row">
+                            <img class="header-img" src="<?php echo get_template_directory_uri() . '/inc/nelagala/img/sicilia.png'; ?>" alt="the Trinacria">
                             <div class="col divider">
                                 <h3>Sons of Italy Foundation<sup>&reg;</sup> presents</h3>
                                 <div class="title-wrap">
                                     <p class="pre-title"><?php echo get_current_event_year_with_ordinal(); ?>
                                     </p>
                                     <h1 class="title"><?php echo  $event_title; ?></h1>
-                                    <p class="pre-title"><span class="yr">Gala</span></p>
+                                    <p class="post-title">Gala</p>
                                 </div>
                             </div>
                             <div class="col col-2">
@@ -155,12 +161,13 @@ if ($events->have_posts()) : while ($events->have_posts()) : $events->the_post()
                         <div class="header-footer-text"><? echo $display_date; ?> | More details coming soon!</div>
                     </header>
                     <!--  !SECTION: Event Header -->
+                    <?php if ($show_full_event_data) : ?>
                     <!--  SECTION: About the Event -->
                     <section id="about-the-event">
                         <h2>About the Event</h2>
                         <?php echo the_content(); ?>
-                        <iframe class="video" src="<?php echo  $promotional_video; ?>" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
                     </section>
+                    <iframe class="video" src="<?php echo  $promotional_video; ?>" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
                     <!--  !SECTION: About the Event -->
                     <!--  SECTION: Event Roles -->
                     <?php
@@ -204,7 +211,7 @@ if ($events->have_posts()) : while ($events->have_posts()) : $events->the_post()
                                         <h3><?php echo esc_html($role_description); ?></h3>
                                         <p class="full-name"><?php echo esc_html($participant_name); ?></p>
                                         <p class="bio-summary"><?php echo esc_html($participant_summary); ?></p>
-                                        <p><a href="<?php echo esc_url($biography_link); ?>">Read more</a></p>
+                                        <!-- <p><a href="<?php echo esc_url($biography_link); ?>">Read more</a></p> -->
                                     </div>
                                 </div>
                             <?php endwhile; ?>
@@ -254,7 +261,7 @@ if ($events->have_posts()) : while ($events->have_posts()) : $events->the_post()
                                         <h3><?php echo esc_html($honor_description); ?></h3>
                                         <p class="full-name"><?php echo esc_html($recipient_name); ?></p>
                                         <p class="bio-summary"><?php echo esc_html($recipient_summary); ?></p>
-                                        <p><a href="<?php echo esc_url($biography_link); ?>">Read more</a></p>
+                                        <!-- <p><a href="<?php echo esc_url($biography_link); ?>">Read more</a></p> -->
                                     </div>
                                 </div>
                             <?php endwhile; ?>
@@ -348,6 +355,7 @@ if ($events->have_posts()) : while ($events->have_posts()) : $events->the_post()
                         </section>
                     <?php endif; ?>
                     <!--  !SECTION: Advertising Rates . -->
+                    <?php endif; ?>
                 </main>
 <?php
             } else {

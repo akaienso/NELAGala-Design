@@ -8,42 +8,61 @@
   .nav {
     flex: 0 0 250px;
     width: 25%;
-    height: 100svh;
+    height: auto;
     overflow: none;
     background-color: var(--ng-nav-bg);
     position: -webkit-sticky;
     position: sticky;
-    top: 120px;
+    top: 4em;
+    padding-top: 2em;
   }
-  
-  .nav .menu {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
+
+  .nav {
+    .menu {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      list-style-type: none;
+      display: flex;
+      padding: 0;
+      margin:0;
+      width: 100%;
+      .bg_shape {
+        // NOTE: This is a background shape for the menu
+
+      }
+
+      .menu-item {
+        padding: 0;
+        margin:0;
+        width: 100%;
+
+        a {
+        padding: 0.1em 0.5em;
+          display: block;
+          text-decoration: none;
+          color: var(--ng-nav-item-txt);
+          font-weight: 500;
+          font-size: 1.125em;
+          border-bottom: .1em solid var(--ng-nav-item-bg);
+          width: 100%;
+          background-color: var(--ng-nav-item-bg);
+
+          &:hover {
+            text-decoration: none;
+            color: var(--ng-nav-item-hover-txt);
+            border-bottom: .1em solid var(--ng-nav-item-hover-txt);
+          }
+        }
+
+      }
+
+    }
+
+
   }
-  
-  .nav .menu-item {
-    padding: 0.1em 0.5em;
-  }
-  
-  .nav .menu-item a {
-    display: block;
-    text-decoration: none;
-    color: var(--ng-txt);
-    font-weight: 500;
-    font-size: 1.4em;
-  }
-  
-  .nav .menu-item a:hover {
-    text-decoration: none;
-    color: var(--ng-red);
-    border: none;
-  }
-  
+
+
   @media (max-width: 991px) {
     .nav {
       position: fixed;
@@ -55,13 +74,14 @@
       z-index: 99;
       transition: all 0.3s ease-in, background 0.5s ease-in;
     }
-    
+
     .burger-container {
       display: flex;
       justify-content: center;
       align-items: center;
       position: relative;
       height: 50px;
+      top: -45px;
       width: 50px;
       cursor: pointer;
       transform: rotate(0deg);
@@ -69,7 +89,7 @@
       user-select: none;
       -webkit-tap-highlight-color: transparent;
     }
-    
+
     .burger-container #burger .bar {
       width: 18px;
       height: 1px;
@@ -79,15 +99,15 @@
       transition: all 0.3s var(--cubic);
       transition-delay: 0s;
     }
-    
+
     .burger-container #burger .bar.topBar {
       transform: translateY(0px) rotate(0deg);
     }
-    
+
     .burger-container #burger .bar.btmBar {
       transform: translateY(6px) rotate(0deg);
     }
-    
+
     .nav .menu {
       position: relative;
       display: block;
@@ -95,7 +115,7 @@
       list-style: none;
       overflow: hidden;
     }
-    
+
     .nav .menu li.menu-item {
       border-bottom: 1px solid #ddd;
       margin-top: 5px;
@@ -103,7 +123,7 @@
       opacity: 0;
       transition: transform 0.5s var(--cubic), opacity 0.6s var(--cubic);
     }
-    
+
     .nav .menu li.menu-item a {
       display: block;
       position: relative;
@@ -117,54 +137,60 @@
       border-bottom: none;
       padding: 0;
     }
-    
+
     .nav.menu-opened {
       height: 100%;
       background-color: #fff;
       transition: all 0.3s ease-in, background 0.5s ease-in;
       /* transition-delay: 0.25s; */
     }
-    
+
     .nav.menu-opened .burger-container {
       transform: rotate(90deg);
     }
-    
+
     .nav.menu-opened .burger-container #burger .bar {
       transition: all 0.4s var(--cubic);
       transition-delay: 0.2s;
     }
-    
+
     .nav.menu-opened .burger-container #burger .bar.topBar {
       transform: translateY(4px) rotate(45deg);
     }
-    
+
     .nav.menu-opened .burger-container #burger .bar.btmBar {
       transform: translateY(3px) rotate(-45deg);
     }
-    
+
     .nav.menu-opened ul.menu li.menu-item {
       transform: scale(1) translateY(0px);
       opacity: 1;
     }
-    
+
     .nav.menu-opened ul.menu li.menu-item:nth-child(1) {
       transition-delay: 0.05s;
     }
+
     .nav.menu-opened ul.menu li.menu-item:nth-child(2) {
       transition-delay: 0.1s;
     }
+
     .nav.menu-opened ul.menu li.menu-item:nth-child(3) {
       transition-delay: 0.15s;
     }
+
     .nav.menu-opened ul.menu li.menu-item:nth-child(4) {
       transition-delay: 0.2s;
     }
+
     .nav.menu-opened ul.menu li.menu-item:nth-child(5) {
       transition-delay: 0.25s;
     }
+
     .nav.menu-opened ul.menu li.menu-item:nth-child(6) {
       transition-delay: 0.3s;
     }
+
     .nav.menu-opened ul.menu li.menu-item:nth-child(7) {
       transition-delay: 0.35s;
     }
