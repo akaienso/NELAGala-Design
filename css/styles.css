@@ -1,21 +1,24 @@
 :root {
+  --ng-offblack: rgb(51, 51, 51);
+  --ng-offwhite: rgb(249, 249, 249);
+  --ng-red: rgb(209, 35, 47);
+  --ng-yellow: rgb(240, 189, 51);
   --ng-txt: rgb(51, 51, 51);
   --ng-bg: rgb(255, 255, 255);
-  --ng-red: rgb(209, 35, 46);
   --font-primary: "kepler-std-condensed-display", serif;
   --font-secondary: "Barlow", sans-serif;
   --font-tertiary: "Playfair Display", serif;
   --font-quaternary: "Georgia", serif;
   --font-gala: "nautica", sans-serif;
-  --ng-nav-bg: hsl(0, 0%, 63%);
-  --ng-nav-item-bg: hsla(0, 0%, 75%, 0.849);
-  --ng-nav-item-txt: hsl(0, 70%, 39%);
-  --ng-nav-item-hover-bg: hsl(0, 0%, 47%);
-  --ng-nav-item-hover-txt: hsl(0, 0%, 95%);
-  --ng-header-bg: #f0bd33;
+  --ng-header-bg: rgb(240, 189, 51);
   --ng-header-txt: rgb(255, 255, 255);
   --ng-header-txt-a: rgb(249, 249, 249);
   --ng-header-title-txt: rgb(171, 171, 171);
+  --ng-nav-bg: rgb(40, 75, 103);
+  --ng-nav-item-txt: #d6a110;
+  --ng-nav-item-bg: rgba(57, 107, 147, 0.4);
+  --ng-nav-item-hover-bg: rgba(57, 107, 147, 0.9);
+  --ng-nav-item-hover-txt: #f0bd33;
   --ng-section-bg: #f9f9f9;
   --ng-package-border: rgb(236, 233, 233);
   --cubic: cubic-bezier(0.4, 0.01, 0.165, 0.99);
@@ -36,6 +39,35 @@ body .business_directory .container {
 }
 body #top .grid_1200 {
   overflow: default;
+}
+body #top > section:nth-child(4) > div {
+  width: 100%;
+  max-width: 100%;
+  padding: 0;
+}
+
+@media (min-width: 1200px) {
+  .container,
+  .container-lg,
+  .container-md,
+  .container-sm,
+  .container-xl {
+    max-width: 2800px;
+  }
+}
+@media (min-width: 992px) {
+  .container,
+  .container-lg,
+  .container-md,
+  .container-sm {
+    max-width: 2800px;
+  }
+}
+@media (min-width: 576px) {
+  .container,
+  .container-sm {
+    max-width: 2800px;
+  }
 }
 .nelagala-event {
 
@@ -323,7 +355,7 @@ body #top .grid_1200 {
 }
 .nelagala-event main > section.participants {
   width: 80%;
-  max-width: 1100px;
+  max-width: 900px;
   margin: 0 auto;
 }
 .nelagala-event main > section > div {
@@ -338,8 +370,8 @@ body #top .grid_1200 {
      object-fit: cover;
   max-height: 400px;
   mix-blend-mode: luminosity;
-  -o-object-position: center 1%;
-     object-position: center 1%;
+  -o-object-position: center 14%;
+     object-position: center 14%;
 }
 .nelagala-event main > section > .packages {
   align-items: inherit;

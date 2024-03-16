@@ -1,8 +1,24 @@
+$ng-steel-blue: rgb(40, 75, 103);
+$ng-red: rgb(209, 35, 47);
+$ng-yellow: rgb(240, 189, 51);
+
+// Navigation Sidebar Colors
+// Define the base color as a Sass variabl
+$ng-nav-bg: $ng-steel-blue;
+// Calculate contrasting color and variations using Sass functions
+$ng-nav-item-txt: darken($ng-yellow, 12%);
+$ng-nav-item-bg: lighten($ng-nav-bg, 12%);
+$ng-nav-item-hover-bg: darken($ng-nav-bg, 16%);
+$ng-nav-item-hover-txt: lighten($ng-nav-item-txt, 12%);
+
 :root {
+  --ng-offblack: rgb(51, 51, 51);
+  --ng-offwhite: rgb(249, 249, 249);
+  --ng-red: #{$ng-red};
+  --ng-yellow: #{$ng-yellow};
+
   --ng-txt: rgb(51, 51, 51);
   --ng-bg: rgb(255, 255, 255);
-  --ng-red: rgb(209, 35, 46);
-
 
   --font-primary: 'kepler-std-condensed-display', serif;
   --font-secondary: 'Barlow', sans-serif;
@@ -10,20 +26,17 @@
   --font-quaternary: "Georgia", serif;
   --font-gala: "nautica", sans-serif;
 
-  // Navigation Sidebar Colors
-  $nav-bg: hsl(207, 44%, 28%);
-  $nav-item-txt: adjust-hue($nav-bg, 180deg);
-
-  --ng-nav-bg: #{$nav-bg}];
-  --ng-nav-item-bg: #{hsla(0, 0%, lighten(hue(var(--ng-nav-bg)), 12%), 0.5)};
-  --ng-nav-item-txt: #{$nav-item-txt];
-  --ng-nav-item-hover-bg: #{hsl(0, 0%, darken(hue(var(--ng-nav-bg)), 16%))};
-  --ng-nav-item-hover-txt: hsl(0, 0%, 95%);
-
-  --ng-header-bg: #f0bd33;
+  --ng-header-bg: #{$ng-yellow};
   --ng-header-txt: rgb(255, 255, 255);
   --ng-header-txt-a: rgb(249, 249, 249);
   --ng-header-title-txt: rgb(171, 171, 171);
+
+  // Assign pre-calculated Sass variable values to CSS custom properties
+  --ng-nav-bg: #{$ng-nav-bg};
+  --ng-nav-item-txt: #{$ng-nav-item-txt};
+  --ng-nav-item-bg: #{rgba($ng-nav-item-bg, 0.4)};
+  --ng-nav-item-hover-bg:  #{rgba($ng-nav-item-bg, 0.9)};
+  --ng-nav-item-hover-txt: #{$ng-nav-item-hover-txt};
 
   --ng-section-bg: #f9f9f9;
   --ng-package-border: rgb(236, 233, 233); // Slightly darker than --ng-section-bg
@@ -43,9 +56,9 @@ body {
   margin: 0;
 
   .business_directory {
-      .container {
-            display: none;
-      }
+    .container {
+      display: none;
+    }
   }
 
   #top {
@@ -56,15 +69,44 @@ body {
     &>section:nth-child(4) {
       // NOTE: Theme content .sections
 
-
-
       &>div {
         // NOTE: Theme content .container
-
+        width: 100%;
+        max-width: 100%;
+        padding: 0;
       }
 
     }
 
+  }
+}
+
+@media (min-width: 1200px) {
+
+  .container,
+  .container-lg,
+  .container-md,
+  .container-sm,
+  .container-xl {
+    max-width: 2800px;
+  }
+}
+
+@media (min-width: 992px) {
+
+  .container,
+  .container-lg,
+  .container-md,
+  .container-sm {
+    max-width: 2800px;
+  }
+}
+
+@media (min-width: 576px) {
+
+  .container,
+  .container-sm {
+    max-width: 2800px;
   }
 }
 
@@ -396,7 +438,7 @@ body {
 
       &.participants {
         width: 80%;
-        max-width: 1100px;
+        max-width: 900px;
         margin: 0 auto;
       }
 
@@ -411,7 +453,7 @@ body {
           object-fit: cover;
           max-height: 400px;
           mix-blend-mode: luminosity;
-          object-position: center 1%;
+          object-position: center 14%;
         }
       }
 
