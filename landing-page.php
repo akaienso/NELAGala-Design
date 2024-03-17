@@ -218,7 +218,7 @@ if ($events->have_posts()) : while ($events->have_posts()) : $events->the_post()
                                         <p class="full-name"><?php echo esc_html($participant_name); ?></p>
                                         <p class="personal-title"><?php echo esc_html($participant_title); ?></p>
                                         <p class="bio-summary"><?php echo esc_html($participant_summary); ?></p>
-                                        <!-- <p><a href="<?php echo esc_url($biography_link); ?>">Read more</a></p> -->
+                                        <p><a href="<?php echo esc_url($biography_link); ?>">Read more</a></p>
                                     </div>
                                 </div>
                             <?php endwhile; ?>

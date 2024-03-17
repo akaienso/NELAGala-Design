@@ -539,20 +539,37 @@ body {
 
   }
 
-  main>#Biography>div>div {
-    width: 58%;
-    text-align: right;
-  }
 
-  main>#Biography>article {
-    font-size: 1.2em;
-    margin: 2em auto;
-    width: 74%;
-    font-weight: normal;
-  }
+  main {
 
-  main>#Biography>article p:first-child {
-    font-size: 1.6em;
+
+    & > #Biography {
+    margin-bottom: 4em;
+      & > div > div {
+        width: 58%;
+        text-align: right;
+      }
+      & > article {
+        font-size: 1em;
+        margin: 2em auto;
+        width: 74%;
+        font-weight: normal;
+        p {
+          margin: 1em 0;
+
+          &:first-child {
+            font-size: 1.2em;
+          }
+
+          &.participant-website {
+            margin: 2em auto;
+            padding-top: .7em;
+            border-top: .1em solid var(--ng-package-border);
+            font-style: italic;
+          }
+        }
+      }
+    }
   }
 
   .packages {

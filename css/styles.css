@@ -429,18 +429,30 @@ body #top > section:nth-child(4) > div {
   font-size: 18px;
   margin: 0.2em 0 0.8em 0;
 }
+.nelagala-event main > #Biography {
+  margin-bottom: 4em;
+}
 .nelagala-event main > #Biography > div > div {
   width: 58%;
   text-align: right;
 }
 .nelagala-event main > #Biography > article {
-  font-size: 1.2em;
+  font-size: 1em;
   margin: 2em auto;
   width: 74%;
   font-weight: normal;
 }
+.nelagala-event main > #Biography > article p {
+  margin: 1em 0;
+}
 .nelagala-event main > #Biography > article p:first-child {
-  font-size: 1.6em;
+  font-size: 1.2em;
+}
+.nelagala-event main > #Biography > article p.participant-website {
+  margin: 2em auto;
+  padding-top: 0.7em;
+  border-top: 0.1em solid var(--ng-package-border);
+  font-style: italic;
 }
 .nelagala-event .packages {
   display: flex;
