@@ -11,6 +11,13 @@ $ng-nav-item-bg: lighten($ng-nav-bg, 12%);
 $ng-nav-item-hover-bg: darken($ng-nav-bg, 16%);
 $ng-nav-item-hover-txt: lighten($ng-nav-item-txt, 12%);
 
+// Media Query Breakpoint
+$breakpoint-sm: 576px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 992px;
+$breakpoint-xl: 1200px;
+$breakpoint-max: 1400px;
+
 :root {
   --ng-offblack: rgb(51, 51, 51);
   --ng-offwhite: rgb(249, 249, 249);
@@ -35,7 +42,7 @@ $ng-nav-item-hover-txt: lighten($ng-nav-item-txt, 12%);
   --ng-nav-bg: #{$ng-nav-bg};
   --ng-nav-item-txt: #{$ng-nav-item-txt};
   --ng-nav-item-bg: #{rgba($ng-nav-item-bg, 0.4)};
-  --ng-nav-item-hover-bg:  #{rgba($ng-nav-item-bg, 0.9)};
+  --ng-nav-item-hover-bg: #{rgba($ng-nav-item-bg, 0.9)};
   --ng-nav-item-hover-txt: #{$ng-nav-item-hover-txt};
 
   --ng-section-bg: #f9f9f9;
@@ -55,6 +62,10 @@ $ng-nav-item-hover-txt: lighten($ng-nav-item-txt, 12%);
 body {
   margin: 0;
 
+  * {
+    overflow: default;
+  }
+
   .business_directory {
     .container {
       display: none;
@@ -72,8 +83,9 @@ body {
       &>div {
         // NOTE: Theme content .container
         width: 100%;
-        max-width: 100%;
         padding: 0;
+        max-width: 2400px;
+
       }
 
     }
@@ -81,18 +93,18 @@ body {
   }
 }
 
-@media (min-width: 1200px) {
+@media (min-width: $breakpoint-sm) {
 
   .container,
   .container-lg,
   .container-md,
   .container-sm,
   .container-xl {
-    max-width: 2800px;
+    max-width: 100%;
   }
 }
 
-@media (min-width: 992px) {
+@media (min-width: $breakpoint-md) {
 
   .container,
   .container-lg,
@@ -102,7 +114,23 @@ body {
   }
 }
 
-@media (min-width: 576px) {
+@media (min-width: $breakpoint-lg) {
+
+  .container,
+  .container-sm {
+    max-width: 2800px;
+  }
+}
+
+@media (min-width: $breakpoint-xl) {
+
+  .container,
+  .container-sm {
+    max-width: 2800px;
+  }
+}
+
+@media (min-width: $breakpoint-max) {
 
   .container,
   .container-sm {
@@ -123,7 +151,7 @@ body {
     flex-wrap: wrap;
     position: relative;
     top: 116px;
-    margin: 0 auto -202px auto;
+    margin: 0 auto -204px auto;
   }
 
   h1,
@@ -178,7 +206,7 @@ body {
 
     .header-img {
       position: absolute;
-      top: -252px;
+      top: -302px;
       right: -236px;
       width: 765px;
       transform: rotate(-13deg);
@@ -244,8 +272,9 @@ body {
       text-transform: uppercase;
       font-style: italic;
       font-size: 2.6em;
-      letter-spacing: 3px;
-      margin: 66px auto 0 auto;
+      font-weight: bold;
+      letter-spacing: .2em;
+      margin: 6px auto 0 auto;
       padding: 0;
       position: relative;
     }
@@ -438,7 +467,7 @@ body {
 
       &.participants {
         width: 80%;
-        max-width: 900px;
+        max-width: 920px;
         margin: 0 auto;
       }
 
@@ -448,7 +477,7 @@ body {
         margin-bottom: 0px;
 
         img {
-          width: 50%;
+          width: 45%;
           aspect-ratio: 3/4;
           object-fit: cover;
           max-height: 400px;
@@ -495,7 +524,7 @@ body {
     font-style: normal;
     text-transform: none;
     line-height: 1.3cap;
-    margin: .1em 0 .8em 0;
+    margin: .6em 0 0 0;
   }
 
   main>section.participants>div>div>.bio-summary {
@@ -506,6 +535,8 @@ body {
   main>section.participants>div>div>.personal-title {
     font-weight: 500;
     font-size: 18px;
+    margin: .2em 0 .8em 0;
+
   }
 
   main>#Biography>div>div {
@@ -524,57 +555,111 @@ body {
     font-size: 1.6em;
   }
 
-  .package ul {
-    list-style-type: none;
-    /* Remove default list bullets */
-    margin-left: 0;
-    padding-left: 0;
-  }
-
-  .package li {
+  .packages {
     display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    gap: 20px;
     align-items: flex-start;
-    /* Align items to the start of the flex container */
-    gap: 8px;
-    /* Adjust gap as needed */
-    margin: 16px 0;
-    font-size: 16px;
-  }
 
-  .package li::before {
-    content: "\f00c";
-    /* FontAwesome checkmark unicode */
-    font-family: 'FontAwesome';
-    /* FontAwesome 4.7 font-family */
-    color: var(--ng-red);
-    /* Additional styles for positioning and size */
-    font-size: 16px;
-    /* Adjust as needed */
-    line-height: 1;
-    /* Helps with aligning the icon with the top line of text */
-    padding-top: 6px;
-  }
+    .package {
+      flex: 0 0 31.333%;
+      box-sizing: border-box;
+      position: relative;
+      background-color: white;
+      padding: 20px 20px 120px;
+      border: 1px solid var(--ng-package-border);
+      border-radius: 10px;
+      margin-top: 10px;
 
-  @media (min-width: 576px) {
+      ul {
+        list-style-type: none;
+        /* Remove default list bullets */
+        margin-left: 0;
+        padding-left: 0;
 
-    .container,
-    .container-md,
-    .container-sm {
-      max-width: 100% !important;
+        li {
+          display: flex;
+          align-items: flex-start;
+          /* Align items to the start of the flex container */
+          gap: 8px;
+          /* Adjust gap as needed */
+          margin: 16px 0;
+          font-size: 16px;
+
+          &::before {
+            content: "\f00c";
+            /* FontAwesome checkmark unicode */
+            font-family: 'FontAwesome';
+            /* FontAwesome 4.7 font-family */
+            color: var(--ng-red);
+            /* Additional styles for positioning and size */
+            font-size: 16px;
+            /* Adjust as needed */
+            line-height: 1;
+            /* Helps with aligning the icon with the top line of text */
+            padding-top: 6px;
+          }
+        }
+      }
+
+      h2 {
+        margin: 10px 0;
+        font-weight: bold;
+        font-size: 22px;
+        text-transform: inherit;
+        font-family: var(--font-secondary);
+        color: var(--ng-txt);
+      }
+
+      p {
+        font-size: 16px;
+      }
+
+      button {
+        padding: 10px;
+        border: 0.5px solid var(--ng-red);
+        border-radius: 5px;
+        color: var(--ng-red);
+        font-weight: 500;
+        text-transform: uppercase;
+        position: absolute;
+        bottom: 20px;
+        width: calc(100% - 40px);
+        cursor: pointer;
+        transition: 0.3s;
+
+        &:hover {
+          background-color: var(--ng-red);
+          color: #fff;
+        }
+      }
+
     }
   }
 
-  @media (min-width: 768px) {
-
-    .container,
-    .container-md,
-    .container-sm {
-      max-width: 100% !important;
-    }
+  .map-container {
+    position: relative;
+    width: 100%;
+    padding-bottom: 56.25%;
+    height: 0;
   }
 
+  .map-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
 
-  @media (min-width: 992px) {
+  .sub-text {
+    margin-bottom: 50px;
+    font-size: 19px;
+    color: #707070;
+  }
+
+  @media (min-width: $breakpoint-lg) {
     main {
       flex-grow: 1;
       width: calc(100% - 250px);
@@ -697,78 +782,6 @@ body {
     #sponsorshipss .packages .package {
       flex: 0 0 100%;
     }
-  }
-
-  .packages {
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
-    gap: 20px;
-    align-items: flex-start;
-  }
-
-  .package {
-    flex: 0 0 31.333%;
-    box-sizing: border-box;
-    position: relative;
-    background-color: white;
-    padding: 20px 20px 120px;
-    border: 1px solid var(--ng-package-border);
-    border-radius: 10px;
-    margin-top: 10px;
-  }
-
-  .package h2 {
-    margin: 10px 0;
-    font-weight: bold;
-    font-size: 22px;
-    text-transform: inherit;
-    font-family: var(--font-secondary);
-    color: var(--ng-txt);
-  }
-
-  .package p {
-    font-size: 16px;
-  }
-
-  .package button {
-    padding: 10px;
-    border: 0.5px solid var(--ng-red);
-    border-radius: 5px;
-    color: var(--ng-red);
-    font-weight: 500;
-    text-transform: uppercase;
-    position: absolute;
-    bottom: 20px;
-    width: calc(100% - 40px);
-    cursor: pointer;
-    transition: 0.3s;
-  }
-
-  .package button:hover {
-    background-color: var(--ng-red);
-    color: #fff;
-  }
-
-  .map-container {
-    position: relative;
-    width: 100%;
-    padding-bottom: 56.25%;
-    height: 0;
-  }
-
-  .map-container iframe {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-  }
-
-  .sub-text {
-    margin-bottom: 50px;
-    font-size: 19px;
-    color: #707070;
   }
 
 

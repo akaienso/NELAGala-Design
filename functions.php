@@ -61,6 +61,7 @@ function nelagala_template_include($template) {
     } elseif ($nelagala_info) {
         // Handle specific sections of the event based on nelagala_info and nelagala_participant_name
         switch ($nelagala_info) {
+            case 'roles':
             case 'honorees':
                 if ($nelagala_participant_name) {
                     // Specific honoree's biography for a given year

@@ -34,6 +34,9 @@
 body {
   margin: 0;
 }
+body * {
+  overflow: default;
+}
 body .business_directory .container {
   display: none;
 }
@@ -42,20 +45,20 @@ body #top .grid_1200 {
 }
 body #top > section:nth-child(4) > div {
   width: 100%;
-  max-width: 100%;
   padding: 0;
+  max-width: 2400px;
 }
 
-@media (min-width: 1200px) {
+@media (min-width: 576px) {
   .container,
   .container-lg,
   .container-md,
   .container-sm,
   .container-xl {
-    max-width: 2800px;
+    max-width: 100%;
   }
 }
-@media (min-width: 992px) {
+@media (min-width: 768px) {
   .container,
   .container-lg,
   .container-md,
@@ -63,7 +66,19 @@ body #top > section:nth-child(4) > div {
     max-width: 2800px;
   }
 }
-@media (min-width: 576px) {
+@media (min-width: 992px) {
+  .container,
+  .container-sm {
+    max-width: 2800px;
+  }
+}
+@media (min-width: 1200px) {
+  .container,
+  .container-sm {
+    max-width: 2800px;
+  }
+}
+@media (min-width: 1400px) {
   .container,
   .container-sm {
     max-width: 2800px;
@@ -83,7 +98,7 @@ body #top > section:nth-child(4) > div {
   flex-wrap: wrap;
   position: relative;
   top: 116px;
-  margin: 0 auto -202px auto;
+  margin: 0 auto -204px auto;
 }
 .nelagala-event h1,
 .nelagala-event h2,
@@ -142,7 +157,7 @@ body #top > section:nth-child(4) > div {
 }
 .nelagala-event header .header-img {
   position: absolute;
-  top: -252px;
+  top: -302px;
   right: -236px;
   width: 765px;
   transform: rotate(-13deg);
@@ -197,8 +212,9 @@ body #top > section:nth-child(4) > div {
   text-transform: uppercase;
   font-style: italic;
   font-size: 2.6em;
-  letter-spacing: 3px;
-  margin: 66px auto 0 auto;
+  font-weight: bold;
+  letter-spacing: 0.2em;
+  margin: 6px auto 0 auto;
   padding: 0;
   position: relative;
 }
@@ -355,7 +371,7 @@ body #top > section:nth-child(4) > div {
 }
 .nelagala-event main > section.participants {
   width: 80%;
-  max-width: 900px;
+  max-width: 920px;
   margin: 0 auto;
 }
 .nelagala-event main > section > div {
@@ -364,7 +380,7 @@ body #top > section:nth-child(4) > div {
   margin-bottom: 0px;
 }
 .nelagala-event main > section > div img {
-  width: 50%;
+  width: 45%;
   aspect-ratio: 3/4;
   -o-object-fit: cover;
      object-fit: cover;
@@ -402,7 +418,7 @@ body #top > section:nth-child(4) > div {
   font-style: normal;
   text-transform: none;
   line-height: 1.3cap;
-  margin: 0.1em 0 0.8em 0;
+  margin: 0.6em 0 0 0;
 }
 .nelagala-event main > section.participants > div > div > .bio-summary {
   font-size: 18px;
@@ -411,6 +427,7 @@ body #top > section:nth-child(4) > div {
 .nelagala-event main > section.participants > div > div > .personal-title {
   font-weight: 500;
   font-size: 18px;
+  margin: 0.2em 0 0.8em 0;
 }
 .nelagala-event main > #Biography > div > div {
   width: 58%;
@@ -425,13 +442,30 @@ body #top > section:nth-child(4) > div {
 .nelagala-event main > #Biography > article p:first-child {
   font-size: 1.6em;
 }
-.nelagala-event .package ul {
+.nelagala-event .packages {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  gap: 20px;
+  align-items: flex-start;
+}
+.nelagala-event .packages .package {
+  flex: 0 0 31.333%;
+  box-sizing: border-box;
+  position: relative;
+  background-color: white;
+  padding: 20px 20px 120px;
+  border: 1px solid var(--ng-package-border);
+  border-radius: 10px;
+  margin-top: 10px;
+}
+.nelagala-event .packages .package ul {
   list-style-type: none;
   /* Remove default list bullets */
   margin-left: 0;
   padding-left: 0;
 }
-.nelagala-event .package li {
+.nelagala-event .packages .package ul li {
   display: flex;
   align-items: flex-start;
   /* Align items to the start of the flex container */
@@ -440,7 +474,7 @@ body #top > section:nth-child(4) > div {
   margin: 16px 0;
   font-size: 16px;
 }
-.nelagala-event .package li::before {
+.nelagala-event .packages .package ul li::before {
   content: "\f00c";
   /* FontAwesome checkmark unicode */
   font-family: "FontAwesome";
@@ -453,19 +487,51 @@ body #top > section:nth-child(4) > div {
   /* Helps with aligning the icon with the top line of text */
   padding-top: 6px;
 }
-@media (min-width: 576px) {
-  .nelagala-event .container,
-  .nelagala-event .container-md,
-  .nelagala-event .container-sm {
-    max-width: 100% !important;
-  }
+.nelagala-event .packages .package h2 {
+  margin: 10px 0;
+  font-weight: bold;
+  font-size: 22px;
+  text-transform: inherit;
+  font-family: var(--font-secondary);
+  color: var(--ng-txt);
 }
-@media (min-width: 768px) {
-  .nelagala-event .container,
-  .nelagala-event .container-md,
-  .nelagala-event .container-sm {
-    max-width: 100% !important;
-  }
+.nelagala-event .packages .package p {
+  font-size: 16px;
+}
+.nelagala-event .packages .package button {
+  padding: 10px;
+  border: 0.5px solid var(--ng-red);
+  border-radius: 5px;
+  color: var(--ng-red);
+  font-weight: 500;
+  text-transform: uppercase;
+  position: absolute;
+  bottom: 20px;
+  width: calc(100% - 40px);
+  cursor: pointer;
+  transition: 0.3s;
+}
+.nelagala-event .packages .package button:hover {
+  background-color: var(--ng-red);
+  color: #fff;
+}
+.nelagala-event .map-container {
+  position: relative;
+  width: 100%;
+  padding-bottom: 56.25%;
+  height: 0;
+}
+.nelagala-event .map-container iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+.nelagala-event .sub-text {
+  margin-bottom: 50px;
+  font-size: 19px;
+  color: #707070;
 }
 @media (min-width: 992px) {
   .nelagala-event main {
@@ -566,67 +632,4 @@ body #top > section:nth-child(4) > div {
   .nelagala-event #sponsorshipss .packages .package {
     flex: 0 0 100%;
   }
-}
-.nelagala-event .packages {
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: row;
-  gap: 20px;
-  align-items: flex-start;
-}
-.nelagala-event .package {
-  flex: 0 0 31.333%;
-  box-sizing: border-box;
-  position: relative;
-  background-color: white;
-  padding: 20px 20px 120px;
-  border: 1px solid var(--ng-package-border);
-  border-radius: 10px;
-  margin-top: 10px;
-}
-.nelagala-event .package h2 {
-  margin: 10px 0;
-  font-weight: bold;
-  font-size: 22px;
-  text-transform: inherit;
-  font-family: var(--font-secondary);
-  color: var(--ng-txt);
-}
-.nelagala-event .package p {
-  font-size: 16px;
-}
-.nelagala-event .package button {
-  padding: 10px;
-  border: 0.5px solid var(--ng-red);
-  border-radius: 5px;
-  color: var(--ng-red);
-  font-weight: 500;
-  text-transform: uppercase;
-  position: absolute;
-  bottom: 20px;
-  width: calc(100% - 40px);
-  cursor: pointer;
-  transition: 0.3s;
-}
-.nelagala-event .package button:hover {
-  background-color: var(--ng-red);
-  color: #fff;
-}
-.nelagala-event .map-container {
-  position: relative;
-  width: 100%;
-  padding-bottom: 56.25%;
-  height: 0;
-}
-.nelagala-event .map-container iframe {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-}
-.nelagala-event .sub-text {
-  margin-bottom: 50px;
-  font-size: 19px;
-  color: #707070;
 }/*# sourceMappingURL=styles.css.map */

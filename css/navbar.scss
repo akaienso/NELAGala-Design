@@ -51,7 +51,7 @@
           &:hover {
             text-decoration: none;
             color: var(--ng-nav-item-hover-txt);
-            border-bottom: .1em solid var(--ng-nav-item-hover-txt);
+            border-bottom: .1em solid var(--ng-red);
             background-color: var(--ng-nav-item-hover-bg);
           }
         }

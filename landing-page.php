@@ -188,6 +188,12 @@ if ($events->have_posts()) : while ($events->have_posts()) : $events->the_post()
                                 // Fetch the participant's photo 
                                 $participant_photo = get_field('photo', $participant_id);
 
+                                // Fetch the Personal Title for the participant
+                                $participant_title = get_field('title', $participant_id);
+
+                                // Fetch the recipient's External Website URL 
+                                $participant_website = get_field('website', $participant_id);
+
                                 // Fetch the summary for the participant
                                 $participant_summary = get_field('summary', $participant_id);
 
@@ -210,6 +216,7 @@ if ($events->have_posts()) : while ($events->have_posts()) : $events->the_post()
                                     <div>
                                         <h3><?php echo esc_html($role_description); ?></h3>
                                         <p class="full-name"><?php echo esc_html($participant_name); ?></p>
+                                        <p class="personal-title"><?php echo esc_html($participant_title); ?></p>
                                         <p class="bio-summary"><?php echo esc_html($participant_summary); ?></p>
                                         <!-- <p><a href="<?php echo esc_url($biography_link); ?>">Read more</a></p> -->
                                     </div>
@@ -238,6 +245,12 @@ if ($events->have_posts()) : while ($events->have_posts()) : $events->the_post()
                                 // Fetch the recipient's photo 
                                 $recipient_photo = get_field('photo', $recipient_id);
 
+                                // Fetch the Personal Title for the participant
+                                $recipient_title = get_field('title', $recipient_id);
+
+                                // Fetch the recipient's External Website URL 
+                                $recipient_website = get_field('website', $recipient_id);
+
                                 // Fetch the summary for the participant
                                 $recipient_summary = get_field('summary', $recipient_id);
 
@@ -260,8 +273,9 @@ if ($events->have_posts()) : while ($events->have_posts()) : $events->the_post()
                                     <div>
                                         <h3><?php echo esc_html($honor_description); ?></h3>
                                         <p class="full-name"><?php echo esc_html($recipient_name); ?></p>
+                                        <p class="personal-title"><?php echo esc_html($recipient_title); ?></p>
                                         <p class="bio-summary"><?php echo esc_html($recipient_summary); ?></p>
-                                        <!-- <p><a href="<?php echo esc_url($biography_link); ?>">Read more</a></p> -->
+                                        <p><a href="<?php echo esc_url($biography_link); ?>">Read more</a></p>
                                     </div>
                                 </div>
                             <?php endwhile; ?>

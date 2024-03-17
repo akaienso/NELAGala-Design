@@ -37,20 +37,21 @@ $sections = [
     '#event-roles' => 'roles',
     '#honorees' => 'honorees',
     '#tickets' => 'ticket_prices',
-    '#lodging' => 'lodging',
+    //'#lodging' => 'lodging',
     '#sponsorships' => 'sponsorship_packages',
     '#advertising' => 'advertising_rates',
 ];
 
-if ($events->have_posts()) : while ($events->have_posts()) : $events->the_post();
-        $datetime = get_field('nelagala_event_datetime');
+
 ?>
 
-        <section class="sections">
-            <div class="container">
-                <div class="nelagala-event">
+<section class="sections">
+    <div class="container">
+        <div class="nelagala-event">
+
+            <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
                     <!-- SECTION: Navigation Sidebar -->
-                    <nav class="event-navigation nav">
+                    <nav class="event-navigation nav bg_shape">
                         <div class="burger-container">
                             <button id="burger" aria-label="Open navigation menu">
                                 <span class="bar topBar"></span>
@@ -63,136 +64,146 @@ if ($events->have_posts()) : while ($events->have_posts()) : $events->the_post()
                                 // Check if the field has content or rows (for repeaters)
                                 $value = get_field($field_key);
                                 if ((is_array($value) && !empty($value)) || (!is_array($value) && !empty($value))) : ?>
-                                    <li class="menu-item"><a href="<?= $anchor ?>"><?= ucfirst(str_replace('-', ' ', substr($anchor, 1))) ?></a></li>
+                                    <li class="menu-item"><a href="/nelagala/<?= $event_year ?><?= $anchor ?>"><?= ucfirst(str_replace('-', ' ', substr($anchor, 1))) ?></a></li>
                                 <?php endif; ?>
                             <?php endforeach; ?>
                         </ul>
                     </nav>
                     <!-- !SECTION: Navigation Sidebar -->
 
-                    <!-- SECTION: Display Event Data  -->
-<?php
+            <?php endwhile;
+            endif; ?>
+            <?php
 
-$participant_name_url = get_query_var('nelagala_participant_name'); // Get the participant name from the URL
-$participant_name = str_replace('-', ' ', $participant_name_url); // Replace hyphens with spaces to match the actual name
+            // ACF field values
+            $event_title = get_field('nelagala_event_title');
+            $event_datetime = get_field('nelagala_event_datetime');
+            $event_date = new DateTime($event_datetime);
+            $display_date = $event_date->format('l, F j, Y'); // Use $event_date, not $datetime
+            // This returns an array for Google Map field
+            $event_location = get_field('nelagala_event_location');
+            $lat = $event_location['lat'];
+            $lng = $event_location['lng'];
+            $google_api_key = get_field('google_api_key');
+            $google_geocoding_api_key = get_field('google_geocoding_api_key');
+            $response = file_get_contents("https://maps.googleapis.com/maps/api/geocode/json?latlng=$lat,$lng&key=$google_geocoding_api_key");
 
-$current_year = date('Y');
-$upcomingEventYear = find_upcoming_event_year(); // Assume this function exists and returns the year of the upcoming event
-$matched_events = [];
+            // echo "<pre>" . $google_api_key . "</pre>";
+            // echo "<pre>" . $google_geocoding_api_key . "</pre>";
+            // echo "<pre>" . $response . "</pre>";
 
-$args = [
-    'post_type' => 'nelagala_event',
-    'posts_per_page' => -1, // Retrieve all events
-    'orderby' => 'meta_value',
-    'meta_key' => 'nelagala_event_datetime',
-    'order' => 'ASC'
-];
+            // Decode the JSON response
+            $data = json_decode($response);
 
-$query = new WP_Query($args);
-
-if ($query->have_posts()) {
-    while ($query->have_posts()) {
-        $query->the_post();
-        $event_year = get_field('nelagala_event_datetime');
-        $event_year = date('Y', strtotime($event_year));
-
-        // Assume 'nelagala_roles' is the repeater field for roles
-        if (have_rows('nelagala_roles')) {
-            while (have_rows('nelagala_roles')) {
-                the_row();
-                // Assume sub fields are 'role_name' and 'participant_name'
-                $role_name = get_sub_field('role_name');
-                $participant_name_field = get_sub_field('participant_name');
-
-                if (strcasecmp($participant_name_field, $participant_name) == 0) {
-                    $matched_events[$event_year][] = [
-                        'role' => $role_name,
-                        'event_title' => get_the_title(),
-                        'event_link' => get_the_permalink()
-                    ];
+            // Iterate over the address components to find the city and state
+            $venue_city = "";
+            $venue_state = "";
+            foreach ($data->results[0]->address_components as $component) {
+                if (in_array("locality", $component->types)) {
+                    $venue_city = $component->long_name;
+                }
+                if (in_array("administrative_area_level_1", $component->types)) {
+                    $venue_state = $component->short_name;
                 }
             }
-        }
+            $header_venue_message = get_field('header_venue_message');
+            $venue_name = get_field('nelagala_venue_name');
+            $promotional_video = get_field('promotional_video');
+            $roles_section_headline = get_field('roles_section_headline');
+            $roles_section_content = get_field('roles_section_content');
+            $roles = get_field('roles');
+            $honorees_section_headline = get_field('honorees_section_headline');
+            $honorees_section_content = get_field('honorees_section_content');
+            $honorees = get_field('honorees');
+            $ticket_section_headline = get_field('ticket_section_headline');
+            $ticket_section_top_content = get_field('ticket_section_top_content');
+            $ticket_prices = get_field('ticket_prices');
+            $lodging_section_headline = get_field('lodging_section_headline');
+            $lodging_section_top_content = get_field('lodging_section_top_content');
+            $lodging = get_field('lodging');
+            $sponsorship_section_headline = get_field('sponsorship_section_headline');
+            $sponsorship_section_top_content = get_field('sponsorship_section_top_content');
+            $sponsorship_packages = get_field('sponsorship_packages');
+            $advertising_section_headline = get_field('advertising_section_headline');
+            $advertising_section_top_content = get_field('advertising_section_top_content');
+            $advertising_rates = get_field('advertising_rates');
 
-       // Similar block for 'nelagala_honorees' repeater field
-        if (have_rows('nelagala_honorees')) {
-            while (have_rows('nelagala_honorees')) {
-                the_row();
-                // Adjust sub fields as necessary for your honorees' structure
-                $honor_title = get_sub_field('honor_title'); // For example
-                $participant_name_field = get_sub_field('participant_name');
+            // Initialize the array to track missing sections
+            $missing_sections = [];
+            ?>
+            <main>
+                <!--  SECTION: Event Header -->
 
-                if (strcasecmp($participant_name_field, $participant_name) == 0) {
-                    $matched_events[$event_year][] = [
-                        'role' => $honor_title, // Adjust key name if you prefer a different label for honorees
-                        'event_title' => get_the_title(),
-                        'event_link' => get_the_permalink()
-                    ];
-                }
-            }
-        }
+                <header>
+                    <h2>Save the Date</h2>
+                    <div class="row">
+                        <img class="header-img" src="<?php echo get_template_directory_uri() . '/inc/nelagala/img/sicilia.png'; ?>" alt="the Trinacria">
+                        <div class="col divider">
+                            <h3>Sons of Italy Foundation<sup>&reg;</sup> presents</h3>
+                            <div class="title-wrap">
+                                <p class="pre-title"><?php echo get_current_event_year_with_ordinal(); ?>
+                                </p>
+                                <h1 class="title"><?php echo  $event_title; ?></h1>
+                                <p class="post-title">Gala</p>
+                            </div>
+                        </div>
+                        <div class="col col-2">
+                            <p class="text"><?php echo  $header_venue_message; ?></p>
+                            <p class="col-2-title"><?php echo $venue_name; ?></p>
+                            <p class="text"><?php echo  $venue_city; ?>, <?php echo  $venue_state; ?></p>
+                        </div>
+                    </div>
+                    <div class="header-img-main">
+                        <img src="<?php echo get_template_directory_uri() . '/inc/nelagala/img/header-main-img.jpg'; ?>" alt="Teatro Antico di Taormina">
+                    </div>
+                    <div class="header-footer-text"><? echo $display_date; ?> | More details coming soon!</div>
+                </header>
 
-    }
-}
+                <!-- SECTION: Data dump of nelagala-participant field group -->
+                <section id="biography" class="participants">
+                    <?php
+                    $participant_slug = get_query_var('nelagala_participant_name');
+                    $participant_posts = new WP_Query(array(
+                        'name' => $participant_slug,
+                        'post_type' => 'nelagala-participant',
+                        'posts_per_page' => 1,
+                    ));
 
-wp_reset_postdata();
+                    if ($participant_posts->have_posts()) : while ($participant_posts->have_posts()) : $participant_posts->the_post(); ?>
 
-ksort($matched_events); // Sort the matched events by year
-?>
+                            <?php
+                            $photo = get_field('photo');
+                            $title = get_field('title');
+                            $website = get_field('website');
+                            $summary = get_field('summary');
+                            ?>
+                            <div class="row-container">
+                                <?php
 
+                                if (!empty($photo)) {
+                                    // Image variables
+                                    $url = $photo['url'];
+                                    $alt = $photo['alt'];
 
-<main>
-    <header>
-        <img class="header-img" src="./img/header-img.png" alt="">
-        <div class="row">
-            <div class="col divider">
-                <h3>Sons of Italy Foundation presents</h3>
+                                ?>
+                                    <img src="<?php echo esc_url($url); ?>" alt="Photograph of <?php echo esc_attr($alt); ?>"><?php
+                                                                                                                            } ?>
 
-                <div class="title-wrap">
-                    <p class="pre-title">The <span class="yr">35</span> th Annual </p>
-                    <h1 class="title">National Academic & Leadership Awards</h1>
-                    <p class="pre-title"><span class="yr">Gala</span></p>
-                </div>
-            </div>
-            <div class="col col-2">
-                <p class="text">Celebrate the Region of Sicily with us</p>
-                <p class="col-2-title">Ronald Reagan Building & International Trade Center</p>
-                <p class="text">Washington, D.C.</p>
-            </div>
+                                <div>
+                                    <h3 class="full-name"><?php the_title(); ?></h3>
+                                    <p class="personal-title"><?php echo esc_html($title); ?></p>
+                                    <?php echo the_content; ?>
+                                </div>
+
+                            </div>
+                    <?php endwhile;
+                        wp_reset_postdata();
+                    endif;
+                    ?>
+
+                    <!-- !SECTION: Data dump of nelagala-participant field group -->
         </div>
+    </div>
+</section>
 
-        <div class="header-img-main">
-            <img src="./img/header-main-img.jpg" alt="">
-        </div>
-
-        <div class="header-footer-text">Thursday, May 23 2024 | More details coming soon!</div>
-    </header>
-    <section id="Biography" class="participants">
-        <h2><?php echo $honor_title;?></h2>
-        <div>
-            <img src="img\faces\zappia.jpg">
-            <div>
-                <p class="full-name"><?php echo $participant_name;?></p>
-                <p class="personal-title"> <?php $participant_name_url;?></p>
-
-            </div>
-        </div>
-        <article>
-           <?php the_content();?>
-        </article>
-        <section class="past-honors">
-            <ul>
-                <li><em>2003 — 2024:</em> Master of Ceremonies</li>
-                <li><em>2019:</em> SIF Lifetime Achievement Award in the Arts</li>
-            </ul>
-        </section>
-        <a href="index.html">Home</a>
-    </section>
-</main>
-
-            </div>
-        </div>
-    </section>
-<?php 
-//get_footer();
- ?>
+<?php get_footer(); ?>
