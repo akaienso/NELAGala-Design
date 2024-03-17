@@ -1,4 +1,53 @@
 <?
+global $nelagala_event_post_id;
+
+function custom_theme_styles()
+{
+    wp_enqueue_style('typekit-fonts', 'https://use.typekit.net/zcb5mzu.css');
+    wp_enqueue_style('google-fonts', 'https://fonts.googleapis.com/css2?family=Playfair+Display:ital@1&display=swap', false);
+    wp_enqueue_style('nelagala-reset', get_template_directory_uri() . '/inc/nelagala/css/reset.css?' . time());
+    wp_enqueue_style('nelagala-style', get_template_directory_uri() . '/inc/nelagala/css/styles.css?' . time());
+    wp_enqueue_style('nelagala-navbar-style', get_template_directory_uri() . '/inc/nelagala/css/navbar.css?' . time());
+}
+add_action('wp_enqueue_scripts', 'custom_theme_styles');
+
+function custom_theme_scripts() {
+    global $events; // Assuming $events is the WP_Query object from your template.
+
+    $google_api_key = '';
+    $google_geocoding_api_key = '';
+
+    // Check if the event query is set and has posts.
+    if (isset($events) && $events->have_posts()) {
+        $events->the_post(); // Set the global post data for the event.
+
+        // Fetch the API keys from ACF fields associated with the event post.
+        $google_api_key = get_field('google_api_key');
+        $google_geocoding_api_key = get_field('google_geocoding_api_key');
+
+        wp_reset_postdata(); // Reset global post data.
+    }
+
+    // Your existing enqueuing scripts and styles...
+    wp_enqueue_style('typekit-fonts', 'https://use.typekit.net/zcb5mzu.css');
+    // More enqueued styles...
+
+    // Enqueue Google Maps API script with the dynamic API key.
+    if (!empty($google_api_key)) {
+        wp_enqueue_script('google-maps-api', 'https://maps.googleapis.com/maps/api/js?key=' . $google_api_key . '&callback=initMap', array(), null, true);
+    }
+
+    // Enqueue your custom script.
+    wp_enqueue_script('nelagala-script', get_template_directory_uri() . '/inc/nelagala/js/script.js', array('google-maps-api'), false, true);
+
+    // Localize the script with the geocoding API key, if needed.
+    if (!empty($google_geocoding_api_key)) {
+        wp_localize_script('nelagala-script', 'geocodingData', ['geocodingApiKey' => $google_geocoding_api_key]);
+    }
+}
+add_action('wp_enqueue_scripts', 'custom_theme_scripts');
+
+
 function my_acf_init() {
     acf_update_setting('google_api_key', 'AIzaSyBGZLfom_9gzVfPI39FCQ1MHWGxNjxUqDg');
 }
@@ -29,6 +78,29 @@ function nelagala_custom_rewrite_rules() {
 add_action('init', 'nelagala_custom_rewrite_rules');
 
 function nelagala_template_include($template) {
+    global $nelagala_event_post_id;
+    $nelagala_year = get_query_var('nelagala_year', false);
+
+    if ($nelagala_year) {
+        // Assuming 'event_year' is your custom field to query against.
+        $events = new WP_Query(array(
+            'post_type' => 'nelagala_event',
+            'meta_query' => array(
+                array(
+                    'key' => 'event_year',
+                    'value' => $nelagala_year,
+                ),
+            ),
+            'posts_per_page' => 1,
+        ));
+
+        if ($events->have_posts()) {
+            $events->the_post();
+            $nelagala_event_post_id = get_the_ID(); // Successfully fetched the event post ID based on year.
+        }
+
+        wp_reset_postdata(); // Always good practice after custom queries.
+    }
     if (!is_post_type_archive('nelagala_event') && !get_query_var('nelagala_year', false) && !get_query_var('nelagala_info', false) && !get_query_var('nelagala_participant_name', false)) {
         return $template;
     }
@@ -144,3 +216,69 @@ function get_current_event_year_with_ordinal() {
 
     return "The <span class='yr'>{$event_number}</span>{$ordinal_suffix} annual";
 }
+function pass_acf_to_js() {
+    $current_year = date('Y'); // Use the current year
+    $events = new WP_Query(array(
+        'post_type' => 'nelagala_event',
+        'year' => $current_year, // Assuming the post's publish year matches
+        'posts_per_page' => 1,
+    ));
+
+    if ($events->have_posts()) {
+        $events->the_post();
+        $post_id = get_the_ID(); // Get the ID of the event post for the current year
+
+        // Fetch the event location and lodging data using ACF's get_field
+        $event_location = get_field('nelagala_event_location', $post_id);
+        $hotels = get_field('lodging', $post_id);
+
+        // Localize the script with your data
+        wp_localize_script('nelagala-script', 'eventData', array(
+            'eventLocation' => $event_location,
+            'hotels' => $hotels,
+        ));
+    }
+
+    wp_reset_postdata();
+}
+add_action('wp_enqueue_scripts', 'pass_acf_to_js');
+
+
+function display_event_location_debug() {
+    $current_year = date('Y'); // Static value for testing
+    $args = array(
+        'post_type' => 'nelagala_event',
+        'title' => $current_year,
+        'posts_per_page' => 1,
+    );
+
+    $events = new WP_Query($args);
+
+    if ($events->have_posts()) {
+        $events->the_post();
+        $post_id = get_the_ID(); // ID of the event post for the current year
+
+        // Fetch the event location data using ACF's get_field
+        $event_location = get_field('nelagala_event_location', $post_id);
+
+        if ($event_location) {
+            // Directly output the data in the 'map' div for debugging
+            echo '<div id="map" class="map-container">';
+            echo '<pre>' . esc_html(print_r($event_location, true)) . '</pre>';
+            echo '</div>';
+        } else {
+            // Output a message if no data is found
+            echo '<div id="map" class="map-container">';
+            echo '<p>No event location data found.</p>';
+            echo '</div>';
+        }
+    } else {
+        // Output a message if no event post is found
+        echo '<div id="map" class="map-container">';
+        echo '<p>No event post found for the current year.</p>';
+        echo '</div>';
+    }
+
+    wp_reset_postdata();
+}
+add_action('wp_footer', 'display_event_location_debug');

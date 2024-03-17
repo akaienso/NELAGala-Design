@@ -1,21 +1,4 @@
 <?php
-function custom_theme_styles()
-{
-    wp_enqueue_style('typekit-fonts', 'https://use.typekit.net/zcb5mzu.css');
-    wp_enqueue_style('google-fonts', 'https://fonts.googleapis.com/css2?family=Playfair+Display:ital@1&display=swap', false);
-    // wp_enqueue_style('nelagala-reset', 'https://cdn.jsdelivr.net/gh/akaienso/NELAGala-Design@migration/css/reset.css?' . time());
-    // wp_enqueue_style('nelagala-style', 'https://cdn.jsdelivr.net/gh/akaienso/NELAGala-Design@migration/css/styles.css?' . time());
-    // wp_enqueue_style('nelagala-navbar-style', 'https://cdn.jsdelivr.net/gh/akaienso/NELAGala-Design@migration/css/navbar.css?' . time());
-    wp_enqueue_style('nelagala-reset', get_template_directory_uri() . '/inc/nelagala/css/reset.css?' . time());
-    wp_enqueue_style('nelagala-style', get_template_directory_uri() . '/inc/nelagala/css/styles.css?' . time());
-    wp_enqueue_style('nelagala-navbar-style', get_template_directory_uri() . '/inc/nelagala/css/navbar.css?' . time());
-}
-add_action('wp_enqueue_scripts', 'custom_theme_styles');
-function custom_theme_scripts()
-{
-    wp_enqueue_script('nelagala-script', get_template_directory_uri() . '/inc/nelagala/js/script.js', array(), false, true);
-}
-add_action('wp_enqueue_scripts', 'custom_theme_scripts');
 get_header();
 
 $event_year = get_query_var('nelagala_year');
@@ -309,7 +292,54 @@ if ($events->have_posts()) : while ($events->have_posts()) : $events->the_post()
                         </section>
                     <?php endif; ?>
                     <!--  !SECTION: Tickets -->
+                    <!-- SECTION: Location -->
+                    <section id="location" class="hotels-cards">
+                    <h2>Venue and Accommodations</h2>
+                    <div id="map" class="map-container"></div>
+                    <?php if(have_rows('lodging')): ?>
+                    <div class="packages">
+                    <?php while(have_rows('lodging')): the_row();
+                        $name = get_sub_field('property');
+                        $location = get_sub_field('location');
+                        $phone = get_sub_field('telephone');
+                        $booking_url = get_sub_field('website');
+                        ?>
+                        <div class="package">
+                            <h2><?php echo esc_html($name); ?></h2>
+                            <p><?php echo esc_html($location); ?></p>
+                            <p><?php echo esc_html($phone); ?></p>
+                            <button><a href="<?php echo esc_url($booking_url); ?>" target="_blank">Book Now</a></button>
+                            </div>
 
+                    <?php endwhile; ?> 
+
+                            </div>
+
+
+                    <?php endif; ?>
+                    
+
+<script>
+    // Initialize and add the map
+    function initMap() {
+        // The location of the Event
+        var eventLocation = {lat: 38.8939166, lng: -77.0307749};
+        // The map, centered at the event location
+        var map = new google.maps.Map(
+            document.getElementById('map'), {zoom: 17, center: eventLocation});
+        // The marker, positioned at the event location
+        var marker = new google.maps.Marker({position: eventLocation, map: map});
+    }
+</script>
+<!--Load the API from the specified URL
+* The async attribute allows the browser to render the page while the API loads
+* The key parameter will contain your own API key (which is not needed for this tutorial)
+* The callback parameter executes the initMap() function
+-->
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBGZLfom_9gzVfPI39FCQ1MHWGxNjxUqDg&callback=initMap"></script>
+
+                     </section>
+                    <!-- SECTION: Location -->
                     <!--  SECTION: sponsorship packagess -->
                     <?php
                     if (have_rows('sponsorship_packages')) :
@@ -384,5 +414,5 @@ if ($events->have_posts()) : while ($events->have_posts()) : $events->the_post()
                 </div>
         </div>
     </section>
-    
+
     <?php get_footer(); ?>
