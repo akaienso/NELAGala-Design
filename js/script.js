@@ -1,4 +1,4 @@
-
+console.log('NG custom script file loaded');
 (function(){
     var burger = document.querySelector('.burger-container'),
         nav = document.querySelector('.nav'),
@@ -27,6 +27,16 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         });
     });
 });
+
+// function initMap() {
+//     console.log("initMap started");
+//     var map = new google.maps.Map(document.getElementById('map'), {
+//         zoom: 10, // Example zoom level
+//         center: { lat: -34.397, lng: 150.644 } // Example coordinates
+//     });
+//     console.log("Map should be initialized");
+// }
+
 function initMap() {
     // Confirm eventData is defined and contains the event location.
     if (eventData && eventData.eventLocation) {
@@ -49,4 +59,3 @@ function initMap() {
         });
     }
 }
-

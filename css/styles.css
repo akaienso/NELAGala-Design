@@ -530,17 +530,19 @@ body #top > section:nth-child(4) > div {
 .nelagala-event .map-container {
   position: relative;
   width: 100%;
-  padding-bottom: 56.25%;
-  height: 0;
+  padding-top: 28.125%; /* 16:9 Aspect Ratio */
+  height: 0; /* This is important to prevent the actual height from affecting the element */
+  overflow: hidden; /* Ensures no overflow from the padding hack */
+  background-color: white;
 }
-.nelagala-event .map-container iframe {
+.nelagala-event .map-container iframe, .nelagala-event .map-container .map {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
 }
-.nelagala-event .sub-text {
+.nelagala-event .map-container .sub-text {
   margin-bottom: 50px;
   font-size: 19px;
   color: #707070;

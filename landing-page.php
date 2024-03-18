@@ -20,7 +20,7 @@ $sections = [
     '#event-roles' => 'roles',
     '#honorees' => 'honorees',
     '#tickets' => 'ticket_prices',
-    //'#lodging' => 'lodging',
+    '#lodging' => 'lodging',
     '#sponsorships' => 'sponsorship_packages',
     '#advertising' => 'advertising_rates',
 ];
@@ -292,10 +292,12 @@ if ($events->have_posts()) : while ($events->have_posts()) : $events->the_post()
                         </section>
                     <?php endif; ?>
                     <!--  !SECTION: Tickets -->
-                    <!-- SECTION: Location -->
+                    <!-- SECTION: lodging -->
+                    <div id="lodging" class="map-container">
+                        <div id="map" class="map"></div>
+                    </div>
                     <section id="location" class="hotels-cards">
                     <h2>Venue and Accommodations</h2>
-                    <div id="map" class="map-container"></div>
                     <?php if(have_rows('lodging')): ?>
                     <div class="packages">
                     <?php while(have_rows('lodging')): the_row();
@@ -317,29 +319,8 @@ if ($events->have_posts()) : while ($events->have_posts()) : $events->the_post()
 
 
                     <?php endif; ?>
-                    
-
-<script>
-    // Initialize and add the map
-    function initMap() {
-        // The location of the Event
-        var eventLocation = {lat: 38.8939166, lng: -77.0307749};
-        // The map, centered at the event location
-        var map = new google.maps.Map(
-            document.getElementById('map'), {zoom: 17, center: eventLocation});
-        // The marker, positioned at the event location
-        var marker = new google.maps.Marker({position: eventLocation, map: map});
-    }
-</script>
-<!--Load the API from the specified URL
-* The async attribute allows the browser to render the page while the API loads
-* The key parameter will contain your own API key (which is not needed for this tutorial)
-* The callback parameter executes the initMap() function
--->
-<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBGZLfom_9gzVfPI39FCQ1MHWGxNjxUqDg&callback=initMap"></script>
-
                      </section>
-                    <!-- SECTION: Location -->
+                    <!-- !SECTION: Location -->
                     <!--  SECTION: sponsorship packagess -->
                     <?php
                     if (have_rows('sponsorship_packages')) :
@@ -414,5 +395,9 @@ if ($events->have_posts()) : while ($events->have_posts()) : $events->the_post()
                 </div>
         </div>
     </section>
-
+    <!-- <script>
+  function initMap() {
+    console.log('initMap defined.');
+  }
+</script>  -->
     <?php get_footer(); ?>

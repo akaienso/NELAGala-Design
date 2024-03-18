@@ -11,42 +11,33 @@ function custom_theme_styles()
 }
 add_action('wp_enqueue_scripts', 'custom_theme_styles');
 
+
 function custom_theme_scripts() {
-    global $events; // Assuming $events is the WP_Query object from your template.
 
-    $google_api_key = '';
-    $google_geocoding_api_key = '';
+    $google_api_key = get_field('google_api_key');
+    $google_geocoding_api_key = get_field('google_geocoding_api_key');
 
-    // Check if the event query is set and has posts.
-    if (isset($events) && $events->have_posts()) {
-        $events->the_post(); // Set the global post data for the event.
+    // Enqueue Google Maps API script
+    wp_enqueue_script('google-maps-api', 'https://maps.googleapis.com/maps/api/js?key=' . $google_api_key . '&callback=initMap', array(), null, true);
 
-        // Fetch the API keys from ACF fields associated with the event post.
-        $google_api_key = get_field('google_api_key');
-        $google_geocoding_api_key = get_field('google_geocoding_api_key');
-
-        wp_reset_postdata(); // Reset global post data.
-    }
-
-    // Your existing enqueuing scripts and styles...
-    wp_enqueue_style('typekit-fonts', 'https://use.typekit.net/zcb5mzu.css');
-    // More enqueued styles...
-
-    // Enqueue Google Maps API script with the dynamic API key.
+    // Enqueue your custom script
+    wp_enqueue_script('nelagala-script', get_template_directory_uri() . '/inc/nelagala/js/script.js', array('google-maps-api'), null, true);
+//     // Localize the script with the geocoding API key, if needed.
     if (!empty($google_api_key)) {
-        wp_enqueue_script('google-maps-api', 'https://maps.googleapis.com/maps/api/js?key=' . $google_api_key . '&callback=initMap', array(), null, true);
-    }
-
-    // Enqueue your custom script.
-    wp_enqueue_script('nelagala-script', get_template_directory_uri() . '/inc/nelagala/js/script.js', array('google-maps-api'), false, true);
-
-    // Localize the script with the geocoding API key, if needed.
-    if (!empty($google_geocoding_api_key)) {
         wp_localize_script('nelagala-script', 'geocodingData', ['geocodingApiKey' => $google_geocoding_api_key]);
     }
 }
-add_action('wp_enqueue_scripts', 'custom_theme_scripts');
 
+function add_async_defer_attribute($tag, $handle) {
+    // Add async and defer attributes to specific scripts
+    if ('google-maps-api' === $handle) {
+        return str_replace(' src', ' async defer src', $tag);
+    }
+    return $tag;
+}
+add_filter('script_loader_tag', 'add_async_defer_attribute', 10, 2);
+
+add_action('wp_enqueue_scripts', 'custom_theme_scripts');
 
 function my_acf_init() {
     acf_update_setting('google_api_key', 'AIzaSyBGZLfom_9gzVfPI39FCQ1MHWGxNjxUqDg');
@@ -216,6 +207,7 @@ function get_current_event_year_with_ordinal() {
 
     return "The <span class='yr'>{$event_number}</span>{$ordinal_suffix} annual";
 }
+
 function pass_acf_to_js() {
     $current_year = date('Y'); // Use the current year
     $events = new WP_Query(array(
@@ -242,7 +234,6 @@ function pass_acf_to_js() {
     wp_reset_postdata();
 }
 add_action('wp_enqueue_scripts', 'pass_acf_to_js');
-
 
 function display_event_location_debug() {
     $current_year = date('Y'); // Static value for testing
