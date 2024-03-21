@@ -1,0 +1,23 @@
+{
+    "liveSassCompile.settings.compileOnWatch": true,
+    "liveSassCompile.settings.useNewCompiler": true,
+    "liveSassCompile.settings.watchOnLaunch": true,
+    "liveSassCompile.settings.formats": [
+        
+        {
+            "format": "expanded",
+            "extensionName": ".css",
+            "savePath": "~/../dist/",
+            "savePathReplacementPairs": null
+        },
+        {
+            "format": "compressed",
+            "extensionName": ".min.css",
+            "savePath": "~/../../css/",
+            "savePathReplacementPairs": null
+        }
+    ],
+    "liveSassCompile.settings.partialsList": [
+        "/sass/partials/_*.s[ac]ss"
+    ]
+}

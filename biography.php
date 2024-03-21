@@ -25,12 +25,16 @@ $sections = [
     '#advertising' => 'advertising_rates',
 ];
 
-
 ?>
 
 <section class="sections">
     <div class="container">
         <div class="nelagala-event">
+            <style>
+                .nelagala-event main > section > div img {
+                    mix-blend-mode: inherit !important;
+                }
+            </style>
 
             <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
                     <!-- SECTION: Navigation Sidebar -->
@@ -47,7 +51,7 @@ $sections = [
                                 // Check if the field has content or rows (for repeaters)
                                 $value = get_field($field_key);
                                 if ((is_array($value) && !empty($value)) || (!is_array($value) && !empty($value))) : ?>
-                                    <li class="menu-item"><a href="/nelagala/<?= $event_year ?><?= $anchor ?>"><?= ucfirst(str_replace('-', ' ', substr($anchor, 1))) ?></a></li>
+                                    <li class="menu-item"><a href="../<?= $anchor ?>"><?= ucfirst(str_replace('-', ' ', substr($anchor, 1))) ?></a></li>
                                 <?php endif; ?>
                             <?php endforeach; ?>
                         </ul>

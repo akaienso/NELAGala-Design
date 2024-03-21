@@ -1,63 +1,9 @@
-$ng-steel-blue: rgb(40, 75, 103);
-$ng-red: rgb(209, 35, 47);
-$ng-yellow: rgb(240, 189, 51);
 
-// Navigation Sidebar Colors
-// Define the base color as a Sass variabl
-$ng-nav-bg: $ng-steel-blue;
-// Calculate contrasting color and variations using Sass functions
-$ng-nav-item-txt: darken($ng-yellow, 12%);
-$ng-nav-item-bg: lighten($ng-nav-bg, 12%);
-$ng-nav-item-hover-bg: darken($ng-nav-bg, 16%);
-$ng-nav-item-hover-txt: lighten($ng-nav-item-txt, 12%);
+@forward '../partials/_variables';
+@forward '../partials/_typography';
 
-// Media Query Breakpoint
-$breakpoint-sm: 576px;
-$breakpoint-md: 768px;
-$breakpoint-lg: 992px;
-$breakpoint-xl: 1200px;
-$breakpoint-max: 1400px;
-
-:root {
-  --ng-offblack: rgb(51, 51, 51);
-  --ng-offwhite: rgb(249, 249, 249);
-  --ng-red: #{$ng-red};
-  --ng-yellow: #{$ng-yellow};
-
-  --ng-txt: rgb(51, 51, 51);
-  --ng-bg: rgb(255, 255, 255);
-
-  --font-primary: 'kepler-std-condensed-display', serif;
-  --font-secondary: 'Barlow', sans-serif;
-  --font-tertiary: 'Playfair Display', serif;
-  --font-quaternary: "Georgia", serif;
-  --font-gala: "nautica", sans-serif;
-
-  --ng-header-bg: #{$ng-yellow};
-  --ng-header-txt: rgb(255, 255, 255);
-  --ng-header-txt-a: rgb(249, 249, 249);
-  --ng-header-title-txt: rgb(171, 171, 171);
-
-  // Assign pre-calculated Sass variable values to CSS custom properties
-  --ng-nav-bg: #{$ng-nav-bg};
-  --ng-nav-item-txt: #{$ng-nav-item-txt};
-  --ng-nav-item-bg: #{rgba($ng-nav-item-bg, 0.4)};
-  --ng-nav-item-hover-bg: #{rgba($ng-nav-item-bg, 0.9)};
-  --ng-nav-item-hover-txt: #{$ng-nav-item-hover-txt};
-
-  --ng-section-bg: #f9f9f9;
-  --ng-package-border: rgb(236, 233, 233); // Slightly darker than --ng-section-bg
-
-  --cubic: cubic-bezier(0.4, 0.01, 0.165, 0.99);
-  --menuItems: 7;
-}
-
-@font-face {
-  font-family: 'Barlow';
-  src: url('../typography/Barlow-SemiBold.otf') format('otf');
-  font-weight: normal;
-  font-style: normal;
-}
+@use '../partials/_variables' as *;
+@use '../partials/_typography' as *;
 
 body {
   margin: 0;
@@ -84,8 +30,7 @@ body {
         // NOTE: Theme content .container
         width: 100%;
         padding: 0;
-        max-width: 2400px;
-
+        max-width: 3200px;
       }
 
     }
@@ -93,62 +38,17 @@ body {
   }
 }
 
-@media (min-width: $breakpoint-sm) {
-
-  .container,
-  .container-lg,
-  .container-md,
-  .container-sm,
-  .container-xl {
-    max-width: 100%;
-  }
-}
-
-@media (min-width: $breakpoint-md) {
-
-  .container,
-  .container-lg,
-  .container-md,
-  .container-sm {
-    max-width: 2800px;
-  }
-}
-
-@media (min-width: $breakpoint-lg) {
-
-  .container,
-  .container-sm {
-    max-width: 2800px;
-  }
-}
-
-@media (min-width: $breakpoint-xl) {
-
-  .container,
-  .container-sm {
-    max-width: 2800px;
-  }
-}
-
-@media (min-width: $breakpoint-max) {
-
-  .container,
-  .container-sm {
-    max-width: 2800px;
-  }
-}
-
 .nelagala-event {
 
   & {
-    font-family: var(--font-secondary);
+    font-family: var(--font-primary);
     color: var(--ng-txt);
     background: var(--ng-bg);
     display: flex;
     justify-content: space-between;
     min-height: 100vh;
     width: 100%;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     position: relative;
     top: 116px;
     margin: 0 auto -204px auto;
@@ -192,7 +92,6 @@ body {
     background: inherit;
   }
 
-
   header {
     width: 100%;
     padding: 0px;
@@ -203,6 +102,7 @@ body {
     position: relative;
     top: 0;
     overflow: hidden;
+    font-family: var(--font-primary);
 
     .header-img {
       position: absolute;
@@ -227,7 +127,6 @@ body {
     .col {
       min-width: 50%;
       padding: 20px 10px 30px;
-      font-family: var(--font-quaternary);
     }
 
     .divider {
@@ -252,8 +151,8 @@ body {
       &.title {
         display: inline;
         text-align: center;
-        font-family: var(--font-primary);
-        font-size: 2em;
+        font-family: var(--font-secondary);
+        font-size: 1.8em;
         color: var(--ng-header-txt);
         line-height: 0.9em;
         margin: -10px 0;
@@ -268,10 +167,12 @@ body {
 
     h2 {
       font-family: var(--font-primary);
+      font-weight: var(--font-primary-weight);
+      font-style: var(--font-primary-italic);
       color: var(--ng-header-txt);
       text-transform: uppercase;
       font-style: italic;
-      font-size: 2.6em;
+      font-size: 2em;
       font-weight: bold;
       letter-spacing: .2em;
       margin: 6px auto 0 auto;
@@ -283,7 +184,9 @@ body {
       font-size: .8em;
       margin-top: 0;
       margin-bottom: 20px;
-      font-family: var(--font-tertiary);
+      font-family: var(--font-secondary);
+      font-weight: 500;
+      font-style: italic;
       color: var(--ng-header-txt);
       font-weight: 400;
       text-transform: unset;
@@ -301,10 +204,9 @@ body {
       align-items: center;
       justify-content: center;
       color: var(--ng-red);
-      font-family: var(--font-gala);
+      font-family: var(--font-script);
       text-align: center;
-      font-size: 2.2em;
-      font-weight: 800;
+      font-size: 2.4em;
       margin: 0;
       line-height: 58px;
 
@@ -331,20 +233,22 @@ body {
       padding-left: 20px;
 
       .col-2-title {
-        font-family: var(--font-secondary);
+        font-family: var(--font-tertiary);
         color: var(--ng-header-txt);
         text-transform: uppercase;
-        font-size: 1.6em;
+        font-size: 1.4em;
         font-weight: 500;
+        font-style: normal;
         margin: 0;
         line-height: 1.2em;
 
       }
 
       .text {
-        font-family: var(--font-tertiary);
+        font-family: var(--font-primary);
         color: var(--ng-header-txt);
-        font-weight: 400;
+        font-weight: 500;
+        font-style:italic;
         font-size: 21px;
         margin: 0;
       }
@@ -353,8 +257,9 @@ body {
     .header-footer-text {
       font-size: 24px;
       margin: 10px 0;
-      font-family: var(--font-tertiary);
-      font-weight: 500;
+      font-family: var(--font-primary);
+      font-weight: var(--font-primary-semibold-weight);
+      font-style: var(--font-primary-style-italic);
     }
 
     .row {
@@ -409,10 +314,10 @@ body {
     }
   }
 
-
   main {
     background: var(--ng-section-bg);
     padding-bottom: 54px;
+    flex-grow: 1;
 
     section {
       margin-bottom: 0;
@@ -434,7 +339,9 @@ body {
 
     #event-roles h3,
     #honorees h3 {
-      font-family: var(--font-tertiary);
+      font-family: var(--font-primary);
+      font-weight: var(--font-primary-semibold-weight);
+      font-style: var(--font-primary-style-italic);
       color: var(--ng-txt);
       font-size: 1em;
       margin-bottom: 0px;
@@ -516,13 +423,14 @@ body {
 
 
   main>section.participants>div>div>.full-name {
-    font-family: var(--font-secondary);
+    font-family: var(--font-tertiary);
     font-size: 2em;
     font-weight: normal;
     font-style: normal;
     text-transform: none;
     line-height: 1.3cap;
     margin: .6em 0 0 0;
+    color: var(--ng-red)
   }
 
   main>section.participants>div>div>.bio-summary {
@@ -531,45 +439,28 @@ body {
   }
 
   main>section.participants>div>div>.personal-title {
+    
+    font-family: var(--font-tertiary);
     font-weight: 500;
     font-size: 18px;
     margin: .2em 0 .8em 0;
 
   }
 
+  main>#Biography>div>div {
+    width: 58%;
+    text-align: right;
+  }
 
-  main {
+  main>#Biography>article {
+    font-size: 1.2em;
+    margin: 2em auto;
+    width: 74%;
+    font-weight: normal;
+  }
 
-    &>#Biography {
-      margin-bottom: 4em;
-
-      &>div>div {
-        width: 58%;
-        text-align: right;
-      }
-
-      &>article {
-        font-size: 1em;
-        margin: 2em auto;
-        width: 74%;
-        font-weight: normal;
-
-        p {
-          margin: 1em 0;
-
-          &:first-child {
-            font-size: 1.2em;
-          }
-
-          &.participant-website {
-            margin: 2em auto;
-            padding-top: .7em;
-            border-top: .1em solid var(--ng-package-border);
-            font-style: italic;
-          }
-        }
-      }
-    }
+  main>#Biography>article p:first-child {
+    font-size: 1.6em;
   }
 
   .packages {
@@ -583,7 +474,7 @@ body {
       flex: 0 0 31.333%;
       box-sizing: border-box;
       position: relative;
-      background-color: white;
+      background-color: var(--ng-offwhite);
       padding: 20px 20px 120px;
       border: 1px solid var(--ng-package-border);
       border-radius: 10px;
@@ -658,7 +549,7 @@ body {
   .map-container {
     $aspect-width: 32;
     $aspect-height: 9;
-    $aspect-ratio: $aspect-height / $aspect-width * 100%;
+    $aspect-ratio: calc($aspect-height / $aspect-width) * 100%;
 
     position: relative;
     width: 100%;
@@ -682,15 +573,18 @@ body {
     }
   }
 
-  @media (min-width: $breakpoint-lg) {
-    main {
-      flex-grow: 1;
-      width: calc(100% - 250px);
-      overflow-y: auto;
+  
+  @media (max-width: var(--ng-media-xl)) {
+    // NOTE: 1200px and smaller screens. 
+    // This breakpoint exists to reset breakpoints and styles from the main theme stylesheet.
+    & {
+      top: -60px;
     }
   }
 
-  @media (max-width: 991px) {
+    @media (max-width: var(--ng-media-lg)) {
+    // NOTE: 992px and smaller screens 
+    // Essentially tablets in landscape mode and smaller desktop screens.
     .container {
       max-width: fit-content;
     }
@@ -786,7 +680,11 @@ body {
 
   }
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: $breakpoint-md) {
+
+    // NOTE: 768px and smaller screens.
+    // Small tablets and large smartphones, especially in landscape orientation. It's a common breakpoint for supporting devices like iPads when held in portrait mode, as well as various other tablets and phablets.
+
     main>section.participants>div {
       flex-direction: column;
       align-items: flex-start;

@@ -38,24 +38,85 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 // }
 
 function initMap() {
-    // Confirm eventData is defined and contains the event location.
     if (eventData && eventData.eventLocation) {
         var eventLoc = {
             lat: parseFloat(eventData.eventLocation.lat),
             lng: parseFloat(eventData.eventLocation.lng)
         };
 
-        // Initialize the map centered at the event location.
         var map = new google.maps.Map(document.getElementById('map'), {
-            zoom: eventData.eventLocation.zoom ? parseInt(eventData.eventLocation.zoom) : 15, // Use the provided zoom or default to 15
+            zoom: 10, // Initial zoom, but we will adjust this dynamically
             center: eventLoc
         });
 
-        // Optionally, place a marker at the event location.
-        new google.maps.Marker({
+        var bounds = new google.maps.LatLngBounds();
+
+        // Marker for the event location
+        var eventMarker = new google.maps.Marker({
             position: eventLoc,
             map: map,
             title: eventData.eventLocation.name || 'Event Location'
         });
+        bounds.extend(eventMarker.getPosition());
+
+        // Markers for the hotels
+        if (eventData.hotels && eventData.hotels.length > 0) {
+            eventData.hotels.forEach(function(hotel) {
+                var hotelLoc = {
+                    lat: parseFloat(hotel.location.lat),
+                    lng: parseFloat(hotel.location.lng)
+                };
+                var marker = new google.maps.Marker({
+                    position: hotelLoc,
+                    map: map,
+                    title: hotel.name
+                });
+                bounds.extend(marker.getPosition());
+            });
+        }
+
+        // Adjust the map view to include all markers
+        map.fitBounds(bounds);
+
+        // Optional: Adjust the zoom level after fitting bounds if the zoom is too high
+        var listener = google.maps.event.addListener(map, "idle", function() {
+            if (map.getZoom() > 16) map.setZoom(16);
+            google.maps.event.removeListener(listener);
+        });
     }
 }
+
+document.addEventListener('DOMContentLoaded', function() {
+    var countdownContainer = document.getElementById('countdown');
+    if (countdownContainer) {
+        var eventTime = parseInt(countdownContainer.getAttribute('data-event-time'), 10);
+        var updateCountdown = function() {
+            var currentTime = Math.floor(Date.now() / 1000); // Current time in seconds
+            var timeRemaining = eventTime - currentTime;
+            
+            // If within one week (but more than 24 hours), show days and hours only
+            if (timeRemaining > 86400) {
+                var days = Math.floor(timeRemaining / 86400);
+                timeRemaining %= 86400;
+                var hours = Math.floor(timeRemaining / 3600);
+                countdownContainer.innerHTML = 'The Gala begins in ' + days + ' days, ' + hours + ' hours.';
+            } 
+            // If within last 24 hours, show detailed countdown
+            else if (timeRemaining > 0) {
+                var hours = Math.floor(timeRemaining / 3600);
+                timeRemaining %= 3600;
+                var minutes = Math.floor(timeRemaining / 60);
+                var seconds = timeRemaining % 60;
+
+                countdownContainer.innerHTML = 'The Gala begins in ' + hours + ' hours, ' + minutes + ' minutes, ' + seconds + ' seconds until the event.';
+            } else {
+                countdownContainer.innerHTML = 'The event has started!';
+                clearInterval(interval); // Stop updating the countdown
+            }
+        };
+
+        updateCountdown(); // Run once on load
+        var interval = setInterval(updateCountdown, 1000); // Update every second
+    }
+});
+

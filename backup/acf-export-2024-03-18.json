@@ -1,0 +1,1558 @@
+
+[
+    {
+        "key": "group_65e4f3c913388",
+        "title": "NELA Gala Events",
+        "fields": [
+            {
+                "key": "field_65f3a6eadadc5",
+                "label": "Show Full Event Data",
+                "name": "full_event_switch",
+                "aria-label": "",
+                "type": "true_false",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "message": "Turn this off to show only a \"Save the Date card on the page",
+                "default_value": 0,
+                "ui_on_text": "Full Event Data",
+                "ui_off_text": "Save The Date Only",
+                "ui": 1
+            },
+            {
+                "key": "field_65e4f3ca29837",
+                "label": "What",
+                "name": "nelagala_event_title",
+                "aria-label": "",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "National Education & Leadership Awards Gala",
+                "maxlength": "",
+                "placeholder": "",
+                "prepend": "",
+                "append": ""
+            },
+            {
+                "key": "field_65e4f44c29838",
+                "label": "When",
+                "name": "nelagala_event_datetime",
+                "aria-label": "",
+                "type": "date_time_picker",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "display_format": "F j, Y g:i a",
+                "return_format": "Y-m-d H:i:s",
+                "first_day": 1
+            },
+            {
+                "key": "field_65e4f48829839",
+                "label": "Where",
+                "name": "nelagala_event_location",
+                "aria-label": "",
+                "type": "google_map",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "center_lat": "38.8939166",
+                "center_lng": "-77.0333498",
+                "zoom": 17,
+                "height": ""
+            },
+            {
+                "key": "field_65f1ff31fc571",
+                "label": "Header Venue Message",
+                "name": "header_venue_message",
+                "aria-label": "",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "Celebrate the Region of Sicily with us",
+                "maxlength": "",
+                "placeholder": "",
+                "prepend": "",
+                "append": ""
+            },
+            {
+                "key": "field_65e4f503f76e8",
+                "label": "Venue",
+                "name": "nelagala_venue_name",
+                "aria-label": "",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "Ronald Reagan Building and International Trade Center",
+                "maxlength": "",
+                "placeholder": "",
+                "prepend": "",
+                "append": ""
+            },
+            {
+                "key": "field_65f220d257278",
+                "label": "Google API Key",
+                "name": "google_api_key",
+                "aria-label": "",
+                "type": "text",
+                "instructions": "Required for rendering Google Maps and providing geolocation data.",
+                "required": 1,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "AIzaSyBGZLfom_9gzVfPI39FCQ1MHWGxNjxUqDg",
+                "maxlength": "",
+                "placeholder": "",
+                "prepend": "",
+                "append": ""
+            },
+            {
+                "key": "field_65f224248d2a5",
+                "label": "Google Geocoding API Key",
+                "name": "google_geocoding_api_key",
+                "aria-label": "",
+                "type": "text",
+                "instructions": "Required for rendering Google Maps and providing geolocation data.",
+                "required": 1,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "AIzaSyDv8ipaW_nF5pnGEpoiGpTHMUhG9PaEg-s",
+                "maxlength": "",
+                "placeholder": "",
+                "prepend": "",
+                "append": ""
+            },
+            {
+                "key": "field_65e513afd8dae",
+                "label": "Promotional Video",
+                "name": "promotional_video",
+                "aria-label": "",
+                "type": "url",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "video",
+                    "id": ""
+                },
+                "default_value": "",
+                "placeholder": ""
+            },
+            {
+                "key": "field_65f3b01ac20ba",
+                "label": "Roles Section Headline",
+                "name": "roles_section_headline",
+                "aria-label": "",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "Who's Who",
+                "maxlength": "",
+                "placeholder": "",
+                "prepend": "",
+                "append": ""
+            },
+            {
+                "key": "field_65f3b03ec20bb",
+                "label": "Roles Section Content",
+                "name": "roles_section_content",
+                "aria-label": "",
+                "type": "wysiwyg",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "tabs": "all",
+                "toolbar": "full",
+                "media_upload": 1,
+                "delay": 0
+            },
+            {
+                "key": "field_65e5172ce104f",
+                "label": "Roles",
+                "name": "roles",
+                "aria-label": "",
+                "type": "repeater",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "layout": "table",
+                "pagination": 0,
+                "min": 0,
+                "max": 0,
+                "collapsed": "",
+                "button_label": "Add Row",
+                "rows_per_page": 20,
+                "sub_fields": [
+                    {
+                        "key": "field_65e51741e1050",
+                        "label": "Role",
+                        "name": "role",
+                        "aria-label": "",
+                        "type": "text",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "default_value": "",
+                        "maxlength": "",
+                        "placeholder": "",
+                        "prepend": "",
+                        "append": "",
+                        "parent_repeater": "field_65e5172ce104f"
+                    },
+                    {
+                        "key": "field_65e5174ce1051",
+                        "label": "Participant",
+                        "name": "participant",
+                        "aria-label": "",
+                        "type": "post_object",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "post_type": [
+                            "nelagala-participant"
+                        ],
+                        "post_status": "",
+                        "taxonomy": "",
+                        "return_format": "",
+                        "multiple": 0,
+                        "allow_null": 0,
+                        "bidirectional": 0,
+                        "ui": 1,
+                        "bidirectional_target": [],
+                        "parent_repeater": "field_65e5172ce104f"
+                    }
+                ]
+            },
+            {
+                "key": "field_65f3b04cc20bc",
+                "label": "Honorees Sections Headline",
+                "name": "honorees_sections_headline",
+                "aria-label": "",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "Honorees",
+                "maxlength": "",
+                "placeholder": "",
+                "prepend": "",
+                "append": ""
+            },
+            {
+                "key": "field_65f3b068c20bd",
+                "label": "Honorees Section Content",
+                "name": "honorees_section_content",
+                "aria-label": "",
+                "type": "wysiwyg",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "tabs": "all",
+                "toolbar": "full",
+                "media_upload": 1,
+                "delay": 0
+            },
+            {
+                "key": "field_65e5178fe1052",
+                "label": "Honorees",
+                "name": "honorees",
+                "aria-label": "",
+                "type": "repeater",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "layout": "table",
+                "pagination": 0,
+                "min": 0,
+                "max": 0,
+                "collapsed": "",
+                "button_label": "Add Row",
+                "rows_per_page": 20,
+                "sub_fields": [
+                    {
+                        "key": "field_65e5178fe1057",
+                        "label": "Honor",
+                        "name": "honor",
+                        "aria-label": "",
+                        "type": "text",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "default_value": "",
+                        "maxlength": "",
+                        "placeholder": "",
+                        "prepend": "",
+                        "append": "",
+                        "parent_repeater": "field_65e5178fe1052"
+                    },
+                    {
+                        "key": "field_65e5178fe1058",
+                        "label": "Recipient",
+                        "name": "recipient",
+                        "aria-label": "",
+                        "type": "post_object",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "post_type": [
+                            "nelagala-participant"
+                        ],
+                        "post_status": "",
+                        "taxonomy": "",
+                        "return_format": "object",
+                        "multiple": 0,
+                        "allow_null": 0,
+                        "bidirectional": 0,
+                        "ui": 1,
+                        "bidirectional_target": [],
+                        "parent_repeater": "field_65e5178fe1052"
+                    }
+                ]
+            },
+            {
+                "key": "field_65f1f9c7e8295",
+                "label": "Ticket Section Headline",
+                "name": "ticket_section_headline",
+                "aria-label": "",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "Tickets",
+                "maxlength": "",
+                "placeholder": "",
+                "prepend": "",
+                "append": ""
+            },
+            {
+                "key": "field_65f1fa22e8296",
+                "label": "Ticket Section Top Content",
+                "name": "ticket_section_top_content",
+                "aria-label": "",
+                "type": "wysiwyg",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "tabs": "all",
+                "toolbar": "basic",
+                "media_upload": 0,
+                "delay": 1
+            },
+            {
+                "key": "field_65e51cc3bea50",
+                "label": "Ticket Prices",
+                "name": "ticket_prices",
+                "aria-label": "",
+                "type": "repeater",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "layout": "block",
+                "pagination": 0,
+                "min": 0,
+                "max": 0,
+                "collapsed": "field_65e51cf3bea51",
+                "button_label": "Add Row",
+                "rows_per_page": 20,
+                "sub_fields": [
+                    {
+                        "key": "field_65e51cf3bea51",
+                        "label": "Type",
+                        "name": "type",
+                        "aria-label": "",
+                        "type": "text",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "default_value": "Admission",
+                        "maxlength": "",
+                        "placeholder": "",
+                        "prepend": "",
+                        "append": "",
+                        "parent_repeater": "field_65e51cc3bea50"
+                    },
+                    {
+                        "key": "field_65e51d6abea52",
+                        "label": "Price",
+                        "name": "price",
+                        "aria-label": "",
+                        "type": "number",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "default_value": 500,
+                        "min": "",
+                        "max": "",
+                        "placeholder": "",
+                        "step": "",
+                        "prepend": "",
+                        "append": "",
+                        "parent_repeater": "field_65e51cc3bea50"
+                    },
+                    {
+                        "key": "field_65e51d7abea53",
+                        "label": "Tax Deduction",
+                        "name": "tax_deduction",
+                        "aria-label": "",
+                        "type": "number",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "default_value": 350,
+                        "min": "",
+                        "max": "",
+                        "placeholder": "",
+                        "step": "",
+                        "prepend": "",
+                        "append": "",
+                        "parent_repeater": "field_65e51cc3bea50"
+                    },
+                    {
+                        "key": "field_65e51d92bea54",
+                        "label": "Description",
+                        "name": "description",
+                        "aria-label": "",
+                        "type": "wysiwyg",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "default_value": "Price For One Ticket",
+                        "tabs": "all",
+                        "toolbar": "full",
+                        "media_upload": 1,
+                        "delay": 0,
+                        "parent_repeater": "field_65e51cc3bea50"
+                    },
+                    {
+                        "key": "field_65f227e5ded88",
+                        "label": "Call to Action Button Label",
+                        "name": "cta_button_label",
+                        "aria-label": "",
+                        "type": "text",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "default_value": "",
+                        "maxlength": "",
+                        "placeholder": "",
+                        "prepend": "",
+                        "append": "",
+                        "parent_repeater": "field_65e51cc3bea50"
+                    },
+                    {
+                        "key": "field_65f2262d729ea",
+                        "label": "Call to Action Button URL",
+                        "name": "cta_button_link",
+                        "aria-label": "",
+                        "type": "url",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "default_value": "",
+                        "placeholder": "",
+                        "parent_repeater": "field_65e51cc3bea50"
+                    }
+                ]
+            },
+            {
+                "key": "field_65f1fa85e8297",
+                "label": "Lodging Section Headline",
+                "name": "lodging_section_headline",
+                "aria-label": "",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "Area Accommodations",
+                "maxlength": "",
+                "placeholder": "",
+                "prepend": "",
+                "append": ""
+            },
+            {
+                "key": "field_65f1fab3e8298",
+                "label": "Lodging Section Top Content",
+                "name": "lodging_section_top_content",
+                "aria-label": "",
+                "type": "wysiwyg",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "tabs": "all",
+                "toolbar": "full",
+                "media_upload": 1,
+                "delay": 0
+            },
+            {
+                "key": "field_65e51f284c6ca",
+                "label": "Lodging",
+                "name": "lodging",
+                "aria-label": "",
+                "type": "repeater",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "layout": "table",
+                "pagination": 1,
+                "rows_per_page": 20,
+                "min": 0,
+                "max": 0,
+                "collapsed": "",
+                "button_label": "Add Row",
+                "sub_fields": [
+                    {
+                        "key": "field_65e51f5f4c6cb",
+                        "label": "Property",
+                        "name": "property",
+                        "aria-label": "",
+                        "type": "text",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "default_value": "",
+                        "maxlength": "",
+                        "placeholder": "",
+                        "prepend": "",
+                        "append": "",
+                        "parent_repeater": "field_65e51f284c6ca"
+                    },
+                    {
+                        "key": "field_65e51f704c6cc",
+                        "label": "Location",
+                        "name": "location",
+                        "aria-label": "",
+                        "type": "google_map",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "center_lat": "",
+                        "center_lng": "",
+                        "zoom": "",
+                        "height": "",
+                        "parent_repeater": "field_65e51f284c6ca"
+                    },
+                    {
+                        "key": "field_65e51f894c6cd",
+                        "label": "Telephone",
+                        "name": "telephone",
+                        "aria-label": "",
+                        "type": "text",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "default_value": "",
+                        "maxlength": "",
+                        "placeholder": "000-000-0000",
+                        "prepend": "",
+                        "append": "",
+                        "parent_repeater": "field_65e51f284c6ca"
+                    },
+                    {
+                        "key": "field_65e51ffd4c6ce",
+                        "label": "Website",
+                        "name": "website",
+                        "aria-label": "",
+                        "type": "url",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "default_value": "",
+                        "placeholder": "",
+                        "parent_repeater": "field_65e51f284c6ca"
+                    }
+                ]
+            },
+            {
+                "key": "field_65f1fadee8299",
+                "label": "Sponsorship Section Headline",
+                "name": "sponsorship_section_headline",
+                "aria-label": "",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "Sponsorship Packages",
+                "maxlength": "",
+                "placeholder": "",
+                "prepend": "",
+                "append": ""
+            },
+            {
+                "key": "field_65f1fb19e829a",
+                "label": "Sponsorship Section Top Content",
+                "name": "sponsorship_section_top_content",
+                "aria-label": "",
+                "type": "wysiwyg",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "tabs": "all",
+                "toolbar": "full",
+                "media_upload": 1,
+                "delay": 0
+            },
+            {
+                "key": "field_65e51ddebea55",
+                "label": "Sponsorship Packages",
+                "name": "sponsorship_packages",
+                "aria-label": "",
+                "type": "repeater",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "layout": "block",
+                "pagination": 0,
+                "min": 0,
+                "max": 0,
+                "collapsed": "field_65e51df4bea56",
+                "button_label": "Add a Sponsorship Package",
+                "rows_per_page": 20,
+                "sub_fields": [
+                    {
+                        "key": "field_65e51df4bea56",
+                        "label": "Package",
+                        "name": "package",
+                        "aria-label": "",
+                        "type": "text",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "default_value": "",
+                        "maxlength": "",
+                        "placeholder": "",
+                        "prepend": "",
+                        "append": "",
+                        "parent_repeater": "field_65e51ddebea55"
+                    },
+                    {
+                        "key": "field_65e51e0dbea57",
+                        "label": "Price",
+                        "name": "price",
+                        "aria-label": "",
+                        "type": "number",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "default_value": "",
+                        "min": "",
+                        "max": "",
+                        "placeholder": "",
+                        "step": "",
+                        "prepend": "",
+                        "append": "",
+                        "parent_repeater": "field_65e51ddebea55"
+                    },
+                    {
+                        "key": "field_65e51e20bea58",
+                        "label": "Tax Deduction",
+                        "name": "tax_deduction",
+                        "aria-label": "",
+                        "type": "number",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "default_value": "",
+                        "min": "",
+                        "max": "",
+                        "placeholder": "",
+                        "step": "",
+                        "prepend": "",
+                        "append": "",
+                        "parent_repeater": "field_65e51ddebea55"
+                    },
+                    {
+                        "key": "field_65e51e34bea59",
+                        "label": "Amenities",
+                        "name": "amenities",
+                        "aria-label": "",
+                        "type": "repeater",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "layout": "",
+                        "pagination": 0,
+                        "min": 0,
+                        "max": 0,
+                        "collapsed": "",
+                        "button_label": "Add Row",
+                        "rows_per_page": 20,
+                        "parent_repeater": "field_65e51ddebea55",
+                        "sub_fields": [
+                            {
+                                "key": "field_65e51e51bea5a",
+                                "label": "Amenity",
+                                "name": "amenity",
+                                "aria-label": "",
+                                "type": "text",
+                                "instructions": "",
+                                "required": 0,
+                                "conditional_logic": 0,
+                                "wrapper": {
+                                    "width": "",
+                                    "class": "",
+                                    "id": ""
+                                },
+                                "default_value": "",
+                                "maxlength": "",
+                                "placeholder": "",
+                                "prepend": "",
+                                "append": "",
+                                "parent_repeater": "field_65e51e34bea59"
+                            }
+                        ]
+                    },
+                    {
+                        "key": "field_65f226feded86",
+                        "label": "Call to Action Button Label",
+                        "name": "cta_button_label",
+                        "aria-label": "",
+                        "type": "text",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "default_value": "Sponsor Now",
+                        "maxlength": "",
+                        "placeholder": "",
+                        "prepend": "",
+                        "append": "",
+                        "parent_repeater": "field_65e51ddebea55"
+                    },
+                    {
+                        "key": "field_65f22679ded84",
+                        "label": "Call to Action URL",
+                        "name": "Call-to-Action-URL",
+                        "aria-label": "",
+                        "type": "url",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "default_value": "",
+                        "placeholder": "",
+                        "parent_repeater": "field_65e51ddebea55"
+                    }
+                ]
+            },
+            {
+                "key": "field_65f1fb31e829b",
+                "label": "Advertising Section Headline",
+                "name": "advertising_section_headline",
+                "aria-label": "",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "Advertising Rates",
+                "maxlength": "",
+                "placeholder": "",
+                "prepend": "",
+                "append": ""
+            },
+            {
+                "key": "field_65f1fb44e829c",
+                "label": "Advertising Section Top Content",
+                "name": "advertising_section_top_content",
+                "aria-label": "",
+                "type": "wysiwyg",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "tabs": "all",
+                "toolbar": "full",
+                "media_upload": 1,
+                "delay": 0
+            },
+            {
+                "key": "field_65e51e94bea5c",
+                "label": "Advertising Rate",
+                "name": "advertising_rates",
+                "aria-label": "",
+                "type": "repeater",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "layout": "table",
+                "pagination": 0,
+                "min": 0,
+                "max": 0,
+                "collapsed": "",
+                "button_label": "Add Row",
+                "rows_per_page": 20,
+                "sub_fields": [
+                    {
+                        "key": "field_65e51e94bea5d",
+                        "label": "Ad",
+                        "name": "ad",
+                        "aria-label": "",
+                        "type": "text",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "default_value": "",
+                        "maxlength": "",
+                        "placeholder": "",
+                        "prepend": "",
+                        "append": "",
+                        "parent_repeater": "field_65e51e94bea5c"
+                    },
+                    {
+                        "key": "field_65e51e94bea5e",
+                        "label": "Price",
+                        "name": "price",
+                        "aria-label": "",
+                        "type": "number",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "default_value": "",
+                        "min": "",
+                        "max": "",
+                        "placeholder": "",
+                        "step": "",
+                        "prepend": "",
+                        "append": "",
+                        "parent_repeater": "field_65e51e94bea5c"
+                    },
+                    {
+                        "key": "field_65e51e94bea60",
+                        "label": "Description",
+                        "name": "description",
+                        "aria-label": "",
+                        "type": "wysiwyg",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "default_value": "",
+                        "tabs": "all",
+                        "toolbar": "full",
+                        "media_upload": 1,
+                        "delay": 0,
+                        "parent_repeater": "field_65e51e94bea5c"
+                    },
+                    {
+                        "key": "field_65f22742ded87",
+                        "label": "Call to Action Button Label",
+                        "name": "cta_button_label",
+                        "aria-label": "",
+                        "type": "text",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "default_value": "Details",
+                        "maxlength": "",
+                        "placeholder": "",
+                        "prepend": "",
+                        "append": "",
+                        "parent_repeater": "field_65e51e94bea5c"
+                    },
+                    {
+                        "key": "field_65f22697ded85",
+                        "label": "Call to Action URL",
+                        "name": "cta_link",
+                        "aria-label": "",
+                        "type": "url",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "default_value": "",
+                        "placeholder": "",
+                        "parent_repeater": "field_65e51e94bea5c"
+                    }
+                ]
+            },
+            {
+                "key": "field_65f1ff05fc570",
+                "label": "Event Calendar File",
+                "name": "event_calendar_file",
+                "aria-label": "",
+                "type": "file",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "return_format": "url",
+                "library": "uploadedTo",
+                "min_size": "",
+                "max_size": "",
+                "mime_types": ""
+            }
+        ],
+        "location": [
+            [
+                {
+                    "param": "post_type",
+                    "operator": "==",
+                    "value": "nelagala_event"
+                }
+            ],
+            [
+                {
+                    "param": "taxonomy",
+                    "operator": "==",
+                    "value": "event_year"
+                }
+            ]
+        ],
+        "menu_order": 0,
+        "position": "normal",
+        "style": "default",
+        "label_placement": "top",
+        "instruction_placement": "label",
+        "hide_on_screen": "",
+        "active": true,
+        "description": "",
+        "show_in_rest": 0
+    },
+    {
+        "key": "group_65e4fb4e924ea",
+        "title": "NELA Gala Participants",
+        "fields": [
+            {
+                "key": "field_65e4fb8709a61",
+                "label": "Photo",
+                "name": "photo",
+                "aria-label": "",
+                "type": "image",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "return_format": "array",
+                "library": "all",
+                "min_width": "",
+                "min_height": "",
+                "min_size": "",
+                "max_width": "",
+                "max_height": "",
+                "max_size": "",
+                "mime_types": "",
+                "preview_size": "medium"
+            },
+            {
+                "key": "field_65e502fc0c31c",
+                "label": "Title",
+                "name": "title",
+                "aria-label": "",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "maxlength": "",
+                "placeholder": "",
+                "prepend": "",
+                "append": ""
+            },
+            {
+                "key": "field_65e4fbdf09a64",
+                "label": "Website",
+                "name": "website",
+                "aria-label": "",
+                "type": "url",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "placeholder": ""
+            },
+            {
+                "key": "field_65e4fbbc09a62",
+                "label": "Summary",
+                "name": "summary",
+                "aria-label": "",
+                "type": "textarea",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "maxlength": "",
+                "rows": "",
+                "placeholder": "",
+                "new_lines": ""
+            },
+            {
+                "key": "field_65eb5a5427978",
+                "label": "Biography",
+                "name": "bio",
+                "aria-label": "",
+                "type": "wysiwyg",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "tabs": "all",
+                "toolbar": "full",
+                "media_upload": 1,
+                "delay": 0
+            }
+        ],
+        "location": [
+            [
+                {
+                    "param": "post_type",
+                    "operator": "==",
+                    "value": "nelagala-participant"
+                }
+            ],
+            [
+                {
+                    "param": "taxonomy",
+                    "operator": "==",
+                    "value": "event_year"
+                }
+            ]
+        ],
+        "menu_order": 0,
+        "position": "normal",
+        "style": "default",
+        "label_placement": "top",
+        "instruction_placement": "label",
+        "hide_on_screen": "",
+        "active": true,
+        "description": "",
+        "show_in_rest": 0
+    },
+    {
+        "key": "taxonomy_65e4efa8b2c49",
+        "title": "Years",
+        "menu_order": 0,
+        "active": true,
+        "taxonomy": "event_year",
+        "object_type": [
+            "nelagala-participant",
+            "nelagala_event"
+        ],
+        "advanced_configuration": 1,
+        "import_source": "",
+        "import_date": "",
+        "labels": {
+            "name": "Years",
+            "singular_name": "Year",
+            "menu_name": "Years",
+            "all_items": "All Years",
+            "edit_item": "Edit Year",
+            "view_item": "View Year",
+            "update_item": "Update Year",
+            "add_new_item": "Add New Year",
+            "new_item_name": "New Year Name",
+            "search_items": "Search Years",
+            "popular_items": "Popular Years",
+            "separate_items_with_commas": "Separate years with commas",
+            "add_or_remove_items": "Add or remove years",
+            "choose_from_most_used": "Choose from the most used years",
+            "most_used": "",
+            "not_found": "No years found",
+            "no_terms": "No years",
+            "name_field_description": "",
+            "slug_field_description": "",
+            "desc_field_description": "",
+            "items_list_navigation": "Years list navigation",
+            "items_list": "Years list",
+            "back_to_items": "← Go to years",
+            "item_link": "Year Link",
+            "item_link_description": "A link to a year"
+        },
+        "description": "",
+        "capabilities": {
+            "manage_terms": "manage_categories",
+            "edit_terms": "manage_categories",
+            "delete_terms": "manage_categories",
+            "assign_terms": "edit_posts"
+        },
+        "public": 1,
+        "publicly_queryable": 1,
+        "hierarchical": 0,
+        "show_ui": 1,
+        "show_in_menu": 1,
+        "show_in_nav_menus": 1,
+        "show_in_rest": 1,
+        "rest_base": "",
+        "rest_namespace": "wp\/v2",
+        "rest_controller_class": "WP_REST_Terms_Controller",
+        "show_tagcloud": 1,
+        "show_in_quick_edit": 1,
+        "show_admin_column": 0,
+        "rewrite": {
+            "permalink_rewrite": "taxonomy_key",
+            "with_front": "1",
+            "rewrite_hierarchical": "0"
+        },
+        "query_var": "post_type_key",
+        "query_var_name": "",
+        "default_term": {
+            "default_term_enabled": "0"
+        },
+        "sort": 0,
+        "meta_box": "default",
+        "meta_box_cb": "",
+        "meta_box_sanitize_cb": ""
+    },
+    {
+        "key": "post_type_65e4ee49195b3",
+        "title": "NELA Gala Event",
+        "menu_order": 0,
+        "active": true,
+        "post_type": "nelagala_event",
+        "advanced_configuration": true,
+        "import_source": "",
+        "import_date": "",
+        "labels": {
+            "name": "NELA Gala Event",
+            "singular_name": "NELA Gala Events",
+            "menu_name": "NELA Gala Events",
+            "all_items": "All NELA Gala Events",
+            "edit_item": "Edit NELA Gala Event",
+            "view_item": "View NELA Gala Event",
+            "view_items": "View NELA Gala Event",
+            "add_new_item": "Add New NELA Gala Event",
+            "add_new": "Add New NELA Gala Event",
+            "new_item": "New NELA Gala Event",
+            "parent_item_colon": "Parent NELA Gala Event:",
+            "search_items": "Search NELA Gala Events",
+            "not_found": "No NELA Gala Events found",
+            "not_found_in_trash": "No NELA Gala Events found in Trash",
+            "archives": "NELA Gala Events Archives",
+            "attributes": "NELA Gala Event Attributes",
+            "featured_image": "",
+            "set_featured_image": "",
+            "remove_featured_image": "",
+            "use_featured_image": "",
+            "insert_into_item": "Insert into NELA Gala Event",
+            "uploaded_to_this_item": "Uploaded to this NELA Gala Event",
+            "filter_items_list": "Filter NELA Gala Event list",
+            "filter_by_date": "Filter NELA Gala Events by date",
+            "items_list_navigation": "NELA Gala Events list navigation",
+            "items_list": "NELA Gala Events list",
+            "item_published": "NELA Gala Event published.",
+            "item_published_privately": "NELA Gala Event published privately.",
+            "item_reverted_to_draft": "NELA Gala Event reverted to draft.",
+            "item_scheduled": "NELA Gala Event scheduled.",
+            "item_updated": "NELA Gala Event updated.",
+            "item_link": "NELA Gala Event Link",
+            "item_link_description": "A link to a NELA Gala Event."
+        },
+        "description": "",
+        "public": true,
+        "hierarchical": true,
+        "exclude_from_search": false,
+        "publicly_queryable": true,
+        "show_ui": true,
+        "show_in_menu": true,
+        "admin_menu_parent": "",
+        "show_in_admin_bar": true,
+        "show_in_nav_menus": true,
+        "show_in_rest": true,
+        "rest_base": "",
+        "rest_namespace": "wp\/v2",
+        "rest_controller_class": "WP_REST_Posts_Controller",
+        "menu_position": 3,
+        "menu_icon": "dashicons-tickets-alt",
+        "rename_capabilities": false,
+        "singular_capability_name": "post",
+        "plural_capability_name": "posts",
+        "supports": [
+            "title",
+            "editor",
+            "excerpt",
+            "revisions",
+            "thumbnail",
+            "custom-fields",
+            "post-formats"
+        ],
+        "taxonomies": [
+            "event_year"
+        ],
+        "has_archive": true,
+        "has_archive_slug": "",
+        "rewrite": {
+            "permalink_rewrite": "custom_permalink",
+            "slug": "nelagala",
+            "with_front": "1",
+            "feeds": "1",
+            "pages": "1"
+        },
+        "query_var": "post_type_key",
+        "query_var_name": "",
+        "can_export": true,
+        "delete_with_user": false,
+        "register_meta_box_cb": "",
+        "enter_title_here": "Event Year"
+    },
+    {
+        "key": "post_type_65e4f841d24e7",
+        "title": "NELA Gala Participants",
+        "menu_order": 0,
+        "active": true,
+        "post_type": "nelagala-participant",
+        "advanced_configuration": true,
+        "import_source": "",
+        "import_date": "",
+        "labels": {
+            "name": "NELA Gala Participants",
+            "singular_name": "NELA Gala Participant",
+            "menu_name": "NELA Gala Participants",
+            "all_items": "All NELA Gala Participants",
+            "edit_item": "Edit NELA Gala Participant",
+            "view_item": "View NELA Gala Participant",
+            "view_items": "View NELA Gala Participants",
+            "add_new_item": "Add New NELA Gala Participant",
+            "add_new": "Add New NELA Gala Participant",
+            "new_item": "New NELA Gala Participant",
+            "parent_item_colon": "Parent NELA Gala Participant:",
+            "search_items": "Search NELA Gala Participants",
+            "not_found": "No nela gala participants found",
+            "not_found_in_trash": "No nela gala participants found in Trash",
+            "archives": "NELA Gala Participant Archives",
+            "attributes": "NELA Gala Participant Attributes",
+            "featured_image": "",
+            "set_featured_image": "",
+            "remove_featured_image": "",
+            "use_featured_image": "",
+            "insert_into_item": "Insert into nela gala participant",
+            "uploaded_to_this_item": "Uploaded to this nela gala participant",
+            "filter_items_list": "Filter nela gala participants list",
+            "filter_by_date": "Filter nela gala participants by date",
+            "items_list_navigation": "NELA Gala Participants list navigation",
+            "items_list": "NELA Gala Participants list",
+            "item_published": "NELA Gala Participant published.",
+            "item_published_privately": "NELA Gala Participant published privately.",
+            "item_reverted_to_draft": "NELA Gala Participant reverted to draft.",
+            "item_scheduled": "NELA Gala Participant scheduled.",
+            "item_updated": "NELA Gala Participant updated.",
+            "item_link": "NELA Gala Participant Link",
+            "item_link_description": "A link to a nela gala participant."
+        },
+        "description": "",
+        "public": true,
+        "hierarchical": true,
+        "exclude_from_search": false,
+        "publicly_queryable": true,
+        "show_ui": true,
+        "show_in_menu": true,
+        "admin_menu_parent": "edit.php?post_type=nelagala_event",
+        "show_in_admin_bar": true,
+        "show_in_nav_menus": true,
+        "show_in_rest": true,
+        "rest_base": "",
+        "rest_namespace": "wp\/v2",
+        "rest_controller_class": "WP_REST_Posts_Controller",
+        "menu_position": 4,
+        "menu_icon": "dashicons-tickets-alt",
+        "rename_capabilities": false,
+        "singular_capability_name": "post",
+        "plural_capability_name": "posts",
+        "supports": [
+            "title",
+            "editor",
+            "page-attributes",
+            "thumbnail",
+            "custom-fields"
+        ],
+        "taxonomies": [
+            "event_year"
+        ],
+        "has_archive": false,
+        "has_archive_slug": "",
+        "rewrite": {
+            "permalink_rewrite": "post_type_key",
+            "with_front": "1",
+            "feeds": "0",
+            "pages": "1"
+        },
+        "query_var": "post_type_key",
+        "query_var_name": "",
+        "can_export": true,
+        "delete_with_user": false,
+        "register_meta_box_cb": "",
+        "enter_title_here": ""
+    }
+]
