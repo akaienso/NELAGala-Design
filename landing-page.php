@@ -143,17 +143,23 @@ if ($events->have_posts()) : while ($events->have_posts()) : $events->the_post()
                                         <p class="text"><?php echo  $venue_city; ?>, <?php echo  $venue_state; ?></p>
                                     </div>
                                 </div>
-                                <div class="header-img-main">
-                                    <img src="<?php echo get_template_directory_uri() . '/inc/nelagala/img/header-main-img.jpg'; ?>" alt="Teatro Antico di Taormina">
+                                <div class="header-img-main" style="background-image: url('<?php echo get_template_directory_uri(); ?>/inc/nelagala/img/header-main-img.jpg');">
                                 </div>
-                                <div class="header-footer-text"><? echo $display_date; ?> | More details coming soon!</div>
+                                <h4><? echo $display_date; ?> | More details coming soon!</h4>
                             </header>
                             <!--  !SECTION: Event Header -->
                             <?php if ($show_full_event_data) : ?>
                                 <!--  SECTION: About the Event -->
                                 <section id="about-the-event">
-                                    <h2>About the Event</h2>
-                                    <?php echo the_content(); ?>
+                                    
+                                    <article><h2>About the Event</h2>
+                                        <?php echo the_content(); ?>
+                                    </article>
+                                    <aside>
+                                        <h2>Celebrate the Region of Sicily with us</h2>
+                                        <p>Saepe eaque nisi fuga cumque amet. Et dolores iusto quibusdam molestiae laudantium facere vel sequi tenetur. Dignissimos adipisci consequuntur officiis commodi repellat omnis.</p>
+                                        <p>Porro cupiditate tempora sequi quis. Voluptas porro recusandae. Corporis exercitationem ducimus quibusdam id repellat quaerat assumenda harum.</p>
+                                    </aside>
                                 </section>
                                 <iframe class="video" src="<?php echo  $promotional_video; ?>" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
                                 <!--  !SECTION: About the Event -->
@@ -206,7 +212,7 @@ if ($events->have_posts()) : while ($events->have_posts()) : $events->the_post()
                                                     <p class="full-name"><?php echo esc_html($participant_name); ?></p>
                                                     <p class="personal-title"><?php echo esc_html($participant_title); ?></p>
                                                     <p class="bio-summary"><?php echo esc_html($participant_summary); ?></p>
-                                                    <p><a href="<?php echo esc_url($biography_link); ?>">Read more</a></p>
+                                                    <p class="read-more"><a href="<?php echo esc_url($biography_link); ?>">Read more</a></p>
                                                 </div>
                                             </div>
                                         <?php endwhile; ?>
@@ -247,6 +253,7 @@ if ($events->have_posts()) : while ($events->have_posts()) : $events->the_post()
                                             $recipient_slug = get_post_field('post_name', $recipient_id);
                                             $biography_link = home_url("/nelagala/" . $recipient_slug);
                                         ?>
+
                                             <div class="row-container reverse">
                                                 <?php
 
@@ -263,7 +270,7 @@ if ($events->have_posts()) : while ($events->have_posts()) : $events->the_post()
                                                     <p class="full-name"><?php echo esc_html($recipient_name); ?></p>
                                                     <p class="personal-title"><?php echo esc_html($recipient_title); ?></p>
                                                     <p class="bio-summary"><?php echo esc_html($recipient_summary); ?></p>
-                                                    <p><a href="<?php echo esc_url($biography_link); ?>">Read more</a></p>
+                                                    <p class="read-more"><a href="<?php echo esc_url($biography_link); ?>">Read more</a></p>
                                                 </div>
                                             </div>
                                         <?php endwhile; ?>
@@ -284,13 +291,17 @@ if ($events->have_posts()) : while ($events->have_posts()) : $events->the_post()
                                                 $price = get_sub_field('price');
                                                 $tax_deduction = get_sub_field('tax_deduction');
                                                 $description = get_sub_field('description');
+                                                $button_label = get_sub_field('cta_button_label');
+                                                $button_url = get_sub_field('cta_button_link');
                                             ?>
                                                 <div class="package">
                                                     <h2><?php echo esc_html($type); ?></h2>
                                                     <p>Price each: $<?php echo esc_html($price); ?></p>
                                                     <p>Allowable tax deduction: $<?php echo esc_html($tax_deduction); ?></p>
                                                     <p><?php echo ($description); ?></p>
-                                                    <button>Buy Now</button>
+                                                    <?php if ($button_label && $button_url) : ?>
+                                                        <a href="<?php echo esc_url($button_url); ?>" target="_blank"><button><?php echo esc_html($button_label); ?></button></a>
+                                                    <?php endif; ?>
                                                 </div>
                                             <?php endwhile; ?>
                                         </div>
@@ -316,9 +327,9 @@ if ($events->have_posts()) : while ($events->have_posts()) : $events->the_post()
                                                     <h2><?php echo esc_html($name); ?></h2>
                                                     <p><?php echo $address; ?></p>
                                                     <p><?php echo $phone; ?></p>
-                                                    <button>
-                                                        <a href="<?php echo esc_url($booking_url); ?>" target="_blank">Book Now</a>
-                                                    </button>
+                                                    <?php if ($booking_url) : ?>
+                                                        <a href="<?php echo esc_url($booking_url); ?>" target="_blank"><button>Book Now</button></a>
+                                                    <?php endif; ?>
                                                 </div>
 
                                             <?php endwhile; ?>
@@ -343,11 +354,13 @@ if ($events->have_posts()) : while ($events->have_posts()) : $events->the_post()
                                                 $price = get_sub_field('price');
                                                 $tax_deduction = get_sub_field('tax_deduction');
                                                 $description = get_sub_field('description');
+                                                $button_label = get_sub_field('cta_button_label');
+                                                $button_url = get_sub_field('Call-to-Action-URL');
                                             ?>
                                                 <div class="package">
                                                     <h2><?php echo esc_html($package); ?></h2>
-                                                    <p><em></em>Price each: $<?php echo esc_html($price); ?></p>
-                                                    <p>Allowable tax deduction: $<?php echo esc_html($tax_deduction); ?></p>
+                                                    <p><span>Price each:</span> $<?php echo esc_html($price); ?></p>
+                                                    <p><span>Allowable tax deduction:</span> $<?php echo esc_html($tax_deduction); ?></p>
                                                     <p><?php echo ($amenities); ?></p>
                                                     <?php if (have_rows('amenities')) : ?>
                                                         <ul>
@@ -355,8 +368,12 @@ if ($events->have_posts()) : while ($events->have_posts()) : $events->the_post()
                                                                 <li><?php the_sub_field('amenity'); ?></li>
                                                             <?php endwhile; ?>
                                                         </ul>
+                                                    <?php endif;
+
+                                                    if ($button_label && $button_url) : ?>
+                                                        <a href="<?php echo esc_url($button_url); ?>" target="_blank"><button><?php echo esc_html($button_label); ?></button></a>
                                                     <?php endif; ?>
-                                                    <button>Buy Now</button>
+
                                                 </div>
                                             <?php endwhile; ?>
                                         </div>
@@ -376,12 +393,18 @@ if ($events->have_posts()) : while ($events->have_posts()) : $events->the_post()
                                                 $ad = get_sub_field('ad');
                                                 $price = get_sub_field('price');
                                                 $description = get_sub_field('description');
+                                                $button_label = get_sub_field('cta_button_label');
+                                                $button_url = get_sub_field('cta_link');
                                             ?>
                                                 <div class="package">
                                                     <h2><?php echo esc_html($ad); ?></h2>
                                                     <p>Price each: $<?php echo esc_html($price); ?></p>
                                                     <p><?php echo ($description); ?></p>
-                                                    <button>Buy Now</button>
+
+
+                                                    <?php if ($button_label && $button_url) : ?>
+                                                        <a href="<?php echo esc_url($button_url); ?>" target="_blank"><button><?php echo esc_html($button_label); ?></button></a>
+                                                    <?php endif; ?>
                                                 </div>
                                             <?php endwhile; ?>
                                         </div>

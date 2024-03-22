@@ -120,3 +120,25 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
+document.addEventListener('scroll', function() {
+    const scrollPosition = window.scrollY;
+    const headerImgMain = document.querySelector('.header-img-main');
+  
+    // Initial zoom and position
+    const initialZoom = 110; // Starting zoomed in at 110%
+    const initialPosition = 75; // Your chosen starting position
+  
+    // Slow down the zoom effect by using a smaller factor
+    let backgroundSize = initialZoom - (scrollPosition * 0.01); // Reduced factor for slower zoom
+    backgroundSize = backgroundSize < 100 ? 100 : backgroundSize; // Ensure it doesn't zoom out too much
+  
+    // Slow down the pan effect by using a smaller factor
+    let positionAdjustment = (scrollPosition * 0.02); // Reduced factor for slower panning
+    let newPosition = initialPosition - positionAdjustment; // Calculate new position based on scroll
+    newPosition = newPosition < 0 ? 0 : newPosition; // Prevent it from going below 0%
+  
+    // Apply the dynamic background size and position
+    headerImgMain.style.backgroundSize = `${backgroundSize}%`;
+    headerImgMain.style.backgroundPosition = `center ${newPosition}%`;
+  });
+  

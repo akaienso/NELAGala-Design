@@ -1,46 +1,3 @@
-/* custom namespace reset styles for common elements */
-/** wp@rmoore.dev */
-.nelagala-event * {
-  margin: 0;
-  padding: 0;
-  border: 0;
-  font-size: 100%;
-  font: inherit;
-  vertical-align: baseline;
-}
-.nelagala-event ul,
-.nelagala-event ol {
-  list-style-type: none;
-  /* Removes default list styling */
-  margin: 0;
-  /* Resets default margins */
-  padding: 0;
-  /* Resets default padding */
-}
-.nelagala-event li {
-  /* Resets and styles for list items */
-  margin: 0;
-  padding: 0;
-}
-.nelagala-event h1,
-.nelagala-event h2,
-.nelagala-event h3,
-.nelagala-event h4,
-.nelagala-event h5,
-.nelagala-event h6 {
-  margin: 0;
-  /* Resets default margins */
-  padding: 0;
-  /* Resets default padding */
-  font-weight: normal;
-  /* Adjusts font weight */
-  font-size: 100%;
-  /* Resets font size to a known state, you can adjust as needed */
-}
-.nelagala-event .grid_1200 {
-  overflow: default;
-}
-
 :root {
   --ng-media-sm: 576px;
   --ng-media-md: 768px;
@@ -53,16 +10,6 @@
   --ng-yellow: rgb(240, 189, 51);
   --ng-txt: rgb(51, 51, 51);
   --ng-bg: rgb(255, 255, 255);
-  --font-primary: minion-pro-condensed-subhead, serif;
-  --font-primary-weight: 400;
-  --font-primary-medium-weight: 500;
-  --font-primary-semibold-weight: 600;
-  --font-primary-bold-weight: 700;
-  --font-primary-style: normal;
-  --font-primary-style-italic: italic;
-  --font-secondary: minion-pro-condensed, serif;
-  --font-tertiary: barlow, sans-serif;
-  --font-script: snell-roundhand, cursive;
   --ng-header-bg: rgb(240, 189, 51);
   --ng-header-txt: rgb(255, 255, 255);
   --ng-header-txt-a: rgb(249, 249, 249);
@@ -80,9 +27,9 @@
 
 @font-face {
   font-family: snell-roundhand;
-  src: url("../typography/Snell_Roundhand/ttf/SnellRoundhand.ttf") format("ttf"), url("../typography/Snell_Roundhand/web_fonts/SnellRoundhand.woff2") format("woff2"), url("../typography/Snell_Roundhand/web_fonts/SnellRoundhand.woff") format("woff");
+  src: url("../typography/Snell_Roundhand/ttf/SnellRoundhand.ttf") format("truetype"), url("../typography/Snell_Roundhand/web_fonts/SnellRoundhand.woff2") format("woff2"), url("../typography/Snell_Roundhand/web_fonts/SnellRoundhand.woff") format("woff");
   font-weight: 400;
-  font-style: cursive;
+  font-style: normal;
 }
 body {
   margin: 0;
@@ -106,7 +53,7 @@ body #top > section:nth-child(4) > div {
 
 }
 .nelagala-event {
-  font-family: var(--font-primary);
+  font-family: minion-pro-condensed-subhead, serif;
   color: var(--ng-txt);
   background: var(--ng-bg);
   display: flex;
@@ -124,27 +71,28 @@ body #top > section:nth-child(4) > div {
 .nelagala-event h4,
 .nelagala-event h5,
 .nelagala-event h6 {
-  font-family: var(--font-secondary);
+  font-family: barlow, sans-serif;
+  font-weight: 400;
   text-transform: capitalize;
-  color: var(--ng-red);
+  color: #d1232f;
 }
 .nelagala-event h1 {
-  font-size: 3rem;
+  font-size: 2.8rem;
 }
 .nelagala-event h2 {
-  font-size: 2.5rem;
+  font-size: 2.3rem;
 }
 .nelagala-event h3 {
-  font-size: 2rem;
+  font-size: 1.8rem;
 }
 .nelagala-event h4 {
-  font-size: 1.5rem;
+  font-size: 1.3rem;
 }
 .nelagala-event h5 {
-  font-size: 1rem;
+  font-size: 0.8rem;
 }
 .nelagala-event h6 {
-  font-size: 0.5rem;
+  font-size: 0.3rem;
 }
 .nelagala-event a {
   text-decoration: none;
@@ -168,11 +116,11 @@ body #top > section:nth-child(4) > div {
   margin-top: 0;
   background: var(--ng-header-bg);
   text-align: center;
-  color: var(--ng-header-txt);
+  color: #ffffff;
   position: relative;
   top: 0;
   overflow: hidden;
-  font-family: var(--font-primary);
+  font-family: minion-pro-condensed-subhead, serif;
 }
 .nelagala-event header .header-img {
   position: absolute;
@@ -184,8 +132,10 @@ body #top > section:nth-child(4) > div {
 }
 .nelagala-event header .header-img-main {
   height: 189px;
+  margin-top: -39px;
 }
 .nelagala-event header .header-img-main img {
+  transition: transform 0.5s ease, opacity 0.5s ease;
   height: 100%;
   width: 100%;
   object-fit: cover;
@@ -206,15 +156,15 @@ body #top > section:nth-child(4) > div {
   /* Adjusts the gap at the bottom */
   width: 4px;
   /* Border width */
-  background-color: var(--ng-red);
+  background-color: #d1232f;
   /* Border color */
 }
 .nelagala-event header h1.title {
   display: inline;
   text-align: center;
-  font-family: var(--font-secondary);
+  font-family: minion-pro-condensed, serif;
   font-size: 1.8em;
-  color: var(--ng-header-txt);
+  color: #ffffff;
   line-height: 0.9em;
   margin: -10px 0;
   text-transform: uppercase;
@@ -223,33 +173,31 @@ body #top > section:nth-child(4) > div {
   font-size: 0.8em;
 }
 .nelagala-event header h2 {
-  font-family: var(--font-primary);
-  font-weight: var(--font-primary-weight);
-  font-style: var(--font-primary-italic);
-  color: var(--ng-header-txt);
-  text-transform: uppercase;
+  font-family: minion-pro-condensed-subhead, serif;
+  font-weight: 600;
+  font-size: 3em;
   font-style: italic;
-  font-size: 2em;
-  font-weight: bold;
+  color: #ffffff;
   letter-spacing: 0.2em;
-  margin: 6px auto 0 auto;
+  text-transform: uppercase;
+  margin: 6px, auto, 0, auto;
   padding: 0;
   position: relative;
+  z-index: 1;
 }
 .nelagala-event header h3 {
-  font-size: 0.8em;
-  margin-top: 0;
-  margin-bottom: 20px;
-  font-family: var(--font-secondary);
-  font-weight: 500;
-  font-style: italic;
-  color: var(--ng-header-txt);
+  font-family: minion-pro-condensed-subhead, serif;
   font-weight: 400;
+  font-style: italic;
+  color: #ffffff;
+  font-size: 1.1em;
+  line-height: 1.125em;
+  margin: 0, auto, 10px, auto;
   text-transform: unset;
 }
 .nelagala-event header h3 sup {
-  font-size: 0.9em;
-  top: -0.2em;
+  font-size: 2em;
+  top: 0.2em;
 }
 .nelagala-event header .pre-title,
 .nelagala-event header .post-title {
@@ -258,7 +206,7 @@ body #top > section:nth-child(4) > div {
   align-items: center;
   justify-content: center;
   color: var(--ng-red);
-  font-family: var(--font-script);
+  font-family: snell-roundhand, cursive;
   text-align: center;
   font-size: 2.4em;
   margin: 0;
@@ -284,29 +232,37 @@ body #top > section:nth-child(4) > div {
   padding-left: 20px;
 }
 .nelagala-event header .col-2 .col-2-title {
-  font-family: var(--font-tertiary);
-  color: var(--ng-header-txt);
+  font-family: barlow, sans-serif;
+  font-weight: 600;
+  color: #ffffff;
   text-transform: uppercase;
-  font-size: 1.4em;
-  font-weight: 500;
+  font-size: 1.25em;
   font-style: normal;
   margin: 0;
-  line-height: 1.2em;
+  line-height: 1.1em;
 }
 .nelagala-event header .col-2 .text {
-  font-family: var(--font-primary);
-  color: var(--ng-header-txt);
-  font-weight: 500;
+  font-family: minion-pro-condensed-subhead, serif;
+  font-weight: 400;
   font-style: italic;
-  font-size: 21px;
-  margin: 0;
+  color: #ffffff;
+  font-size: 1.1em;
+  line-height: 1.125em;
+  margin: 0, auto, 10px, auto;
+  text-transform: unset;
 }
-.nelagala-event header .header-footer-text {
-  font-size: 24px;
-  margin: 10px 0;
-  font-family: var(--font-primary);
-  font-weight: var(--font-primary-semibold-weight);
-  font-style: var(--font-primary-style-italic);
+.nelagala-event header h4 {
+  font-family: minion-pro-condensed-subhead, serif;
+  font-weight: 600;
+  font-style: italic;
+  color: #ffffff;
+  font-size: 1.3em;
+  line-height: 1.125em;
+  margin: 0;
+  text-transform: unset;
+  background-color: rgb(240, 189, 51);
+  padding: 10px 0;
+  z-index: 10000 !important;
 }
 .nelagala-event header .row {
   display: flex;
@@ -314,15 +270,28 @@ body #top > section:nth-child(4) > div {
   align-items: center;
   width: 90%;
   max-width: 960px;
-  margin: 0 auto -15px auto;
+  margin: -40px auto -15px auto;
   position: relative;
+}
+.nelagala-event header .row, .nelagala-event header .title-wrap, .nelagala-event header .post-title, .nelagala-event header h4 {
+  position: relative; /* Required for z-index to work */
+  z-index: 10; /* Ensures they stay in front of the image */
+}
+.nelagala-event header .header-img-main {
+  z-index: 1; /* Ensure the image stays behind the .row and h4 elements */
+  position: relative; /* Adjust based on your layout needs */
+  height: 189px;
+  background-size: 110%; /* Start zoomed in */
+  background-position: center 75%;
+  transition: background-size 0.5s ease, background-position 0.5s ease;
+  width: 100%;
 }
 .nelagala-event header .column {
   flex: 1;
   padding: 10px;
 }
 .nelagala-event header .column h3 {
-  font-family: var(--font-primary);
+  font-family: minion-pro-condensed-subhead, serif;
   font-size: 2em;
   font-style: italic;
 }
@@ -334,7 +303,7 @@ body #top > section:nth-child(4) > div {
 }
 .nelagala-event header a {
   text-decoration: none;
-  color: var(--ng-header-txt);
+  color: #ffffff;
   font-weight: 500;
   font-size: 1em;
   padding: 3px;
@@ -362,42 +331,32 @@ body #top > section:nth-child(4) > div {
   padding: 20px;
   margin: 0 auto;
 }
-.nelagala-event main #about-the-event .last {
-  margin-bottom: 50px;
-}
-.nelagala-event main #about-the-event p {
-  font-size: 18px;
-  margin-bottom: 20px;
-}
-.nelagala-event main #event-roles h3,
-.nelagala-event main #honorees h3 {
-  font-family: var(--font-primary);
-  font-weight: var(--font-primary-semibold-weight);
-  font-style: var(--font-primary-style-italic);
-  color: var(--ng-txt);
-  font-size: 1em;
-  margin-bottom: 0px;
-  text-align: start;
-}
-.nelagala-event .row-container {
-  gap: 50px;
-  margin-bottom: 50px;
-}
-.nelagala-event .row-container:hover img {
-  mix-blend-mode: inherit;
-  transition: all 0.3s ease-in;
-}
-.nelagala-event .row-container.reverse {
-  flex-direction: row-reverse;
-}
 .nelagala-event main > section {
   margin-bottom: 1em;
   padding: 1em;
+}
+.nelagala-event main > section > h2 {
+  line-height: 3.4em;
 }
 .nelagala-event main > section.participants {
   width: 80%;
   max-width: 920px;
   margin: 0 auto;
+}
+.nelagala-event main > section.participants .participant-website,
+.nelagala-event main > section.participants .read-more {
+  padding-top: 2em;
+}
+.nelagala-event main > section.participants .participant-website a,
+.nelagala-event main > section.participants .read-more a {
+  font-family: barlow, sans-serif;
+  font-weight: 500;
+  font-style: normal;
+  color: #d1232f;
+  font-size: 1em;
+  margin: 2em 0 0 0;
+  text-transform: unset;
+  line-height: 1.2em;
 }
 .nelagala-event main > section > div {
   display: flex;
@@ -419,6 +378,36 @@ body #top > section:nth-child(4) > div {
   aspect-ratio: 16/9;
   width: 100%;
 }
+.nelagala-event main #about-the-event .last {
+  margin-bottom: 50px;
+}
+.nelagala-event main #about-the-event p {
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+.nelagala-event main #event-roles h3,
+.nelagala-event main #honorees h3 {
+  font-family: minion-pro-condensed, serif;
+  font-weight: 400;
+  font-style: italic;
+  color: rgb(51, 51, 51);
+  font-size: 1.24em;
+  line-height: 1.125em;
+  margin: 0;
+  text-transform: unset;
+  text-align: start;
+}
+.nelagala-event .row-container {
+  gap: 50px;
+  margin-bottom: 4em;
+}
+.nelagala-event .row-container:hover img {
+  mix-blend-mode: inherit;
+  transition: all 0.3s ease-in;
+}
+.nelagala-event .row-container.reverse {
+  flex-direction: row-reverse;
+}
 .nelagala-event #sponsorships .package {
   flex: 0 0 47%;
 }
@@ -426,33 +415,29 @@ body #top > section:nth-child(4) > div {
   width: 50%;
   text-align: left;
 }
-.nelagala-event main > section.participants > div > div > h3 {
-  text-transform: none;
-  font-family: var(--font-secondary);
-  font-weight: 400;
-  font-size: 16px;
-  margin: 0;
-  padding: 0;
-}
 .nelagala-event main > section.participants > div > div > .full-name {
-  font-family: var(--font-tertiary);
-  font-size: 2em;
-  font-weight: normal;
+  font-family: barlow, sans-serif;
+  font-weight: 600;
   font-style: normal;
-  text-transform: none;
-  line-height: 1.3cap;
-  margin: 0.6em 0 0 0;
-  color: var(--ng-red);
+  color: #d1232f;
+  font-size: 2em;
+  line-height: 1.2em;
+  margin: 0.2em 0 0 0;
+  text-transform: unset;
 }
 .nelagala-event main > section.participants > div > div > .bio-summary {
   font-size: 18px;
   color: #707070;
 }
 .nelagala-event main > section.participants > div > div > .personal-title {
-  font-family: var(--font-tertiary);
-  font-weight: 500;
+  font-family: barlow, sans-serif;
+  font-weight: 600;
   font-size: 18px;
   margin: 0.2em 0 0.8em 0;
+}
+.nelagala-event main > #Biography > div {
+  align-items: center;
+  justify-content: center;
 }
 .nelagala-event main > #Biography > div > div {
   width: 58%;
@@ -464,8 +449,42 @@ body #top > section:nth-child(4) > div {
   width: 74%;
   font-weight: normal;
 }
+.nelagala-event main > #Biography > article p {
+  line-height: normal;
+  margin-bottom: 0.8em;
+}
 .nelagala-event main > #Biography > article p:first-child {
-  font-size: 1.6em;
+  font-size: 1.225em;
+  margin-bottom: 1em;
+  line-height: 1.5em;
+}
+.nelagala-event #about-the-event {
+  display: flex;
+  flex-direction: column;
+}
+@media (min-width: 768px) {
+  .nelagala-event #about-the-event { /* Adjust this value based on your breakpoint for larger screens */
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  .nelagala-event #about-the-event article {
+    width: 70%;
+  }
+  .nelagala-event #about-the-event aside {
+    width: 30%;
+    border: 1px solid #ccc; /* Customize the border as needed */
+    padding: 20px; /* Adjust padding as needed */
+    box-sizing: border-box; /* Ensures padding is included in the width */
+    margin: 0 0 0 20px; /* Adjust margin as needed */
+  }
+  .nelagala-event #about-the-event aside h2 {
+    font-size: 22px;
+    margin-bottom: 20px;
+  }
+}
+.nelagala-event #about-the-event .has-nv-dark-bg-color.has-text-color {
+  font-size: 18px;
+  margin-bottom: 20px;
 }
 .nelagala-event .packages {
   display: flex;
@@ -517,38 +536,46 @@ body #top > section:nth-child(4) > div {
   font-weight: bold;
   font-size: 22px;
   text-transform: inherit;
-  font-family: var(--font-secondary);
+  font-family: barlow, sans-serif;
   color: var(--ng-txt);
 }
 .nelagala-event .packages .package p {
   font-size: 16px;
 }
-.nelagala-event .packages .package button {
+.nelagala-event .packages .package a button {
+  font-family: barlow, sans-serif;
+  font-weight: 500;
+  font-style: normal;
+  font-size: 1em;
+  text-transform: uppercase;
   padding: 10px;
   border: 0.5px solid var(--ng-red);
   border-radius: 5px;
-  color: var(--ng-red);
-  font-weight: 500;
-  text-transform: uppercase;
   position: absolute;
   bottom: 20px;
   width: calc(100% - 40px);
   cursor: pointer;
   transition: 0.3s;
+  background-color: rgb(249, 249, 249);
+  color: #d1232f;
 }
-.nelagala-event .packages .package button:hover {
-  background-color: var(--ng-red);
-  color: #fff;
+.nelagala-event .packages .package a button:hover {
+  background-color: #d1232f;
+  color: rgb(249, 249, 249);
 }
 .nelagala-event .map-container {
   position: relative;
   width: 100%;
-  padding-top: 28.125%; /* 16:9 Aspect Ratio */
-  height: 0; /* This is important to prevent the actual height from affecting the element */
-  overflow: hidden; /* Ensures no overflow from the padding hack */
+  padding-top: 28.125%;
+  /* 16:9 Aspect Ratio */
+  height: 0;
+  /* This is important to prevent the actual height from affecting the element */
+  overflow: hidden;
+  /* Ensures no overflow from the padding hack */
   background-color: white;
 }
-.nelagala-event .map-container iframe, .nelagala-event .map-container .map {
+.nelagala-event .map-container iframe,
+.nelagala-event .map-container .map {
   position: absolute;
   top: 0;
   left: 0;
@@ -570,7 +597,7 @@ body #top > section:nth-child(4) > div {
     max-width: fit-content;
   }
   .nelagala-event {
-    font-family: var(--font-secondary);
+    font-family: minion-pro-condensed, serif;
     color: var(--ng-txt);
     background: var(--ng-bg);
     display: flex;
@@ -608,7 +635,7 @@ body #top > section:nth-child(4) > div {
   }
   .nelagala-event header h1 .title {
     display: block;
-    font-family: var(--font-primary);
+    font-family: minion-pro-condensed-subhead, serif;
     font-size: 1.3em;
     color: var(--ng-header-title-txt);
     line-height: 0.9em;
@@ -656,161 +683,4 @@ body #top > section:nth-child(4) > div {
   .nelagala-event #sponsorshipss .packages .package {
     flex: 0 0 100%;
   }
-}
-
-.nelagala-event .nav {
-  flex: 0 0 250px;
-  width: 25%;
-  height: auto;
-  overflow: none;
-  background-color: var(--ng-nav-bg);
-  position: -webkit-sticky;
-  position: sticky;
-  top: 4em;
-  padding-top: 2em;
-  font-family: var(--font-secondary);
-}
-.nelagala-event .nav .menu {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  list-style-type: none;
-  display: flex;
-  padding: 0;
-  margin: 0;
-  width: 100%;
-}
-.nelagala-event .nav .menu .menu-item {
-  padding: 0;
-  margin: 0;
-  width: 100%;
-}
-.nelagala-event .nav .menu .menu-item a {
-  padding: 0.1em 0.5em;
-  display: block;
-  text-decoration: none;
-  color: var(--ng-nav-item-txt);
-  font-weight: 500;
-  font-size: 1.125em;
-  border-bottom: 0.1em solid var(--ng-nav-item-bg);
-  width: 100%;
-  background-color: var(--ng-nav-item-bg);
-}
-.nelagala-event .nav .menu .menu-item a:hover {
-  text-decoration: none;
-  color: var(--ng-nav-item-hover-txt);
-  border-bottom: 0.1em solid var(--ng-red);
-  background-color: var(--ng-nav-item-hover-bg);
-}
-@media (max-width: var(--ng-media-lg)) {
-  .nelagala-event .nav {
-    position: fixed;
-    top: 0;
-    left: 0;
-    flex: auto;
-    width: 100%;
-    height: 50px;
-    z-index: 999;
-    transition: all 0.3s ease-in, background 0.5s ease-in;
-  }
-  .nelagala-event .burger-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    height: 50px;
-    top: -45px;
-    width: 50px;
-    cursor: pointer;
-    transform: rotate(0deg);
-    transition: all 0.3s var(--cubic);
-    user-select: none;
-    -webkit-tap-highlight-color: transparent;
-  }
-  .nelagala-event .burger-container #burger .bar {
-    width: 18px;
-    height: 1px;
-    display: block;
-    position: relative;
-    background: var(--ng-nav-item-hover-txt);
-    transition: all 0.3s var(--cubic);
-    transition-delay: 0s;
-  }
-  .nelagala-event .burger-container #burger .bar.topBar {
-    transform: translateY(0px) rotate(0deg);
-  }
-  .nelagala-event .burger-container #burger .bar.btmBar {
-    transform: translateY(6px) rotate(0deg);
-  }
-  .nelagala-event .nav .menu {
-    position: relative;
-    display: block;
-    padding: 0px;
-    list-style: none;
-    overflow: hidden;
-  }
-  .nelagala-event .nav .menu li.menu-item {
-    border-bottom: 1px solid var(--ng-red);
-    margin-top: 5px;
-    transform: scale(1.15) translateY(-30px);
-    opacity: 0;
-    transition: transform 0.5s var(--cubic), opacity 0.6s var(--cubic);
-  }
-  .nelagala-event .nav .menu li.menu-item a {
-    display: block;
-    position: relative;
-    color: var(--ng-nav-item-hover-txt);
-    font-weight: 100;
-    text-decoration: none;
-    font-size: 22px;
-    line-height: 2.35;
-    font-weight: 200;
-    width: 100%;
-    border-bottom: none;
-    padding: 0 0.1em 0 3em;
-  }
-  .nelagala-event .nav.menu-opened {
-    height: 100%;
-    background-color: var(--ng-nav-bg);
-    transition: all 0.3s ease-in, background 0.5s ease-in;
-    /* transition-delay: 0.25s; */
-  }
-  .nelagala-event .nav.menu-opened .burger-container {
-    transform: rotate(90deg);
-  }
-  .nelagala-event .nav.menu-opened .burger-container #burger .bar {
-    transition: all 0.4s var(--cubic);
-    transition-delay: 0.2s;
-  }
-  .nelagala-event .nav.menu-opened .burger-container #burger .bar.topBar {
-    transform: translateY(4px) rotate(45deg);
-  }
-  .nelagala-event .nav.menu-opened .burger-container #burger .bar.btmBar {
-    transform: translateY(3px) rotate(-45deg);
-  }
-  .nelagala-event .nav.menu-opened ul.menu li.menu-item {
-    transform: scale(1) translateY(0px);
-    opacity: 1;
-  }
-  .nelagala-event .nav.menu-opened ul.menu li.menu-item:nth-child(1) {
-    transition-delay: 0.05s;
-  }
-  .nelagala-event .nav.menu-opened ul.menu li.menu-item:nth-child(2) {
-    transition-delay: 0.1s;
-  }
-  .nelagala-event .nav.menu-opened ul.menu li.menu-item:nth-child(3) {
-    transition-delay: 0.15s;
-  }
-  .nelagala-event .nav.menu-opened ul.menu li.menu-item:nth-child(4) {
-    transition-delay: 0.2s;
-  }
-  .nelagala-event .nav.menu-opened ul.menu li.menu-item:nth-child(5) {
-    transition-delay: 0.25s;
-  }
-  .nelagala-event .nav.menu-opened ul.menu li.menu-item:nth-child(6) {
-    transition-delay: 0.3s;
-  }
-  .nelagala-event .nav.menu-opened ul.menu li.menu-item:nth-child(7) {
-    transition-delay: 0.35s;
-  }
-}/*# sourceMappingURL=styles.css.map */
+}/*# sourceMappingURL=_nelagala-design.css.map */

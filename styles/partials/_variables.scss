@@ -15,6 +15,26 @@ $ng-nav-item-bg: lighten($ng-nav-bg, 12%);
 $ng-nav-item-hover-bg: darken($ng-nav-bg, 46%);
 $ng-nav-item-hover-txt: lighten($ng-nav-item-txt, 20%);
 
+$ng-header-text: #ffffff;
+
+$color: (
+    primary: $ng-not-black,
+    secondary: $ng-red,
+    tertiary: $ng-yellow,
+    quaternary: $ng-not-white,
+    quinary: $ng-steel-blue,
+
+    header: (
+        text: $ng-header-text,
+        bg: $ng-yellow,
+        txt: $ng-not-white,
+        txt-a: $ng-not-white,
+        title-txt: rgb(171, 171, 171),
+        divider: $ng-red,
+    )
+);
+
+
 // Media Query Breakpoint
 $breakpoint-sm: 576px; 
 $breakpoint-md: 768px;
@@ -36,20 +56,6 @@ $breakpoint-max: 1400px; // 4k resolution
 
     --ng-txt: rgb(51, 51, 51);
     --ng-bg: rgb(255, 255, 255);
-
-    --font-primary: minion-pro-condensed-subhead, serif;      // Body font
-    --font-primary-weight: 400;      // Body font
-    --font-primary-medium-weight: 500;      // Body font
-    --font-primary-semibold-weight: 600;      // Body font
-    --font-primary-bold-weight: 700;      // Body font
-    --font-primary-style: normal;      // Body font
-    --font-primary-style-italic: italic;      // Body font
-
-    --font-secondary: minion-pro-condensed, serif;   // Header Title and H1 - 6 
-
-    --font-tertiary: barlow, sans-serif;        // Venue, and Menu font
-
-    --font-script: snell-roundhand, cursive;  // Gala Script
 
     --ng-header-bg: #{$ng-yellow};
     --ng-header-txt: rgb(255, 255, 255);

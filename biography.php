@@ -31,7 +31,7 @@ $sections = [
     <div class="container">
         <div class="nelagala-event">
             <style>
-                .nelagala-event main > section > div img {
+                .nelagala-event main>section>div img {
                     mix-blend-mode: inherit !important;
                 }
             </style>
@@ -140,10 +140,9 @@ $sections = [
                             <p class="text"><?php echo  $venue_city; ?>, <?php echo  $venue_state; ?></p>
                         </div>
                     </div>
-                    <div class="header-img-main">
-                        <img src="<?php echo get_template_directory_uri() . '/inc/nelagala/img/header-main-img.jpg'; ?>" alt="Teatro Antico di Taormina">
+                    <div class="header-img-main" style="background-image: url('<?php echo get_template_directory_uri(); ?>/inc/nelagala/img/header-main-img.jpg');">
                     </div>
-                    <div class="header-footer-text"><? echo $display_date; ?> | More details coming soon!</div>
+                    <h4><? echo $display_date; ?> | More details coming soon!</h4>
                 </header>
 
                 <!-- SECTION: Data dump of nelagala-participant field group -->
@@ -158,7 +157,7 @@ $sections = [
 
                     if ($participant_posts->have_posts()) : while ($participant_posts->have_posts()) : $participant_posts->the_post(); ?>
 
-                        <?php
+                            <?php
                             $photo = get_field('photo');
                             $title = get_field('title');
                             $website = get_field('website');
@@ -184,17 +183,17 @@ $sections = [
                                 </div>
 
                             </div>
-                        
-                                <article>
-                                    <?php 
-                                    if (!empty($website)) { 
-                                        echo the_content();
-                                    }
-                                    if (!empty($website)) { ?>
-                                        <p class="participant-website"><a href="<?php echo esc_url($website); ?>" target="_blank" rel="noopener noreferrer">Learn more about <?php the_title(); ?></a></p>
-                                    <?php  } ?>
-                                </article>
-                  
+
+                            <article>
+                                <?php
+                                if (!empty($website)) {
+                                    echo the_content();
+                                }
+                                if (!empty($website)) { ?>
+                                    <p class="participant-website"><a href="<?php echo esc_url($website); ?>" target="_blank" rel="noopener noreferrer">Learn more about <?php the_title(); ?></a></p>
+                                <?php  } ?>
+                            </article>
+
                     <?php endwhile;
                         wp_reset_postdata();
                     endif;

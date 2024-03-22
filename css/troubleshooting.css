@@ -1,0 +1,38 @@
+
+@font-face {
+    font-family: snell-roundhand;
+    src: url("../typography/Snell_Roundhand/ttf/SnellRoundhand.ttf") format("truetype"), url("../typography/Snell_Roundhand/web_fonts/SnellRoundhand.woff2") format("woff2"), url("../typography/Snell_Roundhand/web_fonts/SnellRoundhand.woff") format("woff");
+    font-weight: 400;
+    font-style: normal
+}
+
+.nelagala-event header .pre-title,
+.nelagala-event header .post-title {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--ng-red);
+    font-family: "snell-roundhand, cursive";
+    text-align: center;
+    font-size: 2.4em;
+    margin: 0;
+    line-height: 58px
+}
+
+/* Recommened Typekit Usage
+font-family: barlow, sans-serif;
+font-weight: 600;
+font-style: normal; */
+
+
+.nelagala-event header .col-2 .col-2-title {
+    font-family: "barlow, sans-serif";
+    color: var(--ng-header-txt);
+    text-transform: uppercase;
+    font-size: 1.4em;
+    font-weight: 500;
+    font-style: normal;
+    margin: 0;
+    line-height: 1.2em
+}

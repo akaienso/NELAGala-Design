@@ -1,9 +1,10 @@
-
 @forward '../partials/_variables';
 @forward '../partials/_typography';
 
+@use 'sass:math';
 @use '../partials/_variables' as *;
 @use '../partials/_typography' as *;
+
 
 body {
   margin: 0;
@@ -41,7 +42,7 @@ body {
 .nelagala-event {
 
   & {
-    font-family: var(--font-primary);
+    font-family: map-get($font, primary);
     color: var(--ng-txt);
     background: var(--ng-bg);
     display: flex;
@@ -60,12 +61,13 @@ body {
   h4,
   h5,
   h6 {
-    font-family: var(--font-secondary);
+    font-family: map-get($font, tertiary);
+    font-weight: map-get($font-weight, primary);
     text-transform: capitalize;
-    color: var(--ng-red);
+    color: map-get($color, secondary);
   }
 
-  $size: 3rem;
+  $size: 2.8rem;
 
   @for $i from 1 through 6 {
     h#{$i} {
@@ -98,11 +100,11 @@ body {
     margin-top: 0;
     background: var(--ng-header-bg);
     text-align: center;
-    color: var(--ng-header-txt);
+    color: map-get(map-get($color, header), text);
     position: relative;
     top: 0;
     overflow: hidden;
-    font-family: var(--font-primary);
+    font-family: map-get($font, primary);
 
     .header-img {
       position: absolute;
@@ -115,14 +117,17 @@ body {
 
     .header-img-main {
       height: 189px;
+      margin-top: -39px;
+
+      img {
+        transition: transform 0.5s ease, opacity 0.5s ease;
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+        object-position: center 75%;
+      }
     }
 
-    .header-img-main img {
-      height: 100%;
-      width: 100%;
-      object-fit: cover;
-      object-position: center 75%;
-    }
 
     .col {
       min-width: 50%;
@@ -141,7 +146,7 @@ body {
         /* Adjusts the gap at the bottom */
         width: 4px;
         /* Border width */
-        background-color: var(--ng-red);
+        background-color: map-get(map-get($color, header), divider);
         /* Border color */
       }
     }
@@ -151,9 +156,9 @@ body {
       &.title {
         display: inline;
         text-align: center;
-        font-family: var(--font-secondary);
+        font-family: map-get($font, secondary);
         font-size: 1.8em;
-        color: var(--ng-header-txt);
+        color: map-get(map-get($color, header), text);
         line-height: 0.9em;
         margin: -10px 0;
         text-transform: uppercase;
@@ -166,34 +171,32 @@ body {
     }
 
     h2 {
-      font-family: var(--font-primary);
-      font-weight: var(--font-primary-weight);
-      font-style: var(--font-primary-italic);
-      color: var(--ng-header-txt);
-      text-transform: uppercase;
-      font-style: italic;
-      font-size: 2em;
-      font-weight: bold;
-      letter-spacing: .2em;
-      margin: 6px auto 0 auto;
-      padding: 0;
-      position: relative;
+      font-family: map-get($header-h2, font);
+      font-weight: map-get($header-h2, weight);
+      font-size: map-get($header-h2, size);
+      font-style: map-get($header-h2, style);
+      color: map-get($header-h2, color);
+      letter-spacing: map-get($header-h2, letter-spacing);
+      text-transform: map-get($header-h2, transform);
+      margin: map-get($header-h2, margin);
+      padding: map-get($header-h2, padding);
+      position: map-get($header-h2, position);
+      z-index: map-get($header-h2, z-index);
     }
 
     h3 {
-      font-size: .8em;
-      margin-top: 0;
-      margin-bottom: 20px;
-      font-family: var(--font-secondary);
-      font-weight: 500;
-      font-style: italic;
-      color: var(--ng-header-txt);
-      font-weight: 400;
-      text-transform: unset;
+      font-family: map-get($header-h3, font);
+      font-weight: map-get($header-h3, weight);
+      font-style: map-get($header-h3, style);
+      color: map-get($header-h3, color);
+      font-size: map-get($header-h3, size);
+      line-height: map-get($header-h3, line-height);
+      margin: map-get($header-h3, margin);
+      text-transform: map-get($header-h3, transform);
 
       & sup {
-        font-size: .9em;
-        top: -.2em;
+        font-size: 2em;
+        top: .2em;
       }
     }
 
@@ -204,7 +207,7 @@ body {
       align-items: center;
       justify-content: center;
       color: var(--ng-red);
-      font-family: var(--font-script);
+      font-family: map-get($font, script);
       text-align: center;
       font-size: 2.4em;
       margin: 0;
@@ -233,33 +236,41 @@ body {
       padding-left: 20px;
 
       .col-2-title {
-        font-family: var(--font-tertiary);
-        color: var(--ng-header-txt);
+        font-family: map-get($font, tertiary);
+        font-weight: map-get($font-weight, semibold);
+        color: map-get(map-get($color, header), text);
         text-transform: uppercase;
-        font-size: 1.4em;
-        font-weight: 500;
+        font-size: 1.25em;
         font-style: normal;
         margin: 0;
-        line-height: 1.2em;
+        line-height: 1.1em;
 
       }
 
       .text {
-        font-family: var(--font-primary);
-        color: var(--ng-header-txt);
-        font-weight: 500;
-        font-style:italic;
-        font-size: 21px;
-        margin: 0;
+        font-family: map-get($header-h3, font);
+        font-weight: map-get($header-h3, weight);
+        font-style: map-get($header-h3, style);
+        color: map-get($header-h3, color);
+        font-size: map-get($header-h3, size);
+        line-height: map-get($header-h3, line-height);
+        margin: map-get($header-h3, margin);
+        text-transform: map-get($header-h3, transform);
       }
     }
 
-    .header-footer-text {
-      font-size: 24px;
-      margin: 10px 0;
-      font-family: var(--font-primary);
-      font-weight: var(--font-primary-semibold-weight);
-      font-style: var(--font-primary-style-italic);
+    h4 {
+      font-family: map-get($header-h4, font);
+      font-weight: map-get($header-h4, weight);
+      font-style: map-get($header-h4, style);
+      color: map-get($header-h4, color);
+      font-size: map-get($header-h4, size);
+      line-height: map-get($header-h4, line-height);
+      margin: map-get($header-h4, margin);
+      text-transform: map-get($header-h4, transform);
+      background-color: map-get($header-h4, bg);
+      padding: map-get($header-h4, padding);
+      z-index: 10000 !important;
     }
 
     .row {
@@ -268,16 +279,31 @@ body {
       align-items: center;
       width: 90%;
       max-width: 960px;
-      margin: 0 auto -15px auto;
+      margin: -40px auto -15px auto;
       position: relative;
     }
-
+    .row, .title-wrap, .post-title, h4 {
+      position: relative; /* Required for z-index to work */
+      z-index: 10; /* Ensures they stay in front of the image */
+    }
+    
+    .header-img-main {
+      z-index: 1; /* Ensure the image stays behind the .row and h4 elements */
+      position: relative; /* Adjust based on your layout needs */
+        height: 189px;
+        background-size: 110%; /* Start zoomed in */
+        background-position: center 75%;
+        transition: background-size 0.5s ease, background-position 0.5s ease;
+        width: 100%;
+      }
+      
+    
     .column {
       flex: 1;
       padding: 10px;
 
       h3 {
-        font-family: var(--font-primary);
+        font-family: map-get($font, primary);
         font-size: 2em;
         font-style: italic;
 
@@ -292,7 +318,7 @@ body {
 
     a {
       text-decoration: none;
-      color: var(--ng-header-txt);
+      color: map-get(map-get($color, header), text);
       font-weight: 500;
       font-size: 1em;
       padding: 3px;
@@ -324,56 +350,39 @@ body {
       width: 80%;
       padding: 20px;
       margin: 0 auto;
+
+
     }
-
-    #about-the-event {
-      .last {
-        margin-bottom: 50px;
-      }
-
-      p {
-        font-size: 18px;
-        margin-bottom: 20px;
-      }
-    }
-
-    #event-roles h3,
-    #honorees h3 {
-      font-family: var(--font-primary);
-      font-weight: var(--font-primary-semibold-weight);
-      font-style: var(--font-primary-style-italic);
-      color: var(--ng-txt);
-      font-size: 1em;
-      margin-bottom: 0px;
-      text-align: start;
-    }
-
-  }
-
-  .row-container {
-    gap: 50px;
-    margin-bottom: 50px;
-  }
-
-  .row-container:hover img {
-    mix-blend-mode: inherit;
-    transition: all 0.3s ease-in;
-  }
-
-  .row-container.reverse {
-    flex-direction: row-reverse;
-  }
-
-  main {
 
     &>section {
       margin-bottom: 1em;
       padding: 1em;
 
+      &>h2 {
+        line-height: 3.4em;
+      }
+
       &.participants {
         width: 80%;
         max-width: 920px;
         margin: 0 auto;
+
+        .participant-website,
+        .read-more {
+          padding-top: 2em;
+
+          a {
+            font-family: map-get($read-more, font);
+            font-weight: map-get($read-more, weight);
+            font-style: map-get($read-more, style);
+            color: map-get($read-more, color);
+            font-size: map-get($read-more, size);
+            margin: map-get($read-more, margin);
+            text-transform: map-get($read-more, transform);
+            line-height: map-get($read-more, line-height);
+
+          }
+        }
       }
 
       &>div {
@@ -400,7 +409,48 @@ body {
       aspect-ratio: 16/9;
       width: 100%;
     }
+
+    #about-the-event {
+      .last {
+        margin-bottom: 50px;
+      }
+
+      p {
+        font-size: 18px;
+        margin-bottom: 20px;
+      }
+    }
+
+    #event-roles h3,
+    #honorees h3 {
+      font-family: map-get($participant-h3, font);
+      font-weight: map-get($participant-h3, weight);
+      font-style: map-get($participant-h3, style);
+      color: map-get($participant-h3, color);
+      font-size: map-get($participant-h3, size);
+      line-height: map-get($participant-h3, line-height);
+      margin: map-get($participant-h3, margin);
+      text-transform: map-get($participant-h3, transform);
+      text-align: map-get($participant-h3, text-align);
+    }
+
   }
+
+  .row-container {
+    gap: 50px;
+    margin-bottom: 4em;
+
+    &:hover img {
+      mix-blend-mode: inherit;
+      transition: all 0.3s ease-in;
+    }
+
+    &.reverse {
+      flex-direction: row-reverse;
+    }
+
+  }
+
 
   #sponsorships .package {
     flex: 0 0 47%;
@@ -410,41 +460,38 @@ body {
   main>section.participants>div>div {
     width: 50%;
     text-align: left;
-
-    &>h3 {
-      text-transform: none;
-      font-family: var(--font-secondary);
-      font-weight: 400;
-      font-size: 16px;
-      margin: 0;
-      padding: 0;
-    }
   }
 
 
   main>section.participants>div>div>.full-name {
-    font-family: var(--font-tertiary);
-    font-size: 2em;
-    font-weight: normal;
-    font-style: normal;
-    text-transform: none;
-    line-height: 1.3cap;
-    margin: .6em 0 0 0;
-    color: var(--ng-red)
+    font-family: map-get($participant-name, font);
+    font-weight: map-get($participant-name, weight);
+    font-style: map-get($participant-name, style);
+    color: map-get($participant-name, color);
+    font-size: map-get($participant-name, size);
+    line-height: map-get($participant-name, line-height);
+    margin: map-get($participant-name, margin);
+    text-transform: map-get($participant-name, transform);
   }
 
   main>section.participants>div>div>.bio-summary {
     font-size: 18px;
     color: #707070;
+
   }
 
   main>section.participants>div>div>.personal-title {
-    
-    font-family: var(--font-tertiary);
-    font-weight: 500;
+
+    font-family: map-get($font, tertiary);
+    font-weight: map-get($font-weight, semibold);
     font-size: 18px;
     margin: .2em 0 .8em 0;
 
+  }
+
+  main>#Biography>div {
+    align-items: center;
+    justify-content: center;
   }
 
   main>#Biography>div>div {
@@ -457,12 +504,51 @@ body {
     margin: 2em auto;
     width: 74%;
     font-weight: normal;
+
+    p {
+
+      line-height: normal;
+      margin-bottom: .8em;
+
+      &:first-child {
+        font-size: 1.225em;
+        margin-bottom: 1em;
+        line-height: 1.5em;
+      }
+    }
   }
 
-  main>#Biography>article p:first-child {
-    font-size: 1.6em;
+  #about-the-event {
+    display: flex;
+    flex-direction: column;
+  
+    @media (min-width: 768px) { /* Adjust this value based on your breakpoint for larger screens */
+      flex-direction: row;
+      justify-content: space-between;
+      
+      article {
+        width: 70%;
+      }
+  
+      aside {
+     
+        width: 30%;
+        border: 1px solid #ccc; /* Customize the border as needed */
+        padding: 20px; /* Adjust padding as needed */
+        box-sizing: border-box; /* Ensures padding is included in the width */
+        margin: 0 0 0 20px; /* Adjust margin as needed */
+         h2 {
+          font-size: 22px;
+          margin-bottom: 20px;
+         }
+      }
+    }
+  
+    .has-nv-dark-bg-color.has-text-color {
+      font-size: 18px;
+      margin-bottom: 20px;
+    }
   }
-
   .packages {
     display: flex;
     flex-wrap: wrap;
@@ -516,7 +602,7 @@ body {
         font-weight: bold;
         font-size: 22px;
         text-transform: inherit;
-        font-family: var(--font-secondary);
+        font-family: map-get($font, tertiary);
         color: var(--ng-txt);
       }
 
@@ -524,22 +610,31 @@ body {
         font-size: 16px;
       }
 
-      button {
-        padding: 10px;
-        border: 0.5px solid var(--ng-red);
-        border-radius: 5px;
-        color: var(--ng-red);
-        font-weight: 500;
-        text-transform: uppercase;
-        position: absolute;
-        bottom: 20px;
-        width: calc(100% - 40px);
-        cursor: pointer;
-        transition: 0.3s;
 
-        &:hover {
-          background-color: var(--ng-red);
-          color: #fff;
+      a {
+
+        button {
+          font-family: map-get($button, font);
+          font-weight: map-get($button, weight);
+          font-style: map-get($button, style);
+          font-size: map-get($button, size);
+          margin: map-get($button, margin);
+          text-transform: map-get($button, transform);
+          padding: 10px;
+          border: 0.5px solid var(--ng-red);
+          border-radius: 5px;
+          position: absolute;
+          bottom: 20px;
+          width: calc(100% - 40px);
+          cursor: pointer;
+          transition: 0.3s;
+          background-color: map-get($button, bg);
+          color: map-get($button, color);
+
+          &:hover {
+            background-color: map-get($button, color);
+            color: map-get($button, bg);
+          }
         }
       }
 
@@ -553,12 +648,16 @@ body {
 
     position: relative;
     width: 100%;
-    padding-top:  $aspect-ratio;; /* 16:9 Aspect Ratio */
-    height: 0; /* This is important to prevent the actual height from affecting the element */
-    overflow: hidden; /* Ensures no overflow from the padding hack */
+    padding-top: $aspect-ratio;
+    /* 16:9 Aspect Ratio */
+    height: 0;
+    /* This is important to prevent the actual height from affecting the element */
+    overflow: hidden;
+    /* Ensures no overflow from the padding hack */
     background-color: white;
 
-    iframe, .map {
+    iframe,
+    .map {
       position: absolute;
       top: 0;
       left: 0;
@@ -573,8 +672,9 @@ body {
     }
   }
 
-  
+
   @media (max-width: var(--ng-media-xl)) {
+
     // NOTE: 1200px and smaller screens. 
     // This breakpoint exists to reset breakpoints and styles from the main theme stylesheet.
     & {
@@ -582,7 +682,8 @@ body {
     }
   }
 
-    @media (max-width: var(--ng-media-lg)) {
+  @media (max-width: var(--ng-media-lg)) {
+
     // NOTE: 992px and smaller screens 
     // Essentially tablets in landscape mode and smaller desktop screens.
     .container {
@@ -590,7 +691,7 @@ body {
     }
 
     & {
-      font-family: var(--font-secondary);
+      font-family: map-get($font, secondary);
       color: var(--ng-txt);
       background: var(--ng-bg);
       display: flex;
@@ -639,7 +740,7 @@ body {
 
     header h1 .title {
       display: block;
-      font-family: var(--font-primary);
+      font-family: map-get($font, primary);
       font-size: 1.3em;
       color: var(--ng-header-title-txt);
       line-height: 0.9em;

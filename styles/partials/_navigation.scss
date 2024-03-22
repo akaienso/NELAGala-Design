@@ -1,11 +1,10 @@
+@forward '../partials/_variables';
+@forward '../partials/_typography';
 
-  @forward '../partials/_variables';
-  @forward '../partials/_typography';
+@use '../partials/_variables' as *;
+@use '../partials/_typography' as *;
 
-  @use '../partials/_variables' as *;
-  @use '../partials/_typography' as *;
-  
-  .nelagala-event {
+.nelagala-event {
 
   .nav {
     flex: 0 0 250px;
@@ -17,9 +16,10 @@
     position: sticky;
     top: 4em;
     padding-top: 2em;
-    font-family: var(--font-secondary);
+    font-family: map-get($font, tertiary);
+    font-weight: map-get($font-weight, primary);
 
-    .menu { 
+    .menu {
       display: flex;
       flex-direction: column;
       height: 100%;
@@ -40,12 +40,13 @@
         width: 100%;
 
         a {
-          padding: 0.1em 0.5em;
+          font-family: map-get($font, tertiary);
+          font-weight: map-get($font-weight, primary);
+          padding: 0.5em 0.5em 0.24em;
           display: block;
           text-decoration: none;
           color: var(--ng-nav-item-txt);
-          font-weight: 500;
-          font-size: 1.125em;
+          font-size: .9em;
           border-bottom: .1em solid var(--ng-nav-item-bg);
           width: 100%;
           background-color: var(--ng-nav-item-bg);
@@ -53,7 +54,7 @@
           &:hover {
             text-decoration: none;
             color: var(--ng-nav-item-hover-txt);
-            border-bottom: .1em solid var(--ng-red);
+            border-bottom: .1em solid var(--ng-yellow);
             background-color: var(--ng-nav-item-hover-bg);
           }
         }

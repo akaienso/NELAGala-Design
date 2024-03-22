@@ -8,12 +8,6 @@ function custom_theme_styles()
     // Check if the URI contains a specific segment indicating you're on a custom page
     if (strpos($uri, '/nelagala/') !== false) {    // Enqueue global styles
         wp_enqueue_style('typekit-fonts', 'https://use.typekit.net/zcb5mzu.css');
-        wp_enqueue_style('google-fonts', 'https://fonts.googleapis.com/css2?family=Playfair+Display:ital@1&display=swap', false);
-        wp_enqueue_style('google-fonts', 'https://fonts.googleapis.com/css2?family=Luxurious+Script&display=swap', false);
-
-        // Get the current request URI
-
-        // Enqueue your custom stylesheets for this condition
         wp_enqueue_style('nelagala-reset-style', get_template_directory_uri() . '/inc/nelagala/css/reset.min.css?' . time());
         wp_enqueue_style('nelagala-style', get_template_directory_uri() . '/inc/nelagala/css/styles.min.css?' . time());
     }
