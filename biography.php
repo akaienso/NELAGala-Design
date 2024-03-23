@@ -1,32 +1,70 @@
 <?php
-get_header();
+global $page_title;
 
-$event_year = get_query_var('nelagala_year');
+$event_year = get_query_var('nelagala_year', date('Y')); // Default to current year if not specified
 
-if (empty($event_year)) {
-    $event_year = date('Y'); // Default to current year if not specified
+// Use the new function to fetch the event post ID
+$event_post_id = fetch_nelagala_event_by_year($event_year);
+
+if ($event_post_id) {
+    // ACF field values
+    $datetime = get_field('nelagala_event_datetime', $event_post_id);
+    $event_title = get_field('nelagala_event_title', $event_post_id);
+    $event_datetime = get_field('nelagala_event_datetime', $event_post_id);
+    $event_date = new DateTime($event_datetime);
+    $display_date = $event_date->format('l, F j, Y'); // Use $event_date, not $datetime
+    // This returns an array for Google Map field
+    $event_location = get_field('nelagala_event_location', $event_post_id);
+    $lat = $event_location['lat'];
+    $lng = $event_location['lng'];
+    $google_api_key = get_field('google_api_key', $event_post_id);
+    $google_geocoding_api_key = get_field('google_geocoding_api_key', $event_post_id);
+    $response = file_get_contents("https://maps.googleapis.com/maps/api/geocode/json?latlng=$lat,$lng&key=$google_geocoding_api_key");
+
+    // echo "<pre>" . $google_api_key . "</pre>";
+    // echo "<pre>" . $google_geocoding_api_key . "</pre>";
+    // echo "<pre>" . $response . "</pre>";
+
+    // Decode the JSON response
+    $data = json_decode($response);
+
+    // Iterate over the address components to find the city and state
+    $venue_city = "";
+    $venue_state = "";
+    foreach ($data->results[0]->address_components as $component) {
+        if (in_array("locality", $component->types)) {
+            $venue_city = $component->long_name;
+        }
+        if (in_array("administrative_area_level_1", $component->types)) {
+            $venue_state = $component->short_name;
+        }
+    }
+    $header_venue_message = get_field('header_venue_message', $event_post_id);
+    $venue_name = get_field('nelagala_venue_name', $event_post_id);
+    $promotional_video = get_field('promotional_video', $event_post_id);
+    $roles_section_headline = get_field('roles_section_headline', $event_post_id);
+    $roles_section_content = get_field('roles_section_content', $event_post_id);
+    $roles = get_field('roles', $event_post_id);
+    $honorees_section_headline = get_field('honorees_section_headline', $event_post_id);
+    $honorees_section_content = get_field('honorees_section_content', $event_post_id);
+    $honorees = get_field('honorees', $event_post_id);
+    $ticket_section_headline = get_field('ticket_section_headline', $event_post_id);
+    $ticket_section_top_content = get_field('ticket_section_top_content', $event_post_id);
+    $ticket_prices = get_field('ticket_prices', $event_post_id);
+    $lodging_section_headline = get_field('lodging_section_headline', $event_post_id);
+    $lodging_section_top_content = get_field('lodging_section_top_content', $event_post_id);
+    $lodging = get_field('lodging', $event_post_id);
+    $sponsorship_section_headline = get_field('sponsorship_section_headline', $event_post_id);
+    $sponsorship_section_top_content = get_field('sponsorship_section_top_content', $event_post_id);
+    $sponsorship_packages = get_field('sponsorship_packages', $event_post_id);
+    $advertising_section_headline = get_field('advertising_section_headline', $event_post_id);
+    $advertising_section_top_content = get_field('advertising_section_top_content', $event_post_id);
+    $advertising_rates = get_field('advertising_rates', $event_post_id);
+
+    // Initialize the array to track missing sections
+    $missing_sections = [];
 }
-
-// Query to fetch the event post by title, which is the year
-$events = new WP_Query(array(
-    'post_type' => 'nelagala_event',
-    'title' => $event_year,
-    'posts_per_page' => 1,
-));
-
-// Define sections and their corresponding ACF field keys
-$sections = [
-    '#about-the-event' => 'nelagala_event_title',
-    '#event-roles' => 'roles',
-    '#honorees' => 'honorees',
-    '#tickets' => 'ticket_prices',
-    '#lodging' => 'lodging',
-    '#sponsorships' => 'sponsorship_packages',
-    '#advertising' => 'advertising_rates',
-];
-
 ?>
-
 <section class="sections">
     <div class="container">
         <div class="nelagala-event">
@@ -36,88 +74,36 @@ $sections = [
                 }
             </style>
 
-            <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
-                    <!-- SECTION: Navigation Sidebar -->
-                    <nav class="event-navigation nav bg_shape">
-                        <div class="burger-container">
-                            <button id="burger" aria-label="Open navigation menu">
-                                <span class="bar topBar"></span>
-                                <span class="bar btmBar"></span>
-                            </button>
-                        </div>
-                        <ul class="menu">
-                            <?php foreach ($sections as $anchor => $field_key) : ?>
-                                <?php
-                                // Check if the field has content or rows (for repeaters)
-                                $value = get_field($field_key);
-                                if ((is_array($value) && !empty($value)) || (!is_array($value) && !empty($value))) : ?>
-                                    <li class="menu-item"><a href="../<?= $anchor ?>"><?= ucfirst(str_replace('-', ' ', substr($anchor, 1))) ?></a></li>
-                                <?php endif; ?>
-                            <?php endforeach; ?>
-                        </ul>
-                    </nav>
-                    <!-- !SECTION: Navigation Sidebar -->
-
-            <?php endwhile;
-            endif; ?>
             <?php
-
-            // ACF field values
-            $event_title = get_field('nelagala_event_title');
-            $event_datetime = get_field('nelagala_event_datetime');
-            $event_date = new DateTime($event_datetime);
-            $display_date = $event_date->format('l, F j, Y'); // Use $event_date, not $datetime
-            // This returns an array for Google Map field
-            $event_location = get_field('nelagala_event_location');
-            $lat = $event_location['lat'];
-            $lng = $event_location['lng'];
-            $google_api_key = get_field('google_api_key');
-            $google_geocoding_api_key = get_field('google_geocoding_api_key');
-            $response = file_get_contents("https://maps.googleapis.com/maps/api/geocode/json?latlng=$lat,$lng&key=$google_geocoding_api_key");
-
-            // echo "<pre>" . $google_api_key . "</pre>";
-            // echo "<pre>" . $google_geocoding_api_key . "</pre>";
-            // echo "<pre>" . $response . "</pre>";
-
-            // Decode the JSON response
-            $data = json_decode($response);
-
-            // Iterate over the address components to find the city and state
-            $venue_city = "";
-            $venue_state = "";
-            foreach ($data->results[0]->address_components as $component) {
-                if (in_array("locality", $component->types)) {
-                    $venue_city = $component->long_name;
-                }
-                if (in_array("administrative_area_level_1", $component->types)) {
-                    $venue_state = $component->short_name;
-                }
-            }
-            $header_venue_message = get_field('header_venue_message');
-            $venue_name = get_field('nelagala_venue_name');
-            $promotional_video = get_field('promotional_video');
-            $roles_section_headline = get_field('roles_section_headline');
-            $roles_section_content = get_field('roles_section_content');
-            $roles = get_field('roles');
-            $honorees_section_headline = get_field('honorees_section_headline');
-            $honorees_section_content = get_field('honorees_section_content');
-            $honorees = get_field('honorees');
-            $ticket_section_headline = get_field('ticket_section_headline');
-            $ticket_section_top_content = get_field('ticket_section_top_content');
-            $ticket_prices = get_field('ticket_prices');
-            $lodging_section_headline = get_field('lodging_section_headline');
-            $lodging_section_top_content = get_field('lodging_section_top_content');
-            $lodging = get_field('lodging');
-            $sponsorship_section_headline = get_field('sponsorship_section_headline');
-            $sponsorship_section_top_content = get_field('sponsorship_section_top_content');
-            $sponsorship_packages = get_field('sponsorship_packages');
-            $advertising_section_headline = get_field('advertising_section_headline');
-            $advertising_section_top_content = get_field('advertising_section_top_content');
-            $advertising_rates = get_field('advertising_rates');
-
-            // Initialize the array to track missing sections
-            $missing_sections = [];
+            // Assuming $event_post_id is fetched earlier as shown in previous examples.
+            if ($event_post_id) :
             ?>
+                <!-- SECTION: Navigation Sidebar -->
+                <nav class="event-navigation nav bg_shape">
+                    <div class="burger-container">
+                        <button id="burger" aria-label="Open navigation menu">
+                            <span class="bar topBar"></span>
+                            <span class="bar btmBar"></span>
+                        </button>
+                    </div>
+                    <ul class="menu">
+                        <?php foreach ($sections as $anchor => $field_key) : ?>
+                            <?php
+                            // Fetching the value from the event using the event post ID
+                            $value = get_field($field_key, $event_post_id);
+                            if ((is_array($value) && !empty($value)) || (!is_array($value) && !empty($value))) : ?>
+                                <li class="menu-item"><a href="../<?= $anchor ?>"><?= ucfirst(str_replace('-', ' ', substr($anchor, 1))) ?></a></li>
+                            <?php endif; ?>
+                        <?php endforeach; ?>
+                    </ul>
+                </nav>
+                <!-- !SECTION: Navigation Sidebar -->
+            <?php
+            endif;
+            ?>
+
+
+
             <main>
                 <!--  SECTION: Event Header -->
 

@@ -18,6 +18,9 @@
         }
     ],
     "liveSassCompile.settings.partialsList": [
-        "/sass/partials/_*.s[ac]ss"
+        "/styles/partials/_*.s[ac]ss"
+    ],
+    "cSpell.words": [
+        "NELA"
     ]
 }

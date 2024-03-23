@@ -4,6 +4,7 @@ $osdia-red: #D31A35;
 $ng-yellow: rgb(240, 189, 51);
 $ng-not-black: rgb(51, 51, 51);
 $ng-not-white: rgb(249, 249, 249);
+$ng-aside: rgba(235, 232, 228, 0.993);
 
 // Navigation Sidebar Colors
 $ng-nav-bg: $osdia-red;
@@ -31,23 +32,34 @@ $color: (
         txt-a: $ng-not-white,
         title-txt: rgb(171, 171, 171),
         divider: $ng-red,
+    ),
+
+    package: (
+        border: rgb(236, 233, 233)
+    ),
+
+    aside: (
+        bg: $ng-aside,
+        border: $ng-not-black
     )
 );
 
 
-// Media Query Breakpoint
-$breakpoint-sm: 576px; 
-$breakpoint-md: 768px;
-$breakpoint-lg: 992px;
-$breakpoint-xl: 1200px;
-$breakpoint-max: 1400px; // 4k resolution
+// Media Query Breakpoints
+$viewport: (
+    sm: 576px,
+    md: 768px,
+    lg: 992px,
+    xl: 1200px,
+    max: 1400px
+);
 
 :root {
-    --ng-media-sm: #{$breakpoint-sm};
-    --ng-media-md: #{$breakpoint-md};
-    --ng-media-lg: #{$breakpoint-lg};
-    --ng-media-xl: #{$breakpoint-xl};
-    --ng-media-max: #{$breakpoint-max};
+    --ng-media-sm: map-get($viewport, sm);
+    --ng-media-md: map-get($viewport, md);
+    --ng-media-lg: map-get($viewport, lg);
+    --ng-media-xl: map-get($viewport, xl);
+    --ng-media-max: map-get($viewport, max);
 
     --ng-black: #{$ng-not-black};
     --ng-white: #{$ng-not-white};

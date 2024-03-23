@@ -14,6 +14,20 @@ function custom_theme_styles()
 }
 add_action('wp_enqueue_scripts', 'custom_theme_styles');
 
+function fetch_nelagala_event_by_year($year) {
+    $event_query = new WP_Query([
+        'post_type' => 'nelagala_event',
+        'title' => $year,
+        'posts_per_page' => 1,
+    ]);
+
+    if ($event_query->have_posts()) {
+        $event_query->the_post();
+        return get_the_ID(); // Returns the post ID of the event
+    }
+
+    return null;
+}
 
 function custom_theme_scripts()
 {
@@ -221,7 +235,6 @@ function find_upcoming_event_year()
     // Return current year as fallback
     return date('Y');
 }
-
 function get_current_event_year_with_ordinal()
 {
     $start_year = 1990; // The year the first event took place

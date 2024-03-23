@@ -1,48 +1,48 @@
 /* custom namespace reset styles for common elements */
 /** wp@rmoore.dev */
 
-.nelagala-event {
-    * {
-        margin: 0;
-        padding: 0;
-        border: 0;
-        font-size: 100%;
-        font: inherit;
-        vertical-align: baseline;
-    }
+// .nelagala-event {
+//     * {
+//         margin: 0;
+//         padding: 0;
+//         border: 0;
+//         font-size: 100%;
+//         font: inherit;
+//         vertical-align: baseline;
+//     }
 
-    ul,
-    ol {
-        list-style-type: none;
-        /* Removes default list styling */
-        margin: 0;
-        /* Resets default margins */
-        padding: 0;
-        /* Resets default padding */
-    }
+//     ul,
+//     ol {
+//         list-style-type: none;
+//         /* Removes default list styling */
+//         margin: 0;
+//         /* Resets default margins */
+//         padding: 0;
+//         /* Resets default padding */
+//     }
 
-    li {
-        /* Resets and styles for list items */
-        margin: 0;
-        padding: 0;
-    }
+//     li {
+//         /* Resets and styles for list items */
+//         margin: 0;
+//         padding: 0;
+//     }
 
-    h1,
-    h2,
-    h3,
-    h4,
-    h5,
-    h6 {
-        margin: 0;
-        /* Resets default margins */
-        padding: 0;
-        /* Resets default padding */
-        font-weight: normal;
-        /* Adjusts font weight */
-        font-size: 100%;
-        /* Resets font size to a known state, you can adjust as needed */
-    }
-    .grid_1200 {
-        overflow: default;
-    }
-}
+//     h1,
+//     h2,
+//     h3,
+//     h4,
+//     h5,
+//     h6 {
+//         margin: 0;
+//         /* Resets default margins */
+//         padding: 0;
+//         /* Resets default padding */
+//         font-weight: normal;
+//         /* Adjusts font weight */
+//         font-size: 100%;
+//         /* Resets font size to a known state, you can adjust as needed */
+//     }
+//     .grid_1200 {
+//         overflow: default;
+//     }
+// }

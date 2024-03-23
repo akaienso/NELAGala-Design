@@ -1,9 +1,9 @@
 :root {
-  --ng-media-sm: 576px;
-  --ng-media-md: 768px;
-  --ng-media-lg: 992px;
-  --ng-media-xl: 1200px;
-  --ng-media-max: 1400px;
+  --ng-media-sm: map-get($viewport, sm);
+  --ng-media-md: map-get($viewport, md);
+  --ng-media-lg: map-get($viewport, lg);
+  --ng-media-xl: map-get($viewport, xl);
+  --ng-media-max: map-get($viewport, max);
   --ng-black: rgb(51, 51, 51);
   --ng-white: rgb(249, 249, 249);
   --ng-red: #d1232f;
@@ -65,7 +65,7 @@ body #top > section:nth-child(4) > div {
   top: 116px;
   margin: 0 auto -204px auto;
 }
-.nelagala-event h1,
+.nelagala-event aside h1,
 .nelagala-event h2,
 .nelagala-event h3,
 .nelagala-event h4,
@@ -110,7 +110,12 @@ body #top > section:nth-child(4) > div {
   border: none;
   background: inherit;
 }
-.nelagala-event header {
+.nelagala-event main {
+  background: var(--ng-section-bg);
+  padding-bottom: 54px;
+  flex-grow: 1;
+}
+.nelagala-event main header {
   width: 100%;
   padding: 0px;
   margin-top: 0;
@@ -122,7 +127,7 @@ body #top > section:nth-child(4) > div {
   overflow: hidden;
   font-family: minion-pro-condensed-subhead, serif;
 }
-.nelagala-event header .header-img {
+.nelagala-event main header .header-img {
   position: absolute;
   top: -302px;
   right: -236px;
@@ -130,22 +135,22 @@ body #top > section:nth-child(4) > div {
   transform: rotate(-13deg);
   opacity: 0.4;
 }
-.nelagala-event header .header-img-main {
+.nelagala-event main header .header-img-main {
   height: 189px;
   margin-top: -39px;
 }
-.nelagala-event header .header-img-main img {
+.nelagala-event main header .header-img-main img {
   transition: transform 0.5s ease, opacity 0.5s ease;
   height: 100%;
   width: 100%;
   object-fit: cover;
   object-position: center 75%;
 }
-.nelagala-event header .col {
+.nelagala-event main header .col {
   min-width: 50%;
   padding: 20px 10px 30px;
 }
-.nelagala-event header .divider::before {
+.nelagala-event main header .divider::before {
   content: "";
   position: absolute;
   right: 0;
@@ -159,7 +164,7 @@ body #top > section:nth-child(4) > div {
   background-color: #d1232f;
   /* Border color */
 }
-.nelagala-event header h1.title {
+.nelagala-event main header h1.title {
   display: inline;
   text-align: center;
   font-family: minion-pro-condensed, serif;
@@ -169,10 +174,10 @@ body #top > section:nth-child(4) > div {
   margin: -10px 0;
   text-transform: uppercase;
 }
-.nelagala-event header h1:not(:has(span)) {
+.nelagala-event main header h1:not(:has(span)) {
   font-size: 0.8em;
 }
-.nelagala-event header h2 {
+.nelagala-event main header h2 {
   font-family: minion-pro-condensed-subhead, serif;
   font-weight: 600;
   font-size: 3em;
@@ -185,7 +190,7 @@ body #top > section:nth-child(4) > div {
   position: relative;
   z-index: 1;
 }
-.nelagala-event header h3 {
+.nelagala-event main header h3 {
   font-family: minion-pro-condensed-subhead, serif;
   font-weight: 400;
   font-style: italic;
@@ -195,12 +200,12 @@ body #top > section:nth-child(4) > div {
   margin: 0, auto, 10px, auto;
   text-transform: unset;
 }
-.nelagala-event header h3 sup {
+.nelagala-event main header h3 sup {
   font-size: 2em;
   top: 0.2em;
 }
-.nelagala-event header .pre-title,
-.nelagala-event header .post-title {
+.nelagala-event main header .pre-title,
+.nelagala-event main header .post-title {
   position: relative;
   display: flex;
   align-items: center;
@@ -212,26 +217,26 @@ body #top > section:nth-child(4) > div {
   margin: 0;
   line-height: 58px;
 }
-.nelagala-event header .pre-title .yr,
-.nelagala-event header .post-title .yr {
+.nelagala-event main header .pre-title .yr,
+.nelagala-event main header .post-title .yr {
   font-size: 1.7em;
 }
-.nelagala-event header .pre-title .yr sup,
-.nelagala-event header .post-title .yr sup {
+.nelagala-event main header .pre-title .yr sup,
+.nelagala-event main header .post-title .yr sup {
   font-size: 0.7em;
   margin-left: 0.3em;
 }
-.nelagala-event header .post-title {
+.nelagala-event main header .post-title {
   font-size: 5em;
   position: relative;
   top: 0em;
   display: block;
 }
-.nelagala-event header .col-2 {
+.nelagala-event main header .col-2 {
   text-align: start;
   padding-left: 20px;
 }
-.nelagala-event header .col-2 .col-2-title {
+.nelagala-event main header .col-2 .col-2-title {
   font-family: barlow, sans-serif;
   font-weight: 600;
   color: #ffffff;
@@ -241,7 +246,7 @@ body #top > section:nth-child(4) > div {
   margin: 0;
   line-height: 1.1em;
 }
-.nelagala-event header .col-2 .text {
+.nelagala-event main header .col-2 .text {
   font-family: minion-pro-condensed-subhead, serif;
   font-weight: 400;
   font-style: italic;
@@ -251,7 +256,7 @@ body #top > section:nth-child(4) > div {
   margin: 0, auto, 10px, auto;
   text-transform: unset;
 }
-.nelagala-event header h4 {
+.nelagala-event main header h4 {
   font-family: minion-pro-condensed-subhead, serif;
   font-weight: 600;
   font-style: italic;
@@ -264,7 +269,7 @@ body #top > section:nth-child(4) > div {
   padding: 10px 0;
   z-index: 10000 !important;
 }
-.nelagala-event header .row {
+.nelagala-event main header .row {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -273,35 +278,43 @@ body #top > section:nth-child(4) > div {
   margin: -40px auto -15px auto;
   position: relative;
 }
-.nelagala-event header .row, .nelagala-event header .title-wrap, .nelagala-event header .post-title, .nelagala-event header h4 {
-  position: relative; /* Required for z-index to work */
-  z-index: 10; /* Ensures they stay in front of the image */
+.nelagala-event main header .row,
+.nelagala-event main header .title-wrap,
+.nelagala-event main header .post-title,
+.nelagala-event main header h4 {
+  position: relative;
+  /* Required for z-index to work */
+  z-index: 10;
+  /* Ensures they stay in front of the image */
 }
-.nelagala-event header .header-img-main {
-  z-index: 1; /* Ensure the image stays behind the .row and h4 elements */
-  position: relative; /* Adjust based on your layout needs */
+.nelagala-event main header .header-img-main {
+  z-index: 1;
+  /* Ensure the image stays behind the .row and h4 elements */
+  position: relative;
+  /* Adjust based on your layout needs */
   height: 189px;
-  background-size: 110%; /* Start zoomed in */
+  background-size: 110%;
+  /* Start zoomed in */
   background-position: center 75%;
   transition: background-size 0.5s ease, background-position 0.5s ease;
   width: 100%;
 }
-.nelagala-event header .column {
+.nelagala-event main header .column {
   flex: 1;
   padding: 10px;
 }
-.nelagala-event header .column h3 {
+.nelagala-event main header .column h3 {
   font-family: minion-pro-condensed-subhead, serif;
   font-size: 2em;
   font-style: italic;
 }
-.nelagala-event header .column h3 a {
+.nelagala-event main header .column h3 a {
   font-weight: 800;
   padding-right: 20px;
   border-right: 1px solid var(--ng-header-txt);
   margin-right: 20px;
 }
-.nelagala-event header a {
+.nelagala-event main header a {
   text-decoration: none;
   color: #ffffff;
   font-weight: 500;
@@ -309,7 +322,7 @@ body #top > section:nth-child(4) > div {
   padding: 3px;
   border-bottom: 1 px solid var(--ng-header-bg);
 }
-.nelagala-event header a:hover {
+.nelagala-event main header a:hover {
   text-decoration: none;
   color: var(--ng-red);
   font-weight: 500;
@@ -317,19 +330,15 @@ body #top > section:nth-child(4) > div {
   padding: 3px;
   border-bottom: 1px solid var(--ng-header-txt);
 }
-.nelagala-event header p {
+.nelagala-event main header p {
   font-size: 2.7em;
-}
-.nelagala-event main {
-  background: var(--ng-section-bg);
-  padding-bottom: 54px;
-  flex-grow: 1;
 }
 .nelagala-event main section {
   margin-bottom: 0;
   width: 80%;
   padding: 20px;
   margin: 0 auto;
+  max-width: 1100px;
 }
 .nelagala-event main > section {
   margin-bottom: 1em;
@@ -378,12 +387,74 @@ body #top > section:nth-child(4) > div {
   aspect-ratio: 16/9;
   width: 100%;
 }
-.nelagala-event main #about-the-event .last {
-  margin-bottom: 50px;
+.nelagala-event main #about-the-event {
+  display: flex;
+  flex-direction: row;
+  /* Default to row for desktop */
+  justify-content: space-between;
+  max-width: 1000px;
+  /* Media query for smaller screens, adjust breakpoint as needed */
 }
 .nelagala-event main #about-the-event p {
   font-size: 18px;
+  /* Adjust if needed for desktop */
   margin-bottom: 20px;
+}
+.nelagala-event main #about-the-event .last {
+  margin-bottom: 50px;
+}
+.nelagala-event main #about-the-event article {
+  width: 64%;
+  /* Default for desktop */
+}
+.nelagala-event main #about-the-event aside {
+  display: block;
+  outline: 0.01em solid rgb(51, 51, 51);
+  background-color: rgba(235, 232, 228, 0.993);
+  border-radius: 20px 20px 0 0;
+  width: 36%;
+  margin: 0 -3em 0 20px;
+  overflow: hidden;
+  padding: 20px;
+  box-sizing: border-box;
+}
+.nelagala-event main #about-the-event aside > img {
+  display: block;
+  width: calc(100% + 40px);
+  max-width: none;
+  margin: -20px -20px 20px -20px;
+  height: auto;
+}
+.nelagala-event main #about-the-event aside h2 {
+  font-size: 1.24em;
+  line-height: 1.45em;
+  margin-bottom: 20px;
+  font-family: minion-pro-condensed, serif;
+  font-weight: 700;
+  font-style: italic;
+  width: 80%;
+  color: rgb(40, 75, 103);
+}
+.nelagala-event main #about-the-event .has-nv-dark-bg-color.has-text-color {
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+@media (max-width: 767px) {
+  .nelagala-event main #about-the-event {
+    flex-direction: column;
+    /* Stack elements vertically on small screens */
+  }
+  .nelagala-event main #about-the-event article {
+    width: 100%;
+    /* Take full width on smaller screens */
+  }
+  .nelagala-event main #about-the-event aside {
+    width: 100%;
+    /* Take full width on smaller screens */
+    margin: 0;
+    /* Adjust margin as needed for smaller screens */
+    /* Adjust other styles as needed for smaller screens */
+  }
 }
 .nelagala-event main #event-roles h3,
 .nelagala-event main #honorees h3 {
@@ -458,34 +529,6 @@ body #top > section:nth-child(4) > div {
   margin-bottom: 1em;
   line-height: 1.5em;
 }
-.nelagala-event #about-the-event {
-  display: flex;
-  flex-direction: column;
-}
-@media (min-width: 768px) {
-  .nelagala-event #about-the-event { /* Adjust this value based on your breakpoint for larger screens */
-    flex-direction: row;
-    justify-content: space-between;
-  }
-  .nelagala-event #about-the-event article {
-    width: 70%;
-  }
-  .nelagala-event #about-the-event aside {
-    width: 30%;
-    border: 1px solid #ccc; /* Customize the border as needed */
-    padding: 20px; /* Adjust padding as needed */
-    box-sizing: border-box; /* Ensures padding is included in the width */
-    margin: 0 0 0 20px; /* Adjust margin as needed */
-  }
-  .nelagala-event #about-the-event aside h2 {
-    font-size: 22px;
-    margin-bottom: 20px;
-  }
-}
-.nelagala-event #about-the-event .has-nv-dark-bg-color.has-text-color {
-  font-size: 18px;
-  margin-bottom: 20px;
-}
 .nelagala-event .packages {
   display: flex;
   flex-wrap: wrap;
@@ -542,7 +585,7 @@ body #top > section:nth-child(4) > div {
 .nelagala-event .packages .package p {
   font-size: 16px;
 }
-.nelagala-event a button {
+.nelagala-event .packages .package a button {
   font-family: barlow, sans-serif;
   font-weight: 500;
   font-style: normal;
@@ -559,7 +602,7 @@ body #top > section:nth-child(4) > div {
   background-color: rgb(249, 249, 249);
   color: #d1232f;
 }
-.nelagala-event a button:hover {
+.nelagala-event .packages .package a button:hover {
   background-color: #d1232f;
   color: rgb(249, 249, 249);
 }
@@ -587,12 +630,62 @@ body #top > section:nth-child(4) > div {
   font-size: 19px;
   color: #707070;
 }
-@media (max-width: var(--ng-media-xl)) {
+@media (max-width: 1200px) {
   .nelagala-event {
     top: -60px;
   }
 }
-@media (max-width: var(--ng-media-lg)) {
+@media (max-width: 992px) {
+  .nelagala-event header {
+    border-bottom: 0.25em solid var(--ng-red);
+  }
+  .nelagala-event header .row {
+    flex-wrap: wrap;
+  }
+  .nelagala-event header .row .col {
+    min-width: 100%;
+  }
+  .nelagala-event header .row .col-2 {
+    text-align: center;
+  }
+  .nelagala-event header .row .divider::before {
+    display: none;
+  }
+  .nelagala-event header .row h1 {
+    width: 90%;
+    font-size: 2em;
+    padding: 0;
+  }
+  .nelagala-event header .row h1 .yr {
+    font-size: 1.4em;
+  }
+  .nelagala-event header .row h1 .yr sup {
+    font-size: 0.8em;
+  }
+  .nelagala-event header .row h1 .title {
+    display: block;
+    font-family: minion-pro-condensed-subhead, serif;
+    font-size: 1.3em;
+    color: var(--ng-header-title-txt);
+    line-height: 0.9em;
+    margin: 0px 0;
+    text-transform: uppercase;
+  }
+  .nelagala-event header .row h1 .gala {
+    font-size: 2.5em;
+    position: relative;
+    top: -0.8em;
+    display: block;
+  }
+  .nelagala-event header .row h1:not(:has(span)) {
+    font-size: 0.8em;
+  }
+  .nelagala-event .header-img-main {
+    height: 179px;
+  }
+  .nelagala-event .col-2 {
+    display: none;
+  }
   .nelagala-event .container {
     max-width: fit-content;
   }
@@ -606,56 +699,6 @@ body #top > section:nth-child(4) > div {
     width: 100%;
     flex-wrap: wrap;
     margin: 0px auto 0 auto;
-  }
-  .nelagala-event header {
-    border-bottom: 0.25em solid var(--ng-red);
-  }
-  .nelagala-event header h1 {
-    width: 90%;
-    font-size: 2em;
-    padding: 0;
-  }
-  .nelagala-event header .row {
-    flex-wrap: wrap;
-  }
-  .nelagala-event header .col {
-    min-width: 100%;
-  }
-  .nelagala-event header .col-2 {
-    text-align: center;
-  }
-  .nelagala-event header .divider::before {
-    display: none;
-  }
-  .nelagala-event header h1 .yr {
-    font-size: 1.4em;
-  }
-  .nelagala-event header h1 .yr sup {
-    font-size: 0.8em;
-  }
-  .nelagala-event header h1 .title {
-    display: block;
-    font-family: minion-pro-condensed-subhead, serif;
-    font-size: 1.3em;
-    color: var(--ng-header-title-txt);
-    line-height: 0.9em;
-    margin: 0px 0;
-    text-transform: uppercase;
-  }
-  .nelagala-event header h1 .gala {
-    font-size: 2.5em;
-    position: relative;
-    top: -0.8em;
-    display: block;
-  }
-  .nelagala-event header h1:not(:has(span)) {
-    font-size: 0.8em;
-  }
-  .nelagala-event .header-img-main {
-    height: 179px;
-  }
-  .nelagala-event .col-2 {
-    display: none;
   }
   .nelagala-event .row-container,
   .nelagala-event .packages {
