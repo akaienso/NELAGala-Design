@@ -1,5 +1,15 @@
 <?php 
 $ng_data = apply_filters('nelagala_template_data_navigation', []);
+$path = $args['path'] ?? '';
+$event_year = $args['event_year'] ?? '';
+
+// Concatenate $path and $event_year. If both are empty, $base_url will be an empty string.
+$base_url = $path . $event_year;
+
+// This ensures $base_url is set to an empty string if both $path and $event_year are unset or empty.
+if (empty($path) && empty($event_year)) {
+    $base_url = '';
+}
 ?>
 
 <!-- SECTION: Navigation Sidebar -->
@@ -49,7 +59,7 @@ $ng_data = apply_filters('nelagala_template_data_navigation', []);
             $headline = isset($ng_data[$fields['headline_field']]) ? $ng_data[$fields['headline_field']] : null;
             $content = isset($ng_data[$fields['content_field']]) ? $ng_data[$fields['content_field']] : null;
             if (!empty($headline) && !empty($content)) : ?>
-                <li class="menu-item"><a href="<?= esc_url($anchor); ?>"><?= esc_html($headline); ?></a></li>
+                <li class="menu-item"><a href="<?= $base_url . esc_url($anchor); ?>"><?= esc_html($headline); ?></a></li>
         <?php endif;
         endforeach;
         ?>

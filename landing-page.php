@@ -10,9 +10,7 @@ get_header();
 <section class="sections">
     <div class="container">
         <div class="nelagala-event">
-            <?php
-
-            if (!empty($ng)) {
+            <?php if (!empty($ng)) { 
 
                 // ACF field values
                 $show_full_event_data = $ng['full_event_switch'];
@@ -72,17 +70,21 @@ get_header();
                 $advertising_section_top_content = $ng['advertising_section_top_content'];
                 $advertising_rates = $ng['advertising_rates'];
 
+                // NOTE: Display Sidebar Navigation
                 if ($show_full_event_data) :
                     // Display the navigation sidebar
                     $ng_data = fetch_nelagala_event_by_year($event_year);
                     nelagala_pass_template_data($ng_data, 'navigation');
                     get_template_part('inc/nelagala/template-parts/sidebar-nav');
-                endif; ?>
+                endif; 
+                ?>
                 <!-- SECTION: Display NELAGala Event Content -->
                 <main>
-                    <?php                    
-                    nelagala_pass_template_data($ng_data, 'header'); 
-                    get_template_part('inc/nelagala/template-parts/event-header'); 
+                    <?php
+                    
+                    // NOTE: Display the event header
+                    nelagala_pass_template_data($ng_data, 'header');
+                    get_template_part('inc/nelagala/template-parts/event-header');
 
                     if ($show_full_event_data) : ?>
                         <!--  SECTION: About the Event -->
@@ -112,7 +114,7 @@ get_header();
                                 <h2><?php echo $roles_section_headline ?></h2>
                                 <?php if ($roles_section_content) : ?>
                                     <span class="sub-text"><?php echo $roles_section_content; ?></span>
-                                <?php endif; 
+                                <?php endif;
                                 while (have_rows('roles')) : the_row();
                                     $role_description = get_sub_field('role');
                                     $participant_id = get_sub_field('participant');
@@ -168,7 +170,7 @@ get_header();
                                 <h2><?php echo esc_html($honorees_sections_headline) ?></h2>
                                 <?php if ($honorees_section_content) : ?>
                                     <span class="sub-text"><?php echo $honorees_section_content; ?></span>
-                                <?php endif; 
+                                <?php endif;
                                 while (have_rows('honorees')) : the_row();
                                     $honor_description = get_sub_field('honor');
                                     $recipient_id = get_sub_field('recipient');
@@ -225,8 +227,8 @@ get_header();
                             <section id="tickets" class="tickets">
                                 <h2><?php echo esc_html($ticket_section_headline) ?></h2>
                                 <?php if ($ticket_section_top_content) : ?>
-                                <span class="sub-text"><?php echo $ticket_section_top_content; ?></span>
-                                <?php endif; ?> 
+                                    <span class="sub-text"><?php echo $ticket_section_top_content; ?></span>
+                                <?php endif; ?>
                                 <div class="packages">
                                     <?php
                                     while (have_rows('ticket_prices')) : the_row();
@@ -258,9 +260,9 @@ get_header();
                         <section id="location" class="hotels-cards">
                             <h2><?php echo esc_html($lodging_section_headline) ?></h2>
                             <?php if ($lodging_section_top_content) : ?>
-                            <span class="sub-text"><?php echo $lodging_section_top_content; ?></span>
-                            <?php endif; 
-                             if (have_rows('lodging')) : ?>
+                                <span class="sub-text"><?php echo $lodging_section_top_content; ?></span>
+                            <?php endif;
+                            if (have_rows('lodging')) : ?>
                                 <div class="packages">
                                     <?php while (have_rows('lodging')) : the_row();
                                         $name = get_sub_field('property');
@@ -293,7 +295,7 @@ get_header();
                             <section id="sponsorships" class="sponsorships">
                                 <h2><?php echo esc_html($sponsorship_section_headline) ?></h2>
                                 <?php if ($sponsorship_section_top_content) : ?>
-                                <span class="sub-text"><?php echo $sponsorship_section_top_content; ?></span>
+                                    <span class="sub-text"><?php echo $sponsorship_section_top_content; ?></span>
                                 <?php endif; ?> <div class="packages">
                                     <?php
                                     while (have_rows('sponsorship_packages')) : the_row();
@@ -334,8 +336,8 @@ get_header();
                             <section id="advertising" class="advertising">
                                 <h2><?php echo esc_html($advertising_section_headline) ?></h2>
                                 <?php if ($advertising_section_top_content) : ?>
-                                <span class="sub-text"><?php echo $advertising_section_top_content; ?></span>
-                                <?php endif; ?> 
+                                    <span class="sub-text"><?php echo $advertising_section_top_content; ?></span>
+                                <?php endif; ?>
                                 <div class="packages">
                                     <?php
                                     while (have_rows('advertising_rates')) : the_row();
