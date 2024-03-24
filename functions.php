@@ -1,91 +1,6 @@
 <?
 global $nelagala_event_post_id;
 
-function custom_theme_styles()
-{
-    $uri = $_SERVER['REQUEST_URI'];
-
-    // Check if the URI contains a specific segment indicating you're on a custom page
-    if (strpos($uri, '/nelagala/') !== false) {    // Enqueue global styles
-        wp_enqueue_style('typekit-fonts', 'https://use.typekit.net/zcb5mzu.css');
-        wp_enqueue_style('nelagala-reset-style', get_template_directory_uri() . '/inc/nelagala/css/reset.min.css?' . time());
-        wp_enqueue_style('nelagala-style', get_template_directory_uri() . '/inc/nelagala/css/styles.min.css?' . time());
-    }
-}
-add_action('wp_enqueue_scripts', 'custom_theme_styles');
-
-function fetch_nelagala_event_by_year($year) {
-    $event_query = new WP_Query([
-        'post_type' => 'nelagala_event',
-        'title' => $year,
-        'posts_per_page' => 1,
-    ]);
-
-    if ($event_query->have_posts()) {
-        $event_query->the_post();
-        return get_the_ID(); // Returns the post ID of the event
-    }
-
-    return null;
-}
-
-function custom_theme_scripts()
-{
-
-    // Get the current request URI
-    $uri = $_SERVER['REQUEST_URI'];
-
-    // Check if the URI contains a specific segment indicating you're on a custom page
-    if (strpos($uri, '/nelagala/') !== false) {
-
-        $google_api_key = get_field('google_api_key');
-        $google_geocoding_api_key = get_field('google_geocoding_api_key');
-
-        // Enqueue Google Maps API script
-        wp_enqueue_script('google-maps-api', 'https://maps.googleapis.com/maps/api/js?key=' . $google_api_key . '&callback=initMap', array(), null, true);
-
-        // Enqueue your custom script
-        wp_enqueue_script('nelagala-script', get_template_directory_uri() . '/inc/nelagala/js/script.js', array('google-maps-api'), null, true);
-        //     // Localize the script with the geocoding API key, if needed.
-        if (!empty($google_api_key)) {
-            wp_localize_script('nelagala-script', 'geocodingData', ['geocodingApiKey' => $google_geocoding_api_key]);
-        }
-    }
-}
-
-function display_event_date_countdown($event_date, $event_datetime) {
-    $current_timestamp = time(); // Current Unix timestamp
-    $event_timestamp = strtotime($event_datetime);
-    $one_week_before_event = $event_timestamp - (7 * 24 * 60 * 60); // One week before event
-
-    // Display "Save the Date" if more than one week before the event
-    if ($current_timestamp < $one_week_before_event) {
-        echo "<h2>Save the Date</h2>";
-    } 
-    // Otherwise, if within one week, display the countdown container
-    else if ($current_timestamp < $event_timestamp) {
-        echo "<div id='countdown' data-event-time='{$event_timestamp}'></div>";
-    }
-}
-
-function add_async_defer_attribute($tag, $handle)
-{
-    // Add async and defer attributes to specific scripts
-    if ('google-maps-api' === $handle) {
-        return str_replace(' src', ' async defer src', $tag);
-    }
-    return $tag;
-}
-add_filter('script_loader_tag', 'add_async_defer_attribute', 10, 2);
-
-add_action('wp_enqueue_scripts', 'custom_theme_scripts');
-
-function my_acf_init()
-{
-    acf_update_setting('google_api_key', 'AIzaSyBGZLfom_9gzVfPI39FCQ1MHWGxNjxUqDg');
-}
-add_action('acf/init', 'my_acf_init');
-
 function nelagala_add_query_vars($vars)
 {
     $vars[] = 'nelagala_year'; // For filtering events by year
@@ -95,21 +10,45 @@ function nelagala_add_query_vars($vars)
 }
 add_filter('query_vars', 'nelagala_add_query_vars');
 
-function nelagala_custom_rewrite_rules()
+function find_upcoming_event_year()
 {
-    // Matches: /nelagala/2024/
-    add_rewrite_rule('^nelagala/([0-9]{4})/?$', 'index.php?post_type=nelagala_event&nelagala_year=$matches[1]', 'top');
+    // Set up a query for nelagala_event posts ordered by date, ascending
+    $args = array(
+        'post_type' => 'nelagala_event',
+        'posts_per_page' => 1, // We only need the closest future event
+        'meta_key' => 'nelagala_event_datetime',
+        'orderby' => 'meta_value',
+        'order' => 'ASC',
+        'meta_query' => array(
+            array(
+                'key' => 'nelagala_event_datetime',
+                'value' => date('Y-m-d H:i:s'), // Current date and time
+                'compare' => '>=', // Looking for dates in the future
+                'type' => 'DATETIME'
+            )
+        )
+    );
+    $query = new WP_Query($args);
 
-    // Matches: /nelagala/2024/honorees/, /nelagala/2024/lodging/, etc.
-    add_rewrite_rule('^nelagala/([0-9]{4})/(honorees|lodging|sponsorships|advertising)/?$', 'index.php?post_type=nelagala_event&nelagala_year=$matches[1]&nelagala_info=$matches[2]', 'top');
+    // If we have posts, extract the year from the nelagala_event_datetime
+    if ($query->have_posts()) {
+        $query->the_post();
+        $datetime = get_field('nelagala_event_datetime');
+        wp_reset_postdata(); // Always reset postdata after custom queries
 
-    // Matches: /nelagala/2024/honorees/name-of-person
-    add_rewrite_rule('^nelagala/([0-9]{4})/(honorees)/([^/]+)/?$', 'index.php?post_type=nelagala_event&nelagala_year=$matches[1]&nelagala_info=$matches[2]&nelagala_participant_name=$matches[3]', 'top');
+        // Assuming the date is stored in a format PHP can interpret, like 'Y-m-d H:i:s'
+        $eventYear = date('Y', strtotime($datetime));
+        return $eventYear;
+    }
 
-    // Matches: /nelagala/first-last
-    add_rewrite_rule('^nelagala/([a-z0-9-]+)/?$', 'index.php?post_type=nelagala_event&nelagala_participant_name=$matches[1]', 'top');
+    // Return current year as fallback
+    return date('Y');
 }
-add_action('init', 'nelagala_custom_rewrite_rules');
+function nelagala_pass_template_data($data, $part) {
+    add_filter("nelagala_template_data_{$part}", function() use ($data) {
+        return $data;
+    });
+}
 
 function nelagala_template_include($template)
 {
@@ -201,40 +140,115 @@ function nelagala_template_include($template)
 }
 add_filter('template_include', 'nelagala_template_include');
 
-function find_upcoming_event_year()
-{
-    // Set up a query for nelagala_event posts ordered by date, ascending
+function fetch_nelagala_event_by_year($event_year) {
+    // Query for the event post using the year as the title
     $args = array(
         'post_type' => 'nelagala_event',
-        'posts_per_page' => 1, // We only need the closest future event
-        'meta_key' => 'nelagala_event_datetime',
-        'orderby' => 'meta_value',
-        'order' => 'ASC',
-        'meta_query' => array(
-            array(
-                'key' => 'nelagala_event_datetime',
-                'value' => date('Y-m-d H:i:s'), // Current date and time
-                'compare' => '>=', // Looking for dates in the future
-                'type' => 'DATETIME'
-            )
-        )
+        'posts_per_page' => 1,
+        'title' => $event_year,
     );
+
     $query = new WP_Query($args);
 
-    // If we have posts, extract the year from the nelagala_event_datetime
     if ($query->have_posts()) {
-        $query->the_post();
-        $datetime = get_field('nelagala_event_datetime');
-        wp_reset_postdata(); // Always reset postdata after custom queries
-
-        // Assuming the date is stored in a format PHP can interpret, like 'Y-m-d H:i:s'
-        $eventYear = date('Y', strtotime($datetime));
-        return $eventYear;
+        while ($query->have_posts()) {
+            $query->the_post();
+            // Assuming ACF is used, fetch all fields for the post
+            $event_data = get_fields();
+        }
+        wp_reset_postdata(); // Always reset after using the_post()
+        return $event_data; // Return all the ACF fields for the post
     }
 
-    // Return current year as fallback
-    return date('Y');
+    return []; // Return an empty array if no post found
 }
+
+function custom_theme_styles()
+{
+    $uri = $_SERVER['REQUEST_URI'];
+
+    // Check if the URI contains a specific segment indicating you're on a custom page
+    if (strpos($uri, '/nelagala/') !== false) {    // Enqueue global styles
+        wp_enqueue_style('typekit-fonts', 'https://use.typekit.net/zcb5mzu.css');
+        wp_enqueue_style('nelagala-reset-style', get_template_directory_uri() . '/inc/nelagala/css/reset.min.css?' . time());
+        wp_enqueue_style('nelagala-style', get_template_directory_uri() . '/inc/nelagala/css/styles.min.css?' . time());
+    }
+}
+add_action('wp_enqueue_scripts', 'custom_theme_styles');
+
+function custom_theme_scripts()
+{
+
+    // Get the current request URI
+    $uri = $_SERVER['REQUEST_URI'];
+
+    // Check if the URI contains a specific segment indicating you're on a custom page
+    if (strpos($uri, '/nelagala/') !== false) {
+
+        $google_api_key = get_field('google_api_key');
+        $google_geocoding_api_key = get_field('google_geocoding_api_key');
+
+        // Enqueue Google Maps API script
+        wp_enqueue_script('google-maps-api', 'https://maps.googleapis.com/maps/api/js?key=' . $google_api_key . '&callback=initMap', array(), null, true);
+
+        // Enqueue your custom script
+        wp_enqueue_script('nelagala-script', get_template_directory_uri() . '/inc/nelagala/js/script.js', array('google-maps-api'), null, true);
+        //     // Localize the script with the geocoding API key, if needed.
+        if (!empty($google_api_key)) {
+            wp_localize_script('nelagala-script', 'geocodingData', ['geocodingApiKey' => $google_geocoding_api_key]);
+        }
+    }
+}
+
+function display_event_date_countdown($event_date, $event_datetime) {
+    $current_timestamp = time(); // Current Unix timestamp
+    $event_timestamp = strtotime($event_datetime);
+    $one_week_before_event = $event_timestamp - (7 * 24 * 60 * 60); // One week before event
+
+    // Display "Save the Date" if more than one week before the event
+    if ($current_timestamp < $one_week_before_event) {
+        echo "<h2>Save the Date</h2>";
+    } 
+    // Otherwise, if within one week, display the countdown container
+    else if ($current_timestamp < $event_timestamp) {
+        echo "<div id='countdown' data-event-time='{$event_timestamp}'></div>";
+    }
+}
+
+function add_async_defer_attribute($tag, $handle)
+{
+    // Add async and defer attributes to specific scripts
+    if ('google-maps-api' === $handle) {
+        return str_replace(' src', ' async defer src', $tag);
+    }
+    return $tag;
+}
+add_filter('script_loader_tag', 'add_async_defer_attribute', 10, 2);
+add_action('wp_enqueue_scripts', 'custom_theme_scripts');
+
+function my_acf_init()
+{
+    acf_update_setting('google_api_key', 'AIzaSyBGZLfom_9gzVfPI39FCQ1MHWGxNjxUqDg');
+}
+add_action('acf/init', 'my_acf_init');
+
+
+function nelagala_custom_rewrite_rules()
+{
+    // Matches: /nelagala/2024/
+    add_rewrite_rule('^nelagala/([0-9]{4})/?$', 'index.php?post_type=nelagala_event&nelagala_year=$matches[1]', 'top');
+
+    // Matches: /nelagala/2024/honorees/, /nelagala/2024/lodging/, etc.
+    add_rewrite_rule('^nelagala/([0-9]{4})/(honorees|lodging|sponsorships|advertising)/?$', 'index.php?post_type=nelagala_event&nelagala_year=$matches[1]&nelagala_info=$matches[2]', 'top');
+
+    // Matches: /nelagala/2024/honorees/name-of-person
+    add_rewrite_rule('^nelagala/([0-9]{4})/(honorees)/([^/]+)/?$', 'index.php?post_type=nelagala_event&nelagala_year=$matches[1]&nelagala_info=$matches[2]&nelagala_participant_name=$matches[3]', 'top');
+
+    // Matches: /nelagala/first-last
+    add_rewrite_rule('^nelagala/([a-z0-9-]+)/?$', 'index.php?post_type=nelagala_event&nelagala_participant_name=$matches[1]', 'top');
+}
+add_action('init', 'nelagala_custom_rewrite_rules');
+
 function get_current_event_year_with_ordinal()
 {
     $start_year = 1990; // The year the first event took place
@@ -299,20 +313,45 @@ function pass_acf_to_js()
 }
 add_action('wp_enqueue_scripts', 'pass_acf_to_js');
 
-
-// function custom_document_title_parts($title) {
-//     global $page_title; // Make sure this is the same variable used in your template
-
-//     if (!empty($page_title)) {
-//         $title['title'] = strip_tags($page_title); // Use strip_tags() to remove HTML tags like <sup>
-//     }
-
-//     return $title;
-// }
-
-add_filter('document_title_parts', function ($title) {
+function nelagala_generate_document_title($title) {
+    // Your logic to determine the title
+    // This can be based on the current post, query vars, etc.
     if (is_post_type_archive('nelagala_event')) {
-        $title['title'] = 'The National Education & Leadership Awards Gala'; // Change this to your desired title
+        $title['title'] = 'The National Education & Leadership Awards Gala';
     }
+    // Extend with more conditions as needed
+
     return $title;
-});
+}
+add_filter('document_title_parts', 'nelagala_generate_document_title');
+
+function fetch_event_venue_details($event_location, $google_geocoding_api_key) {
+    if (!isset($event_location['lat'], $event_location['lng'])) {
+        // Handle the error appropriately if latitude or longitude are missing
+        return ['error' => 'Latitude or longitude missing'];
+    }
+    $lat = $event_location['lat'];
+    $lng = $event_location['lng'];
+
+    $response = file_get_contents("https://maps.googleapis.com/maps/api/geocode/json?latlng=$lat,$lng&key=$google_geocoding_api_key");
+    $data = json_decode($response, true); // Decoding to an associative array for easier access
+
+    $venue_city = '';
+    $venue_state = '';
+
+    if (!empty($data['results'][0]['address_components'])) {
+        foreach ($data['results'][0]['address_components'] as $component) {
+            if (in_array('locality', $component['types'])) {
+                $venue_city = $component['long_name'];
+            } elseif (in_array('administrative_area_level_1', $component['types'])) {
+                $venue_state = $component['short_name'];
+            }
+        }
+    }
+
+    return [
+        'city' => $venue_city,
+        'state' => $venue_state,
+    ];
+}
+

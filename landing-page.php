@@ -3,187 +3,93 @@ global $page_title;
 
 $event_year = get_query_var('nelagala_year', date('Y')); // Default to current year if not specified
 
-// Use the new function to fetch the event post ID
-$event_post_id = fetch_nelagala_event_by_year($event_year);
+$ng = fetch_nelagala_event_by_year($event_year);
 
-// Define sections and their corresponding ACF field keys
-$sections = [
-    '#about-the-event' => [
-        'content_field' => 'nelagala_event_title', 
-        'headline_field' => 'about_sidebar_link_label',
-    ],
-    '#event-roles' => [
-        'content_field' => 'roles',
-        'headline_field' => 'roles_sidebar_link_label',
-    ],
-    '#honorees' => [
-        'content_field' => 'honorees',
-        'headline_field' => 'honorees_sidebar_link_label',
-    ],
-    '#tickets' => [
-        'content_field' => 'ticket_prices',
-        'headline_field' => 'tickets_sidebar_link_label',
-    ],
-    '#lodging' => [
-        'content_field' => 'lodging',
-        'headline_field' => 'lodging_sidebar_link_label',
-    ],
-    '#sponsorships' => [
-        'content_field' => 'sponsorship_packages',
-        'headline_field' => 'sponsorship_sidebar_link_label',
-    ],
-    '#advertising' => [
-        'content_field' => 'advertising_rates',
-        'headline_field' => 'advertising_sidebar_link_label',
-    ]
-];
-if ($event_post_id) {
-    // Setting the global $post object so that functions like the_title(), the_content(), etc., can work as expected.
-    global $post;
-    $post = get_post($event_post_id);
-    setup_postdata($post);
-
-    // Now, you correctly pass the event_post_id to get_field()
-    $datetime = get_field('nelagala_event_datetime', $event_post_id);
-    $show_full_event_data = get_field('full_event_switch', $event_post_id);
-
-    // Now that we're specifying which post to get the data from, these fields will be fetched correctly.
-    $event_title = get_field('nelagala_event_title', $event_post_id);
-    $event_datetime = get_field('nelagala_event_datetime', $event_post_id);
-    $event_date = new DateTime($event_datetime);
-    $display_date = $event_date->format('l, F j, Y'); // Use $event_date, not $datetime
-
-    $theme_image = get_field('theme_sidebar_image', $event_post_id);
-    $theme_title = get_field('theme_sidebar_title', $event_post_id);
-    $theme_content = wp_kses_post(get_field('theme_sidebar_content', $event_post_id));
-    $show_theme_sidebar = get_field('theme_sidebar_visible', $event_post_id);
-
-    //NOTE - This is the code to get the location of the event
-    // This returns an array for Google Map field
-    $event_location = get_field('nelagala_event_location', $event_post_id);
-    $lat = $event_location['lat'];
-    $lng = $event_location['lng'];
-    $google_api_key = get_field('google_api_key', $event_post_id);
-    $google_geocoding_api_key = get_field('google_geocoding_api_key', $event_post_id);
-    $response = file_get_contents("https://maps.googleapis.com/maps/api/geocode/json?latlng=$lat,$lng&key=$google_geocoding_api_key");
-
-    // echo "<pre>" . $google_api_key . "</pre>";
-    // echo "<pre>" . $google_geocoding_api_key . "</pre>";
-    // echo "<pre>" . $response . "</pre>";
-
-    // Decode the JSON response
-    $data = json_decode($response);
-
-    // Iterate over the address components to find the city and state
-    $venue_city = "";
-    $venue_state = "";
-    foreach ($data->results[0]->address_components as $component) {
-        if (in_array("locality", $component->types)) {
-            $venue_city = $component->long_name;
-        }
-        if (in_array("administrative_area_level_1", $component->types)) {
-            $venue_state = $component->short_name;
-        }
-    }
-    $header_venue_message = get_field('header_venue_message', $event_post_id);
-    $venue_name = get_field('nelagala_venue_name', $event_post_id);
-    $promotional_video = get_field('promotional_video', $event_post_id);
-    $roles_section_headline = get_field('roles_section_headline', $event_post_id);
-    $roles_section_content = get_field('roles_section_content', $event_post_id);
-    $roles = get_field('roles');
-    $honorees_section_headline = get_field('honorees_section_headline', $event_post_id);
-    $honorees_section_content = get_field('honorees_section_content', $event_post_id);
-    $honorees = get_field('honorees');
-    $ticket_section_headline = get_field('ticket_section_headline', $event_post_id);
-    $ticket_section_top_content = get_field('ticket_section_top_content', $event_post_id);
-    $ticket_prices = get_field('ticket_prices', $event_post_id);
-    $lodging_section_headline = get_field('lodging_section_headline', $event_post_id);
-    $lodging_section_top_content = get_field('lodging_section_top_content', $event_post_id);
-    $lodging = get_field('lodging', $event_post_id);
-    $sponsorship_section_headline = get_field('sponsorship_section_headline', $event_post_id);
-    $sponsorship_section_top_content = get_field('sponsorship_section_top_content', $event_post_id);
-    $sponsorship_packages = get_field('sponsorship_packages', $event_post_id);
-    $advertising_section_headline = get_field('advertising_section_headline', $event_post_id);
-    $advertising_section_top_content = get_field('advertising_section_top_content', $event_post_id);
-    $advertising_rates = get_field('advertising_rates', $event_post_id);
-
-
-
-    // Initialize the array to track missing sections
-    $missing_sections = [];
-
-    wp_reset_postdata();
-    get_header();
+get_header();
 ?>
-    <section class="sections">
-        <div class="container">
+<section class="sections">
+    <div class="container">
+        <div class="nelagala-event">
+            <?php
 
-            <div class="nelagala-event">
-                <?php if ($show_full_event_data) : ?>
-                    <!-- SECTION: Navigation Sidebar -->
-                    <nav class="event-navigation nav bg_shape">
-                        <div class="burger-container">
-                            <button id="burger" aria-label="Open navigation menu">
-                                <span class="bar topBar"></span>
-                                <span class="bar btmBar"></span>
-                            </button>
-                        </div>
-                        <ul class="menu">
-                            <?php foreach ($sections as $anchor => $fields) : ?>
-                                <?php
-                                // Fetching both the content and the headline using the specified field keys
-                                $content = get_field($fields['content_field'], $event_post_id);
-                                $headline = get_field($fields['headline_field'], $event_post_id); // Fetch the headline field
+            if (!empty($ng)) {
 
-                                // Check if the content field is not empty; adjust logic if necessary
-                                if ((is_array($content) && !empty($content)) || (!is_array($content) && !empty($content))) : ?>
-                                    <li class="menu-item"><a href="<?= esc_url($anchor); ?>"><?= esc_html($headline); ?></a></li>
-                                <?php endif; ?>
-                            <?php endforeach; ?>
+                // ACF field values
+                $show_full_event_data = $ng['full_event_switch'];
+                $event_title = esc_html($ng['nelagala_event_title']);
+                $datetime = $ng['nelagala_event_datetime'];
+                $event_datetime = $ng['nelagala_event_datetime'];
+                $event_date = new DateTime($event_datetime);
+                $display_date = $event_date->format('l, F j, Y'); // Use $event_date, not $datetime
 
-                        </ul>
-                    </nav>
-                    <!-- !SECTION: Navigation Sidebar -->
+                $theme_image = $ng['theme_sidebar_image'];
+                $theme_title = esc_html($ng['theme_sidebar_title']);
+                $theme_content = wp_kses_post($ng['theme_sidebar_content']);
+                $show_theme_sidebar = $ng['theme_sidebar_visible'];
 
-                <?php endif; ?>
+                //NOTE - This is the code to get the location of the event
+                // This returns an array for Google Map field
+                $event_location = $ng['nelagala_event_location'];
+                $lat = $event_location['lat'];
+                $lng = $event_location['lng'];
+                $google_api_key = $ng['google_api_key'];
+                $google_geocoding_api_key = $ng['google_geocoding_api_key'];
+                $response = file_get_contents("https://maps.googleapis.com/maps/api/geocode/json?latlng=$lat,$lng&key=$google_geocoding_api_key");
+
+                // Decode the JSON response
+                $data = json_decode($response);
+
+                // Iterate over the address components to find the city and state
+                $venue_city = "";
+                $venue_state = "";
+                foreach ($data->results[0]->address_components as $component) {
+                    if (in_array("locality", $component->types)) {
+                        $venue_city = $component->long_name;
+                    }
+                    if (in_array("administrative_area_level_1", $component->types)) {
+                        $venue_state = $component->short_name;
+                    }
+                }
+                $header_venue_message = $ng['header_venue_message'];
+                $venue_name = $ng['nelagala_venue_name'];
+                $promotional_video = esc_url($ng['promotional_video']);
+                $roles_section_headline = $ng['roles_section_headline'];
+                $roles_section_content = $ng['roles_section_content'];
+                $roles = $ng['roles'];
+                $honorees_sections_headline = $ng['honorees_sections_headline'];
+                $honorees_section_content = $ng['honorees_section_content'];
+                $honorees = $ng['honorees'];
+                $ticket_section_headline = $ng['ticket_section_headline'];
+                $ticket_section_top_content = $ng['ticket_section_top_content'];
+                $ticket_prices = $ng['ticket_prices'];
+                $lodging_section_headline = $ng['lodging_section_headline'];
+                $lodging_section_top_content = $ng['lodging_section_top_content'];
+                $lodging = $ng['lodging'];
+                $sponsorship_section_headline = $ng['sponsorship_section_headline'];
+                $sponsorship_section_top_content = $ng['sponsorship_section_top_content'];
+                $sponsorship_packages = $ng['sponsorship_packages'];
+                $advertising_section_headline = $ng['advertising_section_headline'];
+                $advertising_section_top_content = $ng['advertising_section_top_content'];
+                $advertising_rates = $ng['advertising_rates'];
+
+                if ($show_full_event_data) :
+                    // Display the navigation sidebar
+                    $ng_data = fetch_nelagala_event_by_year($event_year);
+                    nelagala_pass_template_data($ng_data, 'navigation');
+                    get_template_part('inc/nelagala/template-parts/sidebar-nav');
+                endif; ?>
                 <!-- SECTION: Display NELAGala Event Content -->
                 <main>
-                    <!--  SECTION: Event Header -->
-                    <header>
-                        <?php
-                        if ($event_date && $event_datetime) {
-                            display_event_date_countdown($event_date, $event_datetime);
-                        }
-                        ?>
-                        <div class="row">
-                            <img class="header-img" src="<?php echo get_template_directory_uri() . '/inc/nelagala/img/sicilia.png'; ?>" alt="the Trinacria">
-                            <div class="col divider">
-                                <h3>Sons of Italy Foundation<sup>&reg;</sup> presents</h3>
-                                <div class="title-wrap">
-                                    <p class="pre-title"><?php echo get_current_event_year_with_ordinal(); ?>
-                                    </p>
-                                    <h1 class="title"><?php echo  $event_title; ?></h1>
-                                    <p class="post-title">Gala</p>
-                                </div>
-                            </div>
-                            <div class="col col-2">
-                                <p class="text"><?php echo  $header_venue_message; ?></p>
-                                <p class="col-2-title"><?php echo $venue_name; ?></p>
-                                <p class="text"><?php echo  $venue_city; ?>, <?php echo  $venue_state; ?></p>
-                            </div>
-                        </div>
-                        <div class="header-img-main" style="background-image: url('<?php echo get_template_directory_uri(); ?>/inc/nelagala/img/header-main-img.jpg');">
-                        </div>
-                        <h4><? echo $display_date; ?> | More details coming soon!</h4>
-                    </header>
-                    <!--  !SECTION: Event Header -->
-                    <?php if ($show_full_event_data) : ?>
+                    <?php                    
+                    nelagala_pass_template_data($ng_data, 'header'); 
+                    get_template_part('inc/nelagala/template-parts/event-header'); 
+
+                    if ($show_full_event_data) : ?>
                         <!--  SECTION: About the Event -->
                         <section id="about-the-event">
                             <article>
                                 <h2>About the Event</h2>
                                 <?php echo the_content(); ?>
-
                             </article>
                             <!-- NOTE: Theme Sidebar Content -->
                             <?php if ($theme_title && $theme_content && $show_theme_sidebar) : ?>
@@ -203,13 +109,13 @@ if ($event_post_id) {
                         if (have_rows('roles')) :
                         ?>
                             <section id="event-roles" class="participants">
-                                <h2>Who's who...</h2>
-
-                                <?php
+                                <h2><?php echo $roles_section_headline ?></h2>
+                                <?php if ($roles_section_content) : ?>
+                                    <span class="sub-text"><?php echo $roles_section_content; ?></span>
+                                <?php endif; 
                                 while (have_rows('roles')) : the_row();
                                     $role_description = get_sub_field('role');
                                     $participant_id = get_sub_field('participant');
-
 
                                     // Fetch the participant's post title (full name)
                                     $participant_name = get_the_title($participant_id);
@@ -258,11 +164,11 @@ if ($event_post_id) {
                         <?php
                         if (have_rows('honorees')) :
                         ?>
-
                             <section id="honorees" class="participants">
-                                <h2>Honorees</h2>
-
-                                <?php
+                                <h2><?php echo esc_html($honorees_sections_headline) ?></h2>
+                                <?php if ($honorees_section_content) : ?>
+                                    <span class="sub-text"><?php echo $honorees_section_content; ?></span>
+                                <?php endif; 
                                 while (have_rows('honorees')) : the_row();
                                     $honor_description = get_sub_field('honor');
                                     $recipient_id = get_sub_field('recipient');
@@ -317,8 +223,10 @@ if ($event_post_id) {
                         if (have_rows('ticket_prices')) :
                         ?>
                             <section id="tickets" class="tickets">
-                                <h2><?php echo $ticket_section_headline ?></h2>
+                                <h2><?php echo esc_html($ticket_section_headline) ?></h2>
+                                <?php if ($ticket_section_top_content) : ?>
                                 <span class="sub-text"><?php echo $ticket_section_top_content; ?></span>
+                                <?php endif; ?> 
                                 <div class="packages">
                                     <?php
                                     while (have_rows('ticket_prices')) : the_row();
@@ -348,8 +256,11 @@ if ($event_post_id) {
                             <div id="map" class="map"></div>
                         </div>
                         <section id="location" class="hotels-cards">
-                            <h2>Venue and Accommodations</h2>
-                            <?php if (have_rows('lodging')) : ?>
+                            <h2><?php echo esc_html($lodging_section_headline) ?></h2>
+                            <?php if ($lodging_section_top_content) : ?>
+                            <span class="sub-text"><?php echo $lodging_section_top_content; ?></span>
+                            <?php endif; 
+                             if (have_rows('lodging')) : ?>
                                 <div class="packages">
                                     <?php while (have_rows('lodging')) : the_row();
                                         $name = get_sub_field('property');
@@ -380,9 +291,10 @@ if ($event_post_id) {
                         if (have_rows('sponsorship_packages')) :
                         ?>
                             <section id="sponsorships" class="sponsorships">
-                                <h2><?php echo $sponsorship_section_headline ?></h2>
+                                <h2><?php echo esc_html($sponsorship_section_headline) ?></h2>
+                                <?php if ($sponsorship_section_top_content) : ?>
                                 <span class="sub-text"><?php echo $sponsorship_section_top_content; ?></span>
-                                <div class="packages">
+                                <?php endif; ?> <div class="packages">
                                     <?php
                                     while (have_rows('sponsorship_packages')) : the_row();
                                         $package = get_sub_field('package');
@@ -420,8 +332,10 @@ if ($event_post_id) {
                         if (have_rows('advertising_rates')) :
                         ?>
                             <section id="advertising" class="advertising">
-                                <h2><?php echo $advertising_section_headline ?></h2>
+                                <h2><?php echo esc_html($advertising_section_headline) ?></h2>
+                                <?php if ($advertising_section_top_content) : ?>
                                 <span class="sub-text"><?php echo $advertising_section_top_content; ?></span>
+                                <?php endif; ?> 
                                 <div class="packages">
                                     <?php
                                     while (have_rows('advertising_rates')) : the_row();
@@ -450,12 +364,12 @@ if ($event_post_id) {
                 </main>
                 <!-- !SECTION: Display NELAGala Event Content -->
             <?php
-        } else {
-            echo "<!-- No event found for the requested year '" . esc_html($event_year) . "' -->";
-        }
+            } else {
+                echo "<!-- No event found for the requested year '" . esc_html($event_year) . "' -->";
+            }
             ?>
 
-            </div>
         </div>
-    </section>
-    <?php get_footer(); ?>
+    </div>
+</section>
+<?php get_footer(); ?>
