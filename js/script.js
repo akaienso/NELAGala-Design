@@ -1,6 +1,6 @@
 console.log('NG custom script file loaded');
 (function(){
-    var burger = document.querySelector('.burger-container'),
+    var burger = document.querySelector('#burger'),
         nav = document.querySelector('.nav'),
         menuItem = document.querySelectorAll('.menu-item');
     
@@ -142,3 +142,4 @@ document.addEventListener('scroll', function() {
     headerImgMain.style.backgroundPosition = `center ${newPosition}%`;
   });
   
+ 

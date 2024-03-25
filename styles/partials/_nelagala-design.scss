@@ -21,10 +21,12 @@ body {
       overflow: visible;
     }
 
-    &>section:nth-child(4) { // NOTE: Theme content .sections
-    
-      &>div { // NOTE: Theme content .container
-       
+    &>section:nth-child(4) {
+      // NOTE: Theme content .sections
+
+      &>div {
+        // NOTE: Theme content .container
+
         width: 100%;
         padding: 0;
         max-width: 3200px;
@@ -50,8 +52,8 @@ body {
     top: 116px;
     margin: 0 auto -204px auto;
   }
-aside
-  h1,
+
+  aside h1,
   h2,
   h3,
   h4,
@@ -90,427 +92,6 @@ aside
     background: inherit;
   }
 
-  main {
-    background: var(--ng-section-bg);
-    padding-bottom: 54px;
-    flex-grow: 1;
-
-
-    header {
-      width: 100%;
-      padding: 0px;
-      margin-top: 0;
-      background: var(--ng-header-bg);
-      text-align: center;
-      color: map-get(map-get($color, header), text);
-      position: relative;
-      top: 0;
-      overflow: hidden;
-      font-family: map-get($font, primary);
-  
-      .header-img {
-          position: absolute;
-          top: -302px;
-          right: -236px;
-          width: 765px;
-          transform: rotate(-13deg);
-          opacity: 0.4;
-      }
-  
-      .header-img-main {
-          height: 189px;
-          margin-top: -39px;
-  
-          img {
-              transition: transform 0.5s ease, opacity 0.5s ease;
-              height: 100%;
-              width: 100%;
-              object-fit: cover;
-              object-position: center 75%;
-          }
-      }
-  
-      .col {
-          min-width: 50%;
-          padding: 20px 10px 30px;
-      }
-  
-      .divider {
-          &::before {
-              content: "";
-              position: absolute;
-              right: 0;
-              /* For a left border; use 'right: 0' for a right border */
-              top: 20%;
-              /* Adjusts the gap at the top */
-              bottom: 15%;
-              /* Adjusts the gap at the bottom */
-              width: 4px;
-              /* Border width */
-              background-color: map-get(map-get($color, header), divider);
-              /* Border color */
-          }
-      }
-  
-      h1 {
-  
-          &.title {
-              display: inline;
-              text-align: center;
-              font-family: map-get($font, secondary);
-              font-size: 1.8em;
-              color: map-get(map-get($color, header), text);
-              line-height: 0.9em;
-              margin: -10px 0;
-              text-transform: uppercase;
-          }
-  
-          &:not(:has(span)) {
-              font-size: 0.8em;
-          }
-  
-      }
-  
-      h2 {
-          font-family: map-get($header-h2, font);
-          font-weight: map-get($header-h2, weight);
-          font-size: map-get($header-h2, size);
-          font-style: map-get($header-h2, style);
-          color: map-get($header-h2, color);
-          letter-spacing: map-get($header-h2, letter-spacing);
-          text-transform: map-get($header-h2, transform);
-          margin: map-get($header-h2, margin);
-          padding: map-get($header-h2, padding);
-          position: map-get($header-h2, position);
-          z-index: map-get($header-h2, z-index);
-      }
-  
-      h3 {
-          font-family: map-get($header-h3, font);
-          font-weight: map-get($header-h3, weight);
-          font-style: map-get($header-h3, style);
-          color: map-get($header-h3, color);
-          font-size: map-get($header-h3, size);
-          line-height: map-get($header-h3, line-height);
-          margin: map-get($header-h3, margin);
-          text-transform: map-get($header-h3, transform);
-  
-          & sup {
-              font-size: 2em;
-              top: .2em;
-          }
-      }
-  
-      .pre-title,
-      .post-title {
-          position: relative;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          color: var(--ng-red);
-          font-family: map-get($font, script);
-          text-align: center;
-          font-size: 2.4em;
-          margin: 0;
-          line-height: 58px;
-  
-          .yr {
-              font-size: 1.7em;
-  
-              sup {
-                  font-size: 0.7em;
-                  margin-left: 0.3em;
-              }
-  
-          }
-      }
-  
-      .post-title {
-          font-size: 5em;
-          position: relative;
-          top: 0em;
-          display: block;
-      }
-  
-      .col-2 {
-          text-align: start;
-          padding-left: 20px;
-  
-          .col-2-title {
-              font-family: map-get($font, tertiary);
-              font-weight: map-get($font-weight, semibold);
-              color: map-get(map-get($color, header), text);
-              text-transform: uppercase;
-              font-size: 1.25em;
-              font-style: normal;
-              margin: 0;
-              line-height: 1.1em;
-  
-          }
-  
-          .text {
-              font-family: map-get($header-h3, font);
-              font-weight: map-get($header-h3, weight);
-              font-style: map-get($header-h3, style);
-              color: map-get($header-h3, color);
-              font-size: map-get($header-h3, size);
-              line-height: map-get($header-h3, line-height);
-              margin: map-get($header-h3, margin);
-              text-transform: map-get($header-h3, transform);
-          }
-      }
-  
-      h4 {
-          font-family: map-get($header-h4, font);
-          font-weight: map-get($header-h4, weight);
-          font-style: map-get($header-h4, style);
-          color: map-get($header-h4, color);
-          font-size: map-get($header-h4, size);
-          line-height: map-get($header-h4, line-height);
-          margin: map-get($header-h4, margin);
-          text-transform: map-get($header-h4, transform);
-          background-color: map-get($header-h4, bg);
-          padding: map-get($header-h4, padding);
-          z-index: 10000 !important;
-      }
-  
-      .row {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          width: 90%;
-          max-width: 960px;
-          margin: -40px auto -15px auto;
-          position: relative;
-      }
-  
-      .row,
-      .title-wrap,
-      .post-title,
-      h4 {
-          position: relative;
-          /* Required for z-index to work */
-          z-index: 10;
-          /* Ensures they stay in front of the image */
-      }
-  
-      .header-img-main {
-          z-index: 1;
-          /* Ensure the image stays behind the .row and h4 elements */
-          position: relative;
-          /* Adjust based on your layout needs */
-          height: 189px;
-          background-size: 110%;
-          /* Start zoomed in */
-          background-position: center 75%;
-          transition: background-size 0.5s ease, background-position 0.5s ease;
-          width: 100%;
-      }
-  
-      .column {
-          flex: 1;
-          padding: 10px;
-  
-          h3 {
-              font-family: map-get($font, primary);
-              font-size: 2em;
-              font-style: italic;
-  
-              a {
-                  font-weight: 800;
-                  padding-right: 20px;
-                  border-right: 1px solid var(--ng-header-txt);
-                  margin-right: 20px;
-              }
-          }
-      }
-  
-      a {
-          text-decoration: none;
-          color: map-get(map-get($color, header), text);
-          font-weight: 500;
-          font-size: 1em;
-          padding: 3px;
-          border-bottom: 1 px solid var(--ng-header-bg);
-  
-          &:hover {
-              text-decoration: none;
-              color: var(--ng-red);
-              font-weight: 500;
-              font-size: 1em;
-              padding: 3px;
-              border-bottom: 1px solid var(--ng-header-txt);
-          }
-      }
-  
-  
-      p {
-          font-size: 2.7em;
-      }
-  }
-  
-
-    section {
-      margin-bottom: 0;
-      width: 80%;
-      padding: 20px;
-      margin: 0 auto;
-      max-width: 1100px;
-    }
-
-    &>section {
-      margin-bottom: 1em;
-      padding: 1em;
-
-      &>h2 {
-        line-height: 3.4em;
-      }
-
-      &.participants {
-        width: 80%;
-        max-width: 920px;
-        margin: 0 auto;
-
-        .participant-website,
-        .read-more {
-          padding-top: 2em;
-
-          a {
-            font-family: map-get($read-more, font);
-            font-weight: map-get($read-more, weight);
-            font-style: map-get($read-more, style);
-            color: map-get($read-more, color);
-            font-size: map-get($read-more, size);
-            margin: map-get($read-more, margin);
-            text-transform: map-get($read-more, transform);
-            line-height: map-get($read-more, line-height);
-
-          }
-        }
-      }
-
-      &>div {
-        display: flex;
-        align-items: flex-start;
-        margin-bottom: 0px;
-
-        img {
-          width: 45%;
-          aspect-ratio: 3/4;
-          object-fit: cover;
-          max-height: 400px;
-          mix-blend-mode: luminosity;
-          object-position: center 14%;
-        }
-      }
-
-      &>.packages {
-        align-items: inherit;
-      }
-    }
-
-    &>.video {
-      aspect-ratio: 16/9;
-      width: 100%;
-    }
-
-    #about-the-event {
-      display: flex;
-      flex-direction: row;
-      /* Default to row for desktop */
-      justify-content: space-between;
-      max-width: 1000px;;
-
-      p {
-        font-size: 18px;
-        /* Adjust if needed for desktop */
-        margin-bottom: 20px;
-      }
-
-      .last {
-        margin-bottom: 50px;
-      }
-
-      article {
-        width: 64%;
-        /* Default for desktop */
-      }
-      
-      aside {
-        display: block;
-        outline: .01em solid map-get(map-get($color, aside), border);
-        background-color: map-get(map-get($color, aside), bg);
-        border-radius: 20px 20px 0 0;
-        width: 36%;
-        margin: 0 -3em 0 20px;
-        overflow: hidden;
-        padding: 20px; 
-        box-sizing: border-box; 
-      
-        > img {
-          display: block;
-          width: calc(100% + 40px); 
-          max-width: none; 
-          margin: -20px -20px 20px -20px; 
-          height: auto; 
-        }
-      
-        h2 {
-          font-size: 1.24em;
-          line-height: 1.45em;
-          margin-bottom: 20px;
-          font-family: map-get($font, secondary);
-          font-weight: map-get($font-weight, bold);
-          font-style: italic;
-          width: 80%;
-          color: map-get($color, quinary)
-        }
-        
-        p {
-          // Styles for h2 and p remain unaffected
-        }
-      }
-      
-      .has-nv-dark-bg-color.has-text-color {
-        font-size: 18px;
-        margin-bottom: 20px;
-      }
-
-      /* Media query for smaller screens, adjust breakpoint as needed */
-      @media (max-width: 767px) {
-        flex-direction: column;
-        /* Stack elements vertically on small screens */
-
-        article {
-          width: 100%;
-          /* Take full width on smaller screens */
-        }
-
-        aside {
-          width: 100%;
-          /* Take full width on smaller screens */
-          margin: 0;
-          /* Adjust margin as needed for smaller screens */
-          /* Adjust other styles as needed for smaller screens */
-        }
-      }
-    }
-
-    #event-roles h3,
-    #honorees h3 {
-      font-family: map-get($participant-h3, font);
-      font-weight: map-get($participant-h3, weight);
-      font-style: map-get($participant-h3, style);
-      color: map-get($participant-h3, color);
-      font-size: map-get($participant-h3, size);
-      line-height: map-get($participant-h3, line-height);
-      margin: map-get($participant-h3, margin);
-      text-transform: map-get($participant-h3, transform);
-      text-align: map-get($participant-h3, text-align);
-    }
-
-  }
-
   .row-container {
     gap: 50px;
     margin-bottom: 4em;
@@ -526,69 +107,8 @@ aside
 
   }
 
-
   #sponsorships .package {
     flex: 0 0 47%;
-  }
-
-
-  main>section.participants>div>div {
-    width: 50%;
-    text-align: left;
-  }
-
-
-  main>section.participants>div>div>.full-name {
-    font-family: map-get($participant-name, font);
-    font-weight: map-get($participant-name, weight);
-    font-style: map-get($participant-name, style);
-    color: map-get($participant-name, color);
-    font-size: map-get($participant-name, size);
-    line-height: map-get($participant-name, line-height);
-    margin: map-get($participant-name, margin);
-    text-transform: map-get($participant-name, transform);
-  }
-
-  main>section.participants>div>div>.bio-summary {
-    font-size: 18px;
-    color: #707070;
-  }
-
-  main>section.participants>div>div>.personal-title {
-    font-family: map-get($font, tertiary);
-    font-weight: map-get($font-weight, semibold);
-    font-size: 18px;
-    margin: .2em 0 .8em 0;
-
-  }
-
-  main>#Biography>div {
-    align-items: center;
-    justify-content: center;
-  }
-
-  main>#Biography>div>div {
-    width: 58%;
-    text-align: right;
-  }
-
-  main>#Biography>article {
-    font-size: 1.2em;
-    margin: 2em auto;
-    width: 74%;
-    font-weight: normal;
-
-    p {
-
-      line-height: normal;
-      margin-bottom: .8em;
-
-      &:first-child {
-        font-size: 1.225em;
-        margin-bottom: 1em;
-        line-height: 1.5em;
-      }
-    }
   }
 
   .packages {
@@ -714,138 +234,629 @@ aside
     }
   }
 
-  @media (max-width: map-get($viewport, xl)) { // NOTE: 1200px and smaller screens. 
+  main {
+    background: var(--ng-section-bg);
+    padding-bottom: 54px;
+    flex-grow: 1;
 
-    // This breakpoint exists to reset breakpoints and styles from the main theme stylesheet.
-    & {
-      top: -60px;
-    }
-  }
-
-  @media (max-width:  map-get($viewport, lg)) { // NOTE: 992px and smaller screens 
-
-    
-    // Essentially tablets in landscape mode and smaller desktop screens.
     header {
-      border-bottom: .25em solid var(--ng-red);
+      width: 100%;
+      padding: 0px;
+      margin-top: 0;
+      background: var(--ng-header-bg);
+      text-align: center;
+      color: map-get(map-get($color, header), text);
+      position: relative;
+      top: 0;
+      overflow: hidden;
+
+      .header-img {
+        position: absolute;
+        top: -302px;
+        right: -236px;
+        width: 765px;
+        transform: rotate(-13deg);
+        opacity: 0.4;
+      }
+
+      .header-img-main {
+        z-index: 1;
+          /* Ensure the image stays behind the .row and h4 elements */
+          position: relative;
+          /* Adjust based on your layout needs */
+          height: 189px;
+          background-size: 110%;
+          /* Start zoomed in */
+          background-position: center 75%;
+          transition: background-size 0.5s ease, background-position 0.5s ease;
+          width: 100%;
+
+        img {
+          transition: transform 0.5s ease, opacity 0.5s ease;
+          height: 100%;
+          width: 100%;
+          object-fit: cover;
+          object-position: center 75%;
+        }
+      }
+
+      .col {
+        min-width: 50%;
+        padding: 20px 10px 30px;
+      }
+
+      .divider {
+        &::before {
+          content: "";
+          position: absolute;
+          right: 0;
+          top: 20%;
+          bottom: 15%;
+          width: 4px;
+          background-color: map-get(map-get($color, header), divider);
+        }
+      }
+
+      h1 {
+        &.title {
+          display: inline;
+          text-align: center;
+          font-family: map-get($font, secondary);
+          font-size: 1.8em;
+          color: map-get(map-get($color, header), text);
+          line-height: 0.9em;
+          margin: -10px 0;
+          text-transform: uppercase;
+        }
+
+        &:not(:has(span)) {
+          font-size: 0.8em;
+        }
+      }
+
+      h2 {
+        font-family: map-get($header-h2, font);
+        font-weight: map-get($header-h2, weight);
+        font-size: map-get($header-h2, size);
+        font-style: map-get($header-h2, style);
+        color: map-get($header-h2, color);
+        letter-spacing: map-get($header-h2, letter-spacing);
+        text-transform: map-get($header-h2, transform);
+        margin: map-get($header-h2, margin);
+        padding: map-get($header-h2, padding);
+        position: map-get($header-h2, position);
+        z-index: map-get($header-h2, z-index);
+      }
+
+      h3 {
+        font-family: map-get($header-h3, font);
+        font-weight: map-get($header-h3, weight);
+        font-style: map-get($header-h3, style);
+        color: map-get($header-h3, color);
+        font-size: map-get($header-h3, size);
+        line-height: map-get($header-h3, line-height);
+        margin: map-get($header-h3, margin);
+        text-transform: map-get($header-h3, transform);
+
+        & sup {
+          font-size: 2em;
+          top: .2em;
+        }
+      }
+
+      .pre-title,
+      .post-title {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--ng-red);
+        font-family: map-get($font, script);
+        text-align: center;
+        font-size: 2.4em;
+        margin: 0;
+        line-height: 58px;
+
+        .yr {
+          font-size: 1.7em;
+
+          sup {
+            font-size: 0.7em;
+            margin-left: 0.3em;
+          }
+        }
+      }
+
+      .post-title {
+        font-size: 5em;
+        position: relative;
+        top: 0em;
+        display: block;
+      }
+
+      .col-2 {
+        text-align: start;
+        padding-left: 20px;
+
+        .col-2-title {
+          font-family: map-get($font, tertiary);
+          font-weight: map-get($font-weight, semibold);
+          color: map-get(map-get($color, header), text);
+          text-transform: uppercase;
+          font-size: 1.25em;
+          font-style: normal;
+          margin: 0;
+          line-height: 1.1em;
+        }
+
+        .text {
+          font-family: map-get($header-h3, font);
+          font-weight: map-get($header-h3, weight);
+          font-style: map-get($header-h3, style);
+          color: map-get($header-h3, color);
+          font-size: map-get($header-h3, size);
+          line-height: map-get($header-h3, line-height);
+          margin: map-get($header-h3, margin);
+          text-transform: map-get($header-h3, transform);
+        }
+      }
+
+      h4 {
+        font-family: map-get($header-h4, font);
+        font-weight: map-get($header-h4, weight);
+        font-style: map-get($header-h4, style);
+        color: map-get($header-h4, color);
+        font-size: map-get($header-h4, size);
+        line-height: map-get($header-h4, line-height);
+        margin: map-get($header-h4, margin);
+        text-transform: map-get($header-h4, transform);
+        background-color: map-get($header-h4, bg);
+        padding: map-get($header-h4, padding);
+        z-index: 10000 !important;
+      }
 
       .row {
-          flex-wrap: wrap;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 90%;
+        max-width: 960px;
+        margin: -40px auto -15px auto;
+        position: relative;
+      }
 
-          .col {
-              min-width: 100%;
+      .column {
+        flex: 1;
+        padding: 10px;
+
+        h3 {
+          font-family: map-get($font, primary);
+          font-size: 2em;
+          font-style: italic;
+
+          a {
+            font-weight: 800;
+            padding-right: 20px;
+            border-right: 1px solid var(--ng-header-txt);
+            margin-right: 20px;
+          }
+        }
+      }
+
+      a {
+        text-decoration: none;
+        color: map-get(map-get($color, header), text);
+        font-weight: 500;
+        font-size: 1em;
+        padding: 3px;
+        border-bottom: 1px solid var(--ng-header-bg);
+
+        &:hover {
+          text-decoration: none;
+          color: var(--ng-red);
+          font-weight: 500;
+          font-size: 1em;
+          padding: 3px;
+          border-bottom: 1 // Continuing from previous...
+            px solid var(--ng-header-txt);
+        }
+      }
+
+      p {
+        font-size: 2.7em;
+      }
+    }
+
+    section {
+      margin-bottom: 0;
+      width: 80%;
+      padding: 20px;
+      margin: 0 auto;
+      max-width: 1100px;
+    }
+
+    &>section {
+      margin-bottom: 1em;
+      padding: 1em;
+
+      &>h2,
+      article h2 {
+        font-family: map-get($section-h2, font);
+        font-weight: map-get($section-h2, weight);
+        font-size: map-get($section-h2, size);
+        color: map-get($section-h2, color);
+        margin: 20px 0 10px -15px;
+      }
+
+      article h2 {
+
+        font-size: 2em;
+      }
+
+      &.participants {
+        width: 80%;
+        max-width: 920px;
+        margin: 0 auto;
+
+        .participant-website,
+        .read-more {
+          padding-top: .4em;
+
+          a {
+            font-family: map-get($read-more, font);
+            font-weight: map-get($read-more, weight);
+            font-style: map-get($read-more, style);
+            color: map-get($read-more, color);
+            font-size: map-get($read-more, size);
+            margin: map-get($read-more, margin);
+            text-transform: map-get($read-more, transform);
+            line-height: map-get($read-more, line-height);
+          }
+        }
+      }
+
+      &>div {
+        display: flex;
+        align-items: flex-start;
+        margin-bottom: 0px;
+
+        a {
+          width: 45%;
+          /* Assign width to the anchor to maintain the layout */
+          display: inline-block;
+          /* Ensure the anchor behaves as a block element with line dimensions */
+          aspect-ratio: 3 / 4;
+          max-height: 400px;
+
+          img {
+            width: 100%;
+            /* Make the image fill the anchor */
+            height: auto;
+            /* Maintain aspect ratio */
+            object-fit: cover;
+            mix-blend-mode: luminosity;
+            object-position: center 14%;
+          }
+        }
+      }
+
+      &>.packages {
+        align-items: inherit;
+      }
+    }
+
+    &>.video {
+      aspect-ratio: 16/9;
+      width: 100%;
+    }
+
+    .row-container {
+      display: flex;
+      align-items: flex-start;
+      margin-bottom: 0px;
+
+      a,
+      img {
+        display: inline-block;
+        /* Ensures block-level behaviors */
+        width: 45%;
+        /* Adjust width as necessary */
+        max-height: 400px;
+      }
+
+      img {
+        width: 100%;
+        /* Ensures the img tag fills its container (either <a> or its direct parent) */
+        aspect-ratio: 3 / 4;
+        object-fit: cover;
+        mix-blend-mode: luminosity;
+        object-position: center 14%;
+      }
+    }
+
+
+    #about-the-event {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      max-width: 1000px;
+
+      p {
+        font-size: 18px;
+        margin-bottom: 20px;
+      }
+
+      .last {
+        margin-bottom: 50px;
+      }
+
+      article {
+        width: 64%;
+      }
+
+      aside {
+        display: block;
+        outline: .01em solid map-get(map-get($color, aside), border);
+        background-color: map-get(map-get($color, aside), bg);
+        border-radius: 20px 20px 0 0;
+        width: 36%;
+        margin: 0 -3em 0 20px;
+        overflow: hidden;
+        padding: 20px;
+        box-sizing: border-box;
+
+        >img {
+          display: block;
+          width: calc(100% + 40px);
+          max-width: none;
+          margin: -20px -20px 20px -20px;
+          height: auto;
+        }
+
+        h2 {
+          font-size: 1.24em;
+          line-height: 1.45em;
+          margin-bottom: 20px;
+          font-family: map-get($font, secondary);
+          font-weight: map-get($font-weight, bold);
+          font-style: italic;
+          width: 80%;
+          color: map-get($color, quinary);
+        }
+      }
+
+      @media (max-width: 767px) {
+        flex-direction: column;
+
+        article {
+          width: 100%;
+        }
+
+        aside {
+          width: 100%;
+          margin: 0;
+        }
+      }
+    }
+
+    #event-roles h3,
+    #honorees h3 {
+      font-family: map-get($participant-h3, font);
+      font-weight: map-get($participant-h3, weight);
+      font-style: map-get($participant-h3, style);
+      color: map-get($participant-h3, color);
+      font-size: map-get($participant-h3, size);
+      line-height: map-get($participant-h3, line-height);
+      margin: map-get($participant-h3, margin);
+      text-transform: map-get($participant-h3, transform);
+      text-align: map-get($participant-h3, text-align);
+    }
+
+    // Styles for section.participants
+    >section.participants {
+      >div>div {
+        width: 50%;
+        text-align: left;
+
+        .full-name {
+          font-family: map-get($participant-name, font);
+          font-weight: map-get($participant-name, weight);
+          font-style: map-get($participant-name, style);
+          color: map-get($participant-name, color);
+          font-size: map-get($participant-name, size);
+          line-height: map-get($participant-name, line-height);
+          margin: map-get($participant-name, margin);
+          text-transform: map-get($participant-name, transform);
+        }
+
+        .bio-summary {
+          font-size: 18px;
+          color: #707070;
+        }
+
+        .personal-title {
+          font-family: map-get($font, tertiary);
+          font-weight: map-get($font-weight, semibold);
+          font-size: 18px;
+          margin: .2em 0 .8em 0;
+        }
+      }
+    }
+
+    // Styles specific to #Biography
+    >#Biography {
+      >div {
+        align-items: center;
+        justify-content: center;
+      }
+
+      >div>div {
+        width: 58%;
+        text-align: right;
+      }
+
+      >article {
+        font-size: 1.2em;
+        margin: 2em auto;
+        width: 74%;
+        font-weight: normal;
+
+        p {
+          line-height: normal;
+          margin-bottom: .8em;
+
+          &:first-child {
+            font-size: 1.225em;
+            margin-bottom: 1em;
+            line-height: 1.5em;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: map-get($viewport, xl)) {
+  // NOTE: 1200px and smaller screens. 
+  // This breakpoint exists to reset breakpoints and styles from the main theme stylesheet.
+
+}
+
+@media (max-width: map-get($viewport, lg)) {
+
+  // NOTE: 992px and smaller screens 
+  // Essentially tablets in landscape mode and smaller desktop screens.
+  .nelagala-event {
+    top: -40px;
+    font-family: map-get($font, secondary);
+    color: var(--ng-txt);
+    background: var(--ng-bg);
+    display: flex;
+    justify-content: space-between;
+    min-height: 100vh;
+    width: 100%;
+    flex-wrap: wrap;
+    margin: 0px auto 0 auto;
+
+    .map-container {
+      $aspect-width: 4;
+      $aspect-height: 5;
+      $aspect-ratio: calc($aspect-height / $aspect-width) * 100%;
+      padding-top: $aspect-ratio;
+    }
+
+    main {
+      header {
+        border-bottom: .25em solid var(--ng-red);
+
+        h1 {
+          width: 90%;
+          font-size: 1.6em;
+          padding: 0;
+
+          .yr {
+            font-size: 1.4em;
+
+            sup {
+              font-size: 0.8em;
+            }
           }
 
+          &.title {
+            font-size: 1.68em;
+            line-height: 0.7em;
+          }
+
+          .gala {
+            font-size: 2.5em;
+            position: relative;
+            top: -0.8em;
+            display: block;
+          }
+
+          &:not(:has(span)) {
+            font-size: 0.8em;
+          }
+        }
+
+        h2 {
+          display: none;
+        }
+
+        .row {
+          flex-wrap: wrap;
+
+          .col,
           .col-2 {
-              text-align: center;
+            min-width: 100%;
+            text-align: center; // Applies to both .col and .col-2 for simplicity.
           }
 
           .divider {
-              &::before {
-                  display: none;
-              }
+            border-right: none;
+            border-bottom: 6px solid var(--ng-red);
+
+            &::before {
+              display: none;
+            }
           }
+        }
+      }
 
-          h1 {
-              width: 90%;
-              font-size: 2em;
-              padding: 0;
+      >section {
+        width: 95%;
 
-              .yr {
-                  font-size: 1.4em;
+        &.participants {
+          width: 100%;
 
-                  sup {
-                      font-size: 0.8em;
-                  }
-              }
-
-              .title {
-                  display: block;
-                  font-family: map-get($font, primary);
-                  font-size: 1.3em;
-                  color: var(--ng-header-title-txt);
-                  line-height: 0.9em;
-                  margin: 0px 0;
-                  text-transform: uppercase;
-              }
-
-              .gala {
-                  font-size: 2.5em;
-                  position: relative;
-                  top: -0.8em;
-                  display: block;
-              }
-
-              &:not(:has(span)) {
-                  font-size: 0.8em;
-              }
-
+          >div {
+            >div {
+              width: 100%;
+            }
           }
+        }
 
       }
-  }
 
-  .header-img-main {
-      height: 179px;
-  }
+      .container {
+        max-width: fit-content;
+      }
 
-  .col-2 {
-      display: none;
-  }
-    .container {
-      max-width: fit-content;
-    }
+      .row-container,
+      .packages {
+        justify-content: center;
+        flex-wrap: wrap;
+        flex: 0 0 48%;
 
-    & {
-      font-family: map-get($font, secondary);
-      color: var(--ng-txt);
-      background: var(--ng-bg);
-      display: flex;
-      justify-content: space-between;
-      min-height: 100vh;
-      width: 100%;
-      flex-wrap: wrap;
-      margin: 0px auto 0 auto;
-    }
-
-
-    .row-container,
-    .packages {
-      justify-content: center;
-      flex-wrap: wrap;
-      flex: 0 0 48%;
-    }
-
-    .package {
-      flex: 0 0 48%;
-    }
-
-  }
-
-  @media screen and (max-width:  map-get($viewport, md)) { // NOTE: 768px and smaller screens.
-
-    // Small tablets and large smartphones, especially in landscape orientation. It's a common breakpoint for supporting devices like iPads when held in portrait mode, as well as various other tablets and phablets.
-
-    main>section.participants>div {
-      flex-direction: column;
-      align-items: flex-start;
-    }
-
-    main>section.participants>div img {
-      width: 100%;
-      margin: 0;
-    }
-
-    main>section.participants>div>div {
-      width: 100%;
-    }
-
-    .packages .package,
-    #sponsorshipss .packages .package {
-      flex: 0 0 100%;
+        .package {
+          flex: 0 0 95%;
+        }
+      }
     }
   }
+}
 
-  /*# sourceMappingURL=styles.css.map */
+@media screen and (max-width: map-get($viewport, md)) {
+  // NOTE: 768px and smaller screens.
 
+  // Small tablets and large smartphones, especially in landscape orientation. It's a common breakpoint for supporting devices like iPads when held in portrait mode, as well as various other tablets and phablets.
+
+  main>section.participants>div {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  main>section.participants>div img {
+    width: 100%;
+    margin: 0;
+  }
+
+  main>section.participants>div>div {
+    width: 100%;
+  }
+
+  .packages .package,
+  #sponsorshipss .packages .package {
+    flex: 0 0 100%;
+  }
 }

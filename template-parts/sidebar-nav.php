@@ -7,7 +7,7 @@ $event_year = $args['event_year'] ?? '';
 $base_url = $path . $event_year;
 
 // This ensures $base_url is set to an empty string if both $path and $event_year are unset or empty.
-if (empty($path) && empty($event_year)) {
+if (empty($path)) {
     $base_url = '';
 }
 ?>
@@ -19,6 +19,8 @@ if (empty($path) && empty($event_year)) {
             <span class="bar topBar"></span>
             <span class="bar btmBar"></span>
         </button>
+        <p><a href="#top">Save the Date</a></p>
+        <a href="/"><img src="http://osdia-national-website.mmp/wp-content/uploads/2024/03/Orange-No-Trademark.png" width="46" height="auto" alt=""></a>
     </div>
     <ul class="menu">
         <?php

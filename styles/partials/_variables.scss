@@ -5,6 +5,7 @@ $ng-yellow: rgb(240, 189, 51);
 $ng-not-black: rgb(51, 51, 51);
 $ng-not-white: rgb(249, 249, 249);
 $ng-aside: rgba(235, 232, 228, 0.993);
+$ng-headliine: rgba(139, 139, 139, 0.144);
 
 // Navigation Sidebar Colors
 $ng-nav-bg: $osdia-red;
@@ -38,8 +39,9 @@ $color: (
         bg: $ng-yellow,
         txt: $ng-not-white,
         txt-a: $ng-not-white,
-        title-txt: rgb(171, 171, 171),
+        title-txt: rgb(243, 243, 243),
         divider: $ng-red,
+        headline: $ng-headliine,
     ),
 
     package: (

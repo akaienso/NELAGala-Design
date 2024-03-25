@@ -9,10 +9,10 @@ get_header();
 ?>
 <section class="sections">
     <div class="container">
-        
+
         <!-- SECTION: NELAGala Event Page -->
         <div class="nelagala-event">
-            <?php if (!empty($ng)) { 
+            <?php if (!empty($ng)) {
 
                 // ACF field values
                 $show_full_event_data = $ng['full_event_switch'];
@@ -74,12 +74,16 @@ get_header();
 
                 // NOTE: Display Sidebar Navigation
                 if ($show_full_event_data) :
-                    // Display the navigation sidebar
+
+                    // NOTE: Display Sidebar Navigation
                     $ng_data = fetch_nelagala_event_by_year($event_year);
-                    nelagala_pass_template_data($ng_data, 'navigation');
-                    get_template_part('inc/nelagala/template-parts/sidebar-nav');
-                endif; 
-                ?>
+                    nelagala_pass_template_data($ng, 'navigation');
+                    $args = array(
+                        'event_year' => $event_year,
+                    );
+                    get_template_part('inc/nelagala/template-parts/sidebar-nav', null, $args);
+                endif;
+            ?>
                 <!-- SECTION: Display NELAGala Event Content -->
                 <main>
                     <?php
@@ -143,18 +147,23 @@ get_header();
                                 ?>
                                     <div class="row-container">
                                         <?php
-
                                         if (!empty($participant_photo)) {
                                             // Image variables
                                             $url = $participant_photo['url'];
                                             $alt = $participant_photo['alt'];
-
+                                            // Check if there's a biography link
+                                            if (!empty($biography_link)) {
+                                                // If a link exists, wrap the image with an <a> tag
+                                                echo '<a href="' . esc_url($biography_link) . '"><img src="' . esc_url($url) . '" alt="' . esc_attr($alt) . '"></a>';
+                                            } else {
+                                                // If no link exists, display just the image
+                                                echo '<img src="' . esc_url($url) . '" alt="' . esc_attr($alt) . '">';
+                                            }
+                                        }
                                         ?>
-                                            <img src="<?php echo esc_url($url); ?>" alt="Photograph of <?php echo esc_attr($alt); ?>"><?php
-                                                                                                                                    } ?>
                                         <div>
                                             <h3><?php echo esc_html($role_description); ?></h3>
-                                            <p class="full-name"><?php echo esc_html($participant_name); ?></p>
+                                            <p class="full-name"><a href="<?php echo esc_url($biography_link); ?>"><?php echo esc_html($participant_name); ?></a></p>
                                             <p class="personal-title"><?php echo esc_html($participant_title); ?></p>
                                             <p class="bio-summary"><?php echo esc_html($participant_summary); ?></p>
                                             <p class="read-more"><a href="<?php echo esc_url($biography_link); ?>">Read more</a></p>
@@ -208,11 +217,11 @@ get_header();
                                             $alt = $recipient_photo['alt'];
 
                                         ?>
-                                            <img src="<?php echo esc_url($url); ?>" alt="Photograph of <?php echo esc_attr($alt); ?>"><?php
-                                                                                                                                    } ?>
+                                            <a href="<?php echo esc_url($biography_link); ?>"><img src="<?php echo esc_url($url); ?>" alt="Photograph of <?php echo esc_attr($alt); ?>"></a><?php
+                                                                                                                                                                                        } ?>
                                         <div>
                                             <h3><?php echo esc_html($honor_description); ?></h3>
-                                            <p class="full-name"><?php echo esc_html($recipient_name); ?></p>
+                                            <p class="full-name"><a href="' . esc_url($biography_link) . '"><?php echo esc_html($recipient_name); ?></a></p>
                                             <p class="personal-title"><?php echo esc_html($recipient_title); ?></p>
                                             <p class="bio-summary"><?php echo esc_html($recipient_summary); ?></p>
                                             <p class="read-more"><a href="<?php echo esc_url($biography_link); ?>">Read more</a></p>

@@ -8,14 +8,17 @@ body {
   overflow: visible;
 }
 
-.nelagala-event {
+body > div.grid_1200 #top {
+  overflow: visible !important;
+}
 
+.nelagala-event {
   .nav {
     background-color: var(--ng-nav-bg);
     flex: 0 0 250px;
     width: 25%;
     height: 100svh;
-    padding-top: 2em;
+    padding-top: 3.4em;
     top: 120px;
 
     &.event-navigation {
@@ -24,7 +27,7 @@ body {
       z-index: 1000;
       /* Ensure it's above other content */
     }
-  
+
     .menu {
       display: flex;
       flex-direction: column;
@@ -64,140 +67,7 @@ body {
     }
   }
 
-
-  @media (max-width: var(--ng-media-lg)) {
-
-    // NOTE: 992px and smaller screens 
-    // Tablets in landscape mode and smaller desktop screens.
-    .nav {
-      position: fixed;
-      top: 0;
-      left: 0;
-      flex: auto;
-      width: 100%;
-      height: 50px;
-      z-index: 999;
-      transition: all 0.3s ease-in, background 0.5s ease-in;
-    }
-
-    .burger-container {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      position: relative;
-      height: 50px;
-      top: -45px;
-      width: 50px;
-      cursor: pointer;
-      transform: rotate(0deg);
-      transition: all 0.3s var(--cubic);
-      user-select: none;
-      -webkit-tap-highlight-color: transparent;
-    }
-
-    .burger-container #burger .bar {
-      width: 18px;
-      height: 1px;
-      display: block;
-      position: relative;
-      background: var(--ng-nav-item-hover-txt);
-      transition: all 0.3s var(--cubic);
-      transition-delay: 0s;
-    }
-
-    .burger-container #burger .bar.topBar {
-      transform: translateY(0px) rotate(0deg);
-    }
-
-    .burger-container #burger .bar.btmBar {
-      transform: translateY(6px) rotate(0deg);
-    }
-
-    .nav .menu {
-      position: relative;
-      display: block;
-      padding: 0px;
-      list-style: none;
-      overflow: hidden;
-    }
-
-    .nav .menu li.menu-item {
-      border-bottom: 1px solid var(--ng-red);
-      margin-top: 5px;
-      transform: scale(1.15) translateY(-30px);
-      opacity: 0;
-      transition: transform 0.5s var(--cubic), opacity 0.6s var(--cubic);
-    }
-
-    .nav .menu li.menu-item a {
-      display: block;
-      position: relative;
-      color: var(--ng-nav-item-hover-txt);
-      font-weight: 100;
-      text-decoration: none;
-      font-size: 22px;
-      line-height: 2.35;
-      font-weight: 200;
-      width: 100%;
-      border-bottom: none;
-      padding: 0 .1em 0 3em;
-    }
-
-    .nav.menu-opened {
-      height: 100%;
-      background-color: var(--ng-nav-bg);
-      transition: all 0.3s ease-in, background 0.5s ease-in;
-      /* transition-delay: 0.25s; */
-    }
-
-    .nav.menu-opened .burger-container {
-      transform: rotate(90deg);
-    }
-
-    .nav.menu-opened .burger-container #burger .bar {
-      transition: all 0.4s var(--cubic);
-      transition-delay: 0.2s;
-    }
-
-    .nav.menu-opened .burger-container #burger .bar.topBar {
-      transform: translateY(4px) rotate(45deg);
-    }
-
-    .nav.menu-opened .burger-container #burger .bar.btmBar {
-      transform: translateY(3px) rotate(-45deg);
-    }
-
-    .nav.menu-opened ul.menu li.menu-item {
-      transform: scale(1) translateY(0px);
-      opacity: 1;
-    }
-
-    .nav.menu-opened ul.menu li.menu-item:nth-child(1) {
-      transition-delay: 0.05s;
-    }
-
-    .nav.menu-opened ul.menu li.menu-item:nth-child(2) {
-      transition-delay: 0.1s;
-    }
-
-    .nav.menu-opened ul.menu li.menu-item:nth-child(3) {
-      transition-delay: 0.15s;
-    }
-
-    .nav.menu-opened ul.menu li.menu-item:nth-child(4) {
-      transition-delay: 0.2s;
-    }
-
-    .nav.menu-opened ul.menu li.menu-item:nth-child(5) {
-      transition-delay: 0.25s;
-    }
-
-    .nav.menu-opened ul.menu li.menu-item:nth-child(6) {
-      transition-delay: 0.3s;
-    }
-
-    .nav.menu-opened ul.menu li.menu-item:nth-child(7) {
-      transition-delay: 0.35s;
-    }
+  .burger-container {
+    display: none;
   }
 }

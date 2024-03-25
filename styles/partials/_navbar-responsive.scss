@@ -1,119 +1,194 @@
-
 @forward '../partials/_variables';
 @forward '../partials/_typography';
 
 @use '../partials/_variables' as *;
 @use '../partials/_typography' as *;
 
+
 @media (max-width: 991px) {
-    .nelagala-event .nav {
-      position: fixed;
-      top: 0;
-      left: 0;
-      flex: auto;
-      width: 100%;
-      height: 50px;
-      z-index: 99;
-      transition: all 0.3s ease-in, background 0.5s ease-in;
+    #top header.header {
+        display: none;
     }
-    .nelagala-event .burger-container {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      position: relative;
-      height: 50px;
-      width: 50px;
-      cursor: pointer;
-      transform: rotate(0deg);
-      transition: all 0.3s var(--cubic);
-      user-select: none;
-      -webkit-tap-highlight-color: transparent;
+
+    .right_middle_notice {
+        display: none;
     }
-    .nelagala-event .burger-container #burger .bar {
-      width: 18px;
-      height: 1px;
-      display: block;
-      position: relative;
-      background: #000;
-      transition: all 0.3s var(--cubic);
-      transition-delay: 0s;
+
+    .nelagala-event {
+
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            flex: auto;
+            width: 100%;
+            height: 50px;
+            z-index: 99;
+            transition: all 0.3s ease-in, background 0.5s ease-in;
+
+            &.event-navigation {
+                top: 0;
+                align-items: start;
+                justify-content: start;
+            }
+        }
+
+        .burger-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between; // Ensures spacing between elements
+            position: absolute;
+            height: 50px;
+            width: 100%;
+            top: 1px;
+            cursor: pointer;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
+
+            #burger {
+                width: 50px;
+                height: 50px;
+                position: absolute;
+                left: 0; // Aligns the burger button flush left
+
+                .bar {
+                    width: 18px;
+                    height: 1px;
+                    display: block;
+                    position: absolute; // Position bars absolutely within the button
+                    left: 50%; // Center bars within the button
+                    margin-left: -9px; // Center bars within the button
+                    background: map-get($color, tertiary);
+                    transition: all 0.4s var(--cubic); // Ensure transitions are smooth
+
+                    &.topBar {
+                        top: 16px; // Position towards the top within the button
+                        transform: translateY(0) rotate(0deg);
+                    }
+
+                    &.btmBar {
+                        top: 24px; // Position towards the bottom within the button
+                        transform: translateY(0) rotate(0deg);
+                    }
+                }
+            }
+
+            p {
+                flex-grow: 1;
+                text-align: center;
+                margin: 0;
+                padding: 0 60px; // Adjust padding to avoid text overlapping the button and image
+                font-family: map-get($header-h2, font);
+                font-weight: map-get($header-h2, weight);
+                font-size: calc(map-get($header-h2, size) / 2.4);
+                font-style: map-get($header-h2, style);
+                color: map-get($header-h2, color);
+                letter-spacing: map-get($header-h2, letter-spacing);
+                text-transform: map-get($header-h2, transform);
+
+                a {
+                    text-decoration: none;
+                    color: map-get($color, quaternary);
+
+                    &:hover {
+                        font-size: calc(map-get($header-h2, size) / 2.3);
+                        font-weight: calc(map-get($font-weight, bold));
+                    }
+                }
+            }
+
+            img {
+                position: absolute;
+                right: 2px; // 2 pixels left of the far right side
+                width: 46px;
+                height: 46px;
+                top: 2px; // Centered vertically
+            }
+        }
+
+        .nav .menu {
+            position: relative;
+            display: block;
+            list-style: none;
+            overflow: hidden;
+        }
+
+        .nav .menu li.menu-item {
+            border-bottom: 1px solid map-get($color, secondary);
+            transform: scale(1.15) translateY(-30px);
+            opacity: 0;
+            transition: transform 0.5s var(--cubic), opacity 0.6s var(--cubic);
+        }
+
+        .nav .menu li.menu-item a {
+            display: block;
+            position: relative;
+            font-weight: 100;
+            text-decoration: none;
+            font-size: 22px;
+            line-height: 2.35;
+            font-weight: 200;
+            width: 100%;
+            border-bottom: none;
+            padding: 0 0 0 2em;
+        }
+
+        .nav.menu-opened {
+            height: 100%;
+            transition: all 0.3s ease-in, background 0.5s ease-in;
+            /* transition-delay: 0.25s; */
+        }
+
+        // Apply rotation and transform effects only to the burger button and its bars
+        .nav.menu-opened #burger {
+            transform: rotate(90deg); // Rotates only the button
+        }
+
+        .nav.menu-opened #burger .bar {
+            transition: transform 0.4s var(--cubic), opacity 0.2s;
+            transition-delay: 0.2s;
+        }
+
+        .nav.menu-opened #burger .bar.topBar {
+            transform: translateY(4px) rotate(45deg); // "X" effect for top bar
+        }
+
+        .nav.menu-opened #burger .bar.btmBar {
+            transform: translateY(-4px) rotate(-45deg); // "X" effect for bottom bar
+        }
+
+        .nav.menu-opened ul.menu li.menu-item {
+            transform: scale(1) translateY(0px);
+            opacity: 1;
+        }
+
+        .nav.menu-opened ul.menu li.menu-item:nth-child(1) {
+            transition-delay: 0.05s;
+        }
+
+        .nav.menu-opened ul.menu li.menu-item:nth-child(2) {
+            transition-delay: 0.1s;
+        }
+
+        .nav.menu-opened ul.menu li.menu-item:nth-child(3) {
+            transition-delay: 0.15s;
+        }
+
+        .nav.menu-opened ul.menu li.menu-item:nth-child(4) {
+            transition-delay: 0.2s;
+        }
+
+        .nav.menu-opened ul.menu li.menu-item:nth-child(5) {
+            transition-delay: 0.25s;
+        }
+
+        .nav.menu-opened ul.menu li.menu-item:nth-child(6) {
+            transition-delay: 0.3s;
+        }
+
+        .nav.menu-opened ul.menu li.menu-item:nth-child(7) {
+            transition-delay: 0.35s;
+        }
+
     }
-    .nelagala-event .burger-container #burger .bar.topBar {
-      transform: translateY(0px) rotate(0deg);
-    }
-    .nelagala-event .burger-container #burger .bar.btmBar {
-      transform: translateY(6px) rotate(0deg);
-    }
-    .nelagala-event .nav .menu {
-      position: relative;
-      display: block;
-      padding: 0px 35px;
-      list-style: none;
-      overflow: hidden;
-    }
-    .nelagala-event .nav .menu li.menu-item {
-      border-bottom: 1px solid #ddd;
-      margin-top: 5px;
-      transform: scale(1.15) translateY(-30px);
-      opacity: 0;
-      transition: transform 0.5s var(--cubic), opacity 0.6s var(--cubic);
-    }
-    .nelagala-event .nav .menu li.menu-item a {
-      display: block;
-      position: relative;
-      color: #333;
-      font-weight: 100;
-      text-decoration: none;
-      font-size: 22px;
-      line-height: 2.35;
-      font-weight: 200;
-      width: 100%;
-      border-bottom: none;
-      padding: 0;
-    }
-    .nelagala-event .nav.menu-opened {
-      height: 100%;
-      background-color: #fff;
-      transition: all 0.3s ease-in, background 0.5s ease-in;
-      /* transition-delay: 0.25s; */
-    }
-    .nelagala-event .nav.menu-opened .burger-container {
-      transform: rotate(90deg);
-    }
-    .nelagala-event .nav.menu-opened .burger-container #burger .bar {
-      transition: all 0.4s var(--cubic);
-      transition-delay: 0.2s;
-    }
-    .nelagala-event .nav.menu-opened .burger-container #burger .bar.topBar {
-      transform: translateY(4px) rotate(45deg);
-    }
-    .nelagala-event .nav.menu-opened .burger-container #burger .bar.btmBar {
-      transform: translateY(3px) rotate(-45deg);
-    }
-    .nelagala-event .nav.menu-opened ul.menu li.menu-item {
-      transform: scale(1) translateY(0px);
-      opacity: 1;
-    }
-    .nelagala-event .nav.menu-opened ul.menu li.menu-item:nth-child(1) {
-      transition-delay: 0.05s;
-    }
-    .nelagala-event .nav.menu-opened ul.menu li.menu-item:nth-child(2) {
-      transition-delay: 0.1s;
-    }
-    .nelagala-event .nav.menu-opened ul.menu li.menu-item:nth-child(3) {
-      transition-delay: 0.15s;
-    }
-    .nelagala-event .nav.menu-opened ul.menu li.menu-item:nth-child(4) {
-      transition-delay: 0.2s;
-    }
-    .nelagala-event .nav.menu-opened ul.menu li.menu-item:nth-child(5) {
-      transition-delay: 0.25s;
-    }
-    .nelagala-event .nav.menu-opened ul.menu li.menu-item:nth-child(6) {
-      transition-delay: 0.3s;
-    }
-    .nelagala-event .nav.menu-opened ul.menu li.menu-item:nth-child(7) {
-      transition-delay: 0.35s;
-    }
-  }
-  
+}

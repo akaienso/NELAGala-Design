@@ -75,6 +75,18 @@ $header-h4: ( // Thursday, May 23, 2024
   bg: map-get(map-get($color, header), bg),
 );
 
+$section-h2: ( // Section Titles
+  font: map-get($font, tertiary),
+  weight: map-get($font-weight, semibold),
+  color: map-get($color, secondary),
+  style: italic,
+  size: 1.4em, // Was 32px
+  margin: 0,
+  transform: unset,
+  line-height: 1.125em,
+  text-align: start
+);
+
 $participant-h3: ( // Role or Honor Title
   font: map-get($font, secondary),
   weight: map-get($font-weight, primary),
@@ -103,7 +115,7 @@ $read-more: ( // Read More link in Bio blocks
   weight: map-get($font-weight, medium),
   color: map-get($color, secondary),
   style: normal,
-  size: 1em, // Was 16px
+  size: 1.4em, // Was 16px
   margin: (2em 0 0 0),
   transform: unset,
   line-height: 1.2em
