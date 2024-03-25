@@ -254,6 +254,7 @@ body #top > section:nth-child(4) > div {
   background-position: center 75%;
   transition: background-size 0.5s ease, background-position 0.5s ease;
   width: 100%;
+  margin-top: -1.5em;
 }
 .nelagala-event main header .header-img-main img {
   transition: transform 0.5s ease, opacity 0.5s ease;
@@ -296,8 +297,8 @@ body #top > section:nth-child(4) > div {
   color: #ffffff;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  margin: 6px, auto, 0, auto;
-  padding: 0;
+  margin: 1em, auto, 0, auto;
+  padding: 0.35em 0 0 0;
   position: relative;
   z-index: 1;
 }
@@ -342,6 +343,7 @@ body #top > section:nth-child(4) > div {
   position: relative;
   top: 0em;
   display: block;
+  z-index: 10000 !important;
 }
 .nelagala-event main header .col-2 {
   text-align: start;
@@ -386,7 +388,7 @@ body #top > section:nth-child(4) > div {
   align-items: center;
   width: 90%;
   max-width: 960px;
-  margin: -40px auto -15px auto;
+  margin: 0px auto 0 auto;
   position: relative;
 }
 .nelagala-event main header .column {

@@ -270,6 +270,7 @@ body {
           background-position: center 75%;
           transition: background-size 0.5s ease, background-position 0.5s ease;
           width: 100%;
+          margin-top: -1.5em;
 
         img {
           transition: transform 0.5s ease, opacity 0.5s ease;
@@ -372,6 +373,7 @@ body {
         position: relative;
         top: 0em;
         display: block;
+        z-index: 10000 !important;
       }
 
       .col-2 {
@@ -421,7 +423,7 @@ body {
         align-items: center;
         width: 90%;
         max-width: 960px;
-        margin: -40px auto -15px auto;
+        margin: 0px auto 0 auto;
         position: relative;
       }
 
