@@ -75,7 +75,7 @@ get_header();
                 // NOTE: Display Sidebar Navigation
                 if ($show_full_event_data) :
 
-                    // NOTE: Display Sidebar Navigation
+                    // Fetch the NELAGala event data for $event_year
                     $ng_data = fetch_nelagala_event_by_year($event_year);
                     nelagala_pass_template_data($ng, 'navigation');
                     $args = array(
@@ -154,7 +154,7 @@ get_header();
                                             // Check if there's a biography link
                                             if (!empty($biography_link)) {
                                                 // If a link exists, wrap the image with an <a> tag
-                                                echo '<a href="' . esc_url($biography_link) . '"><img src="' . esc_url($url) . '" alt="' . esc_attr($alt) . '"></a>';
+                                                echo '<a class="biography-link" href="' . esc_url($biography_link) . '"><img src="' . esc_url($url) . '" alt="' . esc_attr($alt) . '"></a>';
                                             } else {
                                                 // If no link exists, display just the image
                                                 echo '<img src="' . esc_url($url) . '" alt="' . esc_attr($alt) . '">';
@@ -217,7 +217,7 @@ get_header();
                                             $alt = $recipient_photo['alt'];
 
                                         ?>
-                                            <a href="<?php echo esc_url($biography_link); ?>"><img src="<?php echo esc_url($url); ?>" alt="Photograph of <?php echo esc_attr($alt); ?>"></a><?php
+                                            <a class="biography-link" href="<?php echo esc_url($biography_link); ?>"><img src="<?php echo esc_url($url); ?>" alt="Photograph of <?php echo esc_attr($alt); ?>"></a><?php
                                                                                                                                                                                         } ?>
                                         <div>
                                             <h3><?php echo esc_html($honor_description); ?></h3>

@@ -37,6 +37,7 @@ body {
   }
 }
 
+// SECTION: Desktop/ Full Width Default Styles
 .nelagala-event {
 
   & {
@@ -234,11 +235,13 @@ body {
     }
   }
 
+  // SECTION: Main Content
   main {
     background: var(--ng-section-bg);
     padding-bottom: 54px;
     flex-grow: 1;
 
+    // SECTION: Header
     header {
       width: 100%;
       padding: 0px;
@@ -261,16 +264,16 @@ body {
 
       .header-img-main {
         z-index: 1;
-          /* Ensure the image stays behind the .row and h4 elements */
-          position: relative;
-          /* Adjust based on your layout needs */
-          height: 189px;
-          background-size: 110%;
-          /* Start zoomed in */
-          background-position: center 75%;
-          transition: background-size 0.5s ease, background-position 0.5s ease;
-          width: 100%;
-          margin-top: -1.5em;
+        /* Ensure the image stays behind the .row and h4 elements */
+        position: relative;
+        /* Adjust based on your layout needs */
+        height: 189px;
+        background-size: 110%;
+        /* Start zoomed in */
+        background-position: center 75%;
+        transition: background-size 0.5s ease, background-position 0.5s ease;
+        width: 100%;
+        margin-top: -1.5em;
 
         img {
           transition: transform 0.5s ease, opacity 0.5s ease;
@@ -469,6 +472,8 @@ body {
       }
     }
 
+    // !SECTION: Header
+
     section {
       margin-bottom: 0;
       width: 80%;
@@ -495,6 +500,7 @@ body {
         font-size: 2em;
       }
 
+      // NOTE: Styles for Repeating rows of participants
       &.participants {
         width: 80%;
         max-width: 920px;
@@ -512,6 +518,7 @@ body {
             font-size: map-get($read-more, size);
             margin: map-get($read-more, margin);
             text-transform: map-get($read-more, transform);
+            text-align: map-get($read-more, text-align);
             line-height: map-get($read-more, line-height);
           }
         }
@@ -522,7 +529,8 @@ body {
         align-items: flex-start;
         margin-bottom: 0px;
 
-        a {
+
+        a.biography-link {
           width: 45%;
           /* Assign width to the anchor to maintain the layout */
           display: inline-block;
@@ -539,6 +547,7 @@ body {
             mix-blend-mode: luminosity;
             object-position: center 14%;
           }
+
         }
       }
 
@@ -555,9 +564,9 @@ body {
     .row-container {
       display: flex;
       align-items: flex-start;
-      margin-bottom: 0px;
+      margin: 1.5em auto;
 
-      a,
+      a.biography-link,
       img {
         display: inline-block;
         /* Ensures block-level behaviors */
@@ -685,11 +694,15 @@ body {
       }
     }
 
-    // Styles specific to #Biography
+    // SECTION: Biography Page Content
     >#Biography {
-      >div {
+      width: 100%;
+
+      >.row-container {
+        //outline: 1px solid var(--ng-red);
         align-items: center;
         justify-content: center;
+        width: 100%;
       }
 
       >div>div {
@@ -715,13 +728,27 @@ body {
         }
       }
     }
+
+    // !SECTION: Styles specific to #Biography
   }
+
+  // !SECTION: Main Content
 }
 
+// !SECTION: Desktop/ Full Width Default Styles
+// SECTION: Media Queries
 @media (max-width: map-get($viewport, xl)) {
+
   // NOTE: 1200px and smaller screens. 
   // This breakpoint exists to reset breakpoints and styles from the main theme stylesheet.
+  .nelagala-event {
+    top: -60px;
+    margin: 0 auto -280px auto;
 
+    .nav.event-navigation {
+      top: 0em !important;
+    }
+  }
 }
 
 @media (max-width: map-get($viewport, lg)) {
@@ -738,7 +765,7 @@ body {
     min-height: 100vh;
     width: 100%;
     flex-wrap: wrap;
-    margin: 0px auto 0 auto;
+    margin: 0px auto -180px auto;
 
     .map-container {
       $aspect-width: 4;
@@ -820,6 +847,19 @@ body {
 
       }
 
+      #about-the-event {
+        max-width: 100%;
+
+        article {
+          width: 58%;
+        }
+
+        aside {
+          width: 40%;
+          margin: 0;
+        }
+      }
+
       .container {
         max-width: fit-content;
       }
@@ -834,31 +874,126 @@ body {
           flex: 0 0 95%;
         }
       }
+
+      #Biography .row-container {
+        flex-direction: row-reverse;
+        flex-wrap: nowrap;
+        align-items: center;
+        justify-content: center;
+      }
+    }
+
+    #sponsorships .package {
+      flex: 0 0 95%;
     }
   }
 }
 
 @media screen and (max-width: map-get($viewport, md)) {
-  // NOTE: 768px and smaller screens.
-
+  // NOTE: Targets viewport widths up to and including 768px.
   // Small tablets and large smartphones, especially in landscape orientation. It's a common breakpoint for supporting devices like iPads when held in portrait mode, as well as various other tablets and phablets.
 
-  main>section.participants>div {
-    flex-direction: column;
-    align-items: flex-start;
+  .nelagala-event {
+
+    main {
+
+      #Biography {
+
+        >div>div {
+          width: 90%;
+          text-align: left;
+        }
+
+        .row-container {
+          flex-direction: column;
+          flex-wrap: wrap;
+          align-items: center;
+          justify-content: center;
+
+          img {
+            width: 100%;
+            height: auto;
+            aspect-ratio: 1/1;
+            max-height: 100%;
+          }
+
+
+        }
+      }
+
+
+      .row-container {
+        a.biography-link {
+          width: 100%;
+          /* Assign width to the anchor to maintain the layout */
+          display: inline-block;
+          /* Ensure the anchor behaves as a block element with line dimensions */
+          aspect-ratio: 3 / 4;
+          max-height: 400px;
+
+          img {
+            width: 100%;
+            /* Make the image fill the anchor */
+            height: auto;
+            /* Maintain aspect ratio */
+            object-fit: cover;
+            mix-blend-mode: luminosity;
+            object-position: center 14%;
+          }
+        }
+      }
+
+      header .header-img {
+        position: absolute;
+        top: -60px;
+        right: -123px;
+        /* width: 1768px; */
+        transform: rotate(-13deg);
+        opacity: .4;
+      }
+
+      >section {
+        >h2 {
+          margin: 20px 0 10px -10px;
+        }
+
+        &.participants>div {
+          div {
+            width: 100%;
+          }
+
+          img {
+            width: 100%;
+            margin: 0;
+          }
+
+          flex-direction: column;
+          align-items: flex-start;
+        }
+
+      }
+
+      #about-the-event {
+        flex-direction: column;
+
+        article,
+        aside {
+          width: 100%;
+          margin: 0;
+        }
+      }
+    }
+
+    .packages .package {
+      padding: 20px 20px 80px;
+
+      &,
+      #sponsorships .packages .package {
+        flex: 0 0 100%;
+      }
+    }
   }
 
-  main>section.participants>div img {
-    width: 100%;
-    margin: 0;
-  }
-
-  main>section.participants>div>div {
-    width: 100%;
-  }
-
-  .packages .package,
-  #sponsorshipss .packages .package {
-    flex: 0 0 100%;
-  }
 }
+
+// !SECTION: Media Queries

@@ -459,12 +459,13 @@ body #top > section:nth-child(4) > div {
 .nelagala-event main > section.participants .participant-website a,
 .nelagala-event main > section.participants .read-more a {
   font-family: barlow, sans-serif;
-  font-weight: 500;
+  font-weight: 600;
   font-style: normal;
   color: #d1232f;
-  font-size: 1.4em;
+  font-size: 1em;
   margin: 2em 0 0 0;
   text-transform: unset;
+  text-align: right;
   line-height: 1.2em;
 }
 .nelagala-event main > section > div {
@@ -472,7 +473,7 @@ body #top > section:nth-child(4) > div {
   align-items: flex-start;
   margin-bottom: 0px;
 }
-.nelagala-event main > section > div a {
+.nelagala-event main > section > div a.biography-link {
   width: 45%;
   /* Assign width to the anchor to maintain the layout */
   display: inline-block;
@@ -480,7 +481,7 @@ body #top > section:nth-child(4) > div {
   aspect-ratio: 3/4;
   max-height: 400px;
 }
-.nelagala-event main > section > div a img {
+.nelagala-event main > section > div a.biography-link img {
   width: 100%;
   /* Make the image fill the anchor */
   height: auto;
@@ -499,9 +500,9 @@ body #top > section:nth-child(4) > div {
 .nelagala-event main .row-container {
   display: flex;
   align-items: flex-start;
-  margin-bottom: 0px;
+  margin: 1.5em auto;
 }
-.nelagala-event main .row-container a,
+.nelagala-event main .row-container a.biography-link,
 .nelagala-event main .row-container img {
   display: inline-block;
   /* Ensures block-level behaviors */
@@ -609,9 +610,13 @@ body #top > section:nth-child(4) > div {
   font-size: 18px;
   margin: 0.2em 0 0.8em 0;
 }
-.nelagala-event main > #Biography > div {
+.nelagala-event main > #Biography {
+  width: 100%;
+}
+.nelagala-event main > #Biography > .row-container {
   align-items: center;
   justify-content: center;
+  width: 100%;
 }
 .nelagala-event main > #Biography > div > div {
   width: 58%;
@@ -633,7 +638,16 @@ body #top > section:nth-child(4) > div {
   line-height: 1.5em;
 }
 
-@media (max-width: 992px) {
+@media (max-width: 1199px) {
+  .nelagala-event {
+    top: -60px;
+    margin: 0 auto -280px auto;
+  }
+  .nelagala-event .nav.event-navigation {
+    top: 0em !important;
+  }
+}
+@media (max-width: 991px) {
   .nelagala-event {
     top: -40px;
     font-family: minion-pro-condensed, serif;
@@ -644,7 +658,7 @@ body #top > section:nth-child(4) > div {
     min-height: 100vh;
     width: 100%;
     flex-wrap: wrap;
-    margin: 0px auto 0 auto;
+    margin: 0px auto -180px auto;
   }
   .nelagala-event .map-container {
     padding-top: 125%;
@@ -703,6 +717,16 @@ body #top > section:nth-child(4) > div {
   .nelagala-event main > section.participants > div > div {
     width: 100%;
   }
+  .nelagala-event main #about-the-event {
+    max-width: 100%;
+  }
+  .nelagala-event main #about-the-event article {
+    width: 58%;
+  }
+  .nelagala-event main #about-the-event aside {
+    width: 40%;
+    margin: 0;
+  }
   .nelagala-event main .container {
     max-width: fit-content;
   }
@@ -716,21 +740,85 @@ body #top > section:nth-child(4) > div {
   .nelagala-event main .packages .package {
     flex: 0 0 95%;
   }
+  .nelagala-event main #Biography .row-container {
+    flex-direction: row-reverse;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: center;
+  }
+  .nelagala-event #sponsorships .package {
+    flex: 0 0 95%;
+  }
 }
 @media screen and (max-width: 768px) {
-  main > section.participants > div {
+  .nelagala-event main #Biography > div > div {
+    width: 90%;
+    text-align: left;
+  }
+  .nelagala-event main #Biography .row-container {
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+  }
+  .nelagala-event main #Biography .row-container img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1/1;
+    max-height: 100%;
+  }
+  .nelagala-event main .row-container a.biography-link {
+    width: 100%;
+    /* Assign width to the anchor to maintain the layout */
+    display: inline-block;
+    /* Ensure the anchor behaves as a block element with line dimensions */
+    aspect-ratio: 3/4;
+    max-height: 400px;
+  }
+  .nelagala-event main .row-container a.biography-link img {
+    width: 100%;
+    /* Make the image fill the anchor */
+    height: auto;
+    /* Maintain aspect ratio */
+    object-fit: cover;
+    mix-blend-mode: luminosity;
+    object-position: center 14%;
+  }
+  .nelagala-event main header .header-img {
+    position: absolute;
+    top: -60px;
+    right: -123px;
+    /* width: 1768px; */
+    transform: rotate(-13deg);
+    opacity: 0.4;
+  }
+  .nelagala-event main > section > h2 {
+    margin: 20px 0 10px -10px;
+  }
+  .nelagala-event main > section.participants > div {
     flex-direction: column;
     align-items: flex-start;
   }
-  main > section.participants > div img {
+  .nelagala-event main > section.participants > div div {
+    width: 100%;
+  }
+  .nelagala-event main > section.participants > div img {
     width: 100%;
     margin: 0;
   }
-  main > section.participants > div > div {
-    width: 100%;
+  .nelagala-event main #about-the-event {
+    flex-direction: column;
   }
-  .packages .package,
-  #sponsorshipss .packages .package {
+  .nelagala-event main #about-the-event article,
+  .nelagala-event main #about-the-event aside {
+    width: 100%;
+    margin: 0;
+  }
+  .nelagala-event .packages .package {
+    padding: 20px 20px 80px;
+  }
+  .nelagala-event .packages .package,
+  .nelagala-event .packages .package #sponsorships .packages .package {
     flex: 0 0 100%;
   }
 }

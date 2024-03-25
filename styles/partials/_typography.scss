@@ -112,10 +112,11 @@ $participant-name: ( // p.full-name
 
 $read-more: ( // Read More link in Bio blocks
   font: map-get($font, tertiary),
-  weight: map-get($font-weight, medium),
+  weight: map-get($font-weight, semibold),
   color: map-get($color, secondary),
   style: normal,
-  size: 1.4em, // Was 16px
+  text-align: right,
+  size: 1em, // Was 16px
   margin: (2em 0 0 0),
   transform: unset,
   line-height: 1.2em
