@@ -25,6 +25,14 @@ $color: (
     quaternary: $ng-not-white,
     quinary: $ng-steel-blue,
 
+    nav: (
+        bg: $ng-nav-bg,
+        item-txt: $ng-nav-item-txt,
+        item-bg: $ng-nav-item-bg,
+        item-hover-bg: $ng-nav-item-hover-bg,
+        item-hover-txt: $ng-nav-item-hover-txt
+    ),
+
     header: (
         text: $ng-header-text,
         bg: $ng-yellow,

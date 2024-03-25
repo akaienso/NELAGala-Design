@@ -8,10 +8,6 @@
 body {
   margin: 0;
 
-  * {
-    overflow: default;
-  }
-
   .business_directory {
     .container {
       display: none;
@@ -20,7 +16,9 @@ body {
 
   #top {
     .grid_1200 {
-      overflow: default;
+      // NOTE: This is the top section of the page.
+      // TODO: Find a way to overrride overflow: hidden; in the main theme stylesheet.
+      overflow: visible;
     }
 
     &>section:nth-child(4) { // NOTE: Theme content .sections

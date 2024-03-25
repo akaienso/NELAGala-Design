@@ -9,6 +9,8 @@ get_header();
 ?>
 <section class="sections">
     <div class="container">
+        
+        <!-- SECTION: NELAGala Event Page -->
         <div class="nelagala-event">
             <?php if (!empty($ng)) { 
 
@@ -81,7 +83,7 @@ get_header();
                 <!-- SECTION: Display NELAGala Event Content -->
                 <main>
                     <?php
-                    
+
                     // NOTE: Display the event header
                     nelagala_pass_template_data($ng_data, 'header');
                     get_template_part('inc/nelagala/template-parts/event-header');
@@ -372,6 +374,7 @@ get_header();
             ?>
 
         </div>
+        <!-- !SECTION: NELAGala Event Page -->
     </div>
 </section>
 <?php get_footer(); ?>
