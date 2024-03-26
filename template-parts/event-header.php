@@ -2,14 +2,15 @@
 $ng_data = apply_filters('nelagala_template_data_header', []);
 
 $datetime = $ng_data['nelagala_event_datetime'];
+$datetime_detail = $ng_data['datetime_detail'];
 $event_datetime = $ng_data['nelagala_event_datetime'];
 $event_date = new DateTime($event_datetime);
 $display_date = $event_date->format('l, F j, Y'); // Use $event_date, not $datetime
 $header_venue_message = $ng_data['header_venue_message'];
 $venue_name = $ng_data['nelagala_venue_name'];
-
+$event_calendar_file = $ng_data['event_calendar_file'];
 $event_location = $ng_data['nelagala_event_location'];
-$google_geocoding_api_key = $ng_data['google_geocoding_api_key']; 
+$google_geocoding_api_key = $ng_data['google_geocoding_api_key'];
 $venue_details = fetch_event_venue_details($event_location, $google_geocoding_api_key);
 ?>
 <!--  SECTION: Event Header -->
@@ -37,6 +38,19 @@ $venue_details = fetch_event_venue_details($event_location, $google_geocoding_ap
     </div>
     <div class="header-img-main" style="background-image: url('<?php echo get_template_directory_uri(); ?>/inc/nelagala/img/header-main-img.jpg');">
     </div>
-    <h4><? echo $display_date; ?> | More details coming soon!</h4>
+    <h4>
+        <?php if (!empty($event_calendar_file)) : ?>
+        <a href="<?=$event_calendar_file; ?>" title="Click to download an ICS file for your calendar">
+        <?php endif; ?>
+            <span><?php echo $display_date; ?></span>
+            <?php if ($is_demo_mode || empty($datetime_detail)) : ?>
+                <span>More details coming soon!</span>
+            <?php else : ?>
+                <span><?php echo $datetime_detail; ?></span>
+            <?php endif;
+        if (!empty($event_calendar_file)) : ?>
+        </a>
+        <?php endif; ?>
+    </h4> 
 </header>
 <!--  !SECTION: Event Header -->

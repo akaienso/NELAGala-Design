@@ -1,4 +1,4 @@
-<?php 
+<?php
 $ng_data = apply_filters('nelagala_template_data_navigation', []);
 $path = $args['path'] ?? '';
 $event_year = $args['event_year'] ?? '';
@@ -10,6 +10,9 @@ $base_url = $path . $event_year;
 if (empty($path)) {
     $base_url = '';
 }
+
+$osdia_icon = $ng_data['osdia_icon'] ?? null;
+$nela_gala_icon = $ng_data['nela_gala_icon'] ?? null;
 ?>
 
 <!-- SECTION: Navigation Sidebar -->
@@ -20,7 +23,13 @@ if (empty($path)) {
             <span class="bar btmBar"></span>
         </button>
         <p><a href="#top">Save the Date</a></p>
-        <a href="/"><img src="http://osdia-national-website.mmp/wp-content/uploads/2024/03/Orange-No-Trademark.png" width="46" height="auto" alt=""></a>
+        <a href="/"<?= !empty($osdia_icon) ? '' : ' class="menu-item"'; ?>>
+            <?php if (!empty($osdia_icon)) : ?>
+                <img src="<?= esc_url($osdia_icon['url']); ?>" alt="<?= esc_attr($osdia_icon['alt']); ?>" title="Return to Order Sons and Daughters of Italy in America" />
+            <?php else : ?>
+                OSDIA
+            <?php endif; ?>
+        </a>
     </div>
     <ul class="menu">
         <?php
@@ -63,8 +72,16 @@ if (empty($path)) {
             if (!empty($headline) && !empty($content)) : ?>
                 <li class="menu-item"><a href="<?= $base_url . esc_url($anchor); ?>"><?= esc_html($headline); ?></a></li>
         <?php endif;
-        endforeach;
-        ?>
+        endforeach; ?>
+        <li class="<?= !empty($nela_gala_icon) ? 'home' : 'menu-item'; ?>">
+            <a href="<?= $base_url; ?>#top">
+                <?php if (!empty($nela_gala_icon)) : ?>
+                    <img src="<?= esc_url($nela_gala_icon['url']); ?>" alt="<?= esc_attr($nela_gala_icon['alt']); ?>" title="<?= esc_attr($nela_gala_icon['caption']); ?>" />
+                <?php else : ?>
+                    Home
+                <?php endif; ?>
+            </a>
+        </li>
     </ul>
 </nav>
 <!-- !SECTION: Navigation Sidebar -->

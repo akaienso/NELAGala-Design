@@ -64,7 +64,7 @@ $header-h3: ( // Sons of Italy Foundation presents
 
 $header-h4: ( // Thursday, May 23, 2024
   font: map-get($font, primary),
-  weight: map-get($font-weight, semibold),
+  weight: map-get($font-weight, bold),
   color: map-get(map-get($color, header), text),
   style: italic,
   size: 1.3em,
@@ -73,6 +73,10 @@ $header-h4: ( // Thursday, May 23, 2024
   line-height: 1.125em,
   padding: 10px 0,
   bg: map-get(map-get($color, header), bg),
+);
+
+$header-h4-span: ( // Thursday, May 23, 2024
+  weight: map-get($font-weight, semibold),
 );
 
 $section-h2: ( // Section Titles

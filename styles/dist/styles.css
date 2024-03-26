@@ -316,6 +316,35 @@ body #top > section:nth-child(4) > div {
   font-size: 2em;
   top: 0.2em;
 }
+.nelagala-event main header h4 {
+  /* Typography */
+  font-family: minion-pro-condensed-subhead, serif;
+  font-size: 1.3em;
+  font-style: italic;
+  font-weight: 700;
+  line-height: 1.125em;
+  text-transform: unset;
+  /* Layout */
+  margin: 0;
+  padding: 10px 0;
+  /* Palate */
+  background-color: rgb(240, 189, 51);
+  color: #ffffff;
+}
+.nelagala-event main header h4 span {
+  font-weight: 600;
+  display: inline-block;
+  max-width: calc(50% - 0.5em);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.nelagala-event main header h4 span:last-child::before {
+  content: " / ";
+  display: inline-block;
+  margin: 0 0.2em;
+  /* Adjust spacing as needed */
+}
 .nelagala-event main header .pre-title,
 .nelagala-event main header .post-title {
   position: relative;
@@ -368,19 +397,6 @@ body #top > section:nth-child(4) > div {
   line-height: 1.125em;
   margin: 0, auto, 10px, auto;
   text-transform: unset;
-}
-.nelagala-event main header h4 {
-  font-family: minion-pro-condensed-subhead, serif;
-  font-weight: 600;
-  font-style: italic;
-  color: #ffffff;
-  font-size: 1.3em;
-  line-height: 1.125em;
-  margin: 0;
-  text-transform: unset;
-  background-color: rgb(240, 189, 51);
-  padding: 10px 0;
-  z-index: 10000 !important;
 }
 .nelagala-event main header .row {
   display: flex;
@@ -534,6 +550,9 @@ body #top > section:nth-child(4) > div {
 .nelagala-event main #about-the-event article {
   width: 64%;
 }
+.nelagala-event main #about-the-event article.full-width {
+  width: 100%;
+}
 .nelagala-event main #about-the-event aside {
   display: block;
   outline: 0.01em solid rgb(51, 51, 51);
@@ -617,6 +636,9 @@ body #top > section:nth-child(4) > div {
   align-items: center;
   justify-content: center;
   width: 100%;
+}
+.nelagala-event main > #Biography > .row-container img {
+  mix-blend-mode: inherit;
 }
 .nelagala-event main > #Biography > div > div {
   width: 58%;
@@ -740,6 +762,9 @@ body #top > section:nth-child(4) > div {
   .nelagala-event main .packages .package {
     flex: 0 0 95%;
   }
+  .nelagala-event main #Biography article {
+    width: 95%;
+  }
   .nelagala-event main #Biography .row-container {
     flex-direction: row-reverse;
     flex-wrap: nowrap;
@@ -822,6 +847,20 @@ body #top > section:nth-child(4) > div {
     flex: 0 0 100%;
   }
 }
+@media screen and (max-width: 576px) {
+  .nelagala-event main header h4 span {
+    display: block;
+    width: 100%;
+    max-width: 90%;
+  }
+  .nelagala-event main header h4 span:last-child::before {
+    display: none;
+  }
+  .nelagala-event main header h4 span:last-child {
+    font-size: 0.9em;
+    /* Adjust the font size as needed */
+  }
+}
 body {
   overflow: visible;
 }
@@ -841,7 +880,7 @@ body > div.grid_1200 #top {
 .nelagala-event .nav.event-navigation {
   position: sticky;
   top: 2.5em;
-  z-index: 1000;
+  z-index: 100000;
   /* Ensure it's above other content */
 }
 .nelagala-event .nav .menu {
@@ -876,6 +915,15 @@ body > div.grid_1200 #top {
   color: var(--ng-nav-item-hover-txt);
   border-bottom: 0.1em solid var(--ng-yellow);
   background-color: var(--ng-nav-item-hover-bg);
+}
+.nelagala-event .nav .menu .home a {
+  display: block;
+  margin: 1em auto;
+  width: 70%;
+}
+.nelagala-event .nav .menu .home a img {
+  height: auto;
+  margin: 0 auto;
 }
 .nelagala-event .burger-container {
   display: none;
@@ -923,7 +971,7 @@ body > div.grid_1200 #top {
   }
   .nelagala-event .burger-container #burger .bar {
     width: 18px;
-    height: 1px;
+    height: 3px;
     display: block;
     position: absolute;
     left: 50%;
@@ -960,18 +1008,35 @@ body > div.grid_1200 #top {
     font-size: 1.3043478261em;
     font-weight: 700;
   }
-  .nelagala-event .burger-container img {
+  .nelagala-event .burger-container > a.missing-icon {
     position: absolute;
-    right: 2px;
+    display: block;
+    right: 5px;
     width: 46px;
     height: 46px;
-    top: 2px;
+    top: 5px;
+    color: rgb(249, 249, 249);
+  }
+  .nelagala-event .burger-container img {
+    position: absolute;
+    right: 5px;
+    width: 46px;
+    height: 46px;
+    top: 5px;
   }
   .nelagala-event .nav .menu {
     position: relative;
     display: block;
     list-style: none;
     overflow: hidden;
+  }
+  .nelagala-event .nav .menu .home a {
+    display: block;
+    margin: 1em auto;
+    width: 30%;
+  }
+  .nelagala-event .nav .menu .home a img {
+    height: auto;
   }
   .nelagala-event .nav .menu li.menu-item {
     border-bottom: 1px solid #d1232f;
@@ -1033,5 +1098,8 @@ body > div.grid_1200 #top {
   }
   .nelagala-event .nav.menu-opened ul.menu li.menu-item:nth-child(7) {
     transition-delay: 0.35s;
+  }
+  .nelagala-event .nav.menu-opened ul.menu li.menu-item:nth-child(8) {
+    transition-delay: 0.4s;
   }
 }/*# sourceMappingURL=styles.css.map */

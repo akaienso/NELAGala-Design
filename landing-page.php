@@ -1,31 +1,53 @@
 <?php
 global $page_title;
-
 $event_year = get_query_var('nelagala_year', date('Y')); // Default to current year if not specified
-
 $ng = fetch_nelagala_event_by_year($event_year);
 
 get_header();
 ?>
 <section class="sections">
     <div class="container">
-
         <!-- SECTION: NELAGala Event Page -->
-        <div class="nelagala-event">
+        <div id="nelagala" class="nelagala-event">
             <?php if (!empty($ng)) {
 
+                // ACF field values from $ng array
+                $full_event_switch = $ng['full_event_switch'] ?: false;
+                $is_demo_mode = !$full_event_switch;
+
+                // Sections to iterate through, based on your structure
+                $sections = [
+                    'about',
+                    'theme_sidebar',
+                    'promotional_video',
+                    'map',
+                    'roles',
+                    'honorees',
+                    'lodging',
+                    'tickets',
+                    'sponsorships',
+                    'advertising'
+                ];
+
+                foreach ($sections as $section) {
+                    ${"show_$section"} = $ng["show_$section"] ?? false;
+                    ${$section . "_demo"} = $ng[$section . "_demo"] ?? false;
+                    ${"display_$section"} = ${"show_$section"} && (!$is_demo_mode || ($is_demo_mode && ${$section . "_demo"}));
+                }
                 // ACF field values
-                $show_full_event_data = $ng['full_event_switch'];
                 $event_title = esc_html($ng['nelagala_event_title']);
                 $datetime = $ng['nelagala_event_datetime'];
+                $datetime_detail = $ng['datetime_detail'];
                 $event_datetime = $ng['nelagala_event_datetime'];
                 $event_date = new DateTime($event_datetime);
                 $display_date = $event_date->format('l, F j, Y'); // Use $event_date, not $datetime
 
+                $about_section_headline = $ng['about_section_headline'];
                 $theme_image = $ng['theme_sidebar_image'];
                 $theme_title = esc_html($ng['theme_sidebar_title']);
                 $theme_content = wp_kses_post($ng['theme_sidebar_content']);
-                $show_theme_sidebar = $ng['theme_sidebar_visible'];
+                $show_theme_sidebar = $ng['show_theme_sidebar'];
+                $theme_sidebar_demo = $ng['theme_sidebar_demo'];
 
                 //NOTE - This is the code to get the location of the event
                 // This returns an array for Google Map field
@@ -73,12 +95,13 @@ get_header();
                 $advertising_rates = $ng['advertising_rates'];
 
                 // NOTE: Display Sidebar Navigation
-                if ($show_full_event_data) :
+                if (!$is_demo_mode) :
 
                     // Fetch the NELAGala event data for $event_year
                     $ng_data = fetch_nelagala_event_by_year($event_year);
                     nelagala_pass_template_data($ng, 'navigation');
                     $args = array(
+                        'event_year' => $event_year,
                         'event_year' => $event_year,
                     );
                     get_template_part('inc/nelagala/template-parts/sidebar-nav', null, $args);
@@ -87,31 +110,38 @@ get_header();
                 <!-- SECTION: Display NELAGala Event Content -->
                 <main>
                     <?php
-
                     // NOTE: Display the event header
                     nelagala_pass_template_data($ng_data, 'header');
                     get_template_part('inc/nelagala/template-parts/event-header');
 
-                    if ($show_full_event_data) : ?>
+                    if ($display_about) : ?>
                         <!--  SECTION: About the Event -->
                         <section id="about-the-event">
-                            <article>
-                                <h2>About the Event</h2>
+                            <article class="<?= $display_theme_sidebar ? '' : 'full-width'; ?>">
+                                <h2><?php echo $about_section_headline; ?></h2>
                                 <?php echo the_content(); ?>
                             </article>
-                            <!-- NOTE: Theme Sidebar Content -->
-                            <?php if ($theme_title && $theme_content && $show_theme_sidebar) : ?>
-                                <aside>
-                                    <?php if (!empty($theme_image)) : ?>
-                                        <img src="<?php echo esc_url($theme_image['url']); ?>" alt="<?php echo esc_attr($theme_image['alt']); ?>" title="<?php echo esc_attr($theme_image['caption']); ?>" />
-                                    <?php endif; ?>
-                                    <h2><?php echo $theme_title; ?></h2>
-                                    <?php echo $theme_content; ?>
-                                </aside>
-                            <?php endif; ?>
+                            <?php if ($display_theme_sidebar) : ?>
+
+                                <!-- NOTE: Theme Sidebar Content -->
+                                <?php if ($theme_title && $theme_content) : ?>
+                                    <aside>
+                                        <?php if (!empty($theme_image)) : ?>
+                                            <img src="<?php echo esc_url($theme_image['url']); ?>" alt="<?php echo esc_attr($theme_image['alt']); ?>" title="<?php echo esc_attr($theme_image['caption']); ?>" />
+                                        <?php endif; ?>
+                                        <h2><?php echo $theme_title; ?></h2>
+                                        <?php echo $theme_content; ?>
+                                    </aside>
+                            <?php endif;
+                            endif; ?>
+
                         </section>
+                    <?php if ($display_promotional_video) : ?>
                         <iframe class="video" src="<?php echo  $promotional_video; ?>" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                    <?php endif; ?>
                         <!--  !SECTION: About the Event -->
+                    <?php endif;
+                    if ($display_roles) : ?>
                         <!--  SECTION: Event Roles -->
                         <?php
                         if (have_rows('roles')) :
@@ -153,6 +183,7 @@ get_header();
                                             $alt = $participant_photo['alt'];
                                             // Check if there's a biography link
                                             if (!empty($biography_link)) {
+
                                                 // If a link exists, wrap the image with an <a> tag
                                                 echo '<a class="biography-link" href="' . esc_url($biography_link) . '"><img src="' . esc_url($url) . '" alt="' . esc_attr($alt) . '"></a>';
                                             } else {
@@ -173,6 +204,8 @@ get_header();
                             </section>
                         <?php endif; ?>
                         <!--  !SECTION: Event Roles -->
+                    <?php endif;
+                    if ($display_honorees) : ?>
                         <!--  SECTION: Event Honorees -->
                         <?php
                         if (have_rows('honorees')) :
@@ -218,10 +251,10 @@ get_header();
 
                                         ?>
                                             <a class="biography-link" href="<?php echo esc_url($biography_link); ?>"><img src="<?php echo esc_url($url); ?>" alt="Photograph of <?php echo esc_attr($alt); ?>"></a><?php
-                                                                                                                                                                                        } ?>
+                                                                                                                                                                                                                } ?>
                                         <div>
                                             <h3><?php echo esc_html($honor_description); ?></h3>
-                                            <p class="full-name"><a href="' . esc_url($biography_link) . '"><?php echo esc_html($recipient_name); ?></a></p>
+                                            <p class="full-name"><a href="<?php echo esc_url($biography_link); ?>"><?php echo esc_html($recipient_name); ?></a></p>
                                             <p class="personal-title"><?php echo esc_html($recipient_title); ?></p>
                                             <p class="bio-summary"><?php echo esc_html($recipient_summary); ?></p>
                                             <p class="read-more"><a href="<?php echo esc_url($biography_link); ?>">Read more</a></p>
@@ -230,7 +263,9 @@ get_header();
                                 <?php endwhile; ?>
                             </section>
                         <?php endif; ?>
-                        <!--  !SECTION: Event Roles -->
+                        <!--  !SECTION: Event Honorees -->
+                    <?php endif;
+                    if ($display_tickets) : ?>
                         <!--  SECTION: Tickets -->
                         <?php
                         if (have_rows('ticket_prices')) :
@@ -264,10 +299,16 @@ get_header();
                             </section>
                         <?php endif; ?>
                         <!--  !SECTION: Tickets -->
-                        <!-- SECTION: location -->
+                    <?php endif; ?>
+                    <?php if ($display_map) : ?>
+                    <!-- SECTION: map -->
                         <div id="lodging" class="map-container">
                             <div id="map" class="map"></div>
                         </div>
+                    <!-- !SECTION: map -->
+                    <?php endif;
+                    if ($display_lodging) :  ?>
+                    <!-- SECTION: lodging -->
                         <section id="location" class="hotels-cards">
                             <h2><?php echo esc_html($lodging_section_headline) ?></h2>
                             <?php if ($lodging_section_top_content) : ?>
@@ -298,8 +339,10 @@ get_header();
 
                             <?php endif; ?>
                         </section>
-                        <!-- !SECTION: Location -->
-                        <!--  SECTION: sponsorship packagess -->
+                        <!-- !SECTION: lodging -->
+                    <?php endif;
+                    if ($display_sponsorships) : ?>
+                        <!--  SECTION: sponsorships -->
                         <?php
                         if (have_rows('sponsorship_packages')) :
                         ?>
@@ -339,8 +382,10 @@ get_header();
                                 </div>
                             </section>
                         <?php endif; ?>
-                        <!--  !SECTION: Sponsorship Packages. -->
-                        <!--  SECTION: Advertising Rates -->
+                        <!--  !SECTION: sponsorships -->
+                    <?php endif;
+                    if ($display_advertising) : ?>
+                        <!--  SECTION: advertising -->
                         <?php
                         if (have_rows('advertising_rates')) :
                         ?>
@@ -372,7 +417,7 @@ get_header();
                                 </div>
                             </section>
                         <?php endif; ?>
-                        <!--  !SECTION: Advertising Rates . -->
+                        <!--  !SECTION: advertising -->
                     <?php endif; ?>
                 </main>
                 <!-- !SECTION: Display NELAGala Event Content -->
@@ -381,7 +426,6 @@ get_header();
                 echo "<!-- No event found for the requested year '" . esc_html($event_year) . "' -->";
             }
             ?>
-
         </div>
         <!-- !SECTION: NELAGala Event Page -->
     </div>

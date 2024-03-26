@@ -24,7 +24,7 @@ body > div.grid_1200 #top {
     &.event-navigation {
       position: sticky;
       top: 2.5em;
-      z-index: 1000;
+      z-index: 100000;
       /* Ensure it's above other content */
     }
 
@@ -62,7 +62,17 @@ body > div.grid_1200 #top {
             background-color: var(--ng-nav-item-hover-bg);
           }
         }
-
+      }
+      .home {
+        a {
+          display: block;
+          margin: 1em auto;
+          width: 70%;
+          img {
+            height: auto;
+            margin: 0 auto;
+          }
+        }
       }
     }
   }

@@ -348,6 +348,42 @@ body {
         }
       }
 
+      h4 {
+        // Date and time details ("the header's footer")
+        /* Typography */
+        font-family: map-get($header-h4, font);
+        font-size: map-get($header-h4, size);
+        font-style: map-get($header-h4, style);
+        font-weight: map-get($header-h4, weight);
+        line-height: map-get($header-h4, line-height);
+        text-transform: map-get($header-h4, transform);
+
+        /* Layout */
+        margin: map-get($header-h4, margin);
+        padding: map-get($header-h4, padding);
+
+        /* Palate */
+        background-color: map-get($header-h4, bg);
+        color: map-get($header-h4, color);
+
+        span {
+
+          font-weight: map-get($header-h4-span, weight);
+          display: inline-block;
+          max-width: calc(50% - 0.5em);
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+
+          &:last-child::before {
+            content: " / ";
+            display: inline-block;
+            margin: 0 0.2em;
+            /* Adjust spacing as needed */
+          }
+        }
+      }
+
       .pre-title,
       .post-title {
         position: relative;
@@ -406,19 +442,6 @@ body {
         }
       }
 
-      h4 {
-        font-family: map-get($header-h4, font);
-        font-weight: map-get($header-h4, weight);
-        font-style: map-get($header-h4, style);
-        color: map-get($header-h4, color);
-        font-size: map-get($header-h4, size);
-        line-height: map-get($header-h4, line-height);
-        margin: map-get($header-h4, margin);
-        text-transform: map-get($header-h4, transform);
-        background-color: map-get($header-h4, bg);
-        padding: map-get($header-h4, padding);
-        z-index: 10000 !important;
-      }
 
       .row {
         display: flex;
@@ -603,6 +626,10 @@ body {
 
       article {
         width: 64%;
+
+        &.full-width {
+          width: 100%;
+        }
       }
 
       aside {
@@ -703,6 +730,10 @@ body {
         align-items: center;
         justify-content: center;
         width: 100%;
+
+        img {
+          mix-blend-mode: inherit;
+        }
       }
 
       >div>div {
@@ -875,12 +906,19 @@ body {
         }
       }
 
-      #Biography .row-container {
-        flex-direction: row-reverse;
-        flex-wrap: nowrap;
-        align-items: center;
-        justify-content: center;
+      #Biography {
+        article {
+          width: 95%;
+        }
+
+        .row-container {
+          flex-direction: row-reverse;
+          flex-wrap: nowrap;
+          align-items: center;
+          justify-content: center;
+        }
       }
+
     }
 
     #sponsorships .package {
@@ -898,7 +936,6 @@ body {
     main {
 
       #Biography {
-
         >div>div {
           width: 90%;
           text-align: left;
@@ -916,11 +953,8 @@ body {
             aspect-ratio: 1/1;
             max-height: 100%;
           }
-
-
         }
       }
-
 
       .row-container {
         a.biography-link {
@@ -943,13 +977,16 @@ body {
         }
       }
 
-      header .header-img {
-        position: absolute;
-        top: -60px;
-        right: -123px;
-        /* width: 1768px; */
-        transform: rotate(-13deg);
-        opacity: .4;
+      header {
+
+        .header-img {
+          position: absolute;
+          top: -60px;
+          right: -123px;
+          /* width: 1768px; */
+          transform: rotate(-13deg);
+          opacity: .4;
+        }
       }
 
       >section {
@@ -990,6 +1027,32 @@ body {
       &,
       #sponsorships .packages .package {
         flex: 0 0 100%;
+      }
+    }
+  }
+
+}
+
+@media screen and (max-width: map-get($viewport, sm)) {
+  .nelagala-event {
+    main {
+      header {
+        h4 {
+          span {
+            display: block;
+            width: 100%;
+            max-width: 90%;
+
+            &:last-child::before {
+              display: none;
+            }
+
+            &:last-child {
+              font-size: 0.9em;
+              /* Adjust the font size as needed */
+            }
+          }
+        }
       }
     }
   }

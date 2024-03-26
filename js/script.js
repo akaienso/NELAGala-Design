@@ -2,7 +2,7 @@ console.log('NG custom script file loaded');
 (function(){
     var burger = document.querySelector('#burger'),
         nav = document.querySelector('.nav'),
-        menuItem = document.querySelectorAll('.menu-item');
+        menuItem = document.querySelectorAll('.menu-item, .home');
     
     burger.onclick = function() {
         nav.classList.toggle('menu-opened');
