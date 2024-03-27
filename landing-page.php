@@ -359,7 +359,9 @@ get_header();
                                             <h2><?php echo esc_html($package); ?></h2>
                                             <p><span>Price each:</span> $<?php echo esc_html($price); ?></p>
                                             <p><span>Allowable tax deduction:</span> $<?php echo esc_html($tax_deduction); ?></p>
-                                            <p><?php echo ($amenities); ?></p>
+                                            <?php if (isset($amenities_list_title)) : ?>
+                                                <p><?php echo $amenities_list_title; ?></p>
+                                            <?php endif; ?>
                                             <?php if (have_rows('amenities')) : ?>
                                                 <ul>
                                                     <?php while (have_rows('amenities')) : the_row(); ?>
