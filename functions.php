@@ -354,4 +354,3 @@ function fetch_event_venue_details($event_location, $google_geocoding_api_key) {
         'state' => $venue_state,
     ];
 }
-

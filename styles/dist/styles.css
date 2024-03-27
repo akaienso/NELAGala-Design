@@ -59,6 +59,9 @@ body #top > section:nth-child(4) > div {
   top: 116px;
   margin: 0 auto -204px auto;
 }
+.nelagala-event.demo_mode main {
+  padding-bottom: 74px;
+}
 .nelagala-event aside h1,
 .nelagala-event h2,
 .nelagala-event h3,
@@ -538,7 +541,7 @@ body #top > section:nth-child(4) > div {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  max-width: 1000px;
+  max-width: 1100px;
 }
 .nelagala-event main #about-the-event p {
   font-size: 18px;
@@ -877,6 +880,12 @@ body > div.grid_1200 #top {
   padding-top: 3.4em;
   top: 120px;
 }
+.nelagala-event .nav.demo_mode {
+  display: none;
+}
+.nelagala-event .nav.demo_mode #burger, .nelagala-event .nav.demo_mode ul {
+  display: none;
+}
 .nelagala-event .nav.event-navigation {
   position: sticky;
   top: 2.5em;
@@ -950,6 +959,12 @@ body > div.grid_1200 #top {
     top: 0;
     align-items: start;
     justify-content: start;
+  }
+  .nelagala-event .nav.demo_mode {
+    display: block;
+  }
+  .nelagala-event .nav.demo_mode #burger, .nelagala-event .nav.demo_mode ul {
+    display: none;
   }
   .nelagala-event .burger-container {
     display: flex;

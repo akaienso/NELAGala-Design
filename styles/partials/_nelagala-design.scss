@@ -54,6 +54,12 @@ body {
     margin: 0 auto -204px auto;
   }
 
+  &.demo_mode {
+    main {
+      padding-bottom: 74px;
+    }
+  }
+
   aside h1,
   h2,
   h3,
@@ -240,6 +246,7 @@ body {
     background: var(--ng-section-bg);
     padding-bottom: 54px;
     flex-grow: 1;
+
 
     // SECTION: Header
     header {
@@ -613,7 +620,7 @@ body {
       display: flex;
       flex-direction: row;
       justify-content: space-between;
-      max-width: 1000px;
+      max-width: 1100px;
 
       p {
         font-size: 18px;

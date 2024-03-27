@@ -11,7 +11,6 @@ body {
 body > div.grid_1200 #top {
   overflow: visible !important;
 }
-
 .nelagala-event {
   .nav {
     background-color: var(--ng-nav-bg);
@@ -21,6 +20,14 @@ body > div.grid_1200 #top {
     padding-top: 3.4em;
     top: 120px;
 
+    &.demo_mode {
+                
+      display:none;
+      #burger, ul {
+          display: none;
+      }
+      
+  }
     &.event-navigation {
       position: sticky;
       top: 2.5em;

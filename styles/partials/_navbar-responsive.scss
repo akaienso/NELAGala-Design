@@ -31,6 +31,15 @@
                 align-items: start;
                 justify-content: start;
             }
+
+            &.demo_mode {
+                
+                display: block;
+                #burger, ul {
+                    display: none;
+                }
+                
+            }
         }
 
         .burger-container {

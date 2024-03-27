@@ -2,18 +2,15 @@
 global $page_title;
 $event_year = get_query_var('nelagala_year', date('Y')); // Default to current year if not specified
 $ng = fetch_nelagala_event_by_year($event_year);
-
+ $full_event_switch = $ng['full_event_switch'] ?: false;
+$is_demo_mode = !$full_event_switch;
 get_header();
 ?>
 <section class="sections">
     <div class="container">
         <!-- SECTION: NELAGala Event Page -->
-        <div id="nelagala" class="nelagala-event">
+        <div id="nelagala" class="nelagala-event <?=$is_demo_mode ? 'demo_mode' : '' ?>">
             <?php if (!empty($ng)) {
-
-                // ACF field values from $ng array
-                $full_event_switch = $ng['full_event_switch'] ?: false;
-                $is_demo_mode = !$full_event_switch;
 
                 // Sections to iterate through, based on your structure
                 $sections = [
@@ -95,24 +92,22 @@ get_header();
                 $advertising_rates = $ng['advertising_rates'];
 
                 // NOTE: Display Sidebar Navigation
-                if (!$is_demo_mode) :
+                // Fetch the NELAGala event data for $event_year
+                $ng_data = fetch_nelagala_event_by_year($event_year);
+                nelagala_pass_template_data($ng, 'navigation');
+                $args = array(
+                    'event_year' => $event_year,
+                    'event_year' => $event_year,
+                );
+                get_template_part('inc/nelagala/template-parts/section-navigation', null, $args);
 
-                    // Fetch the NELAGala event data for $event_year
-                    $ng_data = fetch_nelagala_event_by_year($event_year);
-                    nelagala_pass_template_data($ng, 'navigation');
-                    $args = array(
-                        'event_year' => $event_year,
-                        'event_year' => $event_year,
-                    );
-                    get_template_part('inc/nelagala/template-parts/sidebar-nav', null, $args);
-                endif;
             ?>
                 <!-- SECTION: Display NELAGala Event Content -->
                 <main>
                     <?php
                     // NOTE: Display the event header
                     nelagala_pass_template_data($ng_data, 'header');
-                    get_template_part('inc/nelagala/template-parts/event-header');
+                    get_template_part('inc/nelagala/template-parts/section-header');
 
                     if ($display_about) : ?>
                         <!--  SECTION: About the Event -->
@@ -136,9 +131,9 @@ get_header();
                             endif; ?>
 
                         </section>
-                    <?php if ($display_promotional_video) : ?>
-                        <iframe class="video" src="<?php echo  $promotional_video; ?>" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-                    <?php endif; ?>
+                        <?php if ($display_promotional_video) : ?>
+                            <iframe class="video" src="<?php echo  $promotional_video; ?>" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                        <?php endif; ?>
                         <!--  !SECTION: About the Event -->
                     <?php endif;
                     if ($display_roles) : ?>
@@ -301,14 +296,14 @@ get_header();
                         <!--  !SECTION: Tickets -->
                     <?php endif; ?>
                     <?php if ($display_map) : ?>
-                    <!-- SECTION: map -->
+                        <!-- SECTION: map -->
                         <div id="lodging" class="map-container">
                             <div id="map" class="map"></div>
                         </div>
-                    <!-- !SECTION: map -->
+                        <!-- !SECTION: map -->
                     <?php endif;
                     if ($display_lodging) :  ?>
-                    <!-- SECTION: lodging -->
+                        <!-- SECTION: lodging -->
                         <section id="location" class="hotels-cards">
                             <h2><?php echo esc_html($lodging_section_headline) ?></h2>
                             <?php if ($lodging_section_top_content) : ?>

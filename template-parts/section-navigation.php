@@ -3,6 +3,9 @@ $ng_data = apply_filters('nelagala_template_data_navigation', []);
 $path = $args['path'] ?? '';
 $event_year = $args['event_year'] ?? '';
 
+// ACF field values from $ng array
+$full_event_switch = $ng_data['full_event_switch'] ?: false;
+$is_demo_mode = !$full_event_switch;
 // Concatenate $path and $event_year. If both are empty, $base_url will be an empty string.
 $base_url = $path . $event_year;
 
@@ -16,7 +19,7 @@ $nela_gala_icon = $ng_data['nela_gala_icon'] ?? null;
 ?>
 
 <!-- SECTION: Navigation Sidebar -->
-<nav class="event-navigation nav bg_shape">
+<nav class="event-navigation nav bg_shape<?=$is_demo_mode ? ' demo_mode' : '' ?>">
     <div class="burger-container">
         <button id="burger" aria-label="Open navigation menu">
             <span class="bar topBar"></span>
