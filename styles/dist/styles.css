@@ -118,25 +118,26 @@ body #top > section:nth-child(4) > div {
 .nelagala-event .row-container.reverse {
   flex-direction: row-reverse;
 }
-.nelagala-event #sponsorships .package {
-  flex: 0 0 47%;
-}
 .nelagala-event .packages {
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
   gap: 20px;
-  align-items: flex-start;
+  align-items: center;
+  width: 100%;
 }
 .nelagala-event .packages .package {
-  flex: 0 0 31.333%;
+  flex: 0 0 calc(31.333% - 20px);
   box-sizing: border-box;
   position: relative;
   background-color: var(--ng-offwhite);
-  padding: 20px 20px 120px;
+  padding: 20px;
   border: 1px solid var(--ng-package-border);
   border-radius: 10px;
-  margin-top: 10px;
+  margin-right: 20px;
+}
+.nelagala-event .packages .package:nth-child(3n) {
+  margin-right: 0;
 }
 .nelagala-event .packages .package ul {
   list-style-type: none;
@@ -151,7 +152,7 @@ body #top > section:nth-child(4) > div {
   gap: 8px;
   /* Adjust gap as needed */
   margin: 16px 0;
-  font-size: 16px;
+  font-size: 0.875em;
 }
 .nelagala-event .packages .package ul li::before {
   content: "\f00c";
@@ -160,7 +161,7 @@ body #top > section:nth-child(4) > div {
   /* FontAwesome 4.7 font-family */
   color: var(--ng-red);
   /* Additional styles for positioning and size */
-  font-size: 16px;
+  font-size: 0.875em;
   /* Adjust as needed */
   line-height: 1;
   /* Helps with aligning the icon with the top line of text */
@@ -169,25 +170,27 @@ body #top > section:nth-child(4) > div {
 .nelagala-event .packages .package h2 {
   margin: 10px 0;
   font-weight: bold;
-  font-size: 22px;
+  font-size: 1.1em;
   text-transform: inherit;
   font-family: barlow, sans-serif;
   color: var(--ng-txt);
 }
 .nelagala-event .packages .package p {
-  font-size: 16px;
+  font-size: 0.875em;
+}
+.nelagala-event .packages .package a {
+  width: 100%;
 }
 .nelagala-event .packages .package a button {
   font-family: barlow, sans-serif;
   font-weight: 500;
   font-style: normal;
   font-size: 1em;
+  margin: 0 auto;
   text-transform: uppercase;
   padding: 10px;
   border: 0.5px solid var(--ng-red);
   border-radius: 5px;
-  position: absolute;
-  bottom: 20px;
   width: calc(100% - 40px);
   cursor: pointer;
   transition: 0.3s;
@@ -197,6 +200,48 @@ body #top > section:nth-child(4) > div {
 .nelagala-event .packages .package a button:hover {
   background-color: #d1232f;
   color: rgb(249, 249, 249);
+}
+.nelagala-event .packages .package a button.reverse {
+  background-color: #d1232f;
+  color: rgb(249, 249, 249);
+}
+.nelagala-event .packages .package a button.reverse:hover {
+  background-color: rgb(249, 249, 249);
+  color: #d1232f;
+}
+.nelagala-event .packages .package.section-button {
+  flex: 0 0 calc(100% - 20px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  background-color: transparent;
+  border: none;
+  margin-right: 20px;
+}
+.nelagala-event .packages .package.section-button a {
+  display: flex;
+  justify-content: center;
+}
+.nelagala-event .packages .package.section-button a button {
+  max-width: 300px;
+  white-space: nowrap;
+}
+.nelagala-event .packages .payment-link {
+  border: none;
+  padding: 20px;
+}
+.nelagala-event .packages .payment-link p {
+  font-family: barlow, sans-serif;
+  font-weight: 600;
+  font-size: 1.1em;
+  color: var(--ng-txt);
+  text-transform: none;
+  margin: 0;
+  line-height: 1.1em;
+}
+.nelagala-event #sponsorships .package:not(.section-button) {
+  flex: 0 0 47%;
 }
 .nelagala-event .map-container {
   position: relative;
@@ -451,6 +496,23 @@ body #top > section:nth-child(4) > div {
   margin: 0 auto;
   max-width: 1100px;
 }
+.nelagala-event main section#promotional-video {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto 2em auto;
+  padding: 0;
+  background-color: #000000;
+  width: 100%;
+  max-width: none;
+}
+.nelagala-event main section#promotional-video .video {
+  aspect-ratio: 16/9;
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+}
 .nelagala-event main > section {
   margin-bottom: 1em;
   padding: 1em;
@@ -468,7 +530,7 @@ body #top > section:nth-child(4) > div {
 }
 .nelagala-event main > section.participants {
   width: 80%;
-  max-width: 920px;
+  max-width: 1100px;
   margin: 0 auto;
 }
 .nelagala-event main > section.participants .participant-website,
@@ -511,10 +573,6 @@ body #top > section:nth-child(4) > div {
 }
 .nelagala-event main > section > .packages {
   align-items: inherit;
-}
-.nelagala-event main > .video {
-  aspect-ratio: 16/9;
-  width: 100%;
 }
 .nelagala-event main .row-container {
   display: flex;
@@ -602,7 +660,7 @@ body #top > section:nth-child(4) > div {
   font-weight: 400;
   font-style: italic;
   color: rgb(51, 51, 51);
-  font-size: 1.24em;
+  font-size: 1em;
   line-height: 1.125em;
   margin: 0;
   text-transform: unset;
@@ -617,7 +675,7 @@ body #top > section:nth-child(4) > div {
   font-weight: 600;
   font-style: normal;
   color: #d1232f;
-  font-size: 2em;
+  font-size: 1.8em;
   line-height: 1.2em;
   margin: 0.2em 0 0 0;
   text-transform: unset;

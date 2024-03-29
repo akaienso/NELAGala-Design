@@ -114,26 +114,28 @@ body {
 
   }
 
-  #sponsorships .package {
-    flex: 0 0 47%;
-  }
-
   .packages {
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
     gap: 20px;
-    align-items: flex-start;
+    align-items: center;
+    width: 100%;
 
     .package {
-      flex: 0 0 31.333%;
+      flex: 0 0 calc(31.333% - 20px);
       box-sizing: border-box;
       position: relative;
       background-color: var(--ng-offwhite);
-      padding: 20px 20px 120px;
+      padding: 20px;
       border: 1px solid var(--ng-package-border);
       border-radius: 10px;
-      margin-top: 10px;
+      margin-right: 20px;
+
+      // Removes the margin for every third item
+      &:nth-child(3n) {
+        margin-right: 0;
+      }
 
       ul {
         list-style-type: none;
@@ -148,7 +150,7 @@ body {
           gap: 8px;
           /* Adjust gap as needed */
           margin: 16px 0;
-          font-size: 16px;
+          font-size: map-get($package-text, size);
 
           &::before {
             content: "\f00c";
@@ -157,7 +159,7 @@ body {
             /* FontAwesome 4.7 font-family */
             color: var(--ng-red);
             /* Additional styles for positioning and size */
-            font-size: 16px;
+            font-size: map-get($package-text, size);
             /* Adjust as needed */
             line-height: 1;
             /* Helps with aligning the icon with the top line of text */
@@ -169,18 +171,18 @@ body {
       h2 {
         margin: 10px 0;
         font-weight: bold;
-        font-size: 22px;
+        font-size: map-get($package-h2, size);
         text-transform: inherit;
         font-family: map-get($font, tertiary);
         color: var(--ng-txt);
       }
 
       p {
-        font-size: 16px;
+        font-size: map-get($package-text, size);
       }
 
-
       a {
+        width: 100%;
 
         button {
           font-family: map-get($button, font);
@@ -192,8 +194,6 @@ body {
           padding: 10px;
           border: 0.5px solid var(--ng-red);
           border-radius: 5px;
-          position: absolute;
-          bottom: 20px;
           width: calc(100% - 40px);
           cursor: pointer;
           transition: 0.3s;
@@ -204,10 +204,61 @@ body {
             background-color: map-get($button, color);
             color: map-get($button, bg);
           }
+
+          &.reverse {
+            background-color: map-get($color, secondary);
+            color: map-get($color, quaternary);
+
+            &:hover {
+              background-color: map-get($button, bg);
+              color: map-get($button, color);
+            }
+          }
         }
       }
 
+      &.section-button {
+        flex: 0 0 calc(100% - 20px); // Ensures full width
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+        background-color: transparent;
+        border: none;
+        margin-right: 20px;
+
+        a {
+          display: flex;
+          justify-content: center;
+
+          button {
+            max-width: 300px;
+            white-space: nowrap;
+          }
+        }
+      }
     }
+
+    .payment-link {
+
+      border: none;
+      padding: 20px;
+
+      p {
+        font-family: map-get($font, tertiary);
+        font-weight: map-get($font-weight, semibold);
+        font-size: 1.1em;
+        color: var(--ng-txt);
+        text-transform: none;
+        margin: 0;
+        line-height: 1.1em;
+      }
+    }
+  }
+
+  // Specific adjustment for .package within #sponsorships
+  #sponsorships .package:not(.section-button) {
+    flex: 0 0 47%;
   }
 
   .map-container {
@@ -510,6 +561,25 @@ body {
       padding: 20px;
       margin: 0 auto;
       max-width: 1100px;
+
+      &#promotional-video {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center; // This will vertically center the content if needed
+        margin: 0 auto 2em auto;
+        padding: 0;
+        background-color: map-get(map-get($color, 'video'), 'bg'); // Ensure your map keys are correct
+        width: 100%;
+        max-width: none;
+
+        .video {
+          aspect-ratio: 16 / 9;
+          width: 100%; // This makes the video fill the width of its parent
+          max-width: 1100px; // Limits the video width
+          margin: 0 auto; // Centers the video block in the page
+        }
+      }
     }
 
     &>section {
@@ -533,7 +603,7 @@ body {
       // NOTE: Styles for Repeating rows of participants
       &.participants {
         width: 80%;
-        max-width: 920px;
+        max-width: 1100px;
         margin: 0 auto;
 
         .participant-website,
@@ -584,11 +654,6 @@ body {
       &>.packages {
         align-items: inherit;
       }
-    }
-
-    &>.video {
-      aspect-ratio: 16/9;
-      width: 100%;
     }
 
     .row-container {

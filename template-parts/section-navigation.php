@@ -5,7 +5,9 @@ $event_year = $args['event_year'] ?? '';
 
 // ACF field values from $ng array
 $full_event_switch = $ng_data['full_event_switch'] ?: false;
-$is_demo_mode = !$full_event_switch;
+$preview_mode = isset($_GET['preview']);
+$is_demo_mode = !$full_event_switch && !$preview_mode;
+
 // Concatenate $path and $event_year. If both are empty, $base_url will be an empty string.
 $base_url = $path . $event_year;
 

@@ -91,12 +91,36 @@ $section-h2: ( // Section Titles
   text-align: start
 );
 
+$package-h2: ( // Role or Honor Title
+  font: map-get($font, secondary),
+  weight: map-get($font-weight, primary),
+  color: map-get($color, primary),
+  style: italic,
+  size: 1.1em, // Was 16px
+  margin: 0,
+  transform: unset,
+  line-height: 1.125em,
+  text-align: start
+);
+
+$package-text: ( // Role or Honor Title
+  font: map-get($font, secondary),
+  weight: map-get($font-weight, primary),
+  color: map-get($color, primary),
+  style: italic,
+  size: .875em, // Was 16px
+  margin: 0,
+  transform: unset,
+  line-height: 1.125em,
+  text-align: start
+);
+
 $participant-h3: ( // Role or Honor Title
   font: map-get($font, secondary),
   weight: map-get($font-weight, primary),
   color: map-get($color, primary),
   style: italic,
-  size: 1.24em, // Was 16px
+  size: 1em, // Was 16px
   margin: 0,
   transform: unset,
   line-height: 1.125em,
@@ -108,7 +132,7 @@ $participant-name: ( // p.full-name
   weight: map-get($font-weight, semibold),
   color: map-get($color, secondary),
   style: normal,
-  size: 2em, // Was 16px
+  size: 1.8em, // Was 16px
   margin: (.2em 0 0 0),
   transform: unset,
   line-height: 1.2em
@@ -134,4 +158,5 @@ $button: ( // Generic button
   style: normal,
   size: 1em, // Was 16px
   transform: uppercase,
+  margin: (0 auto)
 );

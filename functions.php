@@ -354,3 +354,52 @@ function fetch_event_venue_details($event_location, $google_geocoding_api_key) {
         'state' => $venue_state,
     ];
 }
+
+
+function get_section_buttons($target_section_name, $section_link_buttons) {
+    // Normalize the target section name to ensure case-insensitive matching
+    $target_section_name = strtolower($target_section_name);
+
+    $html_output = '';
+
+    foreach ($section_link_buttons as $section) {
+        // Convert the section name to lower case for case-insensitive comparison
+        $section_name = strtolower($section['section']);
+
+        if ($section_name === $target_section_name) {
+            // Extract the necessary data
+            $header = $section['header'];
+            $buttons = $section['button']; // Assumes 'button' is an array of buttons
+            
+            // Start building the HTML output
+            $html_output .= '<div class="payment-link">';
+            $html_output .= '<h3>' . wp_kses_post($header) . '</h3>';
+
+            foreach ($buttons as $button) {
+                $destination = $button['destination']; // The URL the button links to
+                $buttonLabel = $button['button_label']; // The text label of the button
+                $buttonStyle = $button['button_style']; // The style indicator of the button
+                $classAttribute = $buttonStyle ? '' : ' class="reverse"';
+                $targetAttribute = (strpos($destination, '#') === 0) ? '' : ' target="_blank"';
+
+                // Append each button to the HTML, including the target attribute conditionally
+                $html_output .= '<a href="' . esc_url($destination) . '"' . $targetAttribute . '><button' . $classAttribute . '>' . esc_html($buttonLabel) . '</button></a>';
+            }
+
+            $html_output .= '</div>';
+
+            // Break the loop after finding and processing the target section
+            break;
+        }
+    }
+
+    // Check if HTML output is still empty after the loop
+    if (empty($html_output)) {
+        return ''; // Return an empty string or null if no matching section was found
+    }
+
+    // Return the constructed HTML if a matching section was found
+    return $html_output;
+}
+
+?>
