@@ -2,14 +2,14 @@
 global $page_title;
 $event_year = get_query_var('nelagala_year', date('Y')); // Default to current year if not specified
 $ng = fetch_nelagala_event_by_year($event_year);
-$full_event_switch = $ng['full_event_switch'] ?: false;
+ $full_event_switch = $ng['full_event_switch'] ?: false;
 $is_demo_mode = !$full_event_switch;
 get_header();
 ?>
 <section class="sections">
     <div class="container">
-        <!-- SECTION: NELAGala Event Page // Tested 2024-03-28 -->
-        <div id="nelagala" class="nelagala-event <?= $is_demo_mode ? 'demo_mode' : '' ?>">
+        <!-- SECTION: NELAGala Event Page -->
+        <div id="nelagala" class="nelagala-event <?=$is_demo_mode ? 'demo_mode' : '' ?>">
             <?php if (!empty($ng)) {
 
                 // Sections to iterate through, based on your structure
@@ -129,15 +129,10 @@ get_header();
                                     </aside>
                             <?php endif;
                             endif; ?>
-                        </section>
-                        <?php
 
-                        if ($display_promotional_video) : ?>
-                        
-                        <section id="promotional-video">
-                            <iframe class="video" src="<?php echo  $promotional_video; ?>" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
                         </section>
-                            
+                        <?php if ($display_promotional_video) : ?>
+                            <iframe class="video" src="<?php echo  $promotional_video; ?>" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
                         <?php endif; ?>
                         <!--  !SECTION: About the Event -->
                     <?php endif;
@@ -279,8 +274,8 @@ get_header();
                                     <?php
                                     while (have_rows('ticket_prices')) : the_row();
                                         $type = get_sub_field('type');
-                                        $price = number_format(get_sub_field('price'), 0);
-                                        $tax_deduction = number_format(get_sub_field('tax_deduction'), 0);
+                                        $price = get_sub_field('price');
+                                        $tax_deduction = get_sub_field('tax_deduction');
                                         $description = get_sub_field('description');
                                         $button_label = get_sub_field('cta_button_label');
                                         $button_url = get_sub_field('cta_button_link');
@@ -294,10 +289,7 @@ get_header();
                                                 <a href="<?php echo esc_url($button_url); ?>" target="_blank"><button><?php echo esc_html($button_label); ?></button></a>
                                             <?php endif; ?>
                                         </div>
-                                    <?php endwhile;
-                                    echo get_section_buttons('tickets', $ng['section_link_buttons']); ?>
-
-
+                                    <?php endwhile; ?>
                                 </div>
                             </section>
                         <?php endif; ?>
@@ -336,7 +328,10 @@ get_header();
                                         </div>
 
                                     <?php endwhile; ?>
+
                                 </div>
+
+
                             <?php endif; ?>
                         </section>
                         <!-- !SECTION: lodging -->
@@ -354,8 +349,8 @@ get_header();
                                     <?php
                                     while (have_rows('sponsorship_packages')) : the_row();
                                         $package = get_sub_field('package');
-                                        $price = number_format(get_sub_field('price'), 0);
-                                        $tax_deduction = number_format(get_sub_field('tax_deduction'), 0);
+                                        $price = get_sub_field('price');
+                                        $tax_deduction = get_sub_field('tax_deduction');
                                         $description = get_sub_field('description');
                                         $button_label = get_sub_field('cta_button_label');
                                         $button_url = get_sub_field('Call-to-Action-URL');
@@ -380,9 +375,7 @@ get_header();
                                             <?php endif; ?>
 
                                         </div>
-                                    <?php endwhile;
-                                    echo get_section_buttons('sponsorships', $ng['section_link_buttons']);  ?>
-                                    
+                                    <?php endwhile; ?>
                                 </div>
                             </section>
                         <?php endif; ?>
@@ -402,7 +395,7 @@ get_header();
                                     <?php
                                     while (have_rows('advertising_rates')) : the_row();
                                         $ad = get_sub_field('ad');
-                                        $price = number_format(get_sub_field('price'), 0);
+                                        $price = get_sub_field('price');
                                         $description = get_sub_field('description');
                                         $button_label = get_sub_field('cta_button_label');
                                         $button_url = get_sub_field('cta_link');
@@ -417,11 +410,7 @@ get_header();
                                                 <a href="<?php echo esc_url($button_url); ?>" target="_blank"><button><?php echo esc_html($button_label); ?></button></a>
                                             <?php endif; ?>
                                         </div>
-                                    <?php endwhile;
-                                    echo get_section_buttons('advertising', $ng['section_link_buttons']); ?>
-
-
-
+                                    <?php endwhile; ?>
                                 </div>
                             </section>
                         <?php endif; ?>
@@ -438,4 +427,4 @@ get_header();
         <!-- !SECTION: NELAGala Event Page -->
     </div>
 </section>
-<?php get_footer();
+<?php get_footer(); ?>

@@ -372,8 +372,8 @@ function get_section_buttons($target_section_name, $section_link_buttons) {
             $buttons = $section['button']; // Assumes 'button' is an array of buttons
             
             // Start building the HTML output
-            $html_output .= '<div class="payment-link">';
-            $html_output .= '<h3>' . wp_kses_post($header) . '</h3>';
+            $html_output .= '<div class="package section-button">';
+            $html_output .= wp_kses_post($header);
 
             foreach ($buttons as $button) {
                 $destination = $button['destination']; // The URL the button links to
@@ -392,6 +392,14 @@ function get_section_buttons($target_section_name, $section_link_buttons) {
             break;
         }
     }
+
+
+    ?>
+    
+                                </div>
+    
+    
+    <?php
 
     // Check if HTML output is still empty after the loop
     if (empty($html_output)) {
