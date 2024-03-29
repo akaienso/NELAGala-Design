@@ -3,7 +3,8 @@ global $page_title;
 $event_year = get_query_var('nelagala_year', date('Y')); // Default to current year if not specified
 $ng = fetch_nelagala_event_by_year($event_year);
 $full_event_switch = $ng['full_event_switch'] ?: false;
-$is_demo_mode = !$full_event_switch;
+$preview_mode = isset($_GET['preview']);
+$is_demo_mode = !$full_event_switch && !$preview_mode;
 get_header();
 ?>
 <section class="sections">
