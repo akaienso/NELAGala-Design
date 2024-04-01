@@ -134,11 +134,11 @@ get_header();
                         <?php
 
                         if ($display_promotional_video) : ?>
-                        
-                        <section id="promotional-video">
-                            <iframe class="video" src="<?php echo  $promotional_video; ?>" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-                        </section>
-                            
+
+                            <section id="promotional-video">
+                                <iframe class="video" src="<?php echo  $promotional_video; ?>" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                            </section>
+
                         <?php endif; ?>
                         <!--  !SECTION: About the Event -->
                     <?php endif;
@@ -151,56 +151,66 @@ get_header();
                                 <h2><?php echo $roles_section_headline ?></h2>
                                 <?php if ($roles_section_content) : ?>
                                     <span class="sub-text"><?php echo $roles_section_content; ?></span>
-                                <?php endif;
+                                    <?php endif;
                                 while (have_rows('roles')) : the_row();
                                     $role_description = get_sub_field('role');
                                     $participant_id = get_sub_field('participant');
 
-                                    // Fetch the participant's post title (full name)
-                                    $participant_name = get_the_title($participant_id);
+                                    if (!empty($participant_id)) {
+                                        // Fetch the participant's post title (full name)
+                                        $participant_name = get_the_title($participant_id);
 
-                                    // Fetch the participant's photo 
-                                    $participant_photo = get_field('photo', $participant_id);
+                                        // Fetch the participant's photo 
+                                        $participant_photo = get_field('photo', $participant_id);
 
-                                    // Fetch the Personal Title for the participant
-                                    $participant_title = get_field('title', $participant_id);
+                                        // Fetch the Personal Title for the participant
+                                        $participant_title = get_field('title', $participant_id);
 
-                                    // Fetch the recipient's External Website URL 
-                                    $participant_website = get_field('website', $participant_id);
+                                        // Fetch the recipient's External Website URL 
+                                        $participant_website = get_field('website', $participant_id);
 
-                                    // Fetch the summary for the participant
-                                    $participant_summary = get_field('summary', $participant_id);
+                                        // Fetch the summary for the participant
+                                        $participant_summary = get_field('summary', $participant_id);
 
-                                    // Construct the link to the participant's biography page
-                                    // Assume the biography template will use the participant's name in the URL
-                                    $participant_slug = get_post_field('post_name', $participant_id);
-                                    $biography_link = home_url("/nelagala/" . $participant_slug);
-                                ?>
-                                    <div class="row-container">
-                                        <?php
-                                        if (!empty($participant_photo)) {
-                                            // Image variables
-                                            $url = $participant_photo['url'];
-                                            $alt = $participant_photo['alt'];
-                                            // Check if there's a biography link
-                                            if (!empty($biography_link)) {
+                                        // Construct the link to the participant's biography page
+                                        // Assume the biography template will use the participant's name in the URL
+                                        $participant_slug = get_post_field('post_name', $participant_id);
+                                        $biography_link = home_url("/nelagala/" . $participant_slug);
+                                    ?>
+                                        <div class="row-container">
+                                            <?php
+                                            if (!empty($participant_photo)) {
+                                                // Image variables
+                                                $url = $participant_photo['url'];
+                                                $alt = $participant_photo['alt'];
+                                                // Check if there's a biography link
+                                                if (!empty($biography_link)) {
 
-                                                // If a link exists, wrap the image with an <a> tag
-                                                echo '<a class="biography-link" href="' . esc_url($biography_link) . '"><img src="' . esc_url($url) . '" alt="' . esc_attr($alt) . '"></a>';
-                                            } else {
-                                                // If no link exists, display just the image
-                                                echo '<img src="' . esc_url($url) . '" alt="' . esc_attr($alt) . '">';
+                                                    // If a link exists, wrap the image with an <a> tag
+                                                    echo '<a class="biography-link" href="' . esc_url($biography_link) . '"><img src="' . esc_url($url) . '" alt="' . esc_attr($alt) . '"></a>';
+                                                } else {
+                                                    // If no link exists, display just the image
+                                                    echo '<img src="' . esc_url($url) . '" alt="' . esc_attr($alt) . '">';
+                                                }
                                             }
-                                        }
-                                        ?>
-                                        <div>
-                                            <h3><?php echo esc_html($role_description); ?></h3>
-                                            <p class="full-name"><a href="<?php echo esc_url($biography_link); ?>"><?php echo esc_html($participant_name); ?></a></p>
-                                            <p class="personal-title"><?php echo esc_html($participant_title); ?></p>
-                                            <p class="bio-summary"><?php echo esc_html($participant_summary); ?></p>
-                                            <p class="read-more"><a href="<?php echo esc_url($biography_link); ?>">Read more</a></p>
+                                            ?>
+                                            <div>
+                                                <h3><?php echo esc_html($role_description); ?></h3>
+                                                <p class="full-name"><a href="<?php echo esc_url($biography_link); ?>"><?php echo esc_html($participant_name); ?></a></p>
+                                                <p class="personal-title"><?php echo esc_html($participant_title); ?></p>
+                                                <p class="bio-summary"><?php echo esc_html($participant_summary); ?></p>
+                                                <p class="read-more"><a href="<?php echo esc_url($biography_link); ?>">Read more</a></p>
+                                            </div>
                                         </div>
-                                    </div>
+                                    <?php } else { ?>
+                                        <div class="row-container">
+                                            <div>
+                                                <h3><?= esc_html($role_description); ?></h3>
+                                                <p class="full-name">Participant not chosen yet</p>
+                                            </div>
+                                        </div>
+                                    <?php } ?>
+
                                 <?php endwhile; ?>
                             </section>
                         <?php endif; ?>
@@ -217,7 +227,9 @@ get_header();
                                     <span class="sub-text"><?php echo $honorees_section_content; ?></span>
                                 <?php endif;
                                 while (have_rows('honorees')) : the_row();
+
                                     $honor_description = get_sub_field('honor');
+
                                     $recipient_id = get_sub_field('recipient');
 
 
@@ -383,7 +395,7 @@ get_header();
                                         </div>
                                     <?php endwhile;
                                     echo get_section_buttons('sponsorships', $ng['section_link_buttons']);  ?>
-                                    
+
                                 </div>
                             </section>
                         <?php endif; ?>
