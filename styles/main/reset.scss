@@ -42,7 +42,9 @@
 //         font-size: 100%;
 //         /* Resets font size to a known state, you can adjust as needed */
 //     }
-//     .grid_1200 {
-//         overflow: default;
-//     }
+
+#top.grid_1200 {
+        overflow: visible;
+    }
+
 // }

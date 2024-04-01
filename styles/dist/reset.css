@@ -1,2 +1,5 @@
 /* custom namespace reset styles for common elements */
-/** wp@rmoore.dev *//*# sourceMappingURL=reset.css.map */
+/** wp@rmoore.dev */
+#top.grid_1200 {
+  overflow: visible;
+}/*# sourceMappingURL=reset.css.map */

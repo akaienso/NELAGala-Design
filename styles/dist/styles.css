@@ -169,11 +169,11 @@ body #top > section:nth-child(4) > div {
 }
 .nelagala-event .packages .package h2 {
   margin: 10px 0;
-  font-weight: bold;
+  font-weight: 600;
   font-size: 1.1em;
-  text-transform: inherit;
+  text-transform: unset;
   font-family: barlow, sans-serif;
-  color: var(--ng-txt);
+  color: rgb(51, 51, 51);
 }
 .nelagala-event .packages .package p {
   font-size: 0.875em;
@@ -210,35 +210,48 @@ body #top > section:nth-child(4) > div {
   color: #d1232f;
 }
 .nelagala-event .packages .package.section-button {
-  flex: 0 0 calc(100% - 20px);
+  flex: 0 0 100%;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
   padding: 20px;
   background-color: transparent;
   border: none;
-  margin-right: 20px;
 }
-.nelagala-event .packages .package.section-button a {
-  display: flex;
-  justify-content: center;
-}
-.nelagala-event .packages .package.section-button a button {
-  max-width: 300px;
-  white-space: nowrap;
-}
-.nelagala-event .packages .payment-link {
-  border: none;
-  padding: 20px;
-}
-.nelagala-event .packages .payment-link p {
-  font-family: barlow, sans-serif;
+.nelagala-event .packages .package.section-button p {
   font-weight: 600;
   font-size: 1.1em;
-  color: var(--ng-txt);
-  text-transform: none;
+  text-transform: unset;
+  font-family: barlow, sans-serif;
+  color: rgb(51, 51, 51);
+  align-self: flex-start;
+  width: 80%;
+  margin: 0 auto;
+  margin-bottom: 20px;
+}
+.nelagala-event .packages .package.section-button > .buttons {
+  display: flex;
+  justify-content: center;
+  padding: 2em;
+  align-items: center;
+}
+.nelagala-event .packages .package.section-button > .buttons > a {
+  margin: 0 10px;
+}
+.nelagala-event .packages .package.section-button > .buttons > a:first-of-type {
+  margin-right: 35px;
+}
+.nelagala-event .packages .package.section-button > .buttons > a:last-child {
+  margin-left: 35px;
+}
+.nelagala-event .packages .package.section-button > .buttons > a:only-child {
   margin: 0;
-  line-height: 1.1em;
+}
+.nelagala-event .packages .package.section-button > .buttons > a button {
+  max-width: 300px;
+  width: 100%;
+  margin: 0 auto;
+  min-width: 250px;
 }
 .nelagala-event #sponsorships .package:not(.section-button) {
   flex: 0 0 47%;
@@ -519,7 +532,7 @@ body #top > section:nth-child(4) > div {
 }
 .nelagala-event main > section > h2,
 .nelagala-event main > section article h2 {
-  font-family: barlow, sans-serif;
+  font-family: minion-pro-condensed, serif;
   font-weight: 600;
   font-size: 1.4em;
   color: #d1232f;

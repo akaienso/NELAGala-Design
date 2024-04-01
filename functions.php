@@ -372,19 +372,24 @@ function get_section_buttons($target_section_name, $section_link_buttons) {
             $buttons = $section['button']; // Assumes 'button' is an array of buttons
             
             // Start building the HTML output
-            $html_output .= '<div class="payment-link">';
-            $html_output .= '<h3>' . wp_kses_post($header) . '</h3>';
+            $html_output .= '<div class="package section-button">';
+            $html_output .= wp_kses_post($header);
 
-            foreach ($buttons as $button) {
-                $destination = $button['destination']; // The URL the button links to
-                $buttonLabel = $button['button_label']; // The text label of the button
-                $buttonStyle = $button['button_style']; // The style indicator of the button
-                $classAttribute = $buttonStyle ? '' : ' class="reverse"';
-                $targetAttribute = (strpos($destination, '#') === 0) ? '' : ' target="_blank"';
+             if (!empty($buttons)) {
+                 $html_output .= '<div class="buttons">';
+                foreach ($buttons as $button) {
+                    $destination = $button['destination']; // The URL the button links to
+                    $buttonLabel = $button['button_label']; // The text label of the button
+                    $buttonStyle = $button['button_style']; // The style indicator of the button
+                    $classAttribute = $buttonStyle ? '' : ' class="reverse"';
+                    $targetAttribute = (strpos($destination, '#') === 0) ? '' : ' target="_blank"';
 
-                // Append each button to the HTML, including the target attribute conditionally
-                $html_output .= '<a href="' . esc_url($destination) . '"' . $targetAttribute . '><button' . $classAttribute . '>' . esc_html($buttonLabel) . '</button></a>';
-            }
+                    // Append each button to the HTML, including the target attribute conditionally
+                    $html_output .= '<a href="' . esc_url($destination) . '"' . $targetAttribute . '><button' . $classAttribute . '>' . esc_html($buttonLabel) . '</button></a>';
+                }
+
+                 $html_output .= '</div>';
+             }   
 
             $html_output .= '</div>';
 

@@ -80,7 +80,7 @@ $header-h4-span: ( // Thursday, May 23, 2024
 );
 
 $section-h2: ( // Section Titles
-  font: map-get($font, tertiary),
+  font: map-get($font, secondary),
   weight: map-get($font-weight, semibold),
   color: map-get($color, secondary),
   style: italic,
@@ -92,8 +92,8 @@ $section-h2: ( // Section Titles
 );
 
 $package-h2: ( // Role or Honor Title
-  font: map-get($font, secondary),
-  weight: map-get($font-weight, primary),
+  font: map-get($font, tertiary),
+  weight: map-get($font-weight, semibold),
   color: map-get($color, primary),
   style: italic,
   size: 1.1em, // Was 16px
