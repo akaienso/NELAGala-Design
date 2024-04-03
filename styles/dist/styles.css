@@ -68,7 +68,7 @@ body #top > section:nth-child(4) > div {
 .nelagala-event h4,
 .nelagala-event h5,
 .nelagala-event h6 {
-  font-family: barlow, sans-serif;
+  font-family: minion-pro-condensed, serif;
   font-weight: 400;
   text-transform: capitalize;
   color: #d1232f;
@@ -298,9 +298,9 @@ body #top > section:nth-child(4) > div {
 }
 .nelagala-event main header .header-img {
   position: absolute;
-  top: -302px;
-  right: -236px;
-  width: 765px;
+  top: -227px;
+  right: -366px;
+  width: 865px;
   transform: rotate(-13deg);
   opacity: 0.4;
 }
@@ -358,7 +358,7 @@ body #top > section:nth-child(4) > div {
   color: #ffffff;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  margin: 1em, auto, 0, auto;
+  margin: 1em, auto, -20px, auto;
   padding: 0.35em 0 0 0;
   position: relative;
   z-index: 1;
@@ -405,6 +405,9 @@ body #top > section:nth-child(4) > div {
   display: inline-block;
   margin: 0 0.2em;
   /* Adjust spacing as needed */
+}
+.nelagala-event main header .title-wrap {
+  margin-top: -20px;
 }
 .nelagala-event main header .pre-title,
 .nelagala-event main header .post-title {
@@ -465,8 +468,11 @@ body #top > section:nth-child(4) > div {
   align-items: center;
   width: 90%;
   max-width: 960px;
-  margin: 0px auto 0 auto;
+  margin: 20px auto 0 auto;
   position: relative;
+}
+.nelagala-event main header .row.save-the-date {
+  margin: -20px auto 0 auto;
 }
 .nelagala-event main header .column {
   flex: 1;
@@ -583,6 +589,20 @@ body #top > section:nth-child(4) > div {
   object-fit: cover;
   mix-blend-mode: luminosity;
   object-position: center 14%;
+}
+.nelagala-event main > section .participant-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 5/4;
+  background-color: #f0f0f0;
+  color: #666;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  text-align: center;
+  border: 1px solid #ddd;
 }
 .nelagala-event main > section > .packages {
   align-items: inherit;
@@ -713,6 +733,10 @@ body #top > section:nth-child(4) > div {
 }
 .nelagala-event main > #Biography > .row-container img {
   mix-blend-mode: inherit;
+  aspect-ratio: 1/1;
+  width: auto;
+  max-width: 50%;
+  max-height: none;
 }
 .nelagala-event main > #Biography > div > div {
   width: 58%;

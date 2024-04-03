@@ -1,20 +1,14 @@
 <?php
+global $is_demo_mode;
 $ng_data = apply_filters('nelagala_template_data_navigation', []);
 $path = $args['path'] ?? '';
 $event_year = $args['event_year'] ?? '';
 
-// ACF field values from $ng array
-$full_event_switch = $ng_data['full_event_switch'] ?: false;
-$preview_mode = isset($_GET['preview']);
-$is_demo_mode = !$full_event_switch && !$preview_mode;
+// Assuming the landing page has a specific characteristic, e.g., it's the homepage
+// Adjust the condition based on your actual landing page check
+$is_landing_page = (untrailingslashit($path) === '');
 
-// Concatenate $path and $event_year. If both are empty, $base_url will be an empty string.
-$base_url = $path . $event_year;
-
-// This ensures $base_url is set to an empty string if both $path and $event_year are unset or empty.
-if (empty($path)) {
-    $base_url = '';
-}
+$base_url = $is_landing_page ? '' : "/nelagala/";
 
 $osdia_icon = $ng_data['osdia_icon'] ?? null;
 $nela_gala_icon = $ng_data['nela_gala_icon'] ?? null;
@@ -72,11 +66,13 @@ $nela_gala_icon = $ng_data['nela_gala_icon'] ?? null;
             ]
         ];
         foreach ($sections as $anchor => $fields) :
-            $headline = isset($ng_data[$fields['headline_field']]) ? $ng_data[$fields['headline_field']] : null;
-            $content = isset($ng_data[$fields['content_field']]) ? $ng_data[$fields['content_field']] : null;
-            if (!empty($headline) && !empty($content)) : ?>
-                <li class="menu-item"><a href="<?= $base_url . esc_url($anchor); ?>"><?= esc_html($headline); ?></a></li>
-        <?php endif;
+            $headline = $ng_data[$fields['headline_field']] ?? null;
+            $content = $ng_data[$fields['content_field']] ?? null;
+            if (!empty($headline) && !empty($content)) : 
+                $link = $is_landing_page ? $anchor : $base_url . ltrim($anchor, '#');
+                ?>
+                <li class="menu-item"><a href="<?= esc_url($link); ?>"><?= esc_html($headline); ?></a></li>
+            <?php endif;
         endforeach; ?>
         <li class="<?= !empty($nela_gala_icon) ? 'home' : 'menu-item'; ?>">
             <a href="<?= $base_url; ?>#top">

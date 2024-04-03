@@ -203,16 +203,16 @@ function custom_theme_scripts()
 function display_event_date_countdown($event_date, $event_datetime) {
     $current_timestamp = time(); // Current Unix timestamp
     $event_timestamp = strtotime($event_datetime);
-    $one_week_before_event = $event_timestamp - (7 * 24 * 60 * 60); // One week before event
+    $one_week_before_event = $event_timestamp - (90 * 24 * 60 * 60); // One week before event
 
     // Display "Save the Date" if more than one week before the event
-    if ($current_timestamp < $one_week_before_event) {
-        echo "<h2>Save the Date</h2>";
-    } 
-    // Otherwise, if within one week, display the countdown container
-    else if ($current_timestamp < $event_timestamp) {
+    // if ($current_timestamp < $one_week_before_event) {
+    //     echo "<h2>Save the Date</h2>";
+    // } 
+    // // Otherwise, if within one week, display the countdown container
+    // else if ($current_timestamp < $event_timestamp) {
         echo "<div id='countdown' data-event-time='{$event_timestamp}'></div>";
-    }
+    // }
 }
 
 function add_async_defer_attribute($tag, $handle)
@@ -355,7 +355,6 @@ function fetch_event_venue_details($event_location, $google_geocoding_api_key) {
     ];
 }
 
-
 function get_section_buttons($target_section_name, $section_link_buttons) {
     // Normalize the target section name to ensure case-insensitive matching
     $target_section_name = strtolower($target_section_name);
@@ -407,4 +406,31 @@ function get_section_buttons($target_section_name, $section_link_buttons) {
     return $html_output;
 }
 
-?>
+function display_participant_content($participant_photo, $biography_link) {
+    // Determine if there's an image URL
+    $hasImage = !empty($participant_photo['url']);
+    // Image alt text or default
+    $alt = $hasImage && !empty($participant_photo['alt']) ? $participant_photo['alt'] : 'Participant Image';
+
+    // Start output buffering to build the content
+    ob_start();
+
+    if ($hasImage) {
+        // If there is a participant photo, display it
+        echo '<img src="' . esc_url($participant_photo['url']) . '" alt="' . esc_attr($alt) . '">';
+    } else {
+        // If not, display a placeholder
+        echo '<div class="participant-placeholder">Image Not Available</div>';
+    }
+
+    // Get the buffered content (image or placeholder)
+    $content = ob_get_clean();
+
+    // If there's a biography link, wrap the content
+    if (!empty($biography_link)) {
+        echo '<a class="biography-link" href="' . esc_url($biography_link) . '">' . $content . '</a>';
+    } else {
+        // If no biography link, just display the content
+        echo $content;
+    }
+}

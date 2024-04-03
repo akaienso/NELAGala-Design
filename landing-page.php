@@ -1,5 +1,6 @@
 <?php
 global $page_title;
+global $is_demo_mode;
 $event_year = get_query_var('nelagala_year', date('Y')); // Default to current year if not specified
 $ng = fetch_nelagala_event_by_year($event_year);
 $full_event_switch = $ng['full_event_switch'] ?: false;
@@ -178,22 +179,7 @@ get_header();
                                         $biography_link = home_url("/nelagala/" . $participant_slug);
                                     ?>
                                         <div class="row-container">
-                                            <?php
-                                            if (!empty($participant_photo)) {
-                                                // Image variables
-                                                $url = $participant_photo['url'];
-                                                $alt = $participant_photo['alt'];
-                                                // Check if there's a biography link
-                                                if (!empty($biography_link)) {
-
-                                                    // If a link exists, wrap the image with an <a> tag
-                                                    echo '<a class="biography-link" href="' . esc_url($biography_link) . '"><img src="' . esc_url($url) . '" alt="' . esc_attr($alt) . '"></a>';
-                                                } else {
-                                                    // If no link exists, display just the image
-                                                    echo '<img src="' . esc_url($url) . '" alt="' . esc_attr($alt) . '">';
-                                                }
-                                            }
-                                            ?>
+                                            <?php display_participant_content($participant_photo, $biography_link); ?>
                                             <div>
                                                 <h3><?php echo esc_html($role_description); ?></h3>
                                                 <p class="full-name"><a href="<?php echo esc_url($biography_link); ?>"><?php echo esc_html($participant_name); ?></a></p>
@@ -255,17 +241,8 @@ get_header();
                                 ?>
 
                                     <div class="row-container reverse">
-                                        <?php
-
-                                        if (!empty($recipient_photo)) {
-                                            // Image variables
-                                            $url = $recipient_photo['url'];
-                                            $alt = $recipient_photo['alt'];
-
-                                        ?>
-                                            <a class="biography-link" href="<?php echo esc_url($biography_link); ?>"><img src="<?php echo esc_url($url); ?>" alt="Photograph of <?php echo esc_attr($alt); ?>"></a><?php
-                                                                                                                                                                                                                } ?>
-                                        <div>
+                                    <?php display_participant_content($recipient_photo, $biography_link);?>
+                                            <div>
                                             <h3><?php echo esc_html($honor_description); ?></h3>
                                             <p class="full-name"><a href="<?php echo esc_url($biography_link); ?>"><?php echo esc_html($recipient_name); ?></a></p>
                                             <p class="personal-title"><?php echo esc_html($recipient_title); ?></p>

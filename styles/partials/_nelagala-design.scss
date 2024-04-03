@@ -66,7 +66,7 @@ body {
   h4,
   h5,
   h6 {
-    font-family: map-get($font, tertiary);
+    font-family: map-get($font, secondary);
     font-weight: map-get($font-weight, primary);
     text-transform: capitalize;
     color: map-get($color, secondary);
@@ -330,9 +330,9 @@ main {
 
     .header-img {
       position: absolute;
-      top: -302px;
-      right: -236px;
-      width: 765px;
+      top: -227px;
+      right: -366px;
+      width: 865px;
       transform: rotate(-13deg);
       opacity: 0.4;
     }
@@ -458,7 +458,9 @@ main {
         }
       }
     }
-
+    .title-wrap {
+      margin-top: -20px;
+    }
     .pre-title,
     .post-title {
       position: relative;
@@ -524,8 +526,11 @@ main {
       align-items: center;
       width: 90%;
       max-width: 960px;
-      margin: 0px auto 0 auto;
+      margin: 20px auto 0 auto;
       position: relative;
+      &.save-the-date {
+        margin: -20px auto 0 auto;
+      }
     }
 
     .column {
@@ -568,6 +573,8 @@ main {
     p {
       font-size: 2.7em;
     }
+  
+
   }
 
   // !SECTION: Header
@@ -667,6 +674,22 @@ main {
 
       }
     }
+    .participant-placeholder {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%; // Adjust based on your actual image size
+      height: auto; // Adjust based on your actual image size
+      aspect-ratio: 5/4;
+      background-color: #f0f0f0; // A faint grey
+      color: #666; // Darker grey for text
+      font-family: Arial, sans-serif;
+      font-size: 14px; // Adjust as needed
+      text-align: center;
+      border: 1px solid #ddd; // Optional: adds a light border
+
+    }
+    
 
     &>.packages {
       align-items: inherit;
@@ -822,6 +845,10 @@ main {
 
       img {
         mix-blend-mode: inherit;
+        aspect-ratio: 1 / 1;
+        width: auto;
+        max-width: 50%;
+        max-height: none;
       }
     }
 
