@@ -31,7 +31,9 @@ $nela_gala_icon = $ng_data['nela_gala_icon'] ?? null;
             <span class="bar topBar"></span>
             <span class="bar btmBar"></span>
         </button>
-        <p><a href="#top">Save the Date</a></p>
+        <p>
+            <a href="#top"><?=$is_demo_mode ? '<span class="demo">Save the Date</span>' : '<span>National Education & <br>Leadership Awards</span> <span class="gala">Gala</span>';?></a>
+        </p>
         <a href="/"<?= !empty($osdia_icon) ? '' : ' class="menu-item"'; ?>>
             <?php if (!empty($osdia_icon)) : ?>
                 <img src="<?= esc_url($osdia_icon['url']); ?>" alt="<?= esc_attr($osdia_icon['alt']); ?>" title="Return to Order Sons and Daughters of Italy in America" />

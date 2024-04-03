@@ -33,12 +33,14 @@
             }
 
             &.demo_mode {
-                
+
                 display: block;
-                #burger, ul {
+
+                #burger,
+                ul {
                     display: none;
                 }
-                
+
             }
         }
 
@@ -87,26 +89,46 @@
                 text-align: center;
                 margin: 0;
                 padding: 0 60px; // Adjust padding to avoid text overlapping the button and image
-                font-family: map-get($header-h2, font);
-                font-weight: map-get($header-h2, weight);
-                font-size: calc(map-get($header-h2, size) / 2.4);
-                font-style: map-get($header-h2, style);
-                color: map-get($header-h2, color);
-                letter-spacing: map-get($header-h2, letter-spacing);
-                text-transform: map-get($header-h2, transform);
+
 
                 a {
-                    text-decoration: none;
-                    color: map-get($color, quaternary);
 
-                    &:hover {
-                        font-size: calc(map-get($header-h2, size) / 2.3);
-                        font-weight: calc(map-get($font-weight, bold));
+                    span {
+
+                        text-decoration: none;
+                        color: map-get($color, quaternary);
+                        font-size: 1em;
+                        font-weight: map-get($font-weight, medium);
+                        line-height: 1em;
+                        text-transform: uppercase;
+
+                        // &.gala {
+                        //     font-family: map-get($font, script);
+                        //     font-weight: map-get($font-weight, primary);
+                        //     font-size: 2em;
+                        // }
+
+                        &.demo {
+                            font-family: map-get($header-h2, font);
+                            font-weight: map-get($header-h2, weight);
+                            font-size: calc(map-get($header-h2, size) / 2.4);
+                            font-style: map-get($header-h2, style);
+                            color: map-get($header-h2, color);
+                            letter-spacing: map-get($header-h2, letter-spacing);
+                            text-transform: map-get($header-h2, transform);
+
+                            &:hover {
+                                font-size: calc(map-get($header-h2, size) / 2.3);
+                                font-weight: calc(map-get($font-weight, bold));
+                            }
+                        }
                     }
+
+
                 }
             }
 
-            > a.missing-icon {
+            >a.missing-icon {
                 position: absolute;
                 display: block;
                 right: 5px; // 2 pixels left of the far right side
@@ -130,16 +152,18 @@
             display: block;
             list-style: none;
             overflow: hidden;
+
             .home {
                 a {
-                  display: block;
-                  margin: 1em auto;
-                  width: 30%;
-                  img {
-                    height: auto;
-                  }
+                    display: block;
+                    margin: 1em auto;
+                    width: 30%;
+
+                    img {
+                        height: auto;
+                    }
                 }
-              }
+            }
         }
 
         .nav .menu li.menu-item {

@@ -254,8 +254,28 @@ body #top > section:nth-child(4) > div {
   margin: 0 auto;
   min-width: 250px;
 }
+@media (max-width: 786px) {
+  .nelagala-event .packages .package.section-button {
+    padding: 10px;
+  }
+  .nelagala-event .packages .package.section-button > .buttons {
+    flex-direction: column;
+    padding: 1em;
+  }
+  .nelagala-event .packages .package.section-button > .buttons > a {
+    margin: 10px 0;
+  }
+  .nelagala-event .packages .package.section-button > .buttons > a:first-of-type, .nelagala-event .packages .package.section-button > .buttons > a:last-child {
+    margin: 10px 0;
+  }
+}
 .nelagala-event #sponsorships .package:not(.section-button) {
   flex: 0 0 47%;
+}
+@media (max-width: 786px) {
+  .nelagala-event #sponsorships .package:not(.section-button) {
+    flex: 0 0 100%;
+  }
 }
 .nelagala-event .map-container {
   position: relative;
@@ -943,7 +963,7 @@ body #top > section:nth-child(4) > div {
     padding: 20px;
   }
   .nelagala-event .packages .package,
-  .nelagala-event .packages .package #sponsorships .packages .package {
+  .nelagala-event .packages .package #sponsorships .packages .package, .nelagala-event .packages .package #sponsorships .package:not(.section-button) {
     flex: 0 0 100%;
   }
 }
@@ -1060,7 +1080,8 @@ body > div.grid_1200 #top {
   .nelagala-event .nav.demo_mode {
     display: block;
   }
-  .nelagala-event .nav.demo_mode #burger, .nelagala-event .nav.demo_mode ul {
+  .nelagala-event .nav.demo_mode #burger,
+  .nelagala-event .nav.demo_mode ul {
     display: none;
   }
   .nelagala-event .burger-container {
@@ -1104,6 +1125,16 @@ body > div.grid_1200 #top {
     text-align: center;
     margin: 0;
     padding: 0 60px;
+  }
+  .nelagala-event .burger-container p a span {
+    text-decoration: none;
+    color: rgb(249, 249, 249);
+    font-size: 1em;
+    font-weight: 500;
+    line-height: 1em;
+    text-transform: uppercase;
+  }
+  .nelagala-event .burger-container p a span.demo {
     font-family: minion-pro-condensed-subhead, serif;
     font-weight: 600;
     font-size: 1.25em;
@@ -1112,11 +1143,7 @@ body > div.grid_1200 #top {
     letter-spacing: 0.2em;
     text-transform: uppercase;
   }
-  .nelagala-event .burger-container p a {
-    text-decoration: none;
-    color: rgb(249, 249, 249);
-  }
-  .nelagala-event .burger-container p a:hover {
+  .nelagala-event .burger-container p a span.demo:hover {
     font-size: 1.3043478261em;
     font-weight: 700;
   }

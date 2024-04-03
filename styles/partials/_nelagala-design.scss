@@ -216,7 +216,6 @@ body {
           }
         }
       }
-
       &.section-button {
         flex: 0 0 100%; // Ensures full width
         display: flex;
@@ -232,22 +231,22 @@ body {
           text-transform: map-get($package-h2, transform);
           font-family: map-get($package-h2, font);
           color: map-get($package-h2, color);
-
+      
           align-self: flex-start; // Aligns the paragraph to the start
           width: 80%; // Ensures the paragraph takes full width
           margin: 0 auto;
           margin-bottom: 20px; // Adds space between the paragraph and the buttons
         }
-
+      
         > .buttons {
           display: flex;
           justify-content: center; // Centers the buttons horizontally
           padding: 2em;
           align-items: center; // Centers items horizontally
-
+      
           >a {
             margin: 0 10px; // Space between buttons
-
+      
             &:first-of-type {
               margin-right: 35px; // Ensures a 5px margin to the right of the first button
             }
@@ -255,11 +254,11 @@ body {
             &:last-child {
               margin-left: 35px; // Ensures a 5px margin to the left of the last button
             }
-
+      
             &:only-child {
               margin: 0; // Removes margin when there's only one button to ensure it's centered
             }
-
+      
             button {
               max-width: 300px;
               width: 100%;
@@ -268,13 +267,38 @@ body {
             }
           }
         }
+      
+        @media (max-width: 786px) {
+          padding: 10px; // Reduces the padding for smaller screens
+      
+          > .buttons {
+            flex-direction: column; // Stacks the buttons vertically
+            padding: 1em; // Reduces the padding around buttons
+      
+            >a {
+              margin: 10px 0; // Adjusts the margin for vertical stacking
+      
+              &:first-of-type, &:last-child {
+                margin: 10px 0; // Ensures consistent margin for stacked buttons
+              }
+      
+              button {
+                // If needed, adjust button styles specific to mobile here
+              }
+            }
+          }
+        }
       }
+      
   }
 }
 
 // Specific adjustment for .package within #sponsorships
 #sponsorships .package:not(.section-button) {
   flex: 0 0 47%;
+  @media (max-width: 786px) {
+    flex: 0 0 100%;
+  }
 }
 
 .map-container {
@@ -1141,7 +1165,7 @@ width: 100%;
       padding: 20px;
 
       &,
-      #sponsorships .packages .package {
+      #sponsorships .packages .package, #sponsorships .package:not(.section-button) {
         flex: 0 0 100%;
       }
     }
