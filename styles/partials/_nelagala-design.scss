@@ -225,7 +225,7 @@ body {
         padding: 20px;
         background-color: transparent;
         border: none;
-
+        width: 100%;
         p {
           font-weight: map-get($package-h2, weight);
           font-size: map-get($package-h2, size);
@@ -269,7 +269,6 @@ body {
           }
         }
       }
-    
   }
 }
 
@@ -314,7 +313,7 @@ main {
   background: var(--ng-section-bg);
   padding-bottom: 54px;
   flex-grow: 1;
-
+width: 100%;
 
   // SECTION: Header
   header {
@@ -1067,7 +1066,8 @@ main {
             width: 100%;
             height: auto;
             aspect-ratio: 1/1;
-            max-height: 100%;
+            max-width: 100%;
+
           }
         }
       }
@@ -1138,7 +1138,7 @@ main {
     }
 
     .packages .package {
-      padding: 20px 20px 80px;
+      padding: 20px;
 
       &,
       #sponsorships .packages .package {

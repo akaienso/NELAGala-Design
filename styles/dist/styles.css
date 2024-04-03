@@ -217,6 +217,7 @@ body #top > section:nth-child(4) > div {
   padding: 20px;
   background-color: transparent;
   border: none;
+  width: 100%;
 }
 .nelagala-event .packages .package.section-button p {
   font-weight: 600;
@@ -284,6 +285,7 @@ body #top > section:nth-child(4) > div {
   background: var(--ng-section-bg);
   padding-bottom: 54px;
   flex-grow: 1;
+  width: 100%;
 }
 .nelagala-event main header {
   width: 100%;
@@ -888,7 +890,7 @@ body #top > section:nth-child(4) > div {
     width: 100%;
     height: auto;
     aspect-ratio: 1/1;
-    max-height: 100%;
+    max-width: 100%;
   }
   .nelagala-event main .row-container a.biography-link {
     width: 100%;
@@ -938,7 +940,7 @@ body #top > section:nth-child(4) > div {
     margin: 0;
   }
   .nelagala-event .packages .package {
-    padding: 20px 20px 80px;
+    padding: 20px;
   }
   .nelagala-event .packages .package,
   .nelagala-event .packages .package #sponsorships .packages .package {

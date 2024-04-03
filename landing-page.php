@@ -1,11 +1,13 @@
 <?php
 global $page_title;
 global $is_demo_mode;
+global $is_preview_mode;
 $event_year = get_query_var('nelagala_year', date('Y')); // Default to current year if not specified
 $ng = fetch_nelagala_event_by_year($event_year);
 $full_event_switch = $ng['full_event_switch'] ?: false;
-$preview_mode = isset($_GET['preview']);
-$is_demo_mode = !$full_event_switch && !$preview_mode;
+$is_preview_mode = isset($_GET['preview']) ? true : false; // Set based on query string
+$is_demo_mode = !$full_event_switch && !$is_preview_mode;
+
 get_header();
 ?>
 <section class="sections">
@@ -99,7 +101,6 @@ get_header();
                 nelagala_pass_template_data($ng, 'navigation');
                 $args = array(
                     'event_year' => $event_year,
-                    'event_year' => $event_year,
                 );
                 get_template_part('inc/nelagala/template-parts/section-navigation', null, $args);
 
@@ -177,6 +178,10 @@ get_header();
                                         // Assume the biography template will use the participant's name in the URL
                                         $participant_slug = get_post_field('post_name', $participant_id);
                                         $biography_link = home_url("/nelagala/" . $participant_slug);
+
+                                        if ($is_preview_mode) {
+                                            $biography_link = add_query_arg('preview', '', $biography_link);
+                                        }
                                     ?>
                                         <div class="row-container">
                                             <?php display_participant_content($participant_photo, $biography_link); ?>
@@ -238,6 +243,10 @@ get_header();
                                     // Assume the biography template will use the participant's name in the URL
                                     $recipient_slug = get_post_field('post_name', $recipient_id);
                                     $biography_link = home_url("/nelagala/" . $recipient_slug);
+
+                                    if ($is_preview_mode) {
+                                        $biography_link = add_query_arg('preview', '', $biography_link);
+                                    }
                                 ?>
 
                                     <div class="row-container reverse">
@@ -286,8 +295,6 @@ get_header();
                                         </div>
                                     <?php endwhile;
                                     echo get_section_buttons('tickets', $ng['section_link_buttons']); ?>
-
-
                                 </div>
                             </section>
                         <?php endif; ?>
