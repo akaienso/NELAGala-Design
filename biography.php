@@ -1,5 +1,7 @@
 <?php
 global $page_title;
+global $is_demo_mode;
+global $is_preview_mode;
 
 $event_year = get_query_var('nelagala_year', date('Y'));
 $ng = fetch_nelagala_event_by_year($event_year);
@@ -17,23 +19,23 @@ get_header();
             <?php if (!empty($ng)) {
 
                 // NOTE: Display Sidebar Navigation
+                // Fetch the NELAGala event data for $event_year
+                $ng_data = fetch_nelagala_event_by_year($event_year);
                 nelagala_pass_template_data($ng, 'navigation');
                 $args = array(
-                        'path' => '/nelagala/',
-                        'event_year' => $event_year,
-                    );
-                get_template_part('inc/nelagala/template-parts/sidebar-nav', null, $args);
-
+                    'path' => '/nelagala/',
+                    'event_year' => $event_year,
+                    'preview_mode' => $is_preview_mode,
+                );
+                get_template_part('inc/nelagala/template-parts/section-navigation', null, $args);
             ?>
 
                 <!-- SECTION: Biography -->
                 <main>
-                    <?php
-
+                <?php
                     // NOTE: Display the event header
-                    nelagala_pass_template_data($ng, 'header');
-                    
-                    get_template_part('inc/nelagala/template-parts/event-header');
+                    nelagala_pass_template_data($ng_data, 'header');
+                    get_template_part('inc/nelagala/template-parts/section-header');
                     ?>
                     <!-- SECTION: Data dump of nelagala-participant field group -->
                     <section id="Biography" class="participants">
@@ -74,6 +76,7 @@ get_header();
                                 </div>
 
                                 <article>
+                                    
                                     <?php
                                     // Display the full biography
                                     echo the_content();

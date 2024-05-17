@@ -1,17 +1,21 @@
 <?php
+global $is_demo_mode;
+global $is_preview_mode;
+
 $ng_data = apply_filters('nelagala_template_data_navigation', []);
 $path = $args['path'] ?? '';
 $event_year = $args['event_year'] ?? '';
-
-// ACF field values from $ng array
-$full_event_switch = $ng_data['full_event_switch'] ?: false;
-$preview_mode = isset($_GET['preview']);
-$is_demo_mode = !$full_event_switch && !$preview_mode;
+$is_preview_mode = $args['preview_mode'] ?? '';
 
 // Concatenate $path and $event_year. If both are empty, $base_url will be an empty string.
 $base_url = $path . $event_year;
 
-// This ensures $base_url is set to an empty string if both $path and $event_year are unset or empty.
+// Append the preview query string if in preview mode
+if (!empty($is_preview_mode)) {
+    $base_url = add_query_arg('preview', $is_preview_mode, $base_url);
+}
+
+// This ensures $base_url is set to an empty string if $path is unset or empty.
 if (empty($path)) {
     $base_url = '';
 }
@@ -27,7 +31,9 @@ $nela_gala_icon = $ng_data['nela_gala_icon'] ?? null;
             <span class="bar topBar"></span>
             <span class="bar btmBar"></span>
         </button>
-        <p><a href="#top">Save the Date</a></p>
+        <p>
+            <a href="#top"><?=$is_demo_mode ? '<span class="demo">Save the Date</span>' : '<span>National Education & <br>Leadership Awards</span> <span class="gala">Gala</span>';?></a>
+        </p>
         <a href="/"<?= !empty($osdia_icon) ? '' : ' class="menu-item"'; ?>>
             <?php if (!empty($osdia_icon)) : ?>
                 <img src="<?= esc_url($osdia_icon['url']); ?>" alt="<?= esc_attr($osdia_icon['alt']); ?>" title="Return to Order Sons and Daughters of Italy in America" />
