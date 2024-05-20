@@ -94,7 +94,20 @@ get_header();
                 $advertising_section_headline = $ng['advertising_section_headline'];
                 $advertising_section_top_content = $ng['advertising_section_top_content'];
                 $advertising_rates = $ng['advertising_rates'];
-
+                $show_top_banner = $ng['show_top_banner'];
+                $top_banner_headline = $ng['top_banner_headline'];
+                $top_banner_content = $ng['top_banner_content'];
+                $top_banner_button_label = $ng['top_banner_button_label'];
+                $top_banner_button_link = $ng['top_banner_button_link'];
+                $top_banner_image = $ng['top_banner_image'];
+                $top_banner_background_color = $ng['top_banner_background_color'];
+                $top_banner_text_color = $ng['top_banner_text_color'];
+                $top_banner_headline_color = $ng['top_banner_headline_color'];
+                $top_banner_button_color = $ng['top_banner_button_color'];
+                $top_banner_button_text_color = $ng['top_banner_button_text_color'];
+                $top_banner_button_hover_color = $ng['top_banner_button_hover_color'];
+                $top_banner_button_hover_text_color = $ng['top_banner_button_text_hover_color'];
+                
                 // NOTE: Display Sidebar Navigation
                 // Fetch the NELAGala event data for $event_year
                 $ng_data = fetch_nelagala_event_by_year($event_year);
@@ -111,12 +124,14 @@ get_header();
                     // NOTE: Display the event header
                     nelagala_pass_template_data($ng_data, 'header');
                     get_template_part('inc/nelagala/template-parts/section-header');
-
-                    if ($display_about) : ?>
+                    get_template_part('inc/nelagala/template-parts/top-banner', null, $args);
+                    ?>
+                    <!-- Top Banner would be here if it was working properly -->
+                    <?php if ($display_about) : ?>
                         <!--  SECTION: About the Event -->
                         <section id="about-the-event">
                             <article class="<?= $display_theme_sidebar ? '' : 'full-width'; ?>">
-                                <h2><?php echo $about_section_headline; ?></h2>
+                                <h2> <?php echo $about_section_headline; ?></h2>
                                 <?php echo the_content(); ?>
                             </article>
                             <?php if ($display_theme_sidebar) : ?>
