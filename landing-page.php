@@ -94,7 +94,14 @@ get_header();
                 $advertising_section_headline = $ng['advertising_section_headline'];
                 $advertising_section_top_content = $ng['advertising_section_top_content'];
                 $advertising_rates = $ng['advertising_rates'];
-                
+
+                $display_sponsor_list = $ng['show_sponsor_list'];
+                $nelagala_sponsor = $ng['nelagala_sponsor'];
+                $sponsor_list_headline = $ng['sponsor_list_headline'];
+                $sponsor_list_header_text = $ng['sponsor_list_header_text'];
+                $sponsor_list_footer_text = $ng['sponsor_list_footer_text'];
+
+
                 // NOTE: Display Sidebar Navigation
                 // Fetch the NELAGala event data for $event_year
                 $ng_data = fetch_nelagala_event_by_year($event_year);
@@ -112,8 +119,9 @@ get_header();
                     nelagala_pass_template_data($ng_data, 'header');
                     get_template_part('inc/nelagala/template-parts/section-header');
                     get_template_part('inc/nelagala/template-parts/top-banner', null, $args);
-                    
-                    if ($display_about) : ?>
+                    ?>
+                    <!-- Top Banner would be here if it was working properly -->
+                    <?php if ($display_about) : ?>
                         <!--  SECTION: About the Event -->
                         <section id="about-the-event">
                             <article class="<?= $display_theme_sidebar ? '' : 'full-width'; ?>">
@@ -145,295 +153,395 @@ get_header();
                         <?php endif; ?>
                         <!--  !SECTION: About the Event -->
                     <?php endif;
+// SECTION: Sponsor List
+if ($display_sponsor_list) :
+    ?>
+        <!-- SECTION: Sponsor List -->
+    
+        <?php
+        // Initialize variables
+        $sponsors_by_level = [];
+    
+        // Fetch the ACF field
+        $nelagala_sponsor = $ng['nelagala_sponsor'];
+    
+        if ($nelagala_sponsor) {
+            error_log('Sponsors data fetched successfully.');
+            foreach ($nelagala_sponsor as $index => $sponsor) {
+                if (isset($sponsor['sponsor_level'])) {
+                    $level = strtolower($sponsor['sponsor_level']); // Normalize to lowercase
+                    if (!isset($sponsors_by_level[$level])) {
+                        $sponsors_by_level[$level] = [];
+                    }
+                    $sponsors_by_level[$level][] = $sponsor;
+                } else {
+                    error_log('Sponsor ' . $index . ' has no sponsor_level.');
+                }
+            }
+        } else {
+            error_log('No sponsors found.');
+        }
+    
+        $level_order = ['platinum', 'gold', 'silver', 'bronze'];
+    
+        echo '<section id="sponsor-list">';
+        echo '<h2>' . esc_html($sponsor_list_headline) . '</h2>';
+        if ($sponsor_list_header_text) {
+            echo '<p>' . $sponsor_list_header_text . '</p>';
+        };
+    
+        function display_sponsors_by_level($sponsors_by_level, $level_order)
+        {
+            foreach ($level_order as $level) {
+                if (isset($sponsors_by_level[$level])) {
+                    error_log('Displaying sponsors for level: ' . $level);
+                    echo '<section class="sponsorship-level ' . esc_attr($level) . '" data-level="' . esc_attr($level) . '">';
+                    echo '<h3>' . ucfirst($level) . ' Level</h3>';
+                    echo '<ul class="sponsor-list">';
+    
+                    foreach ($sponsors_by_level[$level] as $index => $sponsor) {
+                        $name = isset($sponsor['name']) ? esc_html($sponsor['name']) : '';
+                        $logo = isset($sponsor['logo']['url']) ? esc_url($sponsor['logo']['url']) : '';
+                        $link = isset($sponsor['external_link']) ? esc_url($sponsor['external_link']) : '';
+    
+                        echo '<li class="sponsor-item">';
+                        echo '<figure>';
+    
+                        // If there is a link, wrap the content in an anchor tag
+                        if ($link) {
+                            echo '<a href="' . $link . '">';
+                            if ($logo) {
+                                echo '<img src="' . $logo . '" alt="' . $name . ' Logo">';
+                            }
+                            if ($name) {
+                                echo '<figcaption>' . $name . '</figcaption>';
+                            }
+                            echo '</a>';
+                        } else {
+                            // No link, just display the logo and name if they exist
+                            if ($logo) {
+                                echo '<img src="' . $logo . '" alt="' . $name . ' Logo">';
+                            }
+                            if ($name) {
+                                echo '<figcaption>' . $name . '</figcaption>';
+                            }
+                        }
+    
+                        echo '</figure>';
+                        echo '</li>';
+                    }
+    
+                    echo '</ul>';
+                    echo '</section>';
+                } else {
+                    error_log('No sponsors found for level: ' . $level);
+                }
+            }
+        }
+    
+        display_sponsors_by_level($sponsors_by_level, $level_order);
+        if ($sponsor_list_footer_text) {
+            echo '<p>' . $sponsor_list_footer_text . '</p>';
+        };
+        ?>
+        </section>
+        <!-- !SECTION: Sponsor List -->
+    <?php
+    endif;
+    
+
+
+
                     if ($display_roles) : ?>
-                        <!--  SECTION: Event Roles -->
-                        <?php
+    <!--  SECTION: Event Roles -->
+    <?php
                         if (have_rows('roles')) :
-                        ?>
-                            <section id="event-roles" class="participants">
-                                <h2><?php echo $roles_section_headline ?></h2>
-                                <?php if ($roles_section_content) : ?>
-                                    <span class="sub-text"><?php echo $roles_section_content; ?></span>
-                                    <?php endif;
-                                while (have_rows('roles')) : the_row();
-                                    $role_description = get_sub_field('role');
-                                    $participant_id = get_sub_field('participant');
+    ?>
+        <section id="event-roles" class="participants">
+            <h2><?php echo $roles_section_headline ?></h2>
+            <?php if ($roles_section_content) : ?>
+                <span class="sub-text"><?php echo $roles_section_content; ?></span>
+                <?php endif;
+                            while (have_rows('roles')) : the_row();
+                                $role_description = get_sub_field('role');
+                                $participant_id = get_sub_field('participant');
 
-                                    if (!empty($participant_id)) {
-                                        // Fetch the participant's post title (full name)
-                                        $participant_name = get_the_title($participant_id);
+                                if (!empty($participant_id)) {
+                                    // Fetch the participant's post title (full name)
+                                    $participant_name = get_the_title($participant_id);
 
-                                        // Fetch the participant's photo 
-                                        $participant_photo = get_field('photo', $participant_id);
-
-                                        // Fetch the Personal Title for the participant
-                                        $participant_title = get_field('title', $participant_id);
-
-                                        // Fetch the recipient's External Website URL 
-                                        $participant_website = get_field('website', $participant_id);
-
-                                        // Fetch the summary for the participant
-                                        $participant_summary = get_field('summary', $participant_id);
-
-                                        // Construct the link to the participant's biography page
-                                        // Assume the biography template will use the participant's name in the URL
-                                        $participant_slug = get_post_field('post_name', $participant_id);
-                                        $biography_link = home_url("/nelagala/" . $participant_slug);
-
-                                        if ($is_preview_mode) {
-                                            $biography_link = add_query_arg('preview', '', $biography_link);
-                                        }
-                                    ?>
-                                        <div class="row-container">
-                                            <?php display_participant_content($participant_photo, $biography_link); ?>
-                                            <div>
-                                                <h3><?php echo esc_html($role_description); ?></h3>
-                                                <p class="full-name"><a href="<?php echo esc_url($biography_link); ?>"><?php echo esc_html($participant_name); ?></a></p>
-                                                <p class="personal-title"><?php echo esc_html($participant_title); ?></p>
-                                                <p class="bio-summary"><?php echo esc_html($participant_summary); ?></p>
-                                                <p class="read-more"><a href="<?php echo esc_url($biography_link); ?>">Read more</a></p>
-                                            </div>
-                                        </div>
-                                    <?php } else { ?>
-                                        <div class="row-container">
-                                            <div>
-                                                <h3><?= esc_html($role_description); ?></h3>
-                                                <p class="full-name">Participant not chosen yet</p>
-                                            </div>
-                                        </div>
-                                    <?php } ?>
-
-                                <?php endwhile; ?>
-                            </section>
-                        <?php endif; ?>
-                        <!--  !SECTION: Event Roles -->
-                    <?php endif;
-                    if ($display_honorees) : ?>
-                        <!--  SECTION: Event Honorees -->
-                        <?php
-                        if (have_rows('honorees')) :
-                        ?>
-                            <section id="honorees" class="participants">
-                                <h2><?php echo esc_html($honorees_sections_headline) ?></h2>
-                                <?php if ($honorees_section_content) : ?>
-                                    <span class="sub-text"><?php echo $honorees_section_content; ?></span>
-                                <?php endif;
-                                while (have_rows('honorees')) : the_row();
-
-                                    $honor_description = get_sub_field('honor');
-
-                                    $recipient_id = get_sub_field('recipient');
-
-
-                                    // Fetch the recipient's post title (full name)
-                                    $recipient_name = get_the_title($recipient_id);
-
-                                    // Fetch the recipient's photo 
-                                    $recipient_photo = get_field('photo', $recipient_id);
+                                    // Fetch the participant's photo 
+                                    $participant_photo = get_field('photo', $participant_id);
 
                                     // Fetch the Personal Title for the participant
-                                    $recipient_title = get_field('title', $recipient_id);
+                                    $participant_title = get_field('title', $participant_id);
 
                                     // Fetch the recipient's External Website URL 
-                                    $recipient_website = get_field('website', $recipient_id);
+                                    $participant_website = get_field('website', $participant_id);
 
                                     // Fetch the summary for the participant
-                                    $recipient_summary = get_field('summary', $recipient_id);
+                                    $participant_summary = get_field('summary', $participant_id);
 
                                     // Construct the link to the participant's biography page
                                     // Assume the biography template will use the participant's name in the URL
-                                    $recipient_slug = get_post_field('post_name', $recipient_id);
-                                    $biography_link = home_url("/nelagala/" . $recipient_slug);
+                                    $participant_slug = get_post_field('post_name', $participant_id);
+                                    $biography_link = home_url("/nelagala/" . $participant_slug);
 
                                     if ($is_preview_mode) {
                                         $biography_link = add_query_arg('preview', '', $biography_link);
                                     }
-                                ?>
-
-                                    <div class="row-container reverse">
-                                    <?php display_participant_content($recipient_photo, $biography_link);?>
-                                            <div>
-                                            <h3><?php echo esc_html($honor_description); ?></h3>
-                                            <p class="full-name"><a href="<?php echo esc_url($biography_link); ?>"><?php echo esc_html($recipient_name); ?></a></p>
-                                            <p class="personal-title"><?php echo esc_html($recipient_title); ?></p>
-                                            <p class="bio-summary"><?php echo esc_html($recipient_summary); ?></p>
-                                            <p class="read-more"><a href="<?php echo esc_url($biography_link); ?>">Read more</a></p>
-                                        </div>
-                                    </div>
-                                <?php endwhile; ?>
-                            </section>
-                        <?php endif; ?>
-                        <!--  !SECTION: Event Honorees -->
-                    <?php endif;
-                    if ($display_tickets) : ?>
-                        <!--  SECTION: Tickets -->
-                        <?php
-                        if (have_rows('ticket_prices')) :
-                        ?>
-                            <section id="tickets" class="tickets">
-                                <h2><?php echo esc_html($ticket_section_headline) ?></h2>
-                                <?php if ($ticket_section_top_content) : ?>
-                                    <span class="sub-text"><?php echo $ticket_section_top_content; ?></span>
-                                <?php endif; ?>
-                                <div class="packages">
-                                    <?php
-                                    while (have_rows('ticket_prices')) : the_row();
-                                        $type = get_sub_field('type');
-                                        $price = number_format(get_sub_field('price'), 0);
-                                        $tax_deduction = number_format(get_sub_field('tax_deduction'), 0);
-                                        $description = get_sub_field('description');
-                                        $button_label = get_sub_field('cta_button_label');
-                                        $button_url = get_sub_field('cta_button_link');
-                                    ?>
-                                        <div class="package">
-                                            <h2><?php echo esc_html($type); ?></h2>
-                                            <p>Price each: $<?php echo esc_html($price); ?></p>
-                                            <p>Allowable tax deduction: $<?php echo esc_html($tax_deduction); ?></p>
-                                            <p><?php echo ($description); ?></p>
-                                            <?php if ($button_label && $button_url) : ?>
-                                                <a href="<?php echo esc_url($button_url); ?>" target="_blank"><button><?php echo esc_html($button_label); ?></button></a>
-                                            <?php endif; ?>
-                                        </div>
-                                    <?php endwhile;
-                                    echo get_section_buttons('tickets', $ng['section_link_buttons']); ?>
-                                </div>
-                            </section>
-                        <?php endif; ?>
-                        <!--  !SECTION: Tickets -->
-                    <?php endif; ?>
-                    <?php if ($display_map) : ?>
-                        <!-- SECTION: map -->
-                        <div id="lodging" class="map-container">
-                            <div id="map" class="map"></div>
+                ?>
+                    <div class="row-container">
+                        <?php display_participant_content($participant_photo, $biography_link); ?>
+                        <div>
+                            <h3><?php echo esc_html($role_description); ?></h3>
+                            <p class="full-name"><a href="<?php echo esc_url($biography_link); ?>"><?php echo esc_html($participant_name); ?></a></p>
+                            <p class="personal-title"><?php echo esc_html($participant_title); ?></p>
+                            <p class="bio-summary"><?php echo esc_html($participant_summary); ?></p>
+                            <p class="read-more"><a href="<?php echo esc_url($biography_link); ?>">Read more</a></p>
                         </div>
-                        <!-- !SECTION: map -->
-                    <?php endif;
-                    if ($display_lodging) :  ?>
-                        <!-- SECTION: lodging -->
-                        <section id="location" class="hotels-cards">
-                            <h2><?php echo esc_html($lodging_section_headline) ?></h2>
-                            <?php if ($lodging_section_top_content) : ?>
-                                <span class="sub-text"><?php echo $lodging_section_top_content; ?></span>
-                            <?php endif;
-                            if (have_rows('lodging')) : ?>
-                                <div class="packages">
-                                    <?php while (have_rows('lodging')) : the_row();
-                                        $name = get_sub_field('property');
-                                        $location = get_sub_field('location');
-                                        $address = $location['street_number'] . ' ' . $location['street_name'] . '<br>' . $location['city'] . ', ' . $location['state'] . ' ' . $location['post_code'];
-                                        $phone = get_sub_field('telephone');
-                                        $booking_url = get_sub_field('website');
-                                    ?>
-                                        <div class="package">
-                                            <h2><?php echo esc_html($name); ?></h2>
-                                            <p><?php echo $address; ?></p>
-                                            <p><?php echo $phone; ?></p>
-                                            <?php if ($booking_url) : ?>
-                                                <a href="<?php echo esc_url($booking_url); ?>" target="_blank"><button>Book Now</button></a>
-                                            <?php endif; ?>
-                                        </div>
+                    </div>
+                <?php } else { ?>
+                    <div class="row-container">
+                        <div>
+                            <h3><?= esc_html($role_description); ?></h3>
+                            <p class="full-name">Participant not chosen yet</p>
+                        </div>
+                    </div>
+                <?php } ?>
 
-                                    <?php endwhile; ?>
-                                </div>
-                            <?php endif; ?>
-                        </section>
-                        <!-- !SECTION: lodging -->
-                    <?php endif;
-                    if ($display_sponsorships) : ?>
-                        <!--  SECTION: sponsorships -->
-                        <?php
-                        if (have_rows('sponsorship_packages')) :
-                        ?>
-                            <section id="sponsorships" class="sponsorships">
-                                <h2><?php echo esc_html($sponsorship_section_headline) ?></h2>
-                                <?php if ($sponsorship_section_top_content) : ?>
-                                    <span class="sub-text"><?php echo $sponsorship_section_top_content; ?></span>
-                                <?php endif; ?> <div class="packages">
-                                    <?php
-                                    while (have_rows('sponsorship_packages')) : the_row();
-                                        $package = get_sub_field('package');
-                                        $price = number_format(get_sub_field('price'), 0);
-                                        $tax_deduction = number_format(get_sub_field('tax_deduction'), 0);
-                                        $description = get_sub_field('description');
-                                        $button_label = get_sub_field('cta_button_label');
-                                        $button_url = get_sub_field('Call-to-Action-URL');
-                                    ?>
-                                        <div class="package">
-                                            <h2><?php echo esc_html($package); ?></h2>
-                                            <p><span>Price each:</span> $<?php echo esc_html($price); ?></p>
-                                            <p><span>Allowable tax deduction:</span> $<?php echo esc_html($tax_deduction); ?></p>
-                                            <?php if (isset($amenities_list_title)) : ?>
-                                                <p><?php echo $amenities_list_title; ?></p>
-                                            <?php endif; ?>
-                                            <?php if (have_rows('amenities')) : ?>
-                                                <ul>
-                                                    <?php while (have_rows('amenities')) : the_row(); ?>
-                                                        <li><?php the_sub_field('amenity'); ?></li>
-                                                    <?php endwhile; ?>
-                                                </ul>
-                                            <?php endif;
+            <?php endwhile; ?>
+        </section>
+    <?php endif; ?>
+    <!--  !SECTION: Event Roles -->
+<?php endif;
+                    if ($display_honorees) : ?>
+    <!--  SECTION: Event Honorees -->
+    <?php
+                        if (have_rows('honorees')) :
+    ?>
+        <section id="honorees" class="participants">
+            <h2><?php echo esc_html($honorees_sections_headline) ?></h2>
+            <?php if ($honorees_section_content) : ?>
+                <span class="sub-text"><?php echo $honorees_section_content; ?></span>
+            <?php endif;
+                            while (have_rows('honorees')) : the_row();
 
-                                            if ($button_label && $button_url) : ?>
-                                                <a href="<?php echo esc_url($button_url); ?>" target="_blank"><button><?php echo esc_html($button_label); ?></button></a>
-                                            <?php endif; ?>
+                                $honor_description = get_sub_field('honor');
 
-                                        </div>
-                                    <?php endwhile;
-                                    echo get_section_buttons('sponsorships', $ng['section_link_buttons']);  ?>
+                                $recipient_id = get_sub_field('recipient');
 
-                                </div>
-                            </section>
+
+                                // Fetch the recipient's post title (full name)
+                                $recipient_name = get_the_title($recipient_id);
+
+                                // Fetch the recipient's photo 
+                                $recipient_photo = get_field('photo', $recipient_id);
+
+                                // Fetch the Personal Title for the participant
+                                $recipient_title = get_field('title', $recipient_id);
+
+                                // Fetch the recipient's External Website URL 
+                                $recipient_website = get_field('website', $recipient_id);
+
+                                // Fetch the summary for the participant
+                                $recipient_summary = get_field('summary', $recipient_id);
+
+                                // Construct the link to the participant's biography page
+                                // Assume the biography template will use the participant's name in the URL
+                                $recipient_slug = get_post_field('post_name', $recipient_id);
+                                $biography_link = home_url("/nelagala/" . $recipient_slug);
+
+                                if ($is_preview_mode) {
+                                    $biography_link = add_query_arg('preview', '', $biography_link);
+                                }
+            ?>
+
+                <div class="row-container reverse">
+                    <?php display_participant_content($recipient_photo, $biography_link); ?>
+                    <div>
+                        <h3><?php echo esc_html($honor_description); ?></h3>
+                        <p class="full-name"><a href="<?php echo esc_url($biography_link); ?>"><?php echo esc_html($recipient_name); ?></a></p>
+                        <p class="personal-title"><?php echo esc_html($recipient_title); ?></p>
+                        <p class="bio-summary"><?php echo esc_html($recipient_summary); ?></p>
+                        <p class="read-more"><a href="<?php echo esc_url($biography_link); ?>">Read more</a></p>
+                    </div>
+                </div>
+            <?php endwhile; ?>
+        </section>
+    <?php endif; ?>
+    <!--  !SECTION: Event Honorees -->
+<?php endif;
+
+                    if ($display_tickets) : ?>
+    <!--  SECTION: Tickets -->
+    <?php
+                        if (have_rows('ticket_prices')) :
+    ?>
+        <section id="tickets" class="tickets">
+            <h2><?php echo esc_html($ticket_section_headline) ?></h2>
+            <?php if ($ticket_section_top_content) : ?>
+                <span class="sub-text"><?php echo $ticket_section_top_content; ?></span>
+            <?php endif; ?>
+            <div class="packages">
+                <?php
+                            while (have_rows('ticket_prices')) : the_row();
+                                $type = get_sub_field('type');
+                                $price = number_format(get_sub_field('price'), 0);
+                                $tax_deduction = number_format(get_sub_field('tax_deduction'), 0);
+                                $description = get_sub_field('description');
+                                $button_label = get_sub_field('cta_button_label');
+                                $button_url = get_sub_field('cta_button_link');
+                ?>
+                    <div class="package">
+                        <h2><?php echo esc_html($type); ?></h2>
+                        <p>Price each: $<?php echo esc_html($price); ?></p>
+                        <p>Allowable tax deduction: $<?php echo esc_html($tax_deduction); ?></p>
+                        <p><?php echo ($description); ?></p>
+                        <?php if ($button_label && $button_url) : ?>
+                            <a href="<?php echo esc_url($button_url); ?>" target="_blank"><button><?php echo esc_html($button_label); ?></button></a>
                         <?php endif; ?>
-                        <!--  !SECTION: sponsorships -->
-                    <?php endif;
-                    if ($display_advertising) : ?>
-                        <!--  SECTION: advertising -->
-                        <?php
-                        if (have_rows('advertising_rates')) :
-                        ?>
-                            <section id="advertising" class="advertising">
-                                <h2><?php echo esc_html($advertising_section_headline) ?></h2>
-                                <?php if ($advertising_section_top_content) : ?>
-                                    <span class="sub-text"><?php echo $advertising_section_top_content; ?></span>
-                                <?php endif; ?>
-                                <div class="packages">
-                                    <?php
-                                    while (have_rows('advertising_rates')) : the_row();
-                                        $ad = get_sub_field('ad');
-                                        $price = number_format(get_sub_field('price'), 0);
-                                        $description = get_sub_field('description');
-                                        $button_label = get_sub_field('cta_button_label');
-                                        $button_url = get_sub_field('cta_link');
-                                    ?>
-                                        <div class="package">
-                                            <h2><?php echo esc_html($ad); ?></h2>
-                                            <p>Price each: $<?php echo esc_html($price); ?></p>
-                                            <p><?php echo ($description); ?></p>
-
-
-                                            <?php if ($button_label && $button_url) : ?>
-                                                <a href="<?php echo esc_url($button_url); ?>" target="_blank"><button><?php echo esc_html($button_label); ?></button></a>
-                                            <?php endif; ?>
-                                        </div>
-                                    <?php endwhile;
-                                    echo get_section_buttons('advertising', $ng['section_link_buttons']); ?>
-
-
-
-                                </div>
-                            </section>
+                    </div>
+                <?php endwhile;
+                            echo get_section_buttons('tickets', $ng['section_link_buttons']); ?>
+            </div>
+        </section>
+    <?php endif; ?>
+    <!--  !SECTION: Tickets -->
+<?php endif; ?>
+<?php if ($display_map) : ?>
+    <!-- SECTION: map -->
+    <div id="lodging" class="map-container">
+        <div id="map" class="map"></div>
+    </div>
+    <!-- !SECTION: map -->
+<?php endif;
+                if ($display_lodging) :  ?>
+    <!-- SECTION: lodging -->
+    <section id="location" class="hotels-cards">
+        <h2><?php echo esc_html($lodging_section_headline) ?></h2>
+        <?php if ($lodging_section_top_content) : ?>
+            <span class="sub-text"><?php echo $lodging_section_top_content; ?></span>
+        <?php endif;
+                    if (have_rows('lodging')) : ?>
+            <div class="packages">
+                <?php while (have_rows('lodging')) : the_row();
+                            $name = get_sub_field('property');
+                            $location = get_sub_field('location');
+                            $address = $location['street_number'] . ' ' . $location['street_name'] . '<br>' . $location['city'] . ', ' . $location['state'] . ' ' . $location['post_code'];
+                            $phone = get_sub_field('telephone');
+                            $booking_url = get_sub_field('website');
+                ?>
+                    <div class="package">
+                        <h2><?php echo esc_html($name); ?></h2>
+                        <p><?php echo $address; ?></p>
+                        <p><?php echo $phone; ?></p>
+                        <?php if ($booking_url) : ?>
+                            <a href="<?php echo esc_url($booking_url); ?>" target="_blank"><button>Book Now</button></a>
                         <?php endif; ?>
-                        <!--  !SECTION: advertising -->
-                    <?php endif; ?>
-                </main>
-                <!-- !SECTION: Display NELAGala Event Content -->
-            <?php
+                    </div>
+                <?php endwhile; ?>
+            </div>
+        <?php endif; ?>
+    </section>
+    <!-- !SECTION: lodging -->
+<?php endif;
+
+                if ($display_sponsorships) : ?>
+    <!--  SECTION: sponsorships -->
+    <?php
+                    if (have_rows('sponsorship_packages')) :
+    ?>
+        <section id="sponsorships" class="sponsorships">
+            <h2><?php echo esc_html($sponsorship_section_headline) ?></h2>
+            <?php if ($sponsorship_section_top_content) : ?>
+                <span class="sub-text"><?php echo $sponsorship_section_top_content; ?></span>
+            <?php endif; ?> <div class="packages">
+                <?php
+                        while (have_rows('sponsorship_packages')) : the_row();
+                            $package = get_sub_field('package');
+                            $price = number_format(get_sub_field('price'), 0);
+                            $tax_deduction = number_format(get_sub_field('tax_deduction'), 0);
+                            $description = get_sub_field('description');
+                            $button_label = get_sub_field('cta_button_label');
+                            $button_url = get_sub_field('Call-to-Action-URL');
+                ?>
+                    <div class="package">
+                        <h2><?php echo esc_html($package); ?></h2>
+                        <p><span>Price each:</span> $<?php echo esc_html($price); ?></p>
+                        <p><span>Allowable tax deduction:</span> $<?php echo esc_html($tax_deduction); ?></p>
+                        <?php if (isset($amenities_list_title)) : ?>
+                            <p><?php echo $amenities_list_title; ?></p>
+                        <?php endif; ?>
+                        <?php if (have_rows('amenities')) : ?>
+                            <ul>
+                                <?php while (have_rows('amenities')) : the_row(); ?>
+                                    <li><?php the_sub_field('amenity'); ?></li>
+                                <?php endwhile; ?>
+                            </ul>
+                        <?php endif;
+
+                            if ($button_label && $button_url) : ?>
+                            <a href="<?php echo esc_url($button_url); ?>" target="_blank"><button><?php echo esc_html($button_label); ?></button></a>
+                        <?php endif; ?>
+
+                    </div>
+                <?php endwhile;
+                        echo get_section_buttons('sponsorships', $ng['section_link_buttons']);  ?>
+
+            </div>
+        </section>
+    <?php endif; ?>
+    <!--  !SECTION: sponsorships -->
+<?php endif;
+                if ($display_advertising) : ?>
+    <!--  SECTION: advertising -->
+    <?php
+                    if (have_rows('advertising_rates')) :
+    ?>
+        <section id="advertising" class="advertising">
+            <h2><?php echo esc_html($advertising_section_headline) ?></h2>
+            <?php if ($advertising_section_top_content) : ?>
+                <span class="sub-text"><?php echo $advertising_section_top_content; ?></span>
+            <?php endif; ?>
+            <div class="packages">
+                <?php
+                        while (have_rows('advertising_rates')) : the_row();
+                            $ad = get_sub_field('ad');
+                            $price = number_format(get_sub_field('price'), 0);
+                            $description = get_sub_field('description');
+                            $button_label = get_sub_field('cta_button_label');
+                            $button_url = get_sub_field('cta_link');
+                ?>
+                    <div class="package">
+                        <h2><?php echo esc_html($ad); ?></h2>
+                        <p>Price each: $<?php echo esc_html($price); ?></p>
+                        <p><?php echo ($description); ?></p>
+
+
+                        <?php if ($button_label && $button_url) : ?>
+                            <a href="<?php echo esc_url($button_url); ?>" target="_blank"><button><?php echo esc_html($button_label); ?></button></a>
+                        <?php endif; ?>
+                    </div>
+                <?php endwhile;
+                        echo get_section_buttons('advertising', $ng['section_link_buttons']); ?>
+
+
+
+            </div>
+        </section>
+    <?php endif; ?>
+    <!--  !SECTION: advertising -->
+<?php endif; ?>
+</main>
+<!-- !SECTION: Display NELAGala Event Content -->
+<?php
             } else {
                 echo "<!-- No event found for the requested year '" . esc_html($event_year) . "' -->";
             }
-            ?>
-        </div>
-        <!-- !SECTION: NELAGala Event Page -->
-    </div>
+?>
+</div>
+<!-- !SECTION: NELAGala Event Page -->
+</div>
 </section>
 <?php get_footer();

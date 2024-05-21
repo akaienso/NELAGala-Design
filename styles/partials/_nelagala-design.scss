@@ -216,6 +216,7 @@ body {
           }
         }
       }
+
       &.section-button {
         flex: 0 0 100%; // Ensures full width
         display: flex;
@@ -225,40 +226,41 @@ body {
         background-color: transparent;
         border: none;
         width: 100%;
+
         p {
           font-weight: map-get($package-h2, weight);
           font-size: map-get($package-h2, size);
           text-transform: map-get($package-h2, transform);
           font-family: map-get($package-h2, font);
           color: map-get($package-h2, color);
-      
+
           align-self: flex-start; // Aligns the paragraph to the start
           width: 80%; // Ensures the paragraph takes full width
           margin: 0 auto;
           margin-bottom: 20px; // Adds space between the paragraph and the buttons
         }
-      
-        > .buttons {
+
+        >.buttons {
           display: flex;
           justify-content: center; // Centers the buttons horizontally
           padding: 2em;
           align-items: center; // Centers items horizontally
-      
+
           >a {
             margin: 0 10px; // Space between buttons
-      
+
             &:first-of-type {
               margin-right: 35px; // Ensures a 5px margin to the right of the first button
             }
-      
+
             &:last-child {
               margin-left: 35px; // Ensures a 5px margin to the left of the last button
             }
-      
+
             &:only-child {
               margin: 0; // Removes margin when there's only one button to ensure it's centered
             }
-      
+
             button {
               max-width: 300px;
               width: 100%;
@@ -267,21 +269,22 @@ body {
             }
           }
         }
-      
+
         @media (max-width: 786px) {
           padding: 10px; // Reduces the padding for smaller screens
-      
-          > .buttons {
+
+          >.buttons {
             flex-direction: column; // Stacks the buttons vertically
             padding: 1em; // Reduces the padding around buttons
-      
+
             >a {
               margin: 10px 0; // Adjusts the margin for vertical stacking
-      
-              &:first-of-type, &:last-child {
+
+              &:first-of-type,
+              &:last-child {
                 margin: 10px 0; // Ensures consistent margin for stacked buttons
               }
-      
+
               button {
                 // If needed, adjust button styles specific to mobile here
               }
@@ -289,248 +292,149 @@ body {
           }
         }
       }
-      
-  }
-}
 
-// Specific adjustment for .package within #sponsorships
-#sponsorships .package:not(.section-button) {
-  flex: 0 0 47%;
-  @media (max-width: 786px) {
-    flex: 0 0 100%;
-  }
-}
-
-.map-container {
-  $aspect-width: 32;
-  $aspect-height: 9;
-  $aspect-ratio: calc($aspect-height / $aspect-width) * 100%;
-
-  position: relative;
-  width: 100%;
-  padding-top: $aspect-ratio;
-  /* 16:9 Aspect Ratio */
-  height: 0;
-  /* This is important to prevent the actual height from affecting the element */
-  overflow: hidden;
-  /* Ensures no overflow from the padding hack */
-  background-color: white;
-
-  iframe,
-  .map {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    }
   }
 
-  .sub-text {
-    margin-bottom: 50px;
-    font-size: 19px;
-    color: #707070;
+  // Specific adjustment for .package within #sponsorships
+  #sponsorships .package:not(.section-button) {
+    flex: 0 0 47%;
+
+    @media (max-width: 786px) {
+      flex: 0 0 100%;
+    }
   }
-}
 
-// SECTION: Main Content
-main {
-  background: var(--ng-section-bg);
-  padding-bottom: 54px;
-  flex-grow: 1;
-width: 100%;
+  .map-container {
+    $aspect-width: 32;
+    $aspect-height: 9;
+    $aspect-ratio: calc($aspect-height / $aspect-width) * 100%;
 
-  // SECTION: Header
-  header {
-    width: 100%;
-    padding: 0px;
-    margin-top: 0;
-    background: var(--ng-header-bg);
-    text-align: center;
-    color: map-get(map-get($color, header), text);
     position: relative;
-    top: 0;
+    width: 100%;
+    padding-top: $aspect-ratio;
+    /* 16:9 Aspect Ratio */
+    height: 0;
+    /* This is important to prevent the actual height from affecting the element */
     overflow: hidden;
+    /* Ensures no overflow from the padding hack */
+    background-color: white;
 
-    .header-img {
+    iframe,
+    .map {
       position: absolute;
-      top: -227px;
-      right: -366px;
-      width: 865px;
-      transform: rotate(-13deg);
-      opacity: 0.4;
-    }
-
-    .header-img-main {
-      z-index: 1;
-      /* Ensure the image stays behind the .row and h4 elements */
-      position: relative;
-      /* Adjust based on your layout needs */
-      height: 189px;
-      background-size: 110%;
-      /* Start zoomed in */
-      background-position: center 75%;
-      transition: background-size 0.5s ease, background-position 0.5s ease;
+      top: 0;
+      left: 0;
       width: 100%;
-      margin-top: -1.5em;
-
-      img {
-        transition: transform 0.5s ease, opacity 0.5s ease;
-        height: 100%;
-        width: 100%;
-        object-fit: cover;
-        object-position: center 75%;
-      }
+      height: 100%;
     }
 
-    .col {
-      min-width: 50%;
-      padding: 20px 10px 30px;
+    .sub-text {
+      margin-bottom: 50px;
+      font-size: 19px;
+      color: #707070;
     }
+  }
 
-    .divider {
-      &::before {
-        content: "";
-        position: absolute;
-        right: 0;
-        top: 20%;
-        bottom: 15%;
-        width: 4px;
-        background-color: map-get(map-get($color, header), divider);
-      }
-    }
+  // SECTION: Main Content
+  main {
+    background: var(--ng-section-bg);
+    padding-bottom: 54px;
+    flex-grow: 1;
+    width: 100%;
 
-    h1 {
-      &.title {
-        display: inline;
-        text-align: center;
-        font-family: map-get($font, secondary);
-        font-size: 1.8em;
-        color: map-get(map-get($color, header), text);
-        line-height: 0.9em;
-        margin: -10px 0;
-        text-transform: uppercase;
-      }
-
-      &:not(:has(span)) {
-        font-size: 0.8em;
-      }
-    }
-
-    h2 {
-      font-family: map-get($header-h2, font);
-      font-weight: map-get($header-h2, weight);
-      font-size: map-get($header-h2, size);
-      font-style: map-get($header-h2, style);
-      color: map-get($header-h2, color);
-      letter-spacing: map-get($header-h2, letter-spacing);
-      text-transform: map-get($header-h2, transform);
-      margin: map-get($header-h2, margin);
-      padding: map-get($header-h2, padding);
-      position: map-get($header-h2, position);
-      z-index: map-get($header-h2, z-index);
-    }
-
-    h3 {
-      font-family: map-get($header-h3, font);
-      font-weight: map-get($header-h3, weight);
-      font-style: map-get($header-h3, style);
-      color: map-get($header-h3, color);
-      font-size: map-get($header-h3, size);
-      line-height: map-get($header-h3, line-height);
-      margin: map-get($header-h3, margin);
-      text-transform: map-get($header-h3, transform);
-
-      & sup {
-        font-size: 2em;
-        top: .2em;
-      }
-    }
-
-    h4 {
-      // Date and time details ("the header's footer")
-      /* Typography */
-      font-family: map-get($header-h4, font);
-      font-size: map-get($header-h4, size);
-      font-style: map-get($header-h4, style);
-      font-weight: map-get($header-h4, weight);
-      line-height: map-get($header-h4, line-height);
-      text-transform: map-get($header-h4, transform);
-
-      /* Layout */
-      margin: map-get($header-h4, margin);
-      padding: map-get($header-h4, padding);
-
-      /* Palate */
-      background-color: map-get($header-h4, bg);
-      color: map-get($header-h4, color);
-
-      span {
-
-        font-weight: map-get($header-h4-span, weight);
-        display: inline-block;
-        max-width: calc(50% - 0.5em);
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-
-        &:last-child::before {
-          content: " / ";
-          display: inline-block;
-          margin: 0 0.2em;
-          /* Adjust spacing as needed */
-        }
-      }
-    }
-    .title-wrap {
-      margin-top: -20px;
-    }
-    .pre-title,
-    .post-title {
-      position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--ng-red);
-      font-family: map-get($font, script);
+    // SECTION: Header
+    header {
+      width: 100%;
+      padding: 0px;
+      margin-top: 0;
+      background: var(--ng-header-bg);
       text-align: center;
-      font-size: 2.4em;
-      margin: 0;
-      line-height: 58px;
+      color: map-get(map-get($color, header), text);
+      position: relative;
+      top: 0;
+      overflow: hidden;
 
-      .yr {
-        font-size: 1.7em;
+      .header-img {
+        position: absolute;
+        top: -227px;
+        right: -366px;
+        width: 865px;
+        transform: rotate(-13deg);
+        opacity: 0.4;
+      }
 
-        sup {
-          font-size: 0.7em;
-          margin-left: 0.3em;
+      .header-img-main {
+        z-index: 1;
+        /* Ensure the image stays behind the .row and h4 elements */
+        position: relative;
+        /* Adjust based on your layout needs */
+        height: 189px;
+        background-size: 110%;
+        /* Start zoomed in */
+        background-position: center 75%;
+        transition: background-size 0.5s ease, background-position 0.5s ease;
+        width: 100%;
+        margin-top: -1.5em;
+
+        img {
+          transition: transform 0.5s ease, opacity 0.5s ease;
+          height: 100%;
+          width: 100%;
+          object-fit: cover;
+          object-position: center 75%;
         }
       }
-    }
 
-    .post-title {
-      font-size: 5em;
-      position: relative;
-      top: 0em;
-      display: block;
-      z-index: 10000 !important;
-    }
-
-    .col-2 {
-      text-align: start;
-      padding-left: 20px;
-
-      .col-2-title {
-        font-family: map-get($font, tertiary);
-        font-weight: map-get($font-weight, semibold);
-        color: map-get(map-get($color, header), text);
-        text-transform: uppercase;
-        font-size: 1.25em;
-        font-style: normal;
-        margin: 0;
-        line-height: 1.1em;
+      .col {
+        min-width: 50%;
+        padding: 20px 10px 30px;
       }
 
-      .text {
+      .divider {
+        &::before {
+          content: "";
+          position: absolute;
+          right: 0;
+          top: 20%;
+          bottom: 15%;
+          width: 4px;
+          background-color: map-get(map-get($color, header), divider);
+        }
+      }
+
+      h1 {
+        &.title {
+          display: inline;
+          text-align: center;
+          font-family: map-get($font, secondary);
+          font-size: 1.8em;
+          color: map-get(map-get($color, header), text);
+          line-height: 0.9em;
+          margin: -10px 0;
+          text-transform: uppercase;
+        }
+
+        &:not(:has(span)) {
+          font-size: 0.8em;
+        }
+      }
+
+      h2 {
+        font-family: map-get($header-h2, font);
+        font-weight: map-get($header-h2, weight);
+        font-size: map-get($header-h2, size);
+        font-style: map-get($header-h2, style);
+        color: map-get($header-h2, color);
+        letter-spacing: map-get($header-h2, letter-spacing);
+        text-transform: map-get($header-h2, transform);
+        margin: map-get($header-h2, margin);
+        padding: map-get($header-h2, padding);
+        position: map-get($header-h2, position);
+        z-index: map-get($header-h2, z-index);
+      }
+
+      h3 {
         font-family: map-get($header-h3, font);
         font-weight: map-get($header-h3, weight);
         font-style: map-get($header-h3, style);
@@ -539,370 +443,617 @@ width: 100%;
         line-height: map-get($header-h3, line-height);
         margin: map-get($header-h3, margin);
         text-transform: map-get($header-h3, transform);
-      }
-    }
 
-
-    .row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      width: 90%;
-      max-width: 960px;
-      margin: 20px auto 0 auto;
-      position: relative;
-      &.save-the-date {
-        margin: -20px auto 0 auto;
-      }
-    }
-
-    .column {
-      flex: 1;
-      padding: 10px;
-
-      h3 {
-        font-family: map-get($font, primary);
-        font-size: 2em;
-        font-style: italic;
-
-        a {
-          font-weight: 800;
-          padding-right: 20px;
-          border-right: 1px solid var(--ng-header-txt);
-          margin-right: 20px;
+        & sup {
+          font-size: 2em;
+          top: .2em;
         }
       }
-    }
 
-    a {
-      text-decoration: none;
-      color: map-get(map-get($color, header), text);
-      font-weight: 500;
-      font-size: 1em;
-      padding: 3px;
-      border-bottom: 1px solid var(--ng-header-bg);
+      h4 {
+        // Date and time details ("the header's footer")
+        /* Typography */
+        font-family: map-get($header-h4, font);
+        font-size: map-get($header-h4, size);
+        font-style: map-get($header-h4, style);
+        font-weight: map-get($header-h4, weight);
+        line-height: map-get($header-h4, line-height);
+        text-transform: map-get($header-h4, transform);
 
-      &:hover {
-        text-decoration: none;
+        /* Layout */
+        margin: map-get($header-h4, margin);
+        padding: map-get($header-h4, padding);
+
+        /* Palate */
+        background-color: map-get($header-h4, bg);
+        color: map-get($header-h4, color);
+
+        span {
+
+          font-weight: map-get($header-h4-span, weight);
+          display: inline-block;
+          max-width: calc(50% - 0.5em);
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+
+          &:last-child::before {
+            content: " / ";
+            display: inline-block;
+            margin: 0 0.2em;
+            /* Adjust spacing as needed */
+          }
+        }
+      }
+
+      .title-wrap {
+        margin-top: -20px;
+      }
+
+      .pre-title,
+      .post-title {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         color: var(--ng-red);
+        font-family: map-get($font, script);
+        text-align: center;
+        font-size: 2.4em;
+        margin: 0;
+        line-height: 58px;
+
+        .yr {
+          font-size: 1.7em;
+
+          sup {
+            font-size: 0.7em;
+            margin-left: 0.3em;
+          }
+        }
+      }
+
+      .post-title {
+        font-size: 5em;
+        position: relative;
+        top: 0em;
+        display: block;
+        z-index: 10000 !important;
+      }
+
+      .col-2 {
+        text-align: start;
+        padding-left: 20px;
+
+        .col-2-title {
+          font-family: map-get($font, tertiary);
+          font-weight: map-get($font-weight, semibold);
+          color: map-get(map-get($color, header), text);
+          text-transform: uppercase;
+          font-size: 1.25em;
+          font-style: normal;
+          margin: 0;
+          line-height: 1.1em;
+        }
+
+        .text {
+          font-family: map-get($header-h3, font);
+          font-weight: map-get($header-h3, weight);
+          font-style: map-get($header-h3, style);
+          color: map-get($header-h3, color);
+          font-size: map-get($header-h3, size);
+          line-height: map-get($header-h3, line-height);
+          margin: map-get($header-h3, margin);
+          text-transform: map-get($header-h3, transform);
+        }
+      }
+
+
+      .row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 90%;
+        max-width: 960px;
+        margin: 20px auto 0 auto;
+        position: relative;
+
+        &.save-the-date {
+          margin: -20px auto 0 auto;
+        }
+      }
+
+      .column {
+        flex: 1;
+        padding: 10px;
+
+        h3 {
+          font-family: map-get($font, primary);
+          font-size: 2em;
+          font-style: italic;
+
+          a {
+            font-weight: 800;
+            padding-right: 20px;
+            border-right: 1px solid var(--ng-header-txt);
+            margin-right: 20px;
+          }
+        }
+      }
+
+      a {
+        text-decoration: none;
+        color: map-get(map-get($color, header), text);
         font-weight: 500;
         font-size: 1em;
         padding: 3px;
-        border-bottom: 1 // Continuing from previous...
-          px solid var(--ng-header-txt);
+        border-bottom: 1px solid var(--ng-header-bg);
+
+        &:hover {
+          text-decoration: none;
+          color: var(--ng-red);
+          font-weight: 500;
+          font-size: 1em;
+          padding: 3px;
+          border-bottom: 1 // Continuing from previous...
+            px solid var(--ng-header-txt);
+        }
       }
-    }
 
-    p {
-      font-size: 2.7em;
-    }
-  
-
-  }
-
-  // !SECTION: Header
-
-  section {
-    margin-bottom: 0;
-    width: 80%;
-    padding: 20px;
-    margin: 0 auto;
-    max-width: 1100px;
-
-    &#promotional-video {
-      display: flex;
-      flex-direction: row;
-      justify-content: center;
-      align-items: center; // This will vertically center the content if needed
-      margin: 0 auto 2em auto;
-      padding: 0;
-      background-color: map-get(map-get($color, 'video'), 'bg'); // Ensure your map keys are correct
-      width: 100%;
-      max-width: none;
-
-      .video {
-        aspect-ratio: 16 / 9;
-        width: 100%; // This makes the video fill the width of its parent
-        max-width: 1100px; // Limits the video width
-        margin: 0 auto; // Centers the video block in the page
+      p {
+        font-size: 2.7em;
       }
-    }
-  }
 
-  &>section {
-    margin-bottom: 1em;
-    padding: 1em;
 
-    &>h2,
-    article h2 {
-      font-family: map-get($section-h2, font);
-      font-weight: map-get($section-h2, weight);
-      font-size: map-get($section-h2, size);
-      color: map-get($section-h2, color);
-      margin: 20px 0 10px -15px;
     }
 
-    article h2 {
+    // !SECTION: Header
 
-      font-size: 2em;
-    }
-
-    // NOTE: Styles for Repeating rows of participants
-    &.participants {
+    section {
+      margin-bottom: 0;
       width: 80%;
-      max-width: 1100px;
+      padding: 20px;
       margin: 0 auto;
+      max-width: 1100px;
 
-      .participant-website,
-      .read-more {
-        padding-top: .4em;
+      &#promotional-video {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center; // This will vertically center the content if needed
+        margin: 0 auto 2em auto;
+        padding: 0;
+        background-color: map-get(map-get($color, 'video'), 'bg'); // Ensure your map keys are correct
+        width: 100%;
+        max-width: none;
 
-        a {
-          font-family: map-get($read-more, font);
-          font-weight: map-get($read-more, weight);
-          font-style: map-get($read-more, style);
-          color: map-get($read-more, color);
-          font-size: map-get($read-more, size);
-          margin: map-get($read-more, margin);
-          text-transform: map-get($read-more, transform);
-          text-align: map-get($read-more, text-align);
-          line-height: map-get($read-more, line-height);
+        .video {
+          aspect-ratio: 16 / 9;
+          width: 100%; // This makes the video fill the width of its parent
+          max-width: 1100px; // Limits the video width
+          margin: 0 auto; // Centers the video block in the page
         }
       }
     }
 
-    &>div {
+    &>section {
+      margin-bottom: 1em;
+      padding: 1em;
+
+      &>h2,
+      article h2 {
+        font-family: map-get($section-h2, font);
+        font-weight: map-get($section-h2, weight);
+        font-size: map-get($section-h2, size);
+        color: map-get($section-h2, color);
+        margin: 20px 0 10px -15px;
+      }
+
+      article h2 {
+
+        font-size: 2em;
+      }
+
+      // NOTE: Styles for Repeating rows of participants
+      &.participants {
+        width: 80%;
+        max-width: 1100px;
+        margin: 0 auto;
+
+        .participant-website,
+        .read-more {
+          padding-top: .4em;
+
+          a {
+            font-family: map-get($read-more, font);
+            font-weight: map-get($read-more, weight);
+            font-style: map-get($read-more, style);
+            color: map-get($read-more, color);
+            font-size: map-get($read-more, size);
+            margin: map-get($read-more, margin);
+            text-transform: map-get($read-more, transform);
+            text-align: map-get($read-more, text-align);
+            line-height: map-get($read-more, line-height);
+          }
+        }
+      }
+
+      &>div {
+        display: flex;
+        align-items: flex-start;
+        margin-bottom: 0px;
+
+
+        a.biography-link {
+          width: 45%;
+          /* Assign width to the anchor to maintain the layout */
+          display: inline-block;
+          /* Ensure the anchor behaves as a block element with line dimensions */
+          aspect-ratio: 3 / 4;
+          max-height: 400px;
+
+          img {
+            width: 100%;
+            /* Make the image fill the anchor */
+            height: auto;
+            /* Maintain aspect ratio */
+            object-fit: cover;
+            mix-blend-mode: luminosity;
+            object-position: center 14%;
+          }
+
+        }
+      }
+
+      .participant-placeholder {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%; // Adjust based on your actual image size
+        height: auto; // Adjust based on your actual image size
+        aspect-ratio: 5/4;
+        background-color: #f0f0f0; // A faint grey
+        color: #666; // Darker grey for text
+        font-family: Arial, sans-serif;
+        font-size: 14px; // Adjust as needed
+        text-align: center;
+        border: 1px solid #ddd; // Optional: adds a light border
+
+      }
+
+
+      &>.packages {
+        align-items: inherit;
+      }
+    }
+
+    .row-container {
       display: flex;
       align-items: flex-start;
-      margin-bottom: 0px;
+      margin: 1.5em auto;
 
-
-      a.biography-link {
-        width: 45%;
-        /* Assign width to the anchor to maintain the layout */
+      a.biography-link,
+      img {
         display: inline-block;
-        /* Ensure the anchor behaves as a block element with line dimensions */
-        aspect-ratio: 3 / 4;
+        /* Ensures block-level behaviors */
+        width: 45%;
+        /* Adjust width as necessary */
         max-height: 400px;
-
-        img {
-          width: 100%;
-          /* Make the image fill the anchor */
-          height: auto;
-          /* Maintain aspect ratio */
-          object-fit: cover;
-          mix-blend-mode: luminosity;
-          object-position: center 14%;
-        }
-
       }
-    }
-    .participant-placeholder {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 100%; // Adjust based on your actual image size
-      height: auto; // Adjust based on your actual image size
-      aspect-ratio: 5/4;
-      background-color: #f0f0f0; // A faint grey
-      color: #666; // Darker grey for text
-      font-family: Arial, sans-serif;
-      font-size: 14px; // Adjust as needed
-      text-align: center;
-      border: 1px solid #ddd; // Optional: adds a light border
 
-    }
-    
-
-    &>.packages {
-      align-items: inherit;
-    }
-  }
-
-  .row-container {
-    display: flex;
-    align-items: flex-start;
-    margin: 1.5em auto;
-
-    a.biography-link,
-    img {
-      display: inline-block;
-      /* Ensures block-level behaviors */
-      width: 45%;
-      /* Adjust width as necessary */
-      max-height: 400px;
-    }
-
-    img {
-      width: 100%;
-      /* Ensures the img tag fills its container (either <a> or its direct parent) */
-      aspect-ratio: 3 / 4;
-      object-fit: cover;
-      mix-blend-mode: luminosity;
-      object-position: center 14%;
-    }
-  }
-
-
-  #about-the-event {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    max-width: 1100px;
-
-    p {
-      font-size: 18px;
-      margin-bottom: 20px;
-    }
-
-    .last {
-      margin-bottom: 50px;
-    }
-
-    article {
-      width: 64%;
-
-      &.full-width {
+      img {
         width: 100%;
+        /* Ensures the img tag fills its container (either <a> or its direct parent) */
+        aspect-ratio: 3 / 4;
+        object-fit: cover;
+        mix-blend-mode: luminosity;
+        object-position: center 14%;
       }
     }
 
-    aside {
-      display: block;
-      outline: .01em solid map-get(map-get($color, aside), border);
-      background-color: map-get(map-get($color, aside), bg);
-      border-radius: 20px 20px 0 0;
-      width: 36%;
-      margin: 0 -3em 0 20px;
-      overflow: hidden;
-      padding: 20px;
-      box-sizing: border-box;
 
-      >img {
-        display: block;
-        width: calc(100% + 40px);
-        max-width: none;
-        margin: -20px -20px 20px -20px;
-        height: auto;
-      }
+    #about-the-event {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      max-width: 1100px;
 
-      h2 {
-        font-size: 1.24em;
-        line-height: 1.45em;
+      p {
+        font-size: 18px;
         margin-bottom: 20px;
-        font-family: map-get($font, secondary);
-        font-weight: map-get($font-weight, bold);
-        font-style: italic;
-        width: 80%;
-        color: map-get($color, quinary);
       }
-    }
 
-    @media (max-width: 767px) {
-      flex-direction: column;
+      .last {
+        margin-bottom: 50px;
+      }
 
       article {
-        width: 100%;
+        width: 64%;
+
+        &.full-width {
+          width: 100%;
+        }
       }
 
       aside {
-        width: 100%;
-        margin: 0;
-      }
-    }
-  }
+        display: block;
+        outline: .01em solid map-get(map-get($color, aside), border);
+        background-color: map-get(map-get($color, aside), bg);
+        border-radius: 20px 20px 0 0;
+        width: 36%;
+        margin: 0 -3em 0 20px;
+        overflow: hidden;
+        padding: 20px;
+        box-sizing: border-box;
 
-  #event-roles h3,
-  #honorees h3 {
-    font-family: map-get($participant-h3, font);
-    font-weight: map-get($participant-h3, weight);
-    font-style: map-get($participant-h3, style);
-    color: map-get($participant-h3, color);
-    font-size: map-get($participant-h3, size);
-    line-height: map-get($participant-h3, line-height);
-    margin: map-get($participant-h3, margin);
-    text-transform: map-get($participant-h3, transform);
-    text-align: map-get($participant-h3, text-align);
-  }
+        >img {
+          display: block;
+          width: calc(100% + 40px);
+          max-width: none;
+          margin: -20px -20px 20px -20px;
+          height: auto;
+        }
 
-  // Styles for section.participants
-  >section.participants {
-    >div>div {
-      width: 50%;
-      text-align: left;
-
-      .full-name {
-        font-family: map-get($participant-name, font);
-        font-weight: map-get($participant-name, weight);
-        font-style: map-get($participant-name, style);
-        color: map-get($participant-name, color);
-        font-size: map-get($participant-name, size);
-        line-height: map-get($participant-name, line-height);
-        margin: map-get($participant-name, margin);
-        text-transform: map-get($participant-name, transform);
+        h2 {
+          font-size: 1.24em;
+          line-height: 1.45em;
+          margin-bottom: 20px;
+          font-family: map-get($font, secondary);
+          font-weight: map-get($font-weight, bold);
+          font-style: italic;
+          width: 80%;
+          color: map-get($color, quinary);
+        }
       }
 
-      .bio-summary {
-        font-size: 18px;
-        color: #707070;
-      }
+      @media (max-width: 767px) {
+        flex-direction: column;
 
-      .personal-title {
-        font-family: map-get($font, tertiary);
-        font-weight: map-get($font-weight, semibold);
-        font-size: 18px;
-        margin: .2em 0 .8em 0;
-      }
-    }
-  }
+        article {
+          width: 100%;
+        }
 
-  // SECTION: Biography Page Content
-  >#Biography {
-    width: 100%;
-
-    >.row-container {
-      //outline: 1px solid var(--ng-red);
-      align-items: center;
-      justify-content: center;
-      width: 100%;
-
-      img {
-        mix-blend-mode: inherit;
-        aspect-ratio: 1 / 1;
-        width: auto;
-        max-width: 50%;
-        max-height: none;
-      }
-    }
-
-    >div>div {
-      width: 58%;
-      text-align: right;
-    }
-
-    >article {
-      font-size: 1.2em;
-      margin: 2em auto;
-      width: 74%;
-      font-weight: normal;
-
-      p {
-        line-height: normal;
-        margin-bottom: .8em;
-
-        &:first-child {
-          font-size: 1.225em;
-          margin-bottom: 1em;
-          line-height: 1.5em;
+        aside {
+          width: 100%;
+          margin: 0;
         }
       }
     }
+
+    #event-roles h3,
+    #honorees h3 {
+      font-family: map-get($participant-h3, font);
+      font-weight: map-get($participant-h3, weight);
+      font-style: map-get($participant-h3, style);
+      color: map-get($participant-h3, color);
+      font-size: map-get($participant-h3, size);
+      line-height: map-get($participant-h3, line-height);
+      margin: map-get($participant-h3, margin);
+      text-transform: map-get($participant-h3, transform);
+      text-align: map-get($participant-h3, text-align);
+    }
+
+    // Styles for section.participants
+    >section.participants {
+      >div>div {
+        width: 50%;
+        text-align: left;
+
+        .full-name {
+          font-family: map-get($participant-name, font);
+          font-weight: map-get($participant-name, weight);
+          font-style: map-get($participant-name, style);
+          color: map-get($participant-name, color);
+          font-size: map-get($participant-name, size);
+          line-height: map-get($participant-name, line-height);
+          margin: map-get($participant-name, margin);
+          text-transform: map-get($participant-name, transform);
+        }
+
+        .bio-summary {
+          font-size: 18px;
+          color: #707070;
+        }
+
+        .personal-title {
+          font-family: map-get($font, tertiary);
+          font-weight: map-get($font-weight, semibold);
+          font-size: 18px;
+          margin: .2em 0 .8em 0;
+        }
+      }
+    }
+
+    // SECTION: Biography Page Content
+    >#Biography {
+      width: 100%;
+
+      >.row-container {
+        //outline: 1px solid var(--ng-red);
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+
+        img {
+          mix-blend-mode: inherit;
+          aspect-ratio: 1 / 1;
+          width: auto;
+          max-width: 50%;
+          max-height: none;
+        }
+      }
+
+      >div>div {
+        width: 58%;
+        text-align: right;
+      }
+
+      >article {
+        font-size: 1.2em;
+        margin: 2em auto;
+        width: 74%;
+        font-weight: normal;
+
+        p {
+          line-height: normal;
+          margin-bottom: .8em;
+
+          &:first-child {
+            font-size: 1.225em;
+            margin-bottom: 1em;
+            line-height: 1.5em;
+          }
+        }
+      }
+    }
+
+    // !SECTION: Styles specific to #Biography
+
+    // SECTION: Sponsor List
+
+    #sponsor-list {
+      display: grid;
+      gap: 20px;
+      grid-template-columns: 1fr; // Default to single column
+    
+      @media (min-width: 992px) {
+        grid-template-columns: 1fr 1fr; // Two columns for screens wider than 992px
+      }
+    
+      h2,
+      p {
+        grid-column: span 2; // Ensure the h2 and p span all columns
+        text-align: left; // Align h2 to the left
+      }
+    
+      .sponsorship-level {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    
+        h3 {
+          font-size: 1.5em;
+          margin-bottom: 20px;
+        }
+    
+        .sponsor-list {
+          list-style: none;
+          padding: 0;
+          width: 100%;
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+    
+          .sponsor-item {
+            display: flex;
+            justify-content: center; // Center the entire sponsor item
+            align-items: center;
+            gap: 10px;
+            width: 100%;
+    
+            figure {
+              display: flex;
+              flex-direction: column; // Stack the image and caption vertically
+              align-items: center; // Center the image and caption
+              gap: 10px;
+              margin: 0;
+    
+              a {
+                display: flex;
+                flex-direction: column; // Stack the image and caption vertically within the link
+                align-items: center; // Center the image and caption within the link
+                text-align: center; // Center text within the link
+                width: 100%; // Ensure the link takes the full width
+              }
+    
+              img {
+                max-height: 100px;
+                width: auto;
+              }
+    
+              figcaption {
+                text-align: center; // Center the text for figcaption
+                width: 100%; // Ensure figcaption takes the full width
+              }
+            }
+          }
+        }
+      }
+    
+      // Center text for Platinum and Gold sections and content
+      .sponsorship-level.platinum,
+      .sponsorship-level.gold {
+        font-size: 1em;
+    
+        @media (min-width: 992px) {
+          grid-column: span 2; // Full width for larger screens
+        }
+    
+        h3 {
+          text-align: center; // Center text for headings
+        }
+    
+        .sponsor-item figure figcaption {
+          text-align: center; // Center text for figcaptions
+        }
+      }
+    
+      .sponsorship-level.platinum {
+        font-size: 1.1em;
+      }
+        
+      // Silver and Bronze sections
+      .sponsorship-level.silver,
+      .sponsorship-level.bronze {
+        font-size: .9em;
+    
+        @media (min-width: 992px) {
+          grid-column: span 1; // Half width each for larger screens
+        }
+    
+        h3,
+        .sponsor-item figure figcaption {
+          text-align: center; // Left-align text for headings and figcaptions
+        }
+    
+        @media (max-width: 991px) {
+          grid-column: span 2; // Full width for smaller screens
+    
+          h3,
+          .sponsor-item figure figcaption {
+            text-align: center; // Center text for headings and figcaptions
+          }
+        }
+      }
+    
+      // Center text for the footer
+      p.sponsor-list-footer {
+        text-align: center;
+        grid-column: span 2;
+      }
+    
+      // Single column layout and centered text for smaller screens
+      @media (max-width: 991px) {
+        grid-template-columns: 1fr; // Single column for smaller screens
+    
+        .sponsorship-level {
+          text-align: center; // Center text for all sections
+          grid-column: span 2; // Full width for all sections
+        }
+    
+        .sponsorship-level h3,
+        .sponsor-item figure figcaption {
+          text-align: center; // Center text for headings and figcaptions
+        }
+      }
+    }
+    
+    
+    // !SECTION: Sponsor List
+
   }
 
-  // !SECTION: Styles specific to #Biography
-}
-
-// !SECTION: Main Content
+  // !SECTION: Main Content
 }
 
 // !SECTION: Desktop/ Full Width Default Styles
@@ -1165,7 +1316,8 @@ width: 100%;
       padding: 20px;
 
       &,
-      #sponsorships .packages .package, #sponsorships .package:not(.section-button) {
+      #sponsorships .packages .package,
+      #sponsorships .package:not(.section-button) {
         flex: 0 0 100%;
       }
     }

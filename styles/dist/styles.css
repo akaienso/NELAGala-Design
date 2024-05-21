@@ -779,6 +779,133 @@ body #top > section:nth-child(4) > div {
   margin-bottom: 1em;
   line-height: 1.5em;
 }
+.nelagala-event main #sponsor-list {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: 1fr;
+}
+@media (min-width: 992px) {
+  .nelagala-event main #sponsor-list {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+.nelagala-event main #sponsor-list h2,
+.nelagala-event main #sponsor-list p {
+  grid-column: span 2;
+  text-align: left;
+}
+.nelagala-event main #sponsor-list .sponsorship-level {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+.nelagala-event main #sponsor-list .sponsorship-level h3 {
+  font-size: 1.5em;
+  margin-bottom: 20px;
+}
+.nelagala-event main #sponsor-list .sponsorship-level .sponsor-list {
+  list-style: none;
+  padding: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.nelagala-event main #sponsor-list .sponsorship-level .sponsor-list .sponsor-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+}
+.nelagala-event main #sponsor-list .sponsorship-level .sponsor-list .sponsor-item figure {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  margin: 0;
+}
+.nelagala-event main #sponsor-list .sponsorship-level .sponsor-list .sponsor-item figure a {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+}
+.nelagala-event main #sponsor-list .sponsorship-level .sponsor-list .sponsor-item figure img {
+  max-height: 100px;
+  width: auto;
+}
+.nelagala-event main #sponsor-list .sponsorship-level .sponsor-list .sponsor-item figure figcaption {
+  text-align: center;
+  width: 100%;
+}
+.nelagala-event main #sponsor-list .sponsorship-level.platinum,
+.nelagala-event main #sponsor-list .sponsorship-level.gold {
+  font-size: 1em;
+}
+@media (min-width: 992px) {
+  .nelagala-event main #sponsor-list .sponsorship-level.platinum,
+  .nelagala-event main #sponsor-list .sponsorship-level.gold {
+    grid-column: span 2;
+  }
+}
+.nelagala-event main #sponsor-list .sponsorship-level.platinum h3,
+.nelagala-event main #sponsor-list .sponsorship-level.gold h3 {
+  text-align: center;
+}
+.nelagala-event main #sponsor-list .sponsorship-level.platinum .sponsor-item figure figcaption,
+.nelagala-event main #sponsor-list .sponsorship-level.gold .sponsor-item figure figcaption {
+  text-align: center;
+}
+.nelagala-event main #sponsor-list .sponsorship-level.platinum {
+  font-size: 1.1em;
+}
+.nelagala-event main #sponsor-list .sponsorship-level.silver,
+.nelagala-event main #sponsor-list .sponsorship-level.bronze {
+  font-size: 0.9em;
+}
+@media (min-width: 992px) {
+  .nelagala-event main #sponsor-list .sponsorship-level.silver,
+  .nelagala-event main #sponsor-list .sponsorship-level.bronze {
+    grid-column: span 1;
+  }
+}
+.nelagala-event main #sponsor-list .sponsorship-level.silver h3,
+.nelagala-event main #sponsor-list .sponsorship-level.silver .sponsor-item figure figcaption,
+.nelagala-event main #sponsor-list .sponsorship-level.bronze h3,
+.nelagala-event main #sponsor-list .sponsorship-level.bronze .sponsor-item figure figcaption {
+  text-align: center;
+}
+@media (max-width: 991px) {
+  .nelagala-event main #sponsor-list .sponsorship-level.silver,
+  .nelagala-event main #sponsor-list .sponsorship-level.bronze {
+    grid-column: span 2;
+  }
+  .nelagala-event main #sponsor-list .sponsorship-level.silver h3,
+  .nelagala-event main #sponsor-list .sponsorship-level.silver .sponsor-item figure figcaption,
+  .nelagala-event main #sponsor-list .sponsorship-level.bronze h3,
+  .nelagala-event main #sponsor-list .sponsorship-level.bronze .sponsor-item figure figcaption {
+    text-align: center;
+  }
+}
+.nelagala-event main #sponsor-list p.sponsor-list-footer {
+  text-align: center;
+  grid-column: span 2;
+}
+@media (max-width: 991px) {
+  .nelagala-event main #sponsor-list {
+    grid-template-columns: 1fr;
+  }
+  .nelagala-event main #sponsor-list .sponsorship-level {
+    text-align: center;
+    grid-column: span 2;
+  }
+  .nelagala-event main #sponsor-list .sponsorship-level h3,
+  .nelagala-event main #sponsor-list .sponsor-item figure figcaption {
+    text-align: center;
+  }
+}
 
 @media (max-width: 1199px) {
   .nelagala-event {
@@ -963,7 +1090,8 @@ body #top > section:nth-child(4) > div {
     padding: 20px;
   }
   .nelagala-event .packages .package,
-  .nelagala-event .packages .package #sponsorships .packages .package, .nelagala-event .packages .package #sponsorships .package:not(.section-button) {
+  .nelagala-event .packages .package #sponsorships .packages .package,
+  .nelagala-event .packages .package #sponsorships .package:not(.section-button) {
     flex: 0 0 100%;
   }
 }
